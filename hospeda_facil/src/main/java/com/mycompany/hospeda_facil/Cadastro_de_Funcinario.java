@@ -236,6 +236,15 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfconta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfconta.setBorder(null);
         jPanel1.add(txtfconta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 475, 230, 30));
+
+        btnreserva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnreservaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnreservaMouseExited(evt);
+            }
+        });
         jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
 
         lblimagemcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -257,90 +266,61 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-        // TODO add your handling code here:
-        btnfinalizarcadastro.setOpaque(true); 
-        btnfinalizarcadastro.setBackground(new Color(0, 0, 0, 0));
-        btnfinalizarcadastro.setBorder(BorderFactory.createLineBorder(Color.blue));
+        btnfinalizarcadastro.setBorder(BorderFactory.createLineBorder(Color.yellow));
     }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
 
     private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-        // TODO add your handling code here:
-        btnfinalizarcadastro.setOpaque(false);
         btnfinalizarcadastro.setBorder(null);
     }//GEN-LAST:event_btnfinalizarcadastroMouseExited
 
     private void btnmenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseEntered
-        // TODO add your handling code here:
-        btnmenu.setOpaque(true); 
-        btnmenu.setBackground(new Color(0, 0, 0, 0));
-        btnmenu.setBorder(BorderFactory.createLineBorder(Color.blue));
+        btnmenu.setBorder(BorderFactory.createLineBorder(Color.yellow));
     }//GEN-LAST:event_btnmenuMouseEntered
 
     private void btnmenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseExited
-        // TODO add your handling code here:
-        btnmenu.setOpaque(false);
         btnmenu.setBorder(null);
     }//GEN-LAST:event_btnmenuMouseExited
 
     private void btnhospedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseEntered
-        // TODO add your handling code here:
-        btnhospede.setOpaque(true); 
-        btnhospede.setBackground(new Color(0, 0, 0, 0));
-        btnhospede.setBorder(BorderFactory.createLineBorder(Color.blue));
+        btnhospede.setBorder(BorderFactory.createLineBorder(Color.yellow));
     }//GEN-LAST:event_btnhospedeMouseEntered
 
     private void btnhospedeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseExited
-        // TODO add your handling code here:
-        btnhospede.setOpaque(false);
         btnhospede.setBorder(null);
     }//GEN-LAST:event_btnhospedeMouseExited
 
     private void btnmapaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseEntered
-        // TODO add your handling code here:
-        btnmapa.setOpaque(true); 
-        btnmapa.setBackground(new Color(0, 0, 0, 0));
-        btnmapa.setBorder(BorderFactory.createLineBorder(Color.blue));
+        btnmapa.setBorder(BorderFactory.createLineBorder(Color.yellow));
     }//GEN-LAST:event_btnmapaMouseEntered
 
     private void btnmapaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseExited
-        // TODO add your handling code here:
-        btnmapa.setOpaque(false);
         btnmapa.setBorder(null);
     }//GEN-LAST:event_btnmapaMouseExited
 
     private void btnajustesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseEntered
-        // TODO add your handling code here:
-        btnajustes.setOpaque(true); 
-        btnajustes.setBackground(new Color(0, 0, 0, 0));
-        btnajustes.setBorder(BorderFactory.createLineBorder(Color.blue));
+        btnajustes.setBorder(BorderFactory.createLineBorder(Color.yellow));
     }//GEN-LAST:event_btnajustesMouseEntered
 
     private void btnajustesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseExited
-        // TODO add your handling code here:
-        btnajustes.setOpaque(false);
         btnajustes.setBorder(null);
     }//GEN-LAST:event_btnajustesMouseExited
 
     private void btnrmasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrmasculinoMouseClicked
-        // TODO add your handling code here:
         btnrfeminino.setSelected(false);
         btnroutros.setSelected(false);
     }//GEN-LAST:event_btnrmasculinoMouseClicked
 
     private void btnrfemininoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrfemininoMouseClicked
-        // TODO add your handling code here:
-        btnrmasculino.setSelected(false);
+         btnrmasculino.setSelected(false);
         btnroutros.setSelected(false);
     }//GEN-LAST:event_btnrfemininoMouseClicked
 
     private void btnroutrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnroutrosMouseClicked
-        // TODO add your handling code here:
         btnrmasculino.setSelected(false);
         btnrfeminino.setSelected(false);
     }//GEN-LAST:event_btnroutrosMouseClicked
 
     private void txtfcpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfcpfFocusLost
-        // TODO add your handling code here:
         String cpf = txtfcpf.getText();
         cpf = cpf.replaceAll("[^0-9]", "");
         if (validarCPF(cpf)) {
@@ -348,6 +328,14 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"ERRO: CPF invalido, Digite um numero valido!");
         }
     }//GEN-LAST:event_txtfcpfFocusLost
+
+    private void btnreservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseEntered
+        btnreserva.setBorder(BorderFactory.createLineBorder(Color.yellow));
+    }//GEN-LAST:event_btnreservaMouseEntered
+
+    private void btnreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseExited
+        btnreserva.setBorder(null);
+    }//GEN-LAST:event_btnreservaMouseExited
     private boolean  validarCPF(String cpf) {
         if (cpf == null || cpf.length() != 11) {
             return false;
