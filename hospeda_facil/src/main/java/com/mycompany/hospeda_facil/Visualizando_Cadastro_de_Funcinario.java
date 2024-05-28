@@ -14,8 +14,8 @@ import javax.swing.JTextField;
  *
  * @author NEY SCHUNK
  */
-public class Cadastro_de_Funcinario extends javax.swing.JFrame {
-    public Cadastro_de_Funcinario() {
+public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
+    public Visualizando_Cadastro_de_Funcinario() {
         initComponents();
         transformarTextFieldstransparente();
         transformarButtostransparente();
@@ -36,7 +36,7 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
     }
     private void transformarButtostransparente() { //Deixando jButtons trasparente
     JButton[] buttons = {
-        btnfinalizarcadastro, btnmenu, btnhospede,
+        btneditar, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar
     };
         for (int i = 0; i < buttons.length; i++) {
@@ -63,7 +63,7 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfrua = new javax.swing.JTextField();
         txtfcomplemento = new javax.swing.JTextField();
         txtfobservacoes = new javax.swing.JTextField();
-        btnfinalizarcadastro = new javax.swing.JButton();
+        btneditar = new javax.swing.JButton();
         btnmenu = new javax.swing.JButton();
         btnhospede = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
@@ -81,7 +81,7 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         rbtnstatus = new javax.swing.JRadioButton();
         txtnnumerofuncionario = new javax.swing.JTextField();
         btnvoltar = new javax.swing.JButton();
-        lblimagemcadastrofuncionario = new javax.swing.JLabel();
+        lblimagemVISUALIZANDOcadastrofuncionario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,16 +144,16 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfobservacoes.setBorder(null);
         jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 740, 60));
 
-        btnfinalizarcadastro.setBorder(null);
-        btnfinalizarcadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+        btneditar.setBorder(null);
+        btneditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseEntered(evt);
+                btneditarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseExited(evt);
+                btneditarMouseExited(evt);
             }
         });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 610, 230, 50));
+        jPanel1.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 610, 230, 50));
 
         btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -257,9 +257,9 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         jPanel1.add(txtnnumerofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 172, 110, 30));
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 613, 170, 50));
 
-        lblimagemcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
-        jPanel1.add(lblimagemcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        lblimagemVISUALIZANDOcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblimagemVISUALIZANDOcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando cadastro funcionário.png")); // NOI18N
+        jPanel1.add(lblimagemVISUALIZANDOcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -275,13 +275,13 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-        btnfinalizarcadastro.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
+    private void btneditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseEntered
+        btneditar.setBorder(BorderFactory.createLineBorder(Color.yellow));
+    }//GEN-LAST:event_btneditarMouseEntered
 
-    private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-        btnfinalizarcadastro.setBorder(null);
-    }//GEN-LAST:event_btnfinalizarcadastroMouseExited
+    private void btneditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseExited
+        btneditar.setBorder(null);
+    }//GEN-LAST:event_btneditarMouseExited
 
     private void btnmenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseEntered
         btnmenu.setBorder(BorderFactory.createLineBorder(Color.yellow));
@@ -392,14 +392,26 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Funcinario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Funcinario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Funcinario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Funcinario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -408,14 +420,14 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastro_de_Funcinario().setVisible(true);
+                new Visualizando_Cadastro_de_Funcinario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnajustes;
-    private javax.swing.JButton btnfinalizarcadastro;
+    private javax.swing.JButton btneditar;
     private javax.swing.JButton btnhospede;
     private javax.swing.JButton btnmapa;
     private javax.swing.JButton btnmenu;
@@ -425,7 +437,7 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnroutros;
     private javax.swing.JButton btnvoltar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblimagemcadastrofuncionario;
+    private javax.swing.JLabel lblimagemVISUALIZANDOcadastrofuncionario;
     private javax.swing.JRadioButton rbtnstatus;
     private javax.swing.JTextField txtfagencia;
     private javax.swing.JTextField txtfbairro;

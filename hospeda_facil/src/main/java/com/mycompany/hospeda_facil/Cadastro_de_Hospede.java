@@ -40,7 +40,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     private void transformarButtostransparente() { //Deixando jButtons trasparente
     JButton[] buttons = {
         btnfinalizarcadastro, btnmenu, btnhospede,
-        btnreserva, btnmapa, btnajustes
+        btnreserva, btnmapa, btnajustes,btnvoltar
     };
         for (int i = 0; i < buttons.length; i++) {
             JButton button = buttons[i];                
@@ -75,6 +75,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         btnrmasculino = new javax.swing.JRadioButton();
         btnrfeminino = new javax.swing.JRadioButton();
         btnroutros = new javax.swing.JRadioButton();
+        btnvoltar = new javax.swing.JButton();
         lblimagemcadastrohospede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,7 +109,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
 
         txtfemail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfemail.setBorder(null);
-        jPanel1.add(txtfemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 308, 530, 30));
+        jPanel1.add(txtfemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 308, 540, 30));
 
         txtfcep.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcep.setBorder(null);
@@ -152,7 +153,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
                 btnfinalizarcadastroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 608, 230, 50));
+        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 597, 220, 50));
 
         btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -224,9 +225,10 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnroutros, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 212, -1, -1));
+        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 597, 160, 50));
 
         lblimagemcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\CadastrodeHospede.png")); // NOI18N
+        lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Hóspede.png")); // NOI18N
         jPanel1.add(lblimagemcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -434,6 +436,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnrfeminino;
     private javax.swing.JRadioButton btnrmasculino;
     private javax.swing.JRadioButton btnroutros;
+    private javax.swing.JButton btnvoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblimagemcadastrohospede;
     private javax.swing.JTextField txtfbairro;

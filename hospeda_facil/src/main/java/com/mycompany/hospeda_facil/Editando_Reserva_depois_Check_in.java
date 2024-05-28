@@ -13,8 +13,8 @@ import javax.swing.JTextField;
  *
  * @author NEY SCHUNK
  */
-public class Nova_Reserva extends javax.swing.JFrame {
-    public Nova_Reserva() {
+public class Editando_Reserva_depois_Check_in extends javax.swing.JFrame {
+    public Editando_Reserva_depois_Check_in() {
         initComponents();
         transformarTextFieldstransparente();
         transformarButtostransparente();
@@ -26,7 +26,8 @@ public class Nova_Reserva extends javax.swing.JFrame {
     }
     private void transformarTextFieldstransparente() { //Deixando jTextFields trasparente
     JTextField[] textFields = {
-        jTextField1,jTextField2,jTextField4,jTextField5,jTextField6,jTextField7,jTextField8
+        txtfcpf,txtfnomehospede,txtfvalordiaria,txtfnumeroadutos,
+        txtfnumerocriancas,jTextField7,txtfacomodacao,txtnnumeroreserva
         };
         for (int i=0; i<textFields.length; i++) {
             JTextField txtf = textFields[i];
@@ -36,9 +37,8 @@ public class Nova_Reserva extends javax.swing.JFrame {
     }
     private void transformarButtostransparente() { //Deixando jButtons trasparente
     JButton[] buttons = {
-        btnfinalizarcadastro, btnmenu, btnhospede,
-        btnreserva, btnmapa, btnajustes,btnacomodação,
-        btncpf,btnnovohospede,btnvoltar
+        btnsalvaralteracoes, btnmenu, btnhospede,
+        btnreserva, btnmapa, btnajustes,btnvoltar
     };
         for (int i = 0; i < buttons.length; i++) {
             JButton button = buttons[i];                
@@ -52,7 +52,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        btnfinalizarcadastro = new javax.swing.JButton();
+        btnsalvaralteracoes = new javax.swing.JButton();
         btnmenu = new javax.swing.JButton();
         btnhospede = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
@@ -60,18 +60,16 @@ public class Nova_Reserva extends javax.swing.JFrame {
         btnreserva = new javax.swing.JButton();
         ftxtfdatainicioreserva = new javax.swing.JFormattedTextField();
         ftxtfdatafimreserva = new javax.swing.JFormattedTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txtfcpf = new javax.swing.JTextField();
+        txtfnomehospede = new javax.swing.JTextField();
+        txtfvalordiaria = new javax.swing.JTextField();
+        txtfnumeroadutos = new javax.swing.JTextField();
+        txtfnumerocriancas = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        btncpf = new javax.swing.JButton();
-        btnacomodação = new javax.swing.JButton();
-        btnnovohospede = new javax.swing.JButton();
+        txtfacomodacao = new javax.swing.JTextField();
         btnvoltar = new javax.swing.JButton();
-        lblimagemnovareserva = new javax.swing.JLabel();
+        txtnnumeroreserva = new javax.swing.JTextField();
+        lbleditandoreserva = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -80,16 +78,16 @@ public class Nova_Reserva extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnfinalizarcadastro.setBorder(null);
-        btnfinalizarcadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnsalvaralteracoes.setBorder(null);
+        btnsalvaralteracoes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseEntered(evt);
+                btnsalvaralteracoesMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseExited(evt);
+                btnsalvaralteracoesMouseExited(evt);
             }
         });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 570, 230, 50));
+        jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 570, 210, 50));
 
         btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -159,42 +157,43 @@ public class Nova_Reserva extends javax.swing.JFrame {
         ftxtfdatafimreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jPanel1.add(ftxtfdatafimreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(588, 193, 120, 30));
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 240, 30));
+        txtfcpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfcpf.setBorder(null);
+        jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 240, 30));
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField2.setBorder(null);
-        jTextField2.setEnabled(false);
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 153, 290, 30));
+        txtfnomehospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnomehospede.setBorder(null);
+        txtfnomehospede.setEnabled(false);
+        jPanel1.add(txtfnomehospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 153, 290, 30));
 
-        jTextField4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField4.setBorder(null);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 130, 30));
+        txtfvalordiaria.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfvalordiaria.setBorder(null);
+        jPanel1.add(txtfvalordiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 130, 30));
 
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField5.setBorder(null);
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 357, 120, 30));
+        txtfnumeroadutos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnumeroadutos.setBorder(null);
+        jPanel1.add(txtfnumeroadutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 357, 120, 30));
 
-        jTextField6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField6.setBorder(null);
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 357, 130, 30));
+        txtfnumerocriancas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnumerocriancas.setBorder(null);
+        jPanel1.add(txtfnumerocriancas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 357, 130, 30));
 
         jTextField7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jTextField7.setBorder(null);
         jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 580, 70));
 
-        jTextField8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField8.setBorder(null);
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 241, 390, 30));
-        jPanel1.add(btncpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 103, 40, 40));
-        jPanel1.add(btnacomodação, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 240, 40, 40));
-        jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 200, 40));
-        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 570, 140, 50));
+        txtfacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfacomodacao.setBorder(null);
+        jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 241, 390, 30));
+        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 570, 190, 50));
 
-        lblimagemnovareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
-        jPanel1.add(lblimagemnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
+        txtnnumeroreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtnnumeroreserva.setBorder(null);
+        jPanel1.add(txtnnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 120, 30));
+
+        lbleditandoreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbleditandoreserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_Reserva.png")); // NOI18N
+        jPanel1.add(lbleditandoreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,13 +209,13 @@ public class Nova_Reserva extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-        btnfinalizarcadastro.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
+    private void btnsalvaralteracoesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseEntered
+        btnsalvaralteracoes.setBorder(BorderFactory.createLineBorder(Color.yellow));
+    }//GEN-LAST:event_btnsalvaralteracoesMouseEntered
 
-    private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-        btnfinalizarcadastro.setBorder(null);
-    }//GEN-LAST:event_btnfinalizarcadastroMouseExited
+    private void btnsalvaralteracoesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseExited
+        btnsalvaralteracoes.setBorder(null);
+    }//GEN-LAST:event_btnsalvaralteracoesMouseExited
 
     private void btnmenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseEntered
          btnmenu.setBorder(BorderFactory.createLineBorder(Color.yellow));
@@ -272,46 +271,44 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Nova_Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Reserva_depois_Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Nova_Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Reserva_depois_Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Nova_Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Reserva_depois_Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Nova_Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Reserva_depois_Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Nova_Reserva().setVisible(true);
+                new Editando_Reserva_depois_Check_in().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnacomodação;
     private javax.swing.JButton btnajustes;
-    private javax.swing.JButton btncpf;
-    private javax.swing.JButton btnfinalizarcadastro;
     private javax.swing.JButton btnhospede;
     private javax.swing.JButton btnmapa;
     private javax.swing.JButton btnmenu;
-    private javax.swing.JButton btnnovohospede;
     private javax.swing.JButton btnreserva;
+    private javax.swing.JButton btnsalvaralteracoes;
     private javax.swing.JButton btnvoltar;
     private javax.swing.JFormattedTextField ftxtfdatafimreserva;
     private javax.swing.JFormattedTextField ftxtfdatainicioreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JLabel lblimagemnovareserva;
+    private javax.swing.JLabel lbleditandoreserva;
+    private javax.swing.JTextField txtfacomodacao;
+    private javax.swing.JTextField txtfcpf;
+    private javax.swing.JTextField txtfnomehospede;
+    private javax.swing.JTextField txtfnumeroadutos;
+    private javax.swing.JTextField txtfnumerocriancas;
+    private javax.swing.JTextField txtfvalordiaria;
+    private javax.swing.JTextField txtnnumeroreserva;
     // End of variables declaration//GEN-END:variables
 
     

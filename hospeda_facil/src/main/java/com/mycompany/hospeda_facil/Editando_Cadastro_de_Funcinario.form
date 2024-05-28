@@ -237,19 +237,19 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="btnfinalizarcadastro">
+        <Component class="javax.swing.JButton" name="btnsalvaralteracoes">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnfinalizarcadastroMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnfinalizarcadastroMouseExited"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnsalvaralteracoesMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnsalvaralteracoesMouseExited"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="670" y="610" width="230" height="50"/>
+              <AbsoluteConstraints x="720" y="610" width="210" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -458,17 +458,17 @@
         <Component class="javax.swing.JButton" name="btnvoltar">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="430" y="613" width="170" height="50"/>
+              <AbsoluteConstraints x="470" y="610" width="170" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblimagemcadastrofuncionario">
+        <Component class="javax.swing.JLabel" name="lblimagemEDITANDOcadastrofuncionario">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="18" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\NEY SCHUNK\Desktop\HOSPEDA_FACIL\Projeto_hospeda_facil\hospeda_facil\src\main\java\com\mycompany\hospeda_facil\imagens_telas\Cadastro_Funcionario.png"/>
+              <Image iconType="2" name="C:\Users\NEY SCHUNK\Desktop\HOSPEDA_FACIL\Projeto_hospeda_facil\hospeda_facil\src\main\java\com\mycompany\hospeda_facil\imagens_telas\Editando_cadastro_funcion&#xe1;rio.png"/>
             </Property>
           </Properties>
           <Constraints>

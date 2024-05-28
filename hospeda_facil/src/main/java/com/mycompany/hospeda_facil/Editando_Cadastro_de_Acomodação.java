@@ -13,8 +13,8 @@ import javax.swing.JTextField;
  *
  * @author NEY SCHUNK
  */
-public class Cadastro_de_Acomodação extends javax.swing.JFrame {
-    public Cadastro_de_Acomodação() {
+public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
+    public Editando_Cadastro_de_Acomodação() {
         initComponents();
         transformarTextFieldstransparente();
         transformarButtostransparente();
@@ -38,7 +38,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
     }
     private void transformarButtostransparente() { //Deixando jButtons trasparente
     JButton[] buttons = {
-        btnfinalizarcadastro, btnmenu, btnhospede,
+        btnsalvaralteracoes, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar
     };
         for (int i = 0; i < buttons.length; i++) {
@@ -53,7 +53,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        btnfinalizarcadastro = new javax.swing.JButton();
+        btnsalvaralteracoes = new javax.swing.JButton();
         btnmenu = new javax.swing.JButton();
         btnhospede = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
@@ -77,7 +77,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         ftxtfdatainicio = new javax.swing.JFormattedTextField();
         ftxtfdatafinal = new javax.swing.JFormattedTextField();
         btnvoltar = new javax.swing.JButton();
-        lblimagemcadastroacomodacao = new javax.swing.JLabel();
+        lblimagemEDITANDOcadastroacomodacao = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -86,16 +86,16 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnfinalizarcadastro.setBorder(null);
-        btnfinalizarcadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnsalvaralteracoes.setBorder(null);
+        btnsalvaralteracoes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseEntered(evt);
+                btnsalvaralteracoesMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseExited(evt);
+                btnsalvaralteracoesMouseExited(evt);
             }
         });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 580, 230, 50));
+        jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 586, 220, 50));
 
         btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -220,11 +220,11 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         }
         ftxtfdatafinal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(ftxtfdatafinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 438, 120, 30));
-        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 583, 150, 50));
+        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 586, 160, 50));
 
-        lblimagemcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastroacomodacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Acomodação.png")); // NOI18N
-        jPanel1.add(lblimagemcadastroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+        lblimagemEDITANDOcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblimagemEDITANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_Acomodação.png")); // NOI18N
+        jPanel1.add(lblimagemEDITANDOcadastroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -240,13 +240,13 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-        btnfinalizarcadastro.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
+    private void btnsalvaralteracoesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseEntered
+        btnsalvaralteracoes.setBorder(BorderFactory.createLineBorder(Color.yellow));
+    }//GEN-LAST:event_btnsalvaralteracoesMouseEntered
 
-    private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-        btnfinalizarcadastro.setBorder(null);
-    }//GEN-LAST:event_btnfinalizarcadastroMouseExited
+    private void btnsalvaralteracoesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseExited
+        btnsalvaralteracoes.setBorder(null);
+    }//GEN-LAST:event_btnsalvaralteracoesMouseExited
 
     private void btnmenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseEntered
          btnmenu.setBorder(BorderFactory.createLineBorder(Color.yellow));
@@ -330,26 +330,25 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastro_de_Acomodação().setVisible(true);
+                new Editando_Cadastro_de_Acomodação().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnajustes;
-    private javax.swing.JButton btnfinalizarcadastro;
     private javax.swing.JButton btnhospede;
     private javax.swing.JButton btnmapa;
     private javax.swing.JButton btnmenu;
@@ -359,6 +358,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnrrestricao;
     private javax.swing.JRadioButton btnrsuite;
     private javax.swing.JRadioButton btnrtriplo;
+    private javax.swing.JButton btnsalvaralteracoes;
     private javax.swing.JButton btnvoltar;
     private javax.swing.JCheckBox cbxacessibilidade;
     private javax.swing.JCheckBox cbxarcondicionado;
@@ -369,7 +369,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftxtfdatainicio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JLabel lblimagemcadastroacomodacao;
+    private javax.swing.JLabel lblimagemEDITANDOcadastroacomodacao;
     private javax.swing.JTextField txtfcapacidade;
     private javax.swing.JTextField txtfdescricao;
     private javax.swing.JTextField txtfmotivobloqueio;
