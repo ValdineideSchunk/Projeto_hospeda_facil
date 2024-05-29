@@ -19,16 +19,13 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         transformarTextFieldstransparente();
         transformarButtostransparente();
         
-        ftxtfdatafinal.setOpaque(false);
-        ftxtfdatafinal.setBackground(new Color(0, 0, 0, 0));
-        ftxtfdatainicio.setOpaque(false);
-        ftxtfdatainicio.setBackground(new Color(0, 0, 0, 0)); 
+        
         
     }
     private void transformarTextFieldstransparente() { //Deixando jTextFields trasparente
     JTextField[] textFields = {
         txtfcapacidade,txtfnumeroacomodacao,txtfnomeacomodacao,txtfdescricao,
-        txtfmotivobloqueio
+        txtfmotivobloqueio,ftxtfdatafinal,ftxtfdatainicio
         };
         for (int i=0; i<textFields.length; i++) {
             JTextField txtf = textFields[i];

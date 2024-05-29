@@ -5,6 +5,12 @@
 package com.mycompany.hospeda_facil;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -19,13 +25,14 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         initComponents();
         transformarTextFieldstransparente();
         transformarButtostransparente();
+
     }
-    private void transformarTextFieldstransparente() { //Deixando jTextFields trasparente
+    private void transformarTextFieldstransparente() {
     JTextField[] textFields = {
-        txtfnome, txtfrg, txtfcpf, txtfdatanascimento,
+        txtfnome, txtfrg, txtfcpf, ftxtfdatanascimento,
         txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes,
-        txtfcargo,txtfdataadimisão,txtfdataadimisão,txtfdataemissaocarteira,
+        txtfcargo,ftxtfdataadimisão,ftxtfdataemissaocarteira,
         txtfbanco,txtfagencia,txtfconta,txtnnumerofuncionario
         };
         for (int i=0; i<textFields.length; i++) {
@@ -34,7 +41,7 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
             txtf.setBackground(new Color(0, 0, 0, 0));
         }
     }
-    private void transformarButtostransparente() { //Deixando jButtons trasparente
+    private void transformarButtostransparente() {
     JButton[] buttons = {
         btnfinalizarcadastro, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar
@@ -53,7 +60,6 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfnome = new javax.swing.JTextField();
         txtfrg = new javax.swing.JTextField();
         txtfcpf = new javax.swing.JTextField();
-        txtfdatanascimento = new javax.swing.JTextField();
         txtfnumerotelefone = new javax.swing.JTextField();
         txtfemail = new javax.swing.JTextField();
         txtfcep = new javax.swing.JTextField();
@@ -72,8 +78,6 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         btnrfeminino = new javax.swing.JRadioButton();
         btnroutros = new javax.swing.JRadioButton();
         txtfcargo = new javax.swing.JTextField();
-        txtfdataadimisão = new javax.swing.JTextField();
-        txtfdataemissaocarteira = new javax.swing.JTextField();
         txtfbanco = new javax.swing.JTextField();
         txtfagencia = new javax.swing.JTextField();
         txtfconta = new javax.swing.JTextField();
@@ -81,6 +85,9 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         rbtnstatus = new javax.swing.JRadioButton();
         txtnnumerofuncionario = new javax.swing.JTextField();
         btnvoltar = new javax.swing.JButton();
+        ftxtfdataadimisão = new javax.swing.JFormattedTextField();
+        ftxtfdataemissaocarteira = new javax.swing.JFormattedTextField();
+        ftxtfdatanascimento = new javax.swing.JFormattedTextField();
         lblimagemcadastrofuncionario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,10 +110,6 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 320, 30));
-
-        txtfdatanascimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfdatanascimento.setBorder(null);
-        jPanel1.add(txtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, 210, 30));
 
         txtfnumerotelefone.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerotelefone.setBorder(null);
@@ -151,6 +154,11 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnfinalizarcadastroMouseExited(evt);
+            }
+        });
+        btnfinalizarcadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfinalizarcadastroActionPerformed(evt);
             }
         });
         jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 610, 230, 50));
@@ -221,14 +229,6 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfcargo.setBorder(null);
         jPanel1.add(txtfcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 440, 140, 30));
 
-        txtfdataadimisão.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfdataadimisão.setBorder(null);
-        jPanel1.add(txtfdataadimisão, new org.netbeans.lib.awtextra.AbsoluteConstraints(611, 440, 150, 30));
-
-        txtfdataemissaocarteira.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfdataemissaocarteira.setBorder(null);
-        jPanel1.add(txtfdataemissaocarteira, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 441, 129, 30));
-
         txtfbanco.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfbanco.setBorder(null);
         jPanel1.add(txtfbanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 475, 120, 30));
@@ -254,8 +254,23 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
 
         txtnnumerofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtnnumerofuncionario.setBorder(null);
+        txtnnumerofuncionario.setEnabled(false);
         jPanel1.add(txtnnumerofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 172, 110, 30));
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 613, 170, 50));
+
+        ftxtfdataadimisão.setBorder(null);
+        try {
+            ftxtfdataadimisão.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtfdataadimisão.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel1.add(ftxtfdataadimisão, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 440, 140, 30));
+
+        ftxtfdataemissaocarteira.setBorder(null);
+        ftxtfdataemissaocarteira.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel1.add(ftxtfdataemissaocarteira, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 130, 30));
+        jPanel1.add(ftxtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 140, 180, 30));
 
         lblimagemcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
@@ -321,7 +336,7 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnrmasculinoMouseClicked
 
     private void btnrfemininoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrfemininoMouseClicked
-         btnrmasculino.setSelected(false);
+        btnrmasculino.setSelected(false);
         btnroutros.setSelected(false);
     }//GEN-LAST:event_btnrfemininoMouseClicked
 
@@ -346,6 +361,69 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
     private void btnreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseExited
         btnreserva.setBorder(null);
     }//GEN-LAST:event_btnreservaMouseExited
+
+    private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
+        try {
+            
+                String opcaoSelecionada = null;
+            if (btnrmasculino.isSelected()) {
+                opcaoSelecionada = "M";
+            }else if (btnrfeminino.isSelected()) {
+                opcaoSelecionada = "F";
+            }else if (btnroutros.isSelected()) {
+                opcaoSelecionada ="O";
+            }
+            String status = null;
+            if (rbtnstatus.isSelected()) {
+                status = "1";
+            }else{status = "0";}
+                
+            
+            
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario ="root";
+            String senha ="";
+            conexao =DriverManager.getConnection(url,usuario,senha);
+            String sql = "INSERT INTO funcionarios(nome_funcionario,rg,cpf,data_nascimento,sexo,celular,email,cep,Estado,cidade,"
+                    + "bairro,rua,complemento,cargo,data_admissao,data_emissao_carteira,banco,agencia,conta,status_funcionario,observecoes)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            statement = conexao.prepareStatement(sql);
+            
+            statement.setString(1,txtfnome.getText());
+            statement.setString(2,txtfrg.getText());
+            statement.setString(3,txtfcpf.getText());
+            statement.setString(4,ftxtfdatanascimento.getText());
+            statement.setString(5,opcaoSelecionada);
+            statement.setString(6,txtfnumerotelefone.getText());
+            statement.setString(7,txtfemail.getText());
+            statement.setString(8,txtfcep.getText());
+            statement.setString(9,txtfestado.getText());
+            statement.setString(10,txtfcidade.getText());
+            statement.setString(11,txtfbairro.getText());
+            statement.setString(12,txtfrua.getText());
+            statement.setString(13,txtfcomplemento.getText());
+            statement.setString(14,txtfcargo.getText());
+            statement.setString(15,ftxtfdataadimisão.getText());
+            statement.setString(16,ftxtfdataemissaocarteira.getText());
+            statement.setString(17,txtfbanco.getText());
+            statement.setString(18,txtfagencia.getText());
+            statement.setString(19,txtfconta.getText());
+            statement.setString(20,status);
+            statement.setString(21,txtfobservacoes.getText());
+            
+            
+            
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso.");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }//GEN-LAST:event_btnfinalizarcadastroActionPerformed
     private boolean  validarCPF(String cpf) {
         if (cpf == null || cpf.length() != 11) {
             return false;
@@ -424,6 +502,9 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnrmasculino;
     private javax.swing.JRadioButton btnroutros;
     private javax.swing.JButton btnvoltar;
+    private javax.swing.JFormattedTextField ftxtfdataadimisão;
+    private javax.swing.JFormattedTextField ftxtfdataemissaocarteira;
+    private javax.swing.JFormattedTextField ftxtfdatanascimento;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblimagemcadastrofuncionario;
     private javax.swing.JRadioButton rbtnstatus;
@@ -436,9 +517,6 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
     private javax.swing.JTextField txtfcomplemento;
     private javax.swing.JTextField txtfconta;
     private javax.swing.JTextField txtfcpf;
-    private javax.swing.JTextField txtfdataadimisão;
-    private javax.swing.JTextField txtfdataemissaocarteira;
-    private javax.swing.JTextField txtfdatanascimento;
     private javax.swing.JTextField txtfemail;
     private javax.swing.JTextField txtfestado;
     private javax.swing.JTextField txtfnome;
@@ -448,8 +526,6 @@ public class Cadastro_de_Funcinario extends javax.swing.JFrame {
     private javax.swing.JTextField txtfrua;
     private javax.swing.JTextField txtnnumerofuncionario;
     // End of variables declaration//GEN-END:variables
-
-    
 
     
 }
