@@ -98,6 +98,11 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
                 btnmenuMouseExited(evt);
             }
         });
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
 
         btnhospede.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,6 +111,11 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnhospedeMouseExited(evt);
+            }
+        });
+        btnhospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhospedeActionPerformed(evt);
             }
         });
         jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
@@ -118,6 +128,11 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
                 btnmapaMouseExited(evt);
             }
         });
+        btnmapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmapaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
 
         btnajustes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,6 +143,11 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
                 btnajustesMouseExited(evt);
             }
         });
+        btnajustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnajustesActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
         btnreserva.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -136,6 +156,11 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnreservaMouseExited(evt);
+            }
+        });
+        btnreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreservaActionPerformed(evt);
             }
         });
         jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
@@ -258,6 +283,36 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
     private void btnreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseExited
         btnreserva.setBorder(null);
     }//GEN-LAST:event_btnreservaMouseExited
+
+    private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
+        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Menu_Principal objeto2 = new Menu_Principal();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmenuActionPerformed
+
+    private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
+        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
+        objeto2.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_btnhospedeActionPerformed
+
+    private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
+        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnreservaActionPerformed
+
+    private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
+        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmapaActionPerformed
+
+    private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
+        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Ajustes objeto2 = new Ajustes();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnajustesActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

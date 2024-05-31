@@ -89,8 +89,9 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 btnfinalizarcadastroMouseExited(evt);
             }
         });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 570, 230, 50));
+        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(563, 568, 220, 50));
 
+        btnmenu.setBorder(null);
         btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnmenuMouseEntered(evt);
@@ -99,8 +100,14 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 btnmenuMouseExited(evt);
             }
         });
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
 
+        btnhospede.setBorder(null);
         btnhospede.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnhospedeMouseEntered(evt);
@@ -109,8 +116,14 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 btnhospedeMouseExited(evt);
             }
         });
+        btnhospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhospedeActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
 
+        btnmapa.setBorder(null);
         btnmapa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnmapaMouseEntered(evt);
@@ -119,8 +132,14 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 btnmapaMouseExited(evt);
             }
         });
+        btnmapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmapaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
 
+        btnajustes.setBorder(null);
         btnajustes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnajustesMouseEntered(evt);
@@ -129,14 +148,25 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 btnajustesMouseExited(evt);
             }
         });
+        btnajustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnajustesActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
+        btnreserva.setBorder(null);
         btnreserva.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnreservaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnreservaMouseExited(evt);
+            }
+        });
+        btnreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreservaActionPerformed(evt);
             }
         });
         jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
@@ -187,9 +217,17 @@ public class Nova_Reserva extends javax.swing.JFrame {
         jTextField8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jTextField8.setBorder(null);
         jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 241, 390, 30));
+
+        btncpf.setBorder(null);
         jPanel1.add(btncpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 103, 40, 40));
+
+        btnacomodação.setBorder(null);
         jPanel1.add(btnacomodação, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 240, 40, 40));
+
+        btnnovohospede.setBorder(null);
         jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 200, 40));
+
+        btnvoltar.setBorder(null);
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 570, 140, 50));
 
         lblimagemnovareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -257,6 +295,36 @@ public class Nova_Reserva extends javax.swing.JFrame {
     private void btnreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseExited
         btnreserva.setBorder(null);
     }//GEN-LAST:event_btnreservaMouseExited
+
+    private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
+        Nova_Reserva.this.dispose();
+        Menu_Principal objeto2 = new Menu_Principal();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmenuActionPerformed
+
+    private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
+        Nova_Reserva.this.dispose();
+        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnhospedeActionPerformed
+
+    private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
+        Nova_Reserva.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnreservaActionPerformed
+
+    private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
+        Nova_Reserva.this.dispose();
+        Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmapaActionPerformed
+
+    private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
+        Nova_Reserva.this.dispose();
+        Ajustes objeto2 = new Ajustes();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnajustesActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

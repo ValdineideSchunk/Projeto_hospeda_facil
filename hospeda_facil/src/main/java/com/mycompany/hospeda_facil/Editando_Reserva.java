@@ -13,19 +13,21 @@ import javax.swing.JTextField;
  *
  * @author NEY SCHUNK
  */
-public class Cadastro_de_Acomodação extends javax.swing.JFrame {
-    public Cadastro_de_Acomodação() {
+public class Editando_Reserva extends javax.swing.JFrame {
+    public Editando_Reserva() {
         initComponents();
         transformarTextFieldstransparente();
         transformarButtostransparente();
-        
-        
-        
+        ftxtfdatafimreserva.setOpaque(false);
+        ftxtfdatafimreserva.setBackground(new Color(0, 0, 0, 0));
+        ftxtfdatainicioreserva.setOpaque(false);
+        ftxtfdatainicioreserva.setBackground(new Color(0, 0, 0, 0));
+         
     }
     private void transformarTextFieldstransparente() { //Deixando jTextFields trasparente
     JTextField[] textFields = {
-        txtfcapacidade,txtfnumeroacomodacao,txtfnomeacomodacao,txtfdescricao,
-        txtfmotivobloqueio,ftxtfdatafinal,ftxtfdatainicio
+        txtfcpf,txtfnomehospede,txtfvalordiaria,txtfnumeroadutos,
+        txtfnumerocriancas,jTextField7,txtfacomodacao,txtnnumeroreserva
         };
         for (int i=0; i<textFields.length; i++) {
             JTextField txtf = textFields[i];
@@ -35,7 +37,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
     }
     private void transformarButtostransparente() { //Deixando jButtons trasparente
     JButton[] buttons = {
-        btnfinalizarcadastro, btnmenu, btnhospede,
+        btnsalvaralteracoes, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar
     };
         for (int i = 0; i < buttons.length; i++) {
@@ -50,49 +52,43 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        btnfinalizarcadastro = new javax.swing.JButton();
+        btnsalvaralteracoes = new javax.swing.JButton();
         btnmenu = new javax.swing.JButton();
         btnhospede = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
         btnreserva = new javax.swing.JButton();
-        btnrindividual = new javax.swing.JRadioButton();
-        btnrduplo = new javax.swing.JRadioButton();
-        btnrtriplo = new javax.swing.JRadioButton();
-        btnrsuite = new javax.swing.JRadioButton();
-        txtfcapacidade = new javax.swing.JTextField();
-        txtfnumeroacomodacao = new javax.swing.JTextField();
-        txtfnomeacomodacao = new javax.swing.JTextField();
-        txtfdescricao = new javax.swing.JTextField();
-        btnrrestricao = new javax.swing.JRadioButton();
-        txtfmotivobloqueio = new javax.swing.JTextField();
-        cbxwifi = new javax.swing.JCheckBox();
-        cbxarcondicionado = new javax.swing.JCheckBox();
-        cbxtv = new javax.swing.JCheckBox();
-        cbxfrigibar = new javax.swing.JCheckBox();
-        cbxacessibilidade = new javax.swing.JCheckBox();
-        ftxtfdatainicio = new javax.swing.JFormattedTextField();
-        ftxtfdatafinal = new javax.swing.JFormattedTextField();
+        ftxtfdatainicioreserva = new javax.swing.JFormattedTextField();
+        ftxtfdatafimreserva = new javax.swing.JFormattedTextField();
+        txtfcpf = new javax.swing.JTextField();
+        txtfnomehospede = new javax.swing.JTextField();
+        txtfvalordiaria = new javax.swing.JTextField();
+        txtfnumeroadutos = new javax.swing.JTextField();
+        txtfnumerocriancas = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        txtfacomodacao = new javax.swing.JTextField();
         btnvoltar = new javax.swing.JButton();
-        lblimagemcadastroacomodacao = new javax.swing.JLabel();
+        txtnnumeroreserva = new javax.swing.JTextField();
+        lbleditandoreserva = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnfinalizarcadastro.setBorder(null);
-        btnfinalizarcadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnsalvaralteracoes.setBorder(null);
+        btnsalvaralteracoes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseEntered(evt);
+                btnsalvaralteracoesMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseExited(evt);
+                btnsalvaralteracoesMouseExited(evt);
             }
         });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 580, 230, 50));
+        jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 570, 210, 50));
 
         btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -169,83 +165,61 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         });
         jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
 
-        btnrindividual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnrindividualActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnrindividual, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 114, -1, -1));
-
-        btnrduplo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnrduploActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnrduplo, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 114, -1, -1));
-
-        btnrtriplo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnrtriploActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnrtriplo, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 114, -1, -1));
-
-        btnrsuite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnrsuiteActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnrsuite, new org.netbeans.lib.awtextra.AbsoluteConstraints(673, 114, -1, -1));
-
-        txtfcapacidade.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfcapacidade.setBorder(null);
-        jPanel1.add(txtfcapacidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(343, 142, 100, 30));
-
-        txtfnumeroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfnumeroacomodacao.setBorder(null);
-        jPanel1.add(txtfnumeroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 176, 70, 30));
-
-        txtfnomeacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfnomeacomodacao.setBorder(null);
-        jPanel1.add(txtfnomeacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 210, 30));
-
-        txtfdescricao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfdescricao.setBorder(null);
-        jPanel1.add(txtfdescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 550, 30));
-
-        btnrrestricao.setBorder(null);
-        jPanel1.add(btnrrestricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 367, -1, -1));
-
-        txtfmotivobloqueio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfmotivobloqueio.setBorder(null);
-        jPanel1.add(txtfmotivobloqueio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 630, 30));
-        jPanel1.add(cbxwifi, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 250, -1, -1));
-        jPanel1.add(cbxarcondicionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 249, -1, -1));
-        jPanel1.add(cbxtv, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, -1));
-        jPanel1.add(cbxfrigibar, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 250, -1, -1));
-        jPanel1.add(cbxacessibilidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 250, -1, -1));
-
-        ftxtfdatainicio.setBorder(null);
+        ftxtfdatainicioreserva.setBorder(null);
         try {
-            ftxtfdatainicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            ftxtfdatainicioreserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        ftxtfdatainicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(ftxtfdatainicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 438, 120, 30));
+        ftxtfdatainicioreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel1.add(ftxtfdatainicioreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 193, 120, 30));
 
-        ftxtfdatafinal.setBorder(null);
+        ftxtfdatafimreserva.setBorder(null);
         try {
-            ftxtfdatafinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            ftxtfdatafimreserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        ftxtfdatafinal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(ftxtfdatafinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 438, 120, 30));
-        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 583, 150, 50));
+        ftxtfdatafimreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel1.add(ftxtfdatafimreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(588, 193, 120, 30));
 
-        lblimagemcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jPanel1.add(lblimagemcadastroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+        txtfcpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfcpf.setBorder(null);
+        jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 240, 30));
+
+        txtfnomehospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnomehospede.setBorder(null);
+        txtfnomehospede.setEnabled(false);
+        jPanel1.add(txtfnomehospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 153, 290, 30));
+
+        txtfvalordiaria.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfvalordiaria.setBorder(null);
+        jPanel1.add(txtfvalordiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 130, 30));
+
+        txtfnumeroadutos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnumeroadutos.setBorder(null);
+        jPanel1.add(txtfnumeroadutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 357, 120, 30));
+
+        txtfnumerocriancas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnumerocriancas.setBorder(null);
+        jPanel1.add(txtfnumerocriancas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 357, 130, 30));
+
+        jTextField7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTextField7.setBorder(null);
+        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 580, 70));
+
+        txtfacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfacomodacao.setBorder(null);
+        jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 241, 390, 30));
+        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 570, 190, 50));
+
+        txtnnumeroreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtnnumeroreserva.setBorder(null);
+        jPanel1.add(txtnnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 120, 30));
+
+        lbleditandoreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbleditandoreserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_Reserva.png")); // NOI18N
+        jPanel1.add(lbleditandoreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,13 +235,13 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-        btnfinalizarcadastro.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
+    private void btnsalvaralteracoesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseEntered
+        btnsalvaralteracoes.setBorder(BorderFactory.createLineBorder(Color.yellow));
+    }//GEN-LAST:event_btnsalvaralteracoesMouseEntered
 
-    private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-        btnfinalizarcadastro.setBorder(null);
-    }//GEN-LAST:event_btnfinalizarcadastroMouseExited
+    private void btnsalvaralteracoesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseExited
+        btnsalvaralteracoes.setBorder(null);
+    }//GEN-LAST:event_btnsalvaralteracoesMouseExited
 
     private void btnmenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseEntered
          btnmenu.setBorder(BorderFactory.createLineBorder(Color.yellow));
@@ -309,60 +283,32 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         btnreserva.setBorder(null);
     }//GEN-LAST:event_btnreservaMouseExited
 
-    private void btnrindividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrindividualActionPerformed
-        // TODO add your handling code here:
-        btnrduplo.setSelected(false);
-        btnrtriplo.setSelected(false);
-        btnrsuite.setSelected(false);
-    }//GEN-LAST:event_btnrindividualActionPerformed
-
-    private void btnrduploActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrduploActionPerformed
-        // TODO add your handling code here:
-        btnrindividual.setSelected(false);
-        btnrtriplo.setSelected(false);
-        btnrsuite.setSelected(false);
-    }//GEN-LAST:event_btnrduploActionPerformed
-
-    private void btnrtriploActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrtriploActionPerformed
-        // TODO add your handling code here:
-        btnrduplo.setSelected(false);
-        btnrindividual.setSelected(false);
-        btnrsuite.setSelected(false);
-    }//GEN-LAST:event_btnrtriploActionPerformed
-
-    private void btnrsuiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrsuiteActionPerformed
-        // TODO add your handling code here:
-        btnrduplo.setSelected(false);
-        btnrtriplo.setSelected(false);
-        btnrindividual.setSelected(false);
-    }//GEN-LAST:event_btnrsuiteActionPerformed
-
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
-        Cadastro_de_Acomodação.this.dispose();
+        Editando_Reserva.this.dispose();
         Menu_Principal objeto2 = new Menu_Principal();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnmenuActionPerformed
 
     private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
-        Cadastro_de_Acomodação.this.dispose();
+        Editando_Reserva.this.dispose();
         Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnhospedeActionPerformed
 
     private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
-        Cadastro_de_Acomodação.this.dispose();
+        Editando_Reserva.this.dispose();
         Lista_de_Reserva objeto2 = new Lista_de_Reserva();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnreservaActionPerformed
 
     private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
-        Cadastro_de_Acomodação.this.dispose();
+        Editando_Reserva.this.dispose();
         Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnmapaActionPerformed
 
     private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
-        Cadastro_de_Acomodação.this.dispose();
+        Editando_Reserva.this.dispose();
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
@@ -381,51 +327,44 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editando_Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastro_de_Acomodação().setVisible(true);
+                new Editando_Reserva().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnajustes;
-    private javax.swing.JButton btnfinalizarcadastro;
     private javax.swing.JButton btnhospede;
     private javax.swing.JButton btnmapa;
     private javax.swing.JButton btnmenu;
-    private javax.swing.JRadioButton btnrduplo;
     private javax.swing.JButton btnreserva;
-    private javax.swing.JRadioButton btnrindividual;
-    private javax.swing.JRadioButton btnrrestricao;
-    private javax.swing.JRadioButton btnrsuite;
-    private javax.swing.JRadioButton btnrtriplo;
+    private javax.swing.JButton btnsalvaralteracoes;
     private javax.swing.JButton btnvoltar;
-    private javax.swing.JCheckBox cbxacessibilidade;
-    private javax.swing.JCheckBox cbxarcondicionado;
-    private javax.swing.JCheckBox cbxfrigibar;
-    private javax.swing.JCheckBox cbxtv;
-    private javax.swing.JCheckBox cbxwifi;
-    private javax.swing.JFormattedTextField ftxtfdatafinal;
-    private javax.swing.JFormattedTextField ftxtfdatainicio;
+    private javax.swing.JFormattedTextField ftxtfdatafimreserva;
+    private javax.swing.JFormattedTextField ftxtfdatainicioreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JLabel lblimagemcadastroacomodacao;
-    private javax.swing.JTextField txtfcapacidade;
-    private javax.swing.JTextField txtfdescricao;
-    private javax.swing.JTextField txtfmotivobloqueio;
-    private javax.swing.JTextField txtfnomeacomodacao;
-    private javax.swing.JTextField txtfnumeroacomodacao;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JLabel lbleditandoreserva;
+    private javax.swing.JTextField txtfacomodacao;
+    private javax.swing.JTextField txtfcpf;
+    private javax.swing.JTextField txtfnomehospede;
+    private javax.swing.JTextField txtfnumeroadutos;
+    private javax.swing.JTextField txtfnumerocriancas;
+    private javax.swing.JTextField txtfvalordiaria;
+    private javax.swing.JTextField txtnnumeroreserva;
     // End of variables declaration//GEN-END:variables
 
     
