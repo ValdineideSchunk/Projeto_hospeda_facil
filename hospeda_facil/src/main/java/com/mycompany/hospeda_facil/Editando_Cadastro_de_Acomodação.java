@@ -4,8 +4,6 @@
  */
 package com.mycompany.hospeda_facil;
 
-import java.awt.Color;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -16,37 +14,27 @@ import javax.swing.JTextField;
 public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
     public Editando_Cadastro_de_Acomodação() {
         initComponents();
-        transformarTextFieldstransparente();
-        transformarButtostransparente();
         
-        ftxtfdatafinal.setOpaque(false);
-        ftxtfdatafinal.setBackground(new Color(0, 0, 0, 0));
-        ftxtfdatainicio.setOpaque(false);
-        ftxtfdatainicio.setBackground(new Color(0, 0, 0, 0)); 
-        
-    }
-    private void transformarTextFieldstransparente() { //Deixando jTextFields trasparente
-    JTextField[] textFields = {
-        txtfcapacidade,txtfnumeroacomodacao,txtfnomeacomodacao,txtfdescricao,
-        txtfmotivobloqueio
-        };
-        for (int i=0; i<textFields.length; i++) {
-            JTextField txtf = textFields[i];
-            txtf.setOpaque(false);
-            txtf.setBackground(new Color(0, 0, 0, 0));
-        }
-    }
-    private void transformarButtostransparente() { //Deixando jButtons trasparente
-    JButton[] buttons = {
+        JButton[] buttons = {
         btnsalvaralteracoes, btnmenu, btnhospede,
-        btnreserva, btnmapa, btnajustes,btnvoltar
-    };
-        for (int i = 0; i < buttons.length; i++) {
-            JButton button = buttons[i];                
-            button.setOpaque(false);                    
-            button.setBackground(new Color(0, 0, 0, 0));                       
+        btnreserva, btnmapa, btnajustes,btnvoltar};
+        Efeitos_Botoes.EfeitosBotoes(buttons);
+        
+        JTextField[] textFields = {
+        txtfcapacidade,txtfnumeroacomodacao,txtfnomeacomodacao,txtfdescricao,
+        txtfmotivobloqueio,ftxtfdatafinal,ftxtfdatainicio};
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);
+        
+        
+        
+        
+        
+        
+         
+        
     }
-    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -54,11 +42,6 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
         btnsalvaralteracoes = new javax.swing.JButton();
-        btnmenu = new javax.swing.JButton();
-        btnhospede = new javax.swing.JButton();
-        btnmapa = new javax.swing.JButton();
-        btnajustes = new javax.swing.JButton();
-        btnreserva = new javax.swing.JButton();
         btnrindividual = new javax.swing.JRadioButton();
         btnrduplo = new javax.swing.JRadioButton();
         btnrtriplo = new javax.swing.JRadioButton();
@@ -77,6 +60,11 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         ftxtfdatainicio = new javax.swing.JFormattedTextField();
         ftxtfdatafinal = new javax.swing.JFormattedTextField();
         btnvoltar = new javax.swing.JButton();
+        btnmenu = new javax.swing.JButton();
+        btnhospede = new javax.swing.JButton();
+        btnreserva = new javax.swing.JButton();
+        btnmapa = new javax.swing.JButton();
+        btnajustes = new javax.swing.JButton();
         lblimagemEDITANDOcadastroacomodacao = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -96,81 +84,6 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 586, 220, 50));
-
-        btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnmenuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnmenuMouseExited(evt);
-            }
-        });
-        btnmenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenuActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
-
-        btnhospede.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnhospedeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnhospedeMouseExited(evt);
-            }
-        });
-        btnhospede.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnhospedeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
-
-        btnmapa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnmapaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnmapaMouseExited(evt);
-            }
-        });
-        btnmapa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmapaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
-
-        btnajustes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnajustesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnajustesMouseExited(evt);
-            }
-        });
-        btnajustes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnajustesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
-
-        btnreserva.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnreservaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnreservaMouseExited(evt);
-            }
-        });
-        btnreserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnreservaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
 
         btnrindividual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +160,44 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         jPanel1.add(ftxtfdatafinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 438, 120, 30));
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 586, 160, 50));
 
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
+
+        btnhospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhospedeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
+
+        btnreserva.setVerifyInputWhenFocusTarget(false);
+        btnreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
+
+        btnmapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmapaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
+
+        btnajustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnajustesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+
         lblimagemEDITANDOcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblimagemEDITANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_Acomodação.png")); // NOI18N
         jPanel1.add(lblimagemEDITANDOcadastroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -265,52 +215,12 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnsalvaralteracoesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseEntered
-        btnsalvaralteracoes.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        
     }//GEN-LAST:event_btnsalvaralteracoesMouseEntered
 
     private void btnsalvaralteracoesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseExited
-        btnsalvaralteracoes.setBorder(null);
+       
     }//GEN-LAST:event_btnsalvaralteracoesMouseExited
-
-    private void btnmenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseEntered
-         btnmenu.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnmenuMouseEntered
-
-    private void btnmenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseExited
-        btnmenu.setBorder(null);
-    }//GEN-LAST:event_btnmenuMouseExited
-
-    private void btnhospedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseEntered
-        btnhospede.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnhospedeMouseEntered
-
-    private void btnhospedeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseExited
-        btnhospede.setBorder(null);
-    }//GEN-LAST:event_btnhospedeMouseExited
-
-    private void btnmapaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseEntered
-        btnmapa.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnmapaMouseEntered
-
-    private void btnmapaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseExited
-        btnmapa.setBorder(null);
-    }//GEN-LAST:event_btnmapaMouseExited
-
-    private void btnajustesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseEntered
-        btnajustes.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnajustesMouseEntered
-
-    private void btnajustesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseExited
-        btnajustes.setBorder(null);
-    }//GEN-LAST:event_btnajustesMouseExited
-
-    private void btnreservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseEntered
-        btnreserva.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnreservaMouseEntered
-
-    private void btnreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseExited
-        btnreserva.setBorder(null);
-    }//GEN-LAST:event_btnreservaMouseExited
 
     private void btnrindividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrindividualActionPerformed
         // TODO add your handling code here:

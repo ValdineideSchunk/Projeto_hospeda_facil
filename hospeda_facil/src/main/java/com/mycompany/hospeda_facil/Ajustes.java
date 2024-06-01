@@ -4,6 +4,9 @@
  */
 package com.mycompany.hospeda_facil;
 
+import java.awt.Color;
+import javax.swing.JButton;
+
 /**
  *
  * @author NEY SCHUNK
@@ -15,7 +18,25 @@ public class Ajustes extends javax.swing.JFrame {
      */
     public Ajustes() {
         initComponents();
+        
+        JButton[] buttons = {
+        btnlistadeacomodacoes,btncadastrodeacomodacoes,btnlistadefuncinarios,btncadastrodefuncionarios,btnlistadehospede,btncadastrodehospede,
+        btnlistadereserva,btnnovareserva,btnsair};
+        Efeitos_Botoes.EfeitosBotoes(buttons);
     }
+    
+    
+    
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,47 +48,83 @@ public class Ajustes extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btnlistadeacomodacoes = new javax.swing.JButton();
+        btncadastrodeacomodacoes = new javax.swing.JButton();
+        btnlistadefuncinarios = new javax.swing.JButton();
+        btncadastrodefuncionarios = new javax.swing.JButton();
+        btnlistadehospede = new javax.swing.JButton();
+        btncadastrodehospede = new javax.swing.JButton();
+        btnlistadereserva = new javax.swing.JButton();
+        btnnovareserva = new javax.swing.JButton();
+        btnsair = new javax.swing.JButton();
         lblajustes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 83, 230, 40));
+        btnlistadeacomodacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlistadeacomodacoesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnlistadeacomodacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 80, 230, 44));
 
-        jButton2.setText("jButton2");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 133, 270, 30));
+        btncadastrodeacomodacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncadastrodeacomodacoesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btncadastrodeacomodacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 130, 270, 44));
 
-        jButton3.setText("jButton3");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 183, 210, 40));
+        btnlistadefuncinarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlistadefuncinariosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnlistadefuncinarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 181, 215, 44));
 
-        jButton4.setText("jButton4");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 233, 230, 40));
+        btncadastrodefuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncadastrodefuncionariosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btncadastrodefuncionarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 230, 237, 44));
 
-        jButton5.setText("jButton5");
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 283, 170, 40));
+        btnlistadehospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlistadehospedeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnlistadehospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 283, 176, 44));
 
-        jButton6.setText("jButton6");
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 333, 220, 40));
+        btncadastrodehospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncadastrodehospedeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btncadastrodehospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 333, 220, 44));
 
-        jButton7.setText("jButton7");
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 383, 170, 40));
+        btnlistadereserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlistadereservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnlistadereserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 383, 170, 44));
 
-        jButton8.setText("jButton8");
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 433, 160, 40));
+        btnnovareserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnovareservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 433, 140, 44));
 
-        jButton9.setText("jButton9");
-        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 483, 100, 40));
+        btnsair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsairActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnsair, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 480, 100, 44));
 
         lblajustes.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Ajustes.png")); // NOI18N
         jPanel1.add(lblajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 0, 1200, 665));
@@ -85,6 +142,58 @@ public class Ajustes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnsairActionPerformed
+
+    private void btnlistadeacomodacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistadeacomodacoesActionPerformed
+        Ajustes.this.dispose();
+        Lista_de_Acomodações objeto2 = new Lista_de_Acomodações();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnlistadeacomodacoesActionPerformed
+
+    private void btncadastrodeacomodacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrodeacomodacoesActionPerformed
+        Ajustes.this.dispose();
+        Cadastro_de_Acomodação objeto2 = new Cadastro_de_Acomodação();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btncadastrodeacomodacoesActionPerformed
+
+    private void btnlistadefuncinariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistadefuncinariosActionPerformed
+        Ajustes.this.dispose();
+        Lista_de_Funcionários objeto2 = new Lista_de_Funcionários();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnlistadefuncinariosActionPerformed
+
+    private void btncadastrodefuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrodefuncionariosActionPerformed
+        Ajustes.this.dispose();
+        Cadastro_de_Funcionario objeto2 = new Cadastro_de_Funcionario();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btncadastrodefuncionariosActionPerformed
+
+    private void btnlistadehospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistadehospedeActionPerformed
+        Ajustes.this.dispose();
+        Lista_de_Hóspede objeto2 = new Lista_de_Hóspede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnlistadehospedeActionPerformed
+
+    private void btncadastrodehospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrodehospedeActionPerformed
+        Ajustes.this.dispose();
+        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btncadastrodehospedeActionPerformed
+
+    private void btnlistadereservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistadereservaActionPerformed
+        Ajustes.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnlistadereservaActionPerformed
+
+    private void btnnovareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovareservaActionPerformed
+        Ajustes.this.dispose();
+        Nova_Reserva objeto2 = new Nova_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnnovareservaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,15 +231,15 @@ public class Ajustes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btncadastrodeacomodacoes;
+    private javax.swing.JButton btncadastrodefuncionarios;
+    private javax.swing.JButton btncadastrodehospede;
+    private javax.swing.JButton btnlistadeacomodacoes;
+    private javax.swing.JButton btnlistadefuncinarios;
+    private javax.swing.JButton btnlistadehospede;
+    private javax.swing.JButton btnlistadereserva;
+    private javax.swing.JButton btnnovareserva;
+    private javax.swing.JButton btnsair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblajustes;
     // End of variables declaration//GEN-END:variables

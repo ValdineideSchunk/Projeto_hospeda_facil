@@ -4,8 +4,6 @@
  */
 package com.mycompany.hospeda_facil;
 
-import java.awt.Color;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -16,48 +14,29 @@ import javax.swing.JTextField;
 public class Nova_Reserva extends javax.swing.JFrame {
     public Nova_Reserva() {
         initComponents();
-        transformarTextFieldstransparente();
-        transformarButtostransparente();
-        ftxtfdatafimreserva.setOpaque(false);
-        ftxtfdatafimreserva.setBackground(new Color(0, 0, 0, 0));
-        ftxtfdatainicioreserva.setOpaque(false);
-        ftxtfdatainicioreserva.setBackground(new Color(0, 0, 0, 0));
+        
+        JButton[] buttons = {
+        btnfinalizarnovareserva, btnmenu, btnhospede,
+        btnreserva, btnmapa, btnajustes,btnacomodação,
+        btncpf,btnnovohospede,btnvoltar};
+        Efeitos_Botoes.EfeitosBotoes(buttons);
+        
+        JTextField[] textFields = {
+        jTextField1,jTextField2,jTextField4,jTextField5,jTextField6,
+        jTextField7,jTextField8,ftxtfdatafimreserva,ftxtfdatainicioreserva};
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);
+        
+        
          
     }
-    private void transformarTextFieldstransparente() { //Deixando jTextFields trasparente
-    JTextField[] textFields = {
-        jTextField1,jTextField2,jTextField4,jTextField5,jTextField6,jTextField7,jTextField8
-        };
-        for (int i=0; i<textFields.length; i++) {
-            JTextField txtf = textFields[i];
-            txtf.setOpaque(false);
-            txtf.setBackground(new Color(0, 0, 0, 0));
-        }
-    }
-    private void transformarButtostransparente() { //Deixando jButtons trasparente
-    JButton[] buttons = {
-        btnfinalizarcadastro, btnmenu, btnhospede,
-        btnreserva, btnmapa, btnajustes,btnacomodação,
-        btncpf,btnnovohospede,btnvoltar
-    };
-        for (int i = 0; i < buttons.length; i++) {
-            JButton button = buttons[i];                
-            button.setOpaque(false);                    
-            button.setBackground(new Color(0, 0, 0, 0));                       
-    }
-    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        btnfinalizarcadastro = new javax.swing.JButton();
-        btnmenu = new javax.swing.JButton();
-        btnhospede = new javax.swing.JButton();
-        btnmapa = new javax.swing.JButton();
-        btnajustes = new javax.swing.JButton();
-        btnreserva = new javax.swing.JButton();
         ftxtfdatainicioreserva = new javax.swing.JFormattedTextField();
         ftxtfdatafimreserva = new javax.swing.JFormattedTextField();
         jTextField1 = new javax.swing.JTextField();
@@ -71,6 +50,12 @@ public class Nova_Reserva extends javax.swing.JFrame {
         btnacomodação = new javax.swing.JButton();
         btnnovohospede = new javax.swing.JButton();
         btnvoltar = new javax.swing.JButton();
+        btnmenu = new javax.swing.JButton();
+        btnhospede = new javax.swing.JButton();
+        btnreserva = new javax.swing.JButton();
+        btnmapa = new javax.swing.JButton();
+        btnajustes = new javax.swing.JButton();
+        btnfinalizarnovareserva = new javax.swing.JButton();
         lblimagemnovareserva = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -79,97 +64,6 @@ public class Nova_Reserva extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnfinalizarcadastro.setBorder(null);
-        btnfinalizarcadastro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseExited(evt);
-            }
-        });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(563, 568, 220, 50));
-
-        btnmenu.setBorder(null);
-        btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnmenuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnmenuMouseExited(evt);
-            }
-        });
-        btnmenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenuActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
-
-        btnhospede.setBorder(null);
-        btnhospede.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnhospedeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnhospedeMouseExited(evt);
-            }
-        });
-        btnhospede.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnhospedeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
-
-        btnmapa.setBorder(null);
-        btnmapa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnmapaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnmapaMouseExited(evt);
-            }
-        });
-        btnmapa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmapaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
-
-        btnajustes.setBorder(null);
-        btnajustes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnajustesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnajustesMouseExited(evt);
-            }
-        });
-        btnajustes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnajustesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
-
-        btnreserva.setBorder(null);
-        btnreserva.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnreservaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnreservaMouseExited(evt);
-            }
-        });
-        btnreserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnreservaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
 
         ftxtfdatainicioreserva.setBorder(null);
         try {
@@ -230,6 +124,42 @@ public class Nova_Reserva extends javax.swing.JFrame {
         btnvoltar.setBorder(null);
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 570, 140, 50));
 
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
+
+        btnhospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhospedeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
+
+        btnreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
+
+        btnmapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmapaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
+
+        btnajustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnajustesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+        jPanel1.add(btnfinalizarnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 570, 200, 50));
+
         lblimagemnovareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
         jPanel1.add(lblimagemnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
@@ -247,54 +177,6 @@ public class Nova_Reserva extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-        btnfinalizarcadastro.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
-
-    private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-        btnfinalizarcadastro.setBorder(null);
-    }//GEN-LAST:event_btnfinalizarcadastroMouseExited
-
-    private void btnmenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseEntered
-         btnmenu.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnmenuMouseEntered
-
-    private void btnmenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseExited
-        btnmenu.setBorder(null);
-    }//GEN-LAST:event_btnmenuMouseExited
-
-    private void btnhospedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseEntered
-        btnhospede.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnhospedeMouseEntered
-
-    private void btnhospedeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseExited
-        btnhospede.setBorder(null);
-    }//GEN-LAST:event_btnhospedeMouseExited
-
-    private void btnmapaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseEntered
-        btnmapa.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnmapaMouseEntered
-
-    private void btnmapaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseExited
-        btnmapa.setBorder(null);
-    }//GEN-LAST:event_btnmapaMouseExited
-
-    private void btnajustesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseEntered
-        btnajustes.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnajustesMouseEntered
-
-    private void btnajustesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseExited
-        btnajustes.setBorder(null);
-    }//GEN-LAST:event_btnajustesMouseExited
-
-    private void btnreservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseEntered
-        btnreserva.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnreservaMouseEntered
-
-    private void btnreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseExited
-        btnreserva.setBorder(null);
-    }//GEN-LAST:event_btnreservaMouseExited
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
         Nova_Reserva.this.dispose();
@@ -361,7 +243,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
     private javax.swing.JButton btnacomodação;
     private javax.swing.JButton btnajustes;
     private javax.swing.JButton btncpf;
-    private javax.swing.JButton btnfinalizarcadastro;
+    private javax.swing.JButton btnfinalizarnovareserva;
     private javax.swing.JButton btnhospede;
     private javax.swing.JButton btnmapa;
     private javax.swing.JButton btnmenu;

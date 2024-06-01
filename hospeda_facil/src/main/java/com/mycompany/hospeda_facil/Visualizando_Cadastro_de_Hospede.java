@@ -4,13 +4,6 @@
  */
 package com.mycompany.hospeda_facil;
 
-import java.awt.Color;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -22,33 +15,23 @@ import javax.swing.JTextField;
 public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
     public Visualizando_Cadastro_de_Hospede() {
         initComponents();
-        transformarTextFieldstransparente();
-        transformarButtostransparente();
-    }
-    private void transformarTextFieldstransparente() { //Deixando jTextFields trasparente
-    JTextField[] textFields = {
+        
+        JButton[] buttons = {
+        btneditar, btnmenu, btnhospede,
+        btnreserva, btnmapa, btnajustes,btnvoltar};
+        Efeitos_Botoes.EfeitosBotoes(buttons);
+        
+        JTextField[] textFields = {
         txtfnome, txtfrg, txtfcpf, txtfdatanascimento,
         txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento,
-        txtfobservacoes,txtfnumerohospede
-        };
-        for (int i=0; i<textFields.length; i++) {
-            JTextField txtf = textFields[i];
-            txtf.setOpaque(false);
-            txtf.setBackground(new Color(0, 0, 0, 0));
-        }
+        txtfobservacoes,txtfnumerohospede};
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);
+        
+        
     }
-    private void transformarButtostransparente() { //Deixando jButtons trasparente
-    JButton[] buttons = {
-        btneditar, btnmenu, btnhospede,
-        btnreserva, btnmapa, btnajustes,btnvoltar
-    };
-        for (int i = 0; i < buttons.length; i++) {
-            JButton button = buttons[i];                
-            button.setOpaque(false);                    
-            button.setBackground(new Color(0, 0, 0, 0));                       
-    }
-    }
+    
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,17 +50,17 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfrua = new javax.swing.JTextField();
         txtfcomplemento = new javax.swing.JTextField();
         txtfobservacoes = new javax.swing.JTextField();
-        btneditar = new javax.swing.JButton();
-        btnmenu = new javax.swing.JButton();
-        btnhospede = new javax.swing.JButton();
-        btnreserva = new javax.swing.JButton();
-        btnmapa = new javax.swing.JButton();
-        btnajustes = new javax.swing.JButton();
         btnrmasculino = new javax.swing.JRadioButton();
         btnrfeminino = new javax.swing.JRadioButton();
         btnroutros = new javax.swing.JRadioButton();
         btnvoltar = new javax.swing.JButton();
         txtfnumerohospede = new javax.swing.JTextField();
+        btnmenu = new javax.swing.JButton();
+        btnhospede = new javax.swing.JButton();
+        btnreserva = new javax.swing.JButton();
+        btnmapa = new javax.swing.JButton();
+        btnajustes = new javax.swing.JButton();
+        btneditar = new javax.swing.JButton();
         lblimagemVISUALIZANDOcadastrohospede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,97 +124,6 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfobservacoes.setBorder(null);
         jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 720, 60));
 
-        btneditar.setBorder(null);
-        btneditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btneditarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btneditarMouseExited(evt);
-            }
-        });
-        btneditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btneditarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 597, 160, 50));
-
-        btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnmenuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnmenuMouseExited(evt);
-            }
-        });
-        btnmenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenuActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
-
-        btnhospede.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnhospedeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnhospedeMouseExited(evt);
-            }
-        });
-        btnhospede.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnhospedeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
-
-        btnreserva.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnreservaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnreservaMouseExited(evt);
-            }
-        });
-        btnreserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnreservaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 306, 78, 67));
-
-        btnmapa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnmapaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnmapaMouseExited(evt);
-            }
-        });
-        btnmapa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmapaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
-
-        btnajustes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnajustesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnajustesMouseExited(evt);
-            }
-        });
-        btnajustes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnajustesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
-
         btnrmasculino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnrmasculinoMouseClicked(evt);
@@ -252,11 +144,47 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnroutros, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 212, -1, -1));
-        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 597, 160, 50));
+        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 597, 150, 50));
 
         txtfnumerohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerohospede.setBorder(null);
         jPanel1.add(txtfnumerohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 210, 110, 30));
+
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
+
+        btnhospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhospedeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
+
+        btnreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
+
+        btnmapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmapaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
+
+        btnajustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnajustesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+        jPanel1.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 600, 180, 50));
 
         lblimagemVISUALIZANDOcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemVISUALIZANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Cadastro_Hóspede.png")); // NOI18N
@@ -275,54 +203,6 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btneditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseEntered
-        btneditar.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btneditarMouseEntered
-
-    private void btneditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseExited
-        btneditar.setBorder(null);
-    }//GEN-LAST:event_btneditarMouseExited
-
-    private void btnmenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseEntered
-        btnmenu.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnmenuMouseEntered
-
-    private void btnmenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseExited
-        btnmenu.setBorder(null);
-    }//GEN-LAST:event_btnmenuMouseExited
-
-    private void btnhospedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseEntered
-        btnhospede.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnhospedeMouseEntered
-
-    private void btnhospedeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseExited
-        btnhospede.setBorder(null);
-    }//GEN-LAST:event_btnhospedeMouseExited
-
-    private void btnreservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseEntered
-        btnreserva.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnreservaMouseEntered
-
-    private void btnreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseExited
-        btnreserva.setBorder(null);
-    }//GEN-LAST:event_btnreservaMouseExited
-
-    private void btnmapaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseEntered
-        btnmapa.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnmapaMouseEntered
-
-    private void btnmapaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseExited
-        btnmapa.setBorder(null);
-    }//GEN-LAST:event_btnmapaMouseExited
-
-    private void btnajustesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseEntered
-        btnajustes.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnajustesMouseEntered
-
-    private void btnajustesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseExited
-        btnajustes.setBorder(null);
-    }//GEN-LAST:event_btnajustesMouseExited
 
     private void btnrmasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrmasculinoMouseClicked
         // TODO add your handling code here:
@@ -351,48 +231,6 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"ERRO: CPF invalido, Digite um numero valido!");
         }
     }//GEN-LAST:event_txtfcpfFocusLost
-
-    private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
-        try {
-            FileWriter arquivo = new FileWriter("C:\\Users\\NEY SCHUNK\\Desktop\\txtstestes\\arquivoteste.txt");
-            PrintWriter arquivoTxt = new PrintWriter(arquivo);
-
-            arquivoTxt.println("---------------------------------------------------------------");
-            arquivoTxt.println("Informações do hóspede:\n\n");
-            arquivoTxt.println("Nome do Hóspede:"+ txtfnome.getText());
-            arquivoTxt.println("CPF:"+ txtfcpf.getText());
-            arquivoTxt.println("RG:"+ txtfrg.getText());
-            arquivoTxt.println("Data de Nascimento:"+ txtfdatanascimento.getText());
-
-            if(btnrmasculino.isSelected()){
-                arquivoTxt.println("Sexo: Masculino");
-            }else if(btnrfeminino.isSelected()){
-                arquivoTxt.println("Sexo: Feminino");
-            }else if(btnroutros.isSelected()){
-                arquivoTxt.println("Sexo: Outro");
-            }else{
-                arquivoTxt.println("Sexo: Não informado");
-            }
-            arquivoTxt.println("---------------------------------------------------------------");
-            arquivoTxt.println("Contatos:");
-            arquivoTxt.println("Numero de Telefone:"+ txtfnumerotelefone.getText());
-            arquivoTxt.println("email:"+ txtfemail.getText());
-            arquivoTxt.println("---------------------------------------------------------------");
-            arquivoTxt.println("Endereço:");
-            arquivoTxt.println("Cep:"+ txtfcep.getText());
-            arquivoTxt.println("estado:"+ txtfestado.getText());
-            arquivoTxt.println("Cidade:"+ txtfcidade.getText());
-            arquivoTxt.println("Bairro:"+ txtfbairro.getText());
-            arquivoTxt.println("Complemento:"+ txtfcomplemento.getText());
-            arquivoTxt.println("Observações:"+ txtfobservacoes.getText());
-
-            arquivo.close();
-            
-            JOptionPane.showMessageDialog(null,"Informações salvas com sucesso!");
-        } catch (IOException ex) {
-            Logger.getLogger(Visualizando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btneditarActionPerformed
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
         Visualizando_Cadastro_de_Hospede.this.dispose();

@@ -4,26 +4,17 @@
  */
 package com.mycompany.hospeda_facil;
 
-import javax.swing.JButton;
-
 /**
  *
  * @author NEY SCHUNK
  */
-public class Inicio_Hospeda_Facil extends javax.swing.JFrame {
+public class Lista_de_Hóspede extends javax.swing.JFrame {
 
     /**
-     * Creates new form Inicio_Hospeda_Facil
+     * Creates new form Lista_de_Hóspede
      */
-    public Inicio_Hospeda_Facil() {
+    public Lista_de_Hóspede() {
         initComponents();
-        
-        JButton[] buttons = {
-        btniniciosistema};
-        Efeitos_Botoes.EfeitosBotoes(buttons);
-        
-        
-        
     }
 
     /**
@@ -36,23 +27,26 @@ public class Inicio_Hospeda_Facil extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btniniciosistema = new javax.swing.JButton();
-        lbltelainicial = new javax.swing.JLabel();
+        Lista_de_Hóspede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
 
-        btniniciosistema.setBorder(null);
-        btniniciosistema.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btniniciosistemaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btniniciosistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 615, 240, 50));
-
-        lbltelainicial.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Tela_Inicial.png")); // NOI18N
-        jPanel1.add(lbltelainicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1128, -1));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Lista_de_Hóspede)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Lista_de_Hóspede)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,17 +56,11 @@ public class Inicio_Hospeda_Facil extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btniniciosistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btniniciosistemaActionPerformed
-        Inicio_Hospeda_Facil.this.dispose();
-        login objeto2 = new login();
-        objeto2.setVisible(true);
-    }//GEN-LAST:event_btniniciosistemaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -91,27 +79,26 @@ public class Inicio_Hospeda_Facil extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicio_Hospeda_Facil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_Hóspede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicio_Hospeda_Facil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_Hóspede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicio_Hospeda_Facil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_Hóspede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicio_Hospeda_Facil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_Hóspede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicio_Hospeda_Facil().setVisible(true);
+                new Lista_de_Hóspede().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btniniciosistema;
+    private javax.swing.JLabel Lista_de_Hóspede;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lbltelainicial;
     // End of variables declaration//GEN-END:variables
 }

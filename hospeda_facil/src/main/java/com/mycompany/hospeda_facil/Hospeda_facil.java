@@ -14,10 +14,6 @@ public class Hospeda_facil {
         
         Inicio_Hospeda_Facil objeto2 = new Inicio_Hospeda_Facil();
         objeto2.setVisible(true);
-        
-   /*   tela_01.this.dispose();
-        tela02 objeto2 = new tela02();
-        objeto2.setVisible(true);*/
-        
+
     }
 }

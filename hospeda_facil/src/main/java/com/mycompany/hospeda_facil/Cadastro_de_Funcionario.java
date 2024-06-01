@@ -4,7 +4,6 @@
  */
 package com.mycompany.hospeda_facil;
 
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,11 +12,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import java.lang.String;
 
 /**
  *
@@ -26,35 +23,25 @@ import java.lang.String;
 public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     public Cadastro_de_Funcionario() {
         initComponents();
-        transformarTextFieldstransparente();
-        transformarButtostransparente();
-
-    }
-    private void transformarTextFieldstransparente() {
-    JTextField[] textFields = {
+        
+        JButton[] buttons = {
+        btnfinalizarcadastro, btnmenu, btnhospede,
+        btnreserva, btnmapa, btnajustes,btnvoltar};
+        Efeitos_Botoes.EfeitosBotoes(buttons);
+        
+        JTextField[] textFields = {
         txtfnome, txtfrg, txtfcpf, ftxtfdatanascimento,
         txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes,
         txtfcargo,ftxtfdataadimisao,ftxtfdataemissaocarteira,
-        txtfbanco,txtfagencia,txtfconta,txtnnumerofuncionario
-        };
-        for (int i=0; i<textFields.length; i++) {
-            JTextField txtf = textFields[i];
-            txtf.setOpaque(false);
-            txtf.setBackground(new Color(0, 0, 0, 0));
-        }
+        txtfbanco,txtfagencia,txtfconta,txtnnumerofuncionario};
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);
+        
+        
+        
+        
     }
-    private void transformarButtostransparente() {
-    JButton[] buttons = {
-        btnfinalizarcadastro, btnmenu, btnhospede,
-        btnreserva, btnmapa, btnajustes,btnvoltar
-    };
-        for (int i = 0; i < buttons.length; i++) {
-            JButton button = buttons[i];                
-            button.setOpaque(false);                    
-            button.setBackground(new Color(0, 0, 0, 0));                       
-    }
-    }
+ 
     public String formatoData(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -81,10 +68,6 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         txtfcomplemento = new javax.swing.JTextField();
         txtfobservacoes = new javax.swing.JTextField();
         btnfinalizarcadastro = new javax.swing.JButton();
-        btnmenu = new javax.swing.JButton();
-        btnhospede = new javax.swing.JButton();
-        btnmapa = new javax.swing.JButton();
-        btnajustes = new javax.swing.JButton();
         btnrmasculino = new javax.swing.JRadioButton();
         btnrfeminino = new javax.swing.JRadioButton();
         btnroutros = new javax.swing.JRadioButton();
@@ -92,13 +75,17 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         txtfbanco = new javax.swing.JTextField();
         txtfagencia = new javax.swing.JTextField();
         txtfconta = new javax.swing.JTextField();
-        btnreserva = new javax.swing.JButton();
         rbtnstatus = new javax.swing.JRadioButton();
         txtnnumerofuncionario = new javax.swing.JTextField();
         btnvoltar = new javax.swing.JButton();
         ftxtfdataadimisao = new javax.swing.JFormattedTextField();
         ftxtfdataemissaocarteira = new javax.swing.JFormattedTextField();
         ftxtfdatanascimento = new javax.swing.JFormattedTextField();
+        btnmenu = new javax.swing.JButton();
+        btnhospede = new javax.swing.JButton();
+        btnreserva = new javax.swing.JButton();
+        btnmapa = new javax.swing.JButton();
+        btnajustes = new javax.swing.JButton();
         lblimagemcadastrofuncionario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -174,66 +161,6 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         });
         jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 610, 230, 50));
 
-        btnmenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnmenuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnmenuMouseExited(evt);
-            }
-        });
-        btnmenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenuActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
-
-        btnhospede.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnhospedeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnhospedeMouseExited(evt);
-            }
-        });
-        btnhospede.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnhospedeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
-
-        btnmapa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnmapaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnmapaMouseExited(evt);
-            }
-        });
-        btnmapa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmapaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
-
-        btnajustes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnajustesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnajustesMouseExited(evt);
-            }
-        });
-        btnajustes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnajustesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
-
         btnrmasculino.setBorder(null);
         btnrmasculino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -271,21 +198,6 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         txtfconta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfconta.setBorder(null);
         jPanel1.add(txtfconta, new org.netbeans.lib.awtextra.AbsoluteConstraints(735, 475, 240, 30));
-
-        btnreserva.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnreservaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnreservaMouseExited(evt);
-            }
-        });
-        btnreserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnreservaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
         jPanel1.add(rbtnstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
 
         txtnnumerofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -321,7 +233,43 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         ftxtfdatanascimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jPanel1.add(ftxtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 140, 180, 30));
 
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
+
+        btnhospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhospedeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
+
+        btnreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
+
+        btnmapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmapaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
+
+        btnajustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnajustesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+
         lblimagemcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
         jPanel1.add(lblimagemcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -337,46 +285,6 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-        btnfinalizarcadastro.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
-
-    private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-        btnfinalizarcadastro.setBorder(null);
-    }//GEN-LAST:event_btnfinalizarcadastroMouseExited
-
-    private void btnmenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseEntered
-        btnmenu.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnmenuMouseEntered
-
-    private void btnmenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuMouseExited
-        btnmenu.setBorder(null);
-    }//GEN-LAST:event_btnmenuMouseExited
-
-    private void btnhospedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseEntered
-        btnhospede.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnhospedeMouseEntered
-
-    private void btnhospedeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnhospedeMouseExited
-        btnhospede.setBorder(null);
-    }//GEN-LAST:event_btnhospedeMouseExited
-
-    private void btnmapaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseEntered
-        btnmapa.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnmapaMouseEntered
-
-    private void btnmapaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmapaMouseExited
-        btnmapa.setBorder(null);
-    }//GEN-LAST:event_btnmapaMouseExited
-
-    private void btnajustesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseEntered
-        btnajustes.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnajustesMouseEntered
-
-    private void btnajustesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnajustesMouseExited
-        btnajustes.setBorder(null);
-    }//GEN-LAST:event_btnajustesMouseExited
 
     private void btnrmasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrmasculinoMouseClicked
         btnrfeminino.setSelected(false);
@@ -402,26 +310,18 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtfcpfFocusLost
 
-    private void btnreservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseEntered
-        btnreserva.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnreservaMouseEntered
-
-    private void btnreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreservaMouseExited
-        btnreserva.setBorder(null);
-    }//GEN-LAST:event_btnreservaMouseExited
-
     private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
         try {
             String data = ftxtfdatanascimento.getText();
             String datanascimento = formatoData(data);
-            
+
             data = ftxtfdataadimisao.getText();
             String dataadimisao = formatoData(data);
-            
+
             data = ftxtfdataemissaocarteira.getText();
             String dataemissaocarteira = formatoData(data);
-            
-                String opcaoSelecionada = null;
+
+            String opcaoSelecionada = null;
             if (btnrmasculino.isSelected()) {
                 opcaoSelecionada = "M";
             }else if (btnrfeminino.isSelected()) {
@@ -433,9 +333,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
             if (rbtnstatus.isSelected()) {
                 status = "1";
             }else{status = "0";}
-                
-            
-            
+
             Connection conexao = null;
             PreparedStatement statement = null;
             String url = "jdbc:mysql://localhost/hospedagem";
@@ -443,10 +341,10 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
             String senha ="";
             conexao =DriverManager.getConnection(url,usuario,senha);
             String sql = "INSERT INTO funcionarios(nome_funcionario,rg,cpf,data_nascimento,sexo,celular,email,cep,Estado,cidade,"
-                    + "bairro,rua,complemento,cargo,data_admissao,data_emissao_carteira,banco,agencia,conta,status_funcionario,observecoes)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "bairro,rua,complemento,cargo,data_admissao,data_emissao_carteira,banco,agencia,conta,status_funcionario,observecoes)"
+            + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             statement = conexao.prepareStatement(sql);
-            
+
             statement.setString(1,txtfnome.getText());
             statement.setString(2,txtfrg.getText());
             statement.setString(3,txtfcpf.getText());
@@ -468,18 +366,24 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
             statement.setString(19,txtfconta.getText());
             statement.setString(20,status);
             statement.setString(21,txtfobservacoes.getText());
-            
-            
-            
+
             statement.executeUpdate();
             statement.close();
             conexao.close();
             JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso.");
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Cadastro_de_Funcionario.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+        }
     }//GEN-LAST:event_btnfinalizarcadastroActionPerformed
+
+    private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
+
+    }//GEN-LAST:event_btnfinalizarcadastroMouseExited
+
+    private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
+
+    }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
         Cadastro_de_Funcionario.this.dispose();
