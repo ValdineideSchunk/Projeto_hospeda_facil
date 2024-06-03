@@ -4,6 +4,8 @@
  */
 package com.mycompany.hospeda_facil;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author NEY SCHUNK
@@ -15,6 +17,11 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
      */
     public Lista_de_Acomodações() {
         initComponents();
+        
+        JButton[] buttons = {
+        btnmenu, btnhospede,btnpesquisaracomodacao,
+        btnreserva, btnmapa, btnajustes,btnnovaacomodação};
+        Efeitos_Botoes.EfeitosBotoes(buttons);
     }
 
     /**
@@ -27,22 +34,81 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbllistaacomodacoes = new javax.swing.JTable();
+        btnmenu = new javax.swing.JButton();
+        btnhospede = new javax.swing.JButton();
+        btnreserva = new javax.swing.JButton();
+        btnmapa = new javax.swing.JButton();
+        btnajustes = new javax.swing.JButton();
+        btnnovaacomodação = new javax.swing.JButton();
+        btnpesquisaracomodacao = new javax.swing.JButton();
         lblLista_de_Acomodações = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblLista_de_Acomodações)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblLista_de_Acomodações)
-        );
+        tbllistaacomodacoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tbllistaacomodacoes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numero", "Nome", "Tipo", "Capacidade", "Status"
+            }
+        ));
+        jScrollPane1.setViewportView(tbllistaacomodacoes);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 720, 410));
+
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
+
+        btnhospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhospedeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
+
+        btnreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
+
+        btnmapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmapaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
+
+        btnajustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnajustesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+
+        btnnovaacomodação.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnovaacomodaçãoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnnovaacomodação, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 596, 280, 50));
+        btnnovaacomodação.getAccessibleContext().setAccessibleDescription("");
+
+        jPanel1.add(btnpesquisaracomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(746, 120, 42, 40));
+
+        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
+        jPanel1.add(lblLista_de_Acomodações, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,6 +123,42 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
+        Lista_de_Acomodações.this.dispose();
+        Menu_Principal objeto2 = new Menu_Principal();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmenuActionPerformed
+
+    private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
+        Lista_de_Acomodações.this.dispose();
+        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnhospedeActionPerformed
+
+    private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
+        Lista_de_Acomodações.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnreservaActionPerformed
+
+    private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
+        Lista_de_Acomodações.this.dispose();
+        Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmapaActionPerformed
+
+    private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
+        Lista_de_Acomodações.this.dispose();
+        Ajustes objeto2 = new Ajustes();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void btnnovaacomodaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovaacomodaçãoActionPerformed
+        Lista_de_Acomodações.this.dispose();
+        Cadastro_de_Acomodação objeto2 = new Cadastro_de_Acomodação();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnnovaacomodaçãoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,7 +196,16 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnajustes;
+    private javax.swing.JButton btnhospede;
+    private javax.swing.JButton btnmapa;
+    private javax.swing.JButton btnmenu;
+    private javax.swing.JButton btnnovaacomodação;
+    private javax.swing.JButton btnpesquisaracomodacao;
+    private javax.swing.JButton btnreserva;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLista_de_Acomodações;
+    private javax.swing.JTable tbllistaacomodacoes;
     // End of variables declaration//GEN-END:variables
 }

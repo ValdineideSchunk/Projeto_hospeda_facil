@@ -18,7 +18,7 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         
         JButton[] buttons = {
         btnnovareserva, btnmenu, btnhospede,
-        btnreserva, btnmapa, btnajustes};
+        btnreserva, btnmapa, btnajustes,btnpesquisareserva};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
         
@@ -38,6 +38,9 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         btnreserva = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbllistareserva = new javax.swing.JTable();
+        btnpesquisareserva = new javax.swing.JButton();
         lblimagemlistadereserva = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -91,6 +94,20 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+
+        tbllistareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tbllistareserva.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numero da Reserva", "Numero do Hóspede", "Data da Reserva", "Nome do Hóspede", "Data Check-in", "Data Check-out", "Status"
+            }
+        ));
+        jScrollPane1.setViewportView(tbllistareserva);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 940, 370));
+        jPanel1.add(btnpesquisareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 136, 47, 41));
 
         lblimagemlistadereserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemlistadereserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Reservas.png")); // NOI18N
@@ -198,10 +215,13 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
     private javax.swing.JButton btnmapa;
     private javax.swing.JButton btnmenu;
     private javax.swing.JButton btnnovareserva;
+    private javax.swing.JButton btnpesquisareserva;
     private javax.swing.JButton btnreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblimagemlistadereserva;
+    private javax.swing.JTable tbllistareserva;
     // End of variables declaration//GEN-END:variables
 
     

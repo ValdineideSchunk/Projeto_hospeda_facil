@@ -25,12 +25,12 @@ public class Efeitos_Botoes {
             button.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    button.setBorder(BorderFactory.createLineBorder(Color.YELLOW)); // Add line border on hover
+                    button.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    button.setBorder(BorderFactory.createEmptyBorder()); // Remove border when not hovering
+                    button.setBorder(BorderFactory.createEmptyBorder());
                 }
             });
         }

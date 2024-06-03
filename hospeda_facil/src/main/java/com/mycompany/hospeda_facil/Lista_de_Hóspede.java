@@ -4,6 +4,8 @@
  */
 package com.mycompany.hospeda_facil;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author NEY SCHUNK
@@ -15,6 +17,15 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
      */
     public Lista_de_Hóspede() {
         initComponents();
+        
+        JButton[] buttons = {
+        btnmenu, btnhospede,btnpesquisarhospede,
+        btnreserva, btnmapa, btnajustes,btnnovohospede};
+        Efeitos_Botoes.EfeitosBotoes(buttons);
+        
+        
+        
+        
     }
 
     /**
@@ -27,26 +38,79 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbllistahospede = new javax.swing.JTable();
+        btnmenu = new javax.swing.JButton();
+        btnhospede = new javax.swing.JButton();
+        btnreserva = new javax.swing.JButton();
+        btnmapa = new javax.swing.JButton();
+        btnajustes = new javax.swing.JButton();
+        btnnovohospede = new javax.swing.JButton();
+        btnpesquisarhospede = new javax.swing.JButton();
         Lista_de_Hóspede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Lista_de_Hóspede)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Lista_de_Hóspede)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        tbllistahospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tbllistahospede.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numero", "Nome", "CPF", "Telefone", "Sexo"
+            }
+        ));
+        jScrollPane1.setViewportView(tbllistahospede);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 710, 400));
+
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
+
+        btnhospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhospedeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 162, 77, 87));
+
+        btnreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 306, 78, 67));
+
+        btnmapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmapaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 428, 82, 64));
+
+        btnajustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnajustesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+
+        btnnovohospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnovohospedeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 590, 230, 50));
+        jPanel1.add(btnpesquisarhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 50, 50));
+
+        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
+        jPanel1.add(Lista_de_Hóspede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,6 +125,42 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
+        Lista_de_Hóspede.this.dispose();
+        Menu_Principal objeto2 = new Menu_Principal();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmenuActionPerformed
+
+    private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
+        Lista_de_Hóspede.this.dispose();
+        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnhospedeActionPerformed
+
+    private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
+        Lista_de_Hóspede.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnreservaActionPerformed
+
+    private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
+        Lista_de_Hóspede.this.dispose();
+        Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmapaActionPerformed
+
+    private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
+        Lista_de_Hóspede.this.dispose();
+        Ajustes objeto2 = new Ajustes();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void btnnovohospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovohospedeActionPerformed
+        Lista_de_Hóspede.this.dispose();
+        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnnovohospedeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,6 +199,15 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Lista_de_Hóspede;
+    private javax.swing.JButton btnajustes;
+    private javax.swing.JButton btnhospede;
+    private javax.swing.JButton btnmapa;
+    private javax.swing.JButton btnmenu;
+    private javax.swing.JButton btnnovohospede;
+    private javax.swing.JButton btnpesquisarhospede;
+    private javax.swing.JButton btnreserva;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbllistahospede;
     // End of variables declaration//GEN-END:variables
 }

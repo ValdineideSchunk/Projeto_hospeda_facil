@@ -212,11 +212,11 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-        btnfinalizarcadastro.setBorder(BorderFactory.createLineBorder(Color.yellow));
+  
     }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
 
     private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-        btnfinalizarcadastro.setBorder(null);
+
     }//GEN-LAST:event_btnfinalizarcadastroMouseExited
 
     private void btnrindividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrindividualActionPerformed
