@@ -4,9 +4,12 @@
  */
 package com.mycompany.hospeda_facil;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -27,7 +30,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
         JTextField[] textFields = {
-        txtfnome, txtfrg, txtfcpf, txtfdatanascimento,
+        txtfnome, txtfrg, txtfcpf, ftxtfdatanascimento,
         txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
@@ -35,6 +38,18 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         
 
     }
+    
+    public String formatoData(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }
+    
+    
+    
     
     
     @SuppressWarnings("unchecked")
@@ -45,7 +60,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfnome = new javax.swing.JTextField();
         txtfrg = new javax.swing.JTextField();
         txtfcpf = new javax.swing.JTextField();
-        txtfdatanascimento = new javax.swing.JTextField();
         txtfnumerotelefone = new javax.swing.JTextField();
         txtfemail = new javax.swing.JTextField();
         txtfcep = new javax.swing.JTextField();
@@ -65,6 +79,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         btnreserva = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
+        ftxtfdatanascimento = new javax.swing.JFormattedTextField();
         lblimagemcadastrohospede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,10 +102,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 168, 280, 30));
-
-        txtfdatanascimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfdatanascimento.setBorder(null);
-        jPanel1.add(txtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 169, 180, 30));
 
         txtfnumerotelefone.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerotelefone.setBorder(null);
@@ -198,6 +209,15 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 531, 82, 90));
 
+        ftxtfdatanascimento.setBorder(null);
+        try {
+            ftxtfdatanascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtfdatanascimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel1.add(ftxtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 170, 150, 30));
+
         lblimagemcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Hóspede.png")); // NOI18N
         jPanel1.add(lblimagemcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -242,50 +262,61 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     private void txtfcpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfcpfFocusLost
         String cpf = txtfcpf.getText();
         cpf = cpf.replaceAll("[^0-9]", "");
-        if (validarCPF(cpf)) {
+        if (ValidarCPF.validarCPF(cpf)) {
         } else {
             JOptionPane.showMessageDialog(null,"ERRO: CPF invalido, Digite um numero valido!");
+            txtfcpf.requestFocus();
         }
     }//GEN-LAST:event_txtfcpfFocusLost
 
     private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
+                    
         try {
-            FileWriter arquivo = new FileWriter("C:\\Users\\NEY SCHUNK\\Desktop\\txtstestes\\arquivoteste.txt");
-            PrintWriter arquivoTxt = new PrintWriter(arquivo);
-
-            arquivoTxt.println("---------------------------------------------------------------");
-            arquivoTxt.println("Informações do hóspede:\n\n");
-            arquivoTxt.println("Nome do Hóspede:"+ txtfnome.getText());
-            arquivoTxt.println("CPF:"+ txtfcpf.getText());
-            arquivoTxt.println("RG:"+ txtfrg.getText());
-            arquivoTxt.println("Data de Nascimento:"+ txtfdatanascimento.getText());
-
-            if(btnrmasculino.isSelected()){
-                arquivoTxt.println("Sexo: Masculino");
-            }else if(btnrfeminino.isSelected()){
-                arquivoTxt.println("Sexo: Feminino");
-            }else if(btnroutros.isSelected()){
-                arquivoTxt.println("Sexo: Outro");
-            }else{
-                arquivoTxt.println("Sexo: Não informado");
-            }
-            arquivoTxt.println("---------------------------------------------------------------");
-            arquivoTxt.println("Contatos:");
-            arquivoTxt.println("Numero de Telefone:"+ txtfnumerotelefone.getText());
-            arquivoTxt.println("email:"+ txtfemail.getText());
-            arquivoTxt.println("---------------------------------------------------------------");
-            arquivoTxt.println("Endereço:");
-            arquivoTxt.println("Cep:"+ txtfcep.getText());
-            arquivoTxt.println("estado:"+ txtfestado.getText());
-            arquivoTxt.println("Cidade:"+ txtfcidade.getText());
-            arquivoTxt.println("Bairro:"+ txtfbairro.getText());
-            arquivoTxt.println("Complemento:"+ txtfcomplemento.getText());
-            arquivoTxt.println("Observações:"+ txtfobservacoes.getText());
-
-            arquivo.close();
+            String data = ftxtfdatanascimento.getText();
+            String datanascimento = formatoData(data);
             
-            JOptionPane.showMessageDialog(null,"Informações salvas com sucesso!");
-        } catch (IOException ex) {
+
+            String opcaoSelecionada = null;
+            if (btnrmasculino.isSelected()) {
+                opcaoSelecionada = "M";
+            }else if (btnrfeminino.isSelected()) {
+                opcaoSelecionada = "F";
+            }else if (btnroutros.isSelected()) {
+                opcaoSelecionada ="O";
+            }
+            
+
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario ="root";
+            String senha ="";
+            conexao =DriverManager.getConnection(url,usuario,senha);
+            String sql = "INSERT INTO hospedes(nome_hospede,rg,cpf,data_nascimento,sexo,celular,email,cep,Estado,cidade,"
+                    + "bairro,rua,complemento,observacoes)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            statement = conexao.prepareStatement(sql);
+
+            statement.setString(1,txtfnome.getText());
+            statement.setString(2,txtfrg.getText());
+            statement.setString(3,txtfcpf.getText());
+            statement.setString(4,datanascimento);
+            statement.setString(5,opcaoSelecionada);
+            statement.setString(6,txtfnumerotelefone.getText());
+            statement.setString(7,txtfemail.getText());
+            statement.setString(8,txtfcep.getText());
+            statement.setString(9,txtfestado.getText());
+            statement.setString(10,txtfcidade.getText());
+            statement.setString(11,txtfbairro.getText());
+            statement.setString(12,txtfrua.getText());
+            statement.setString(13,txtfcomplemento.getText());
+            statement.setString(14,txtfobservacoes.getText());
+
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso.");
+        } catch (SQLException ex) {
             Logger.getLogger(Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnfinalizarcadastroActionPerformed
@@ -313,38 +344,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
-    private boolean  validarCPF(String cpf) {
-        if (cpf == null || cpf.length() != 11) {
-            return false;
-        }
-        boolean digitosIguais = true;
-        for (int i = 1; i < cpf.length(); i++) {
-            if (cpf.charAt(i) != cpf.charAt(0)) {
-                digitosIguais = false;
-                break;
-            }
-        }
-        if (digitosIguais) {
-            return false;
-        }
-        int soma = 0;
-        for (int i = 0; i < 9; i++) {
-            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
-        }
-        int digito1 = 11 - (soma % 11);
-        if (digito1 == 10 || digito1 == 11) {
-            digito1 = 0;
-        }
-        soma = 0;
-        for (int i = 0; i < 10; i++) {
-            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
-        }
-        int digito2 = 11 - (soma % 11);
-        if (digito2 == 10 || digito2 == 11) {
-            digito2 = 0;
-        }
-        return Character.getNumericValue(cpf.charAt(9)) == digito1 && Character.getNumericValue(cpf.charAt(10)) == digito2;
- }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -388,6 +388,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnrmasculino;
     private javax.swing.JRadioButton btnroutros;
     private javax.swing.JButton btnvoltar;
+    private javax.swing.JFormattedTextField ftxtfdatanascimento;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblimagemcadastrohospede;
     private javax.swing.JTextField txtfbairro;
@@ -395,7 +396,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     private javax.swing.JTextField txtfcidade;
     private javax.swing.JTextField txtfcomplemento;
     private javax.swing.JTextField txtfcpf;
-    private javax.swing.JTextField txtfdatanascimento;
     private javax.swing.JTextField txtfemail;
     private javax.swing.JTextField txtfestado;
     private javax.swing.JTextField txtfnome;

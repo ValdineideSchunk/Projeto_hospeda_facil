@@ -4,9 +4,16 @@
  */
 package com.mycompany.hospeda_facil;
 
-import java.awt.Color;
-import javax.swing.BorderFactory;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -31,7 +38,14 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         
            
     }
-    
+    public String formatoData(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,7 +53,6 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        btnfinalizarcadastro = new javax.swing.JButton();
         btnrindividual = new javax.swing.JRadioButton();
         btnrduplo = new javax.swing.JRadioButton();
         btnrtriplo = new javax.swing.JRadioButton();
@@ -63,6 +76,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         btnreserva = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
+        btnfinalizarcadastro = new javax.swing.JButton();
         lblimagemcadastroacomodacao = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -71,17 +85,6 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnfinalizarcadastro.setBorder(null);
-        btnfinalizarcadastro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseExited(evt);
-            }
-        });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 580, 230, 50));
 
         btnrindividual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,6 +196,13 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
+        btnfinalizarcadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfinalizarcadastroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 580, 210, 50));
+
         lblimagemcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemcadastroacomodacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Acomodação.png")); // NOI18N
         jPanel1.add(lblimagemcadastroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
@@ -210,14 +220,6 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-  
-    }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
-
-    private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-
-    }//GEN-LAST:event_btnfinalizarcadastroMouseExited
 
     private void btnrindividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrindividualActionPerformed
         // TODO add your handling code here:
@@ -276,6 +278,94 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
+        try {
+            
+            String opcaoSelecionada = null;
+            if (btnrindividual.isSelected()) {
+                opcaoSelecionada = "Individual";
+            }else if (btnrduplo.isSelected()) {
+                opcaoSelecionada = "Duplo";
+            }else if (btnrtriplo.isSelected()) {
+                opcaoSelecionada ="Triplo";
+            }else if (btnrsuite.isSelected()) {
+                opcaoSelecionada ="Suite";
+            }
+            
+            boolean wifi = cbxwifi.isSelected();
+            boolean arCondicionado = cbxarcondicionado.isSelected();
+            boolean tv = cbxtv.isSelected();
+            boolean frigobar = cbxfrigibar.isSelected();
+            boolean acessibilidade = cbxacessibilidade.isSelected();
+            
+            
+            boolean bloqueio = btnrrestricao.isSelected();
+            
+            
+            
+            
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario ="root";
+            String senha ="";
+            conexao =DriverManager.getConnection(url,usuario,senha);
+            String sql = "INSERT INTO acomodacoes(tipo_quarto,capacidade,nome_acomodacao,comodidade_wifi,"
+                    + "comodidade_arcondicionado,comodidade_tv,comodidade_frigobar,comodidade_acessibiidade,decricao,"
+                    + "bloqueio_acomodacao,periodo_bloqueio_inicio,periodo_bloqueio_fim,motivo_bloqueio)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            statement = conexao.prepareStatement(sql);
+
+            statement.setString(1,opcaoSelecionada);
+            statement.setString(2,txtfcapacidade.getText());
+            statement.setString(3,txtfnomeacomodacao.getText());
+            statement.setBoolean(4,wifi);
+            statement.setBoolean(5,arCondicionado);
+            statement.setBoolean(6,tv);
+            statement.setBoolean(7,frigobar);
+            statement.setBoolean(8,acessibilidade);
+            statement.setString(9,txtfdescricao.getText());
+            statement.setBoolean(10,bloqueio);
+            
+            if(btnrrestricao.isSelected()){
+            String data = ftxtfdatainicio.getText();
+            String datainicio = formatoData(data);
+            
+            data = ftxtfdatafinal.getText();
+                String datafinal = formatoData(data);
+                  
+                statement.setString(11,datainicio);
+                statement.setString(12,datafinal);
+                statement.setString(13,txtfmotivobloqueio.getText());
+            }else{
+                statement.setString(11,null);
+                statement.setString(12,null);
+                statement.setString(13," ");
+                
+                
+            }
+
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null,"Acomodação cadastrada com sucesso.");
+        } catch (SQLException ex) {
+            Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnfinalizarcadastroActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
