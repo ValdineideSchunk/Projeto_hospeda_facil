@@ -71,6 +71,9 @@
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbllistafuncionariosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -126,6 +129,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnnovofuncionario">
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnnovofuncionarioMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnnovofuncionarioActionPerformed"/>
           </Events>
           <Constraints>

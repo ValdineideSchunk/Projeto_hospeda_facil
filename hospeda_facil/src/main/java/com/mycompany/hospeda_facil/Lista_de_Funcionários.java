@@ -110,6 +110,11 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
                 "Numero", "Nome", "CPF", "Telefone", "sexo", "Cargo", "Status"
             }
         ));
+        tbllistafuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbllistafuncionariosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbllistafuncionarios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 890, 400));
@@ -149,6 +154,11 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
+        btnnovofuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnnovofuncionarioMouseClicked(evt);
+            }
+        });
         btnnovofuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnnovofuncionarioActionPerformed(evt);
@@ -214,6 +224,16 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.PopularTbllistafuncionarios("SELECT * from funcionarios");
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnnovofuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnovofuncionarioMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_btnnovofuncionarioMouseClicked
+
+    private void tbllistafuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistafuncionariosMouseClicked
+        // TODO add your handling code here:
+        /*int linha = tbllistafuncionarios.get*/
+    }//GEN-LAST:event_tbllistafuncionariosMouseClicked
 
     /**
      * @param args the command line arguments
