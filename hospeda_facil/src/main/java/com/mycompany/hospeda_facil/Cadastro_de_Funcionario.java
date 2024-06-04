@@ -4,6 +4,7 @@
  */
 package com.mycompany.hospeda_facil;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -37,10 +39,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         txtfcargo,ftxtfdataadimisao,ftxtfdataemissaocarteira,
         txtfbanco,txtfagencia,txtfconta,txtnnumerofuncionario};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
-        
-        
-        
-        
+           
     }
  
     public String formatoData(String data) {
@@ -56,9 +55,9 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtfnome = new javax.swing.JTextField();
         txtfrg = new javax.swing.JTextField();
         txtfcpf = new javax.swing.JTextField();
+        txtfnome = new javax.swing.JTextField();
         txtfnumerotelefone = new javax.swing.JTextField();
         txtfemail = new javax.swing.JTextField();
         txtfcep = new javax.swing.JTextField();
@@ -87,20 +86,12 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
         btnfinalizarcadastro = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         lblimagemcadastrofuncionario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtfnome.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfnome.setBorder(null);
-        txtfnome.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtfnomeFocusLost(evt);
-            }
-        });
-        jPanel1.add(txtfnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 109, 450, 30));
 
         txtfrg.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfrg.setBorder(null);
@@ -119,6 +110,16 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 320, 30));
+
+        txtfnome.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnome.setBorder(null);
+        txtfnome.setVerifyInputWhenFocusTarget(false);
+        txtfnome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfnomeFocusLost(evt);
+            }
+        });
+        jPanel1.add(txtfnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 109, 446, 28));
 
         txtfnumerotelefone.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerotelefone.setBorder(null);
@@ -270,8 +271,12 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         });
         jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 610, 220, 50));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 70, 15));
+
         lblimagemcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
+        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
         jPanel1.add(lblimagemcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -409,12 +414,10 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
 
     private void txtfnomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnomeFocusLost
         String text = txtfnome.getText();
-        if (!text.matches("[a-zA-Z\\s]+"))  { // Verifica se o texto contém apenas letras
-                    JOptionPane.showMessageDialog(null,
-                                                  "Por favor, no campo nome é permitido apenas letras.",
-                                                  "Entrada Inválida",
-                                                  JOptionPane.ERROR_MESSAGE);
-                    txtfnome.requestFocus();
+        if (!text.matches("[a-zA-Z\\s]+"))  {
+                txtfnome.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+                String mensagem = "Nome invalido";
+                jLabel1.setText(mensagem);
                 }
     }//GEN-LAST:event_txtfnomeFocusLost
 
@@ -481,6 +484,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftxtfdataadimisao;
     private javax.swing.JFormattedTextField ftxtfdataemissaocarteira;
     private javax.swing.JFormattedTextField ftxtfdatanascimento;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblimagemcadastrofuncionario;
     private javax.swing.JRadioButton rbtnstatus;
