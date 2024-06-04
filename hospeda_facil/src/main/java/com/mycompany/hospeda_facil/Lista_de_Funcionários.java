@@ -4,7 +4,15 @@
  */
 package com.mycompany.hospeda_facil;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +31,44 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         btnreserva, btnmapa, btnajustes,btnnovofuncionario};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
+    }
+    public void PopularTbllistafuncionarios(String sql) {
+        try {
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario ="root";
+            String senha ="";
+            conexao =DriverManager.getConnection(url,usuario,senha);
+            
+            PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
+            
+            banco.execute();
+            ResultSet resultado = banco.executeQuery(sql);
+            
+            DefaultTableModel model = (DefaultTableModel) tbllistafuncionarios.getModel();
+            
+            model.setNumRows(0);
+            
+            while(resultado.next())
+            {
+                model.addRow(new Object[]
+                {
+                    resultado.getString("id_funcionario"),
+                    resultado.getString("nome_funcionario"),
+                    resultado.getString("cpf"),
+                    resultado.getString("celular"), 
+                    resultado.getString("sexo"),
+                    resultado.getString("cargo"),
+                    resultado.getString("status_funcionario")
+                });
+            }
+            
+            conexao.close();
+            banco.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Lista_de_Funcionários.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -47,6 +93,11 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         lblLista_de_Funcionários = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -106,7 +157,7 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         jPanel1.add(btnnovofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 583, 240, 50));
         jPanel1.add(btnpesquisarfuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 120, 50, 40));
 
-        lblLista_de_Funcionários.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Funcionários.png")); // NOI18N
+        lblLista_de_Funcionários.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Funcionários.png")); // NOI18N
         jPanel1.add(lblLista_de_Funcionários, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -158,6 +209,11 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         Cadastro_de_Funcionario objeto2 = new Cadastro_de_Funcionario();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnnovofuncionarioActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.PopularTbllistafuncionarios("SELECT * from funcionarios");
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
