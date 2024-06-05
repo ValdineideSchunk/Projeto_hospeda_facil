@@ -17,7 +17,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -50,6 +49,51 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
+    
+    public boolean validardata(String data) {
+        if (data == null || data.trim().isEmpty()) {// Verifica se a string de data está no formato correto
+            return false;
+        }
+        if (!data.matches("\\d{2}/\\d{2}/\\d{4}")) { // Verifica se a data está no formato DD/MM/YYYY
+            return false;
+        }
+        String[] partes = data.split("/"); // Data no formato DD/MM/YYYY
+        int dia = Integer.parseInt(partes[0]);
+        int mes = Integer.parseInt(partes[1]);
+        int ano = Integer.parseInt(partes[2]);
+
+        if (mes < 1 || mes > 12) {    // Verifica se o mês é válido
+            return false;
+        }
+        if (dia < 1 || dia > 31) {   // Verifica se o dia é válido para o mês
+            return false;
+        }
+        if (ano > 2024) {    // Verifica se o ano é válido
+            return false;
+        }
+        if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {    // Verifica o número de dias em cada mês
+            if (dia > 30) {
+                return false;
+            }
+        } else if (mes == 2) {
+            if (anobissexto(ano)) {
+                if (dia > 29) {
+                    return false;
+                }
+            } else {
+                if (dia > 28) {
+                    return false;
+                }
+            }
+        }
+        return true;// Data válida
+    }
+    public static boolean anobissexto(int year) {// Função auxiliar para verificar se um ano é bissexto
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -86,7 +130,10 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
         btnfinalizarcadastro = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblerronome = new javax.swing.JLabel();
+        lblerrorg = new javax.swing.JLabel();
+        lblerrocpf = new javax.swing.JLabel();
+        lblerrodatanascimento = new javax.swing.JLabel();
         lblimagemcadastrofuncionario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,7 +147,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 txtfrgFocusLost(evt);
             }
         });
-        jPanel1.add(txtfrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 108, 140, 30));
+        jPanel1.add(txtfrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 108, 140, 28));
 
         txtfcpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcpf.setBorder(null);
@@ -109,7 +156,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 txtfcpfFocusLost(evt);
             }
         });
-        jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 320, 30));
+        jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 310, 30));
 
         txtfnome.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnome.setBorder(null);
@@ -227,7 +274,12 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         ftxtfdatanascimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jPanel1.add(ftxtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 140, 180, 30));
+        ftxtfdatanascimento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftxtfdatanascimentoFocusLost(evt);
+            }
+        });
+        jPanel1.add(ftxtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, 210, 30));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,12 +323,23 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         });
         jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 610, 220, 50));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 70, 15));
+        lblerronome.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerronome.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerronome, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 70, 15));
+
+        lblerrorg.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerrorg.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerrorg, new org.netbeans.lib.awtextra.AbsoluteConstraints(986, 109, 54, 15));
+
+        lblerrocpf.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        jPanel1.add(lblerrocpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 141, 70, 15));
+
+        lblerrodatanascimento.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerrodatanascimento.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerrodatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(955, 140, 70, 15));
 
         lblimagemcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
+        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
         jPanel1.add(lblimagemcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -309,12 +372,22 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnroutrosMouseClicked
 
     private void txtfcpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfcpfFocusLost
-        String cpf = txtfcpf.getText();
+        String cpf = txtfcpf.getText().trim();
+        
+         if (cpf.isEmpty()) {
+            txtfcpf.setBorder(null);
+            lblerrocpf.setText("");  
+            return;                  
+        }
         cpf = cpf.replaceAll("[^0-9]", "");
-        if (ValidarCPF.validarCPF(cpf)) {
+        if (!ValidarCPF.validarCPF(cpf)) {
+            txtfcpf.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "CPF invalido";
+            lblerrocpf.setText(mensagem);
         } else {
-            JOptionPane.showMessageDialog(null,"ERRO: CPF invalido, Digite um numero valido!");
-            txtfcpf.requestFocus();
+            txtfcpf.setBorder(null);
+            String mensagem = "";
+            lblerrocpf.setText(mensagem);
         }
     }//GEN-LAST:event_txtfcpfFocusLost
 
@@ -413,23 +486,50 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnfinalizarcadastroActionPerformed
 
     private void txtfnomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnomeFocusLost
-        String text = txtfnome.getText();
-        if (!text.matches("[a-zA-Z\\s]+"))  {
+        String text = txtfnome.getText().trim();
+        if (!text.isEmpty() && !text.matches("[a-zA-Z\\s]+"))  {
                 txtfnome.setBorder(BorderFactory.createLineBorder(Color.red, 2));
                 String mensagem = "Nome invalido";
-                jLabel1.setText(mensagem);
-                }
+                lblerronome.setText(mensagem);
+                }else{
+                    txtfnome.setBorder(null);
+                    String mensagem = "";
+                    lblerronome.setText(mensagem);
+        }
     }//GEN-LAST:event_txtfnomeFocusLost
 
     private void txtfrgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfrgFocusLost
-        String rg = txtfrg.getText();
-    if (!ValidarRG.validarRG(rg)) {
-        SwingUtilities.invokeLater(() -> {
-            txtfrg.requestFocus();
-        });
+        String rg = txtfrg.getText().trim();
+        if (!ValidarRG.validarRG(rg)) {
+            txtfrg.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "RG invalido";
+            lblerrorg.setText(mensagem); 
+        }else{
+            txtfrg.setBorder(null);
+            String mensagem = "";
+            lblerrorg.setText(mensagem);
+        
     }
                  
     }//GEN-LAST:event_txtfrgFocusLost
+
+    private void ftxtfdatanascimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdatanascimentoFocusLost
+        String data = ftxtfdatanascimento.getText().trim();
+        if (data.equals("  /  /    ") || data.isEmpty()) {    // Verifica se o campo está vazio
+            ftxtfdatanascimento.setBorder(null);
+            lblerrodatanascimento.setText("");
+        } else {
+            boolean isValid = validardata(data); // Chama a função validardata passando a data
+            if (isValid) {
+                ftxtfdatanascimento.setBorder(null);
+                lblerrodatanascimento.setText("");
+                 String datanascimento = formatoData(data); // Chame formatoData apenas se a data for válida
+        } else {
+            ftxtfdatanascimento.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            lblerrodatanascimento.setText("Data inválida");
+        }
+    }
+    }//GEN-LAST:event_ftxtfdatanascimentoFocusLost
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -484,8 +584,11 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftxtfdataadimisao;
     private javax.swing.JFormattedTextField ftxtfdataemissaocarteira;
     private javax.swing.JFormattedTextField ftxtfdatanascimento;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblerrocpf;
+    private javax.swing.JLabel lblerrodatanascimento;
+    private javax.swing.JLabel lblerronome;
+    private javax.swing.JLabel lblerrorg;
     private javax.swing.JLabel lblimagemcadastrofuncionario;
     private javax.swing.JRadioButton rbtnstatus;
     private javax.swing.JTextField txtfagencia;

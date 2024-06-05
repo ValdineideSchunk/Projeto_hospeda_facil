@@ -4,7 +4,15 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -15,9 +23,10 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
+    int idFuncionario = Integer.parseInt(id);
     public Visualizando_Cadastro_de_Funcinario() {
         initComponents();
-        
+        DetalhesFuncionario();
     JButton[] buttons = {
         btneditar, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
@@ -28,13 +37,79 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes,
         txtfcargo,txtfdataadimisão,txtfdataadimisão,txtfdataemissaocarteira,
-        txtfbanco,txtfagencia,txtfconta,txtnnumerofuncionario};
+        txtfbanco,txtfagencia,txtfconta,txtfnumerofuncionario};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
         
         
         
     }
+    public void DetalhesFuncionario(){
+        try {
+            Connection conexao = null;
+            PreparedStatement declaracaoPreparada = null;
+            ResultSet resultado = null;
+
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+
+            conexao = DriverManager.getConnection(url, usuario, senha);
+
+            declaracaoPreparada = conexao.prepareStatement(
+                    "SELECT * FROM funcionarios WHERE id_funcionario = ?");
+            declaracaoPreparada.setInt(1, idFuncionario);
+            resultado = declaracaoPreparada.executeQuery();
+
+            if (resultado.next()) {
+                
+                try {
+                    String sexo = resultado.getString("sexo");
+                   if("Masculino".equals(sexo)){
+                       btnrmasculino.setSelected(true);
+                   }else if("Feminino".equals(sexo)){
+                       btnrfeminino.setSelected(true);
+                   }else if("Outro".equals(sexo)){
+                       btnroutros.setSelected(true);
+                   }
+                    
+
+                    
+                    boolean ativo = resultado.getBoolean("status_funcionario");
+                    rbtnstatus.setSelected(ativo);
+
+                    txtfnumerofuncionario.setText(resultado.getString("id_funcionario"));
+                    txtfnome.setText(resultado.getString("nome_funcionario"));
+                    txtfrg.setText(resultado.getString("rg"));
+                    txtfcpf.setText(resultado.getString("cpf"));
+                    txtfdatanascimento.setText(resultado.getString("data_nascimento"));
+                    //cpfField.setText(resultado.getString("sexo"));
+                    txtfnumerotelefone.setText(resultado.getString("celular"));
+                    txtfemail.setText(resultado.getString("email"));
+                    txtfcep.setText(resultado.getString("cep"));
+                    txtfestado.setText(resultado.getString("estado"));
+                    txtfcidade.setText(resultado.getString("cidade"));
+                    txtfbairro.setText(resultado.getString("bairro"));
+                    txtfrua.setText(resultado.getString("rua"));
+                    txtfcomplemento.setText(resultado.getString("complemento"));
+                    txtfcargo.setText(resultado.getString("cargo"));
+                    txtfdataadimisão.setText(resultado.getString("data_admissao"));
+                    txtfdataemissaocarteira.setText(resultado.getString("data_emissao_carteira"));
+                    txtfbanco.setText(resultado.getString("banco"));
+                    txtfagencia.setText(resultado.getString("agencia"));
+                    txtfconta.setText(resultado.getString("conta"));
+                    txtfobservacoes.setText(resultado.getString("observacoes"));
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+            }   
+        } catch (SQLException ex) {
+            Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
     
     
     @SuppressWarnings("unchecked")
@@ -66,7 +141,7 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfagencia = new javax.swing.JTextField();
         txtfconta = new javax.swing.JTextField();
         rbtnstatus = new javax.swing.JRadioButton();
-        txtnnumerofuncionario = new javax.swing.JTextField();
+        txtfnumerofuncionario = new javax.swing.JTextField();
         btnvoltar = new javax.swing.JButton();
         btnmenu = new javax.swing.JButton();
         btnhospede = new javax.swing.JButton();
@@ -76,19 +151,27 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         lblimagemVISUALIZANDOcadastrofuncionario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtfnome.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnome.setBorder(null);
+        txtfnome.setEnabled(false);
         jPanel1.add(txtfnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 109, 450, 30));
 
         txtfrg.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfrg.setBorder(null);
+        txtfrg.setEnabled(false);
         jPanel1.add(txtfrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 108, 140, 30));
 
         txtfcpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcpf.setBorder(null);
+        txtfcpf.setEnabled(false);
         txtfcpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtfcpfFocusLost(evt);
@@ -98,42 +181,52 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
 
         txtfdatanascimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfdatanascimento.setBorder(null);
+        txtfdatanascimento.setEnabled(false);
         jPanel1.add(txtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, 210, 30));
 
         txtfnumerotelefone.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerotelefone.setBorder(null);
+        txtfnumerotelefone.setEnabled(false);
         jPanel1.add(txtfnumerotelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 231, 170, 30));
 
         txtfemail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfemail.setBorder(null);
+        txtfemail.setEnabled(false);
         jPanel1.add(txtfemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 231, 420, 30));
 
         txtfcep.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcep.setBorder(null);
+        txtfcep.setEnabled(false);
         jPanel1.add(txtfcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 300, 150, 30));
 
         txtfestado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfestado.setBorder(null);
+        txtfestado.setEnabled(false);
         jPanel1.add(txtfestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 298, 250, 30));
 
         txtfcidade.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcidade.setBorder(null);
+        txtfcidade.setEnabled(false);
         jPanel1.add(txtfcidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(881, 297, 250, 30));
 
         txtfbairro.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfbairro.setBorder(null);
+        txtfbairro.setEnabled(false);
         jPanel1.add(txtfbairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 333, 290, 30));
 
         txtfrua.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfrua.setBorder(null);
+        txtfrua.setEnabled(false);
         jPanel1.add(txtfrua, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 331, 460, 30));
 
         txtfcomplemento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcomplemento.setBorder(null);
+        txtfcomplemento.setEnabled(false);
         jPanel1.add(txtfcomplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 369, 610, 30));
 
         txtfobservacoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfobservacoes.setBorder(null);
+        txtfobservacoes.setEnabled(false);
         jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 740, 60));
 
         btneditar.setBorder(null);
@@ -148,6 +241,7 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         jPanel1.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 610, 230, 50));
 
         btnrmasculino.setBorder(null);
+        btnrmasculino.setEnabled(false);
         btnrmasculino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnrmasculinoMouseClicked(evt);
@@ -155,6 +249,7 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         });
         jPanel1.add(btnrmasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 180, 20, -1));
 
+        btnrfeminino.setEnabled(false);
         btnrfeminino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnrfemininoMouseClicked(evt);
@@ -162,6 +257,7 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         });
         jPanel1.add(btnrfeminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 179, -1, -1));
 
+        btnroutros.setEnabled(false);
         btnroutros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnroutrosMouseClicked(evt);
@@ -171,32 +267,41 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
 
         txtfcargo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcargo.setBorder(null);
+        txtfcargo.setEnabled(false);
         jPanel1.add(txtfcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 440, 140, 30));
 
         txtfdataadimisão.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfdataadimisão.setBorder(null);
+        txtfdataadimisão.setEnabled(false);
         jPanel1.add(txtfdataadimisão, new org.netbeans.lib.awtextra.AbsoluteConstraints(611, 440, 150, 30));
 
         txtfdataemissaocarteira.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfdataemissaocarteira.setBorder(null);
+        txtfdataemissaocarteira.setEnabled(false);
         jPanel1.add(txtfdataemissaocarteira, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 441, 129, 30));
 
         txtfbanco.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfbanco.setBorder(null);
+        txtfbanco.setEnabled(false);
         jPanel1.add(txtfbanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 475, 120, 30));
 
         txtfagencia.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfagencia.setBorder(null);
+        txtfagencia.setEnabled(false);
         jPanel1.add(txtfagencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 475, 110, 30));
 
         txtfconta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfconta.setBorder(null);
+        txtfconta.setEnabled(false);
         jPanel1.add(txtfconta, new org.netbeans.lib.awtextra.AbsoluteConstraints(735, 475, 240, 30));
+
+        rbtnstatus.setEnabled(false);
         jPanel1.add(rbtnstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
 
-        txtnnumerofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtnnumerofuncionario.setBorder(null);
-        jPanel1.add(txtnnumerofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 172, 110, 30));
+        txtfnumerofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnumerofuncionario.setBorder(null);
+        txtfnumerofuncionario.setEnabled(false);
+        jPanel1.add(txtfnumerofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 172, 110, 30));
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 610, 170, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +340,7 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
         lblimagemVISUALIZANDOcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemVISUALIZANDOcadastrofuncionario.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando cadastro funcionário.png")); // NOI18N
+        lblimagemVISUALIZANDOcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando cadastro funcionário.png")); // NOI18N
         jPanel1.add(lblimagemVISUALIZANDOcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -313,6 +418,10 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+    }//GEN-LAST:event_formWindowOpened
     private boolean  validarCPF(String cpf) {
         if (cpf == null || cpf.length() != 11) {
             return false;
@@ -421,11 +530,11 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
     private javax.swing.JTextField txtfemail;
     private javax.swing.JTextField txtfestado;
     private javax.swing.JTextField txtfnome;
+    private javax.swing.JTextField txtfnumerofuncionario;
     private javax.swing.JTextField txtfnumerotelefone;
     private javax.swing.JTextField txtfobservacoes;
     private javax.swing.JTextField txtfrg;
     private javax.swing.JTextField txtfrua;
-    private javax.swing.JTextField txtnnumerofuncionario;
     // End of variables declaration//GEN-END:variables
 
     

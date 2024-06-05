@@ -12,20 +12,17 @@ import javax.swing.JOptionPane;
  */
 public class ValidarRG {
     public static boolean validarRG(String rg) {
-        if (rg == null || rg.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "O campo RG não pode estar vazio.");
+        if (rg == null || rg.trim().isEmpty()) {// verifica se o camo esta vazio
+        return true;
+        }
+        
+        String rgLimpo = rg.replaceAll("[^0-9A-Za-z]", "");// Remove todos os caracteres que não são dígitos
+
+        if (rgLimpo.length() < 7 || rgLimpo.length() > 9) {// Verifica se o comprimento está entre 7 e 9 caracteres
             return false;
         }
 
-        String rgLimpo = rg.replaceAll("[^0-9A-Za-z]", "");
-
-        if (rgLimpo.length() < 7 || rgLimpo.length() > 9) {
-            JOptionPane.showMessageDialog(null, "O RG deve ter entre 7 e 9 caracteres.");
-            return false;
-        }
-
-        if (!rgLimpo.matches("[0-9]+")) {
-            JOptionPane.showMessageDialog(null, "O RG contém caracteres inválidos.");
+        if (!rgLimpo.matches("[0-9]+")) {// Verifica se contém apenas dígitos
             return false;
         }
         return true;

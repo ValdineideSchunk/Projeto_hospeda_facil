@@ -19,10 +19,8 @@ import javax.swing.table.DefaultTableModel;
  * @author NEY SCHUNK
  */
 public class Lista_de_Funcionários extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Lista_de_Funcionários
-     */
+         public static String id;
+    
     public Lista_de_Funcionários() {
         initComponents();
         
@@ -52,6 +50,7 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
             
             while(resultado.next())
             {
+                String status = resultado.getInt("status_funcionario") == 1 ? "Ativo" : "Inativo";
                 model.addRow(new Object[]
                 {
                     resultado.getString("id_funcionario"),
@@ -60,7 +59,7 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
                     resultado.getString("celular"), 
                     resultado.getString("sexo"),
                     resultado.getString("cargo"),
-                    resultado.getString("status_funcionario")
+                    status
                 });
             }
             
@@ -101,7 +100,7 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbllistafuncionarios.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tbllistafuncionarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tbllistafuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -167,7 +166,7 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         jPanel1.add(btnnovofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 583, 240, 50));
         jPanel1.add(btnpesquisarfuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 120, 50, 40));
 
-        lblLista_de_Funcionários.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Funcionários.png")); // NOI18N
+        lblLista_de_Funcionários.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Funcionários.png")); // NOI18N
         jPanel1.add(lblLista_de_Funcionários, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -231,8 +230,17 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
     }//GEN-LAST:event_btnnovofuncionarioMouseClicked
 
     private void tbllistafuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistafuncionariosMouseClicked
-        // TODO add your handling code here:
-        /*int linha = tbllistafuncionarios.get*/
+     
+    int linha = tbllistafuncionarios.getSelectedRow();
+
+        id = tbllistafuncionarios.getValueAt(linha, 0).toString();
+        
+        Lista_de_Funcionários.this.dispose();
+        Visualizando_Cadastro_de_Funcinario objeto2 = new Visualizando_Cadastro_de_Funcinario();
+        objeto2.setVisible(true);
+        
+           
+        
     }//GEN-LAST:event_tbllistafuncionariosMouseClicked
 
     /**
@@ -283,4 +291,6 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
     private javax.swing.JLabel lblLista_de_Funcionários;
     private javax.swing.JTable tbllistafuncionarios;
     // End of variables declaration//GEN-END:variables
+
+    
 }
