@@ -8,6 +8,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -66,6 +69,9 @@
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbllistaacomodacoesMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -142,7 +148,7 @@
         <Component class="javax.swing.JLabel" name="lblLista_de_Acomoda&#xe7;&#xf5;es">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\NEY SCHUNK\Desktop\HOSPEDA_FACIL\Projeto_hospeda_facil\hospeda_facil\src\main\java\com\mycompany\hospeda_facil\imagens_telas\Lista_de_Acomoda&#xe7;&#xf5;es.png"/>
+              <Image iconType="2" name="D:\Users\msantana\Desktop\Gerenciamento de Hospedagens\Projeto_hospeda_facil\hospeda_facil\src\main\java\com\mycompany\hospeda_facil\imagens_telas\Lista_de_Acomoda&#xe7;&#xf5;es.png"/>
             </Property>
           </Properties>
           <Constraints>

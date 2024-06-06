@@ -4,7 +4,16 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -46,6 +55,11 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
         lblLista_de_Acomodações = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -58,6 +72,11 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
                 "Numero", "Nome", "Tipo", "Capacidade", "Status"
             }
         ));
+        tbllistaacomodacoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbllistaacomodacoesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbllistaacomodacoes);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 720, 410));
@@ -107,7 +126,7 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
 
         jPanel1.add(btnpesquisaracomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(746, 120, 42, 40));
 
-        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
+        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
         jPanel1.add(lblLista_de_Acomodações, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,7 +142,43 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void PopularTbllistaacomodacoes(String sql){
+        try {
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario ="root";
+            String senha ="";
+            conexao =DriverManager.getConnection(url,usuario,senha);
+            
+            PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
+            
+            banco.execute();
+            ResultSet resultado = banco.executeQuery(sql);
+            
+            DefaultTableModel model = (DefaultTableModel) tbllistaacomodacoes.getModel();
+            
+            model.setNumRows(0);
+            
+            while(resultado.next())
+            {
+                model.addRow(new Object[]
+                {
+                    resultado.getString("id_acomodacao"),
+                    resultado.getString("nome_acomodacao"),
+                    resultado.getString("tipo_quarto"),
+                    resultado.getString("capacidade"), 
+                    resultado.getString("bloqueio_acomodacao"),
+                });
+            }
+            
+            conexao.close();
+            banco.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Lista_de_Acomodações.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
         Lista_de_Acomodações.this.dispose();
         Menu_Principal objeto2 = new Menu_Principal();
@@ -159,6 +214,22 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
         Cadastro_de_Acomodação objeto2 = new Cadastro_de_Acomodação();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnnovaacomodaçãoActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes");
+    }//GEN-LAST:event_formWindowOpened
+
+    private void tbllistaacomodacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistaacomodacoesMouseClicked
+        // TODO add your handling code here:
+        int linha = tbllistaacomodacoes.getSelectedRow();
+
+        id = tbllistaacomodacoes.getValueAt(linha, 0).toString();
+        
+        Lista_de_Acomodações.this.dispose();
+        Visualizando_Cadastro_de_Acomodação objeto2 = new Visualizando_Cadastro_de_Acomodação();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_tbllistaacomodacoesMouseClicked
 
     /**
      * @param args the command line arguments

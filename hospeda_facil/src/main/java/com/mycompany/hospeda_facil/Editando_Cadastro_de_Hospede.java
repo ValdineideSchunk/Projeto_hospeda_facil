@@ -4,9 +4,17 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -18,9 +26,10 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
+    int idHospede = Integer.parseInt(id);
     public Editando_Cadastro_de_Hospede() {
         initComponents();
-        
+        DetalhesHospede();
         JButton[] buttons = {
         btnsalvaralteracoes, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
@@ -38,6 +47,67 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         
         
     }
+    public void DetalhesHospede(){
+        
+        try {
+            Connection conexao = null;
+            PreparedStatement declaracaoPreparada = null;
+            ResultSet resultado = null;
+
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+
+            conexao = DriverManager.getConnection(url, usuario, senha);
+
+            declaracaoPreparada = conexao.prepareStatement(
+                    "SELECT * FROM hospedes WHERE id_hospede = ?");
+            declaracaoPreparada.setInt(1, idHospede);
+            resultado = declaracaoPreparada.executeQuery();
+
+            if (resultado.next()) {
+                
+                try {
+                    String sexo = resultado.getString("sexo");
+                    if("Masculino".equals(sexo)){
+                        btnrmasculino.setSelected(true);
+                    }else if("Feminino".equals(sexo)){
+                        btnrfeminino.setSelected(true);
+                    }else if("Outro".equals(sexo)){
+                        btnroutros.setSelected(true);
+                    }
+                    
+                    txtfnumerohospede.setText(resultado.getString("id_hospede"));
+                    txtfnome.setText(resultado.getString("nome_hospede"));
+                    txtfrg.setText(resultado.getString("rg"));
+                    txtfcpf.setText(resultado.getString("cpf"));
+                    txtfdatanascimento.setText(resultado.getString("data_nascimento"));
+                    txtfnumerotelefone.setText(resultado.getString("celular"));
+                    txtfemail.setText(resultado.getString("email"));
+                    txtfcep.setText(resultado.getString("cep"));
+                    txtfestado.setText(resultado.getString("estado"));
+                    txtfcidade.setText(resultado.getString("cidade"));
+                    txtfbairro.setText(resultado.getString("bairro"));
+                    txtfrua.setText(resultado.getString("rua"));
+                    txtfcomplemento.setText(resultado.getString("complemento"));
+                    txtfobservacoes.setText(resultado.getString("observacoes"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(Visualizando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Visualizando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String formatoData(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }    
     
     
     @SuppressWarnings("unchecked")
@@ -58,7 +128,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfrua = new javax.swing.JTextField();
         txtfcomplemento = new javax.swing.JTextField();
         txtfobservacoes = new javax.swing.JTextField();
-        btnsalvaralteracoes = new javax.swing.JButton();
         btnrmasculino = new javax.swing.JRadioButton();
         btnrfeminino = new javax.swing.JRadioButton();
         btnroutros = new javax.swing.JRadioButton();
@@ -69,9 +138,15 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         btnreserva = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
+        btnsalvaralteracoes = new javax.swing.JButton();
         lblimagemEDITANDOcadastrohospede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -132,22 +207,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfobservacoes.setBorder(null);
         jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 720, 60));
 
-        btnsalvaralteracoes.setBorder(null);
-        btnsalvaralteracoes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnsalvaralteracoesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnsalvaralteracoesMouseExited(evt);
-            }
-        });
-        btnsalvaralteracoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsalvaralteracoesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 597, 210, 50));
-
         btnrmasculino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnrmasculinoMouseClicked(evt);
@@ -170,8 +229,10 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         jPanel1.add(btnroutros, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 212, -1, -1));
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 594, 160, 50));
 
+        txtfnumerohospede.setEditable(false);
         txtfnumerohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerohospede.setBorder(null);
+        txtfnumerohospede.setEnabled(false);
         jPanel1.add(txtfnumerohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 207, 100, 30));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -209,8 +270,20 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
+        btnsalvaralteracoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnsalvaralteracoesMouseClicked(evt);
+            }
+        });
+        btnsalvaralteracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalvaralteracoesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 600, 220, 50));
+
         lblimagemEDITANDOcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemEDITANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_Hospede.png")); // NOI18N
+        lblimagemEDITANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_Hospede.png")); // NOI18N
         jPanel1.add(lblimagemEDITANDOcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,14 +299,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnsalvaralteracoesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseEntered
-        
-    }//GEN-LAST:event_btnsalvaralteracoesMouseEntered
-
-    private void btnsalvaralteracoesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseExited
-        
-    }//GEN-LAST:event_btnsalvaralteracoesMouseExited
 
     private void btnrmasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrmasculinoMouseClicked
         btnrfeminino.setSelected(false);
@@ -261,48 +326,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"ERRO: CPF invalido, Digite um numero valido!");
         }
     }//GEN-LAST:event_txtfcpfFocusLost
-
-    private void btnsalvaralteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesActionPerformed
-        try {
-            FileWriter arquivo = new FileWriter("C:\\Users\\NEY SCHUNK\\Desktop\\txtstestes\\arquivoteste.txt");
-            PrintWriter arquivoTxt = new PrintWriter(arquivo);
-
-            arquivoTxt.println("---------------------------------------------------------------");
-            arquivoTxt.println("Informações do hóspede:\n\n");
-            arquivoTxt.println("Nome do Hóspede:"+ txtfnome.getText());
-            arquivoTxt.println("CPF:"+ txtfcpf.getText());
-            arquivoTxt.println("RG:"+ txtfrg.getText());
-            arquivoTxt.println("Data de Nascimento:"+ txtfdatanascimento.getText());
-
-            if(btnrmasculino.isSelected()){
-                arquivoTxt.println("Sexo: Masculino");
-            }else if(btnrfeminino.isSelected()){
-                arquivoTxt.println("Sexo: Feminino");
-            }else if(btnroutros.isSelected()){
-                arquivoTxt.println("Sexo: Outro");
-            }else{
-                arquivoTxt.println("Sexo: Não informado");
-            }
-            arquivoTxt.println("---------------------------------------------------------------");
-            arquivoTxt.println("Contatos:");
-            arquivoTxt.println("Numero de Telefone:"+ txtfnumerotelefone.getText());
-            arquivoTxt.println("email:"+ txtfemail.getText());
-            arquivoTxt.println("---------------------------------------------------------------");
-            arquivoTxt.println("Endereço:");
-            arquivoTxt.println("Cep:"+ txtfcep.getText());
-            arquivoTxt.println("estado:"+ txtfestado.getText());
-            arquivoTxt.println("Cidade:"+ txtfcidade.getText());
-            arquivoTxt.println("Bairro:"+ txtfbairro.getText());
-            arquivoTxt.println("Complemento:"+ txtfcomplemento.getText());
-            arquivoTxt.println("Observações:"+ txtfobservacoes.getText());
-
-            arquivo.close();
-            
-            JOptionPane.showMessageDialog(null,"Informações salvas com sucesso!");
-        } catch (IOException ex) {
-            Logger.getLogger(Editando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnsalvaralteracoesActionPerformed
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
         Editando_Cadastro_de_Hospede.this.dispose();
@@ -333,6 +356,72 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnsalvaralteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnsalvaralteracoesActionPerformed
+
+    private void btnsalvaralteracoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseClicked
+
+        try {
+            // TODO add your handling code here:
+            String data = txtfdatanascimento.getText();
+            String datanascimento = formatoData(data);
+            
+
+            String opcaoSelecionada = null;
+            if (btnrmasculino.isSelected()) {
+                opcaoSelecionada = "M";
+            }else if (btnrfeminino.isSelected()) {
+                opcaoSelecionada = "F";
+            }else if (btnroutros.isSelected()) {
+                opcaoSelecionada ="O";
+            }
+            
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+            
+            conexao = DriverManager.getConnection(url, usuario, senha);
+            
+            String sql = "UPDATE hospedes SET nome_hospede = ?, rg = ?, cpf = ?, data_nascimento = ?, sexo = ?, celular = ?, "
+                    + "email = ?, cep = ?, Estado = ?, cidade = ?, bairro = ?, rua = ?, complemento = ?, observacoes = ? "
+                    + "WHERE id_hospede = ?";
+            
+            statement = conexao.prepareStatement(sql);
+            
+            statement.setString(1,txtfnome.getText());
+            statement.setString(2,txtfrg.getText());
+            statement.setString(3,txtfcpf.getText());
+            statement.setString(4,datanascimento);
+            statement.setString(5,opcaoSelecionada);
+            statement.setString(6,txtfnumerotelefone.getText());
+            statement.setString(7,txtfemail.getText());
+            statement.setString(8,txtfcep.getText());
+            statement.setString(9,txtfestado.getText());
+            statement.setString(10,txtfcidade.getText());
+            statement.setString(11,txtfbairro.getText());
+            statement.setString(12,txtfrua.getText());
+            statement.setString(13,txtfcomplemento.getText());
+            statement.setString(14,txtfobservacoes.getText());
+            statement.setString(15,txtfnumerohospede.getText());
+            
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null, "Dados atualizados com Sucesso!!!");
+        } catch (SQLException ex) {
+            Logger.getLogger(Editando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnsalvaralteracoesMouseClicked
     private boolean  validarCPF(String cpf) {
         if (cpf == null || cpf.length() != 11) {
             return false;

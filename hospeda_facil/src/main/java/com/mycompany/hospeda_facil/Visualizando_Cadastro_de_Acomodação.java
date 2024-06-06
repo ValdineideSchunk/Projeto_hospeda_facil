@@ -4,6 +4,14 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -12,9 +20,10 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
+    int idAcomodacao = Integer.parseInt(id);
     public Visualizando_Cadastro_de_Acomodação() {
         initComponents();
-        
+        DetalhesAcomodacao();
         JButton[] buttons = {
         btneditar, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
@@ -25,6 +34,38 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         txtfmotivobloqueio,ftxtfdatafinal,ftxtfdatainicio};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
            
+    }
+    
+    public void DetalhesAcomodacao(){
+    
+        try {
+            Connection conexao = null;
+            PreparedStatement declaracaoPreparada = null;
+            ResultSet resultado = null;
+
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+
+            conexao = DriverManager.getConnection(url, usuario, senha);
+
+            declaracaoPreparada = conexao.prepareStatement(
+                    "SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
+            declaracaoPreparada.setInt(1, idAcomodacao);
+            resultado = declaracaoPreparada.executeQuery();
+            
+            txtfcapacidade.setText(resultado.getString("capacidade"));
+            txtfnomeacomodacao.setText(resultado.getString("nome_acomodacao"));
+            txtfnumeroacomodacao.setText(resultado.getString("id_acomodacao"));
+            txtfdescricao.setText(resultado.getString("descricao"));
+            ftxtfdatainicio.setText(resultado.getString("periodo_bloqueio_inicio"));
+            ftxtfdatafinal.setText(resultado.getString("periodo_bloqueio_fim"));
+            txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Visualizando_Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+            
     }
     
    
@@ -179,7 +220,7 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         jPanel1.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 590, 160, 50));
 
         lblimagemVISUALIZANDOcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemVISUALIZANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Acomodação.png")); // NOI18N
+        lblimagemVISUALIZANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Acomodação.png")); // NOI18N
         jPanel1.add(lblimagemVISUALIZANDOcadastroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
