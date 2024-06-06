@@ -4,6 +4,16 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -13,8 +23,11 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
+    int idFuncionario = Integer.parseInt(id);
     public Editando_Cadastro_de_Funcinario() {
+        
         initComponents();
+        DetalhesFuncionario();
         
         JButton[] buttons = {
         btnsalvaralteracoes, btnmenu, btnhospede,
@@ -25,16 +38,85 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfnome, txtfrg, txtfcpf, txtfdatanascimento,
         txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes,
-        txtfcargo,txtfdataadimisão,txtfdataadimisão,txtfdataemissaocarteira,
+        txtfcargo,txtfdataadimisao,txtfdataadimisao,txtfdataemissaocarteira,
         txtfbanco,txtfagencia,txtfconta,txtnnumerofuncionario};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
-        
-        
-        
-        
-        
+            
     }
-    
+    public String formatoData(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }
+    public void DetalhesFuncionario(){
+        try {
+            Connection conexao = null;
+            PreparedStatement declaracaoPreparada = null;
+            ResultSet resultado = null;
+
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+
+            conexao = DriverManager.getConnection(url, usuario, senha);
+
+            declaracaoPreparada = conexao.prepareStatement(
+                    "SELECT * FROM funcionarios WHERE id_funcionario = ?");
+            declaracaoPreparada.setInt(1, idFuncionario);
+            resultado = declaracaoPreparada.executeQuery();
+
+            if (resultado.next()) {
+                
+                try {
+                    String sexo = resultado.getString("sexo");
+                   if("Masculino".equals(sexo)){
+                       btnrmasculino.setSelected(true);
+                   }else if("Feminino".equals(sexo)){
+                       btnrfeminino.setSelected(true);
+                   }else if("Outro".equals(sexo)){
+                       btnroutros.setSelected(true);
+                   }
+                    
+
+                    
+                    boolean ativo = resultado.getBoolean("status_funcionario");
+                    rbtnstatus.setSelected(ativo);
+
+                    txtnnumerofuncionario.setText(resultado.getString("id_funcionario"));
+                    txtfnome.setText(resultado.getString("nome_funcionario"));
+                    txtfrg.setText(resultado.getString("rg"));
+                    txtfcpf.setText(resultado.getString("cpf"));
+                    txtfdatanascimento.setText(resultado.getString("data_nascimento"));
+                    //cpfField.setText(resultado.getString("sexo"));
+                    txtfnumerotelefone.setText(resultado.getString("celular"));
+                    txtfemail.setText(resultado.getString("email"));
+                    txtfcep.setText(resultado.getString("cep"));
+                    txtfestado.setText(resultado.getString("estado"));
+                    txtfcidade.setText(resultado.getString("cidade"));
+                    txtfbairro.setText(resultado.getString("bairro"));
+                    txtfrua.setText(resultado.getString("rua"));
+                    txtfcomplemento.setText(resultado.getString("complemento"));
+                    txtfcargo.setText(resultado.getString("cargo"));
+                    txtfdataadimisao.setText(resultado.getString("data_admissao"));
+                    txtfdataemissaocarteira.setText(resultado.getString("data_emissao_carteira"));
+                    txtfbanco.setText(resultado.getString("banco"));
+                    txtfagencia.setText(resultado.getString("agencia"));
+                    txtfconta.setText(resultado.getString("conta"));
+                    txtfobservacoes.setText(resultado.getString("observacoes"));
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+            }   
+        } catch (SQLException ex) {
+            Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,12 +135,11 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfrua = new javax.swing.JTextField();
         txtfcomplemento = new javax.swing.JTextField();
         txtfobservacoes = new javax.swing.JTextField();
-        btnsalvaralteracoes = new javax.swing.JButton();
         btnrmasculino = new javax.swing.JRadioButton();
         btnrfeminino = new javax.swing.JRadioButton();
         btnroutros = new javax.swing.JRadioButton();
         txtfcargo = new javax.swing.JTextField();
-        txtfdataadimisão = new javax.swing.JTextField();
+        txtfdataadimisao = new javax.swing.JTextField();
         txtfdataemissaocarteira = new javax.swing.JTextField();
         txtfbanco = new javax.swing.JTextField();
         txtfagencia = new javax.swing.JTextField();
@@ -71,6 +152,7 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         btnreserva = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
+        btnsalvaralteracoes = new javax.swing.JButton();
         lblimagemEDITANDOcadastrofuncionario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,17 +216,6 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfobservacoes.setBorder(null);
         jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 740, 60));
 
-        btnsalvaralteracoes.setBorder(null);
-        btnsalvaralteracoes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnsalvaralteracoesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnsalvaralteracoesMouseExited(evt);
-            }
-        });
-        jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 610, 210, 50));
-
         btnrmasculino.setBorder(null);
         btnrmasculino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -171,9 +242,9 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfcargo.setBorder(null);
         jPanel1.add(txtfcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 440, 140, 30));
 
-        txtfdataadimisão.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfdataadimisão.setBorder(null);
-        jPanel1.add(txtfdataadimisão, new org.netbeans.lib.awtextra.AbsoluteConstraints(611, 440, 150, 30));
+        txtfdataadimisao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfdataadimisao.setBorder(null);
+        jPanel1.add(txtfdataadimisao, new org.netbeans.lib.awtextra.AbsoluteConstraints(611, 440, 150, 30));
 
         txtfdataemissaocarteira.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfdataemissaocarteira.setBorder(null);
@@ -232,8 +303,15 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
+        btnsalvaralteracoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnsalvaralteracoesMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 613, 220, 50));
+
         lblimagemEDITANDOcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemEDITANDOcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_funcionário.png")); // NOI18N
+        lblimagemEDITANDOcadastrofuncionario.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_funcionário.png")); // NOI18N
         jPanel1.add(lblimagemEDITANDOcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,14 +327,6 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnsalvaralteracoesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseEntered
-        
-    }//GEN-LAST:event_btnsalvaralteracoesMouseEntered
-
-    private void btnsalvaralteracoesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseExited
-       
-    }//GEN-LAST:event_btnsalvaralteracoesMouseExited
 
     private void btnrmasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrmasculinoMouseClicked
         btnrfeminino.setSelected(false);
@@ -311,6 +381,81 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void btnsalvaralteracoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseClicked
+        
+        
+        
+        try {
+            String data = txtfdatanascimento.getText();
+            String datanascimento = formatoData(data);
+
+            data = txtfdataadimisao.getText();
+            String dataadimisao = formatoData(data);
+
+            data = txtfdataemissaocarteira.getText();
+            String dataemissaocarteira = formatoData(data);
+
+            String opcaoSelecionada = null;
+            if (btnrmasculino.isSelected()) {
+                opcaoSelecionada = "Masculino";
+            }else if (btnrfeminino.isSelected()) {
+                opcaoSelecionada = "Feminino";
+            }else if (btnroutros.isSelected()) {
+                opcaoSelecionada ="Outro";
+            }
+            
+            
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario ="root";
+            String senha ="";
+            conexao =DriverManager.getConnection(url,usuario,senha);
+          
+            String sql = "UPDATE funcionarios SET nome_funcionario = ?,rg = ?,cpf = ?,data_nascimento = ?,"
+                    + "sexo = ?,celular = ?,email = ?,cep = ?,Estado = ?,cidade = ?,"
+                    + "bairro = ?,rua = ?,complemento = ?,cargo = ?,data_admissao = ?,"
+                    + "data_emissao_carteira = ?,banco = ?,agencia = ?,conta = ?,"
+                    + "status_funcionario = ?,observacoes = ? where id_funcionario = ?";
+            statement = conexao.prepareStatement(sql);
+
+            statement.setString(1,txtfnome.getText());
+            statement.setString(2,txtfrg.getText());
+            statement.setString(3,txtfcpf.getText());
+            statement.setString(4,datanascimento);
+            statement.setString(5,opcaoSelecionada);
+            statement.setString(6,txtfnumerotelefone.getText());
+            statement.setString(7,txtfemail.getText());
+            statement.setString(8,txtfcep.getText());
+            statement.setString(9,txtfestado.getText());
+            statement.setString(10,txtfcidade.getText());
+            statement.setString(11,txtfbairro.getText());
+            statement.setString(12,txtfrua.getText());
+            statement.setString(13,txtfcomplemento.getText());
+            statement.setString(14,txtfcargo.getText());
+            statement.setString(15,dataadimisao);
+            statement.setString(16,dataemissaocarteira);
+            statement.setString(17,txtfbanco.getText());
+            statement.setString(18,txtfagencia.getText());
+            statement.setString(19,txtfconta.getText());
+            statement.setBoolean(20,rbtnstatus.isSelected());
+            statement.setString(21,txtfobservacoes.getText());
+            statement.setString(22,txtnnumerofuncionario.getText());
+            
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null,"Dados atualizados com sucesso.");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Editando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+            
+            
+    }//GEN-LAST:event_btnsalvaralteracoesMouseClicked
     private boolean  validarCPF(String cpf) {
         if (cpf == null || cpf.length() != 11) {
             return false;
@@ -461,7 +606,7 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
     private javax.swing.JTextField txtfcomplemento;
     private javax.swing.JTextField txtfconta;
     private javax.swing.JTextField txtfcpf;
-    private javax.swing.JTextField txtfdataadimisão;
+    private javax.swing.JTextField txtfdataadimisao;
     private javax.swing.JTextField txtfdataemissaocarteira;
     private javax.swing.JTextField txtfdatanascimento;
     private javax.swing.JTextField txtfemail;

@@ -166,7 +166,7 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         jPanel1.add(btnnovofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 583, 240, 50));
         jPanel1.add(btnpesquisarfuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 120, 50, 40));
 
-        lblLista_de_Funcionários.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Funcionários.png")); // NOI18N
+        lblLista_de_Funcionários.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Funcionários.png")); // NOI18N
         jPanel1.add(lblLista_de_Funcionários, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,11 +233,11 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
      
     int linha = tbllistafuncionarios.getSelectedRow();
 
-        id = tbllistafuncionarios.getValueAt(linha, 0).toString();
+    id = tbllistafuncionarios.getValueAt(linha, 0).toString();
         
-        Lista_de_Funcionários.this.dispose();
-        Visualizando_Cadastro_de_Funcinario objeto2 = new Visualizando_Cadastro_de_Funcinario();
-        objeto2.setVisible(true);
+    Lista_de_Funcionários.this.dispose();
+    Visualizando_Cadastro_de_Funcinario objeto2 = new Visualizando_Cadastro_de_Funcinario();
+    objeto2.setVisible(true);
         
            
         
