@@ -59,56 +59,46 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
     
     
     public void DetalhesFuncionario(){
+        
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-
+           
+            
+            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-
+            
             conexao = DriverManager.getConnection(url, usuario, senha);
-
+            
             declaracaoPreparada = conexao.prepareStatement(
                     "SELECT * FROM funcionarios WHERE id_funcionario = ?");
             declaracaoPreparada.setInt(1, idFuncionario);
             resultado = declaracaoPreparada.executeQuery();
-
             
+            // POPULAR CAMPOS NORMAL
             if (resultado.next()) {
                 
                 try {
-                    String data = "data_nascimento";
-                    String datanascimento = formatoData(data);
-
-                    data = "data_admissao";
-                    String dataadimisao = formatoData(data);
-
-                    data = "data_emissao_carteira";
-                    String dataemissaocarteira = formatoData(data);
-                    
- 
-                    
                     String sexo = resultado.getString("sexo");
-                   if("Masculino".equals(sexo)){
-                       btnrmasculino.setSelected(true);
-                   }else if("Feminino".equals(sexo)){
-                       btnrfeminino.setSelected(true);
-                   }else if("Outro".equals(sexo)){
-                       btnroutros.setSelected(true);
-                   }
-                    
-
+                    if("Masculino".equals(sexo)){
+                        btnrmasculino.setSelected(true);
+                    }else if("Feminino".equals(sexo)){
+                        btnrfeminino.setSelected(true);
+                    }else if("Outro".equals(sexo)){
+                        btnroutros.setSelected(true);
+                    }
                     
                     boolean ativo = resultado.getBoolean("status_funcionario");
                     rbtnstatus.setSelected(ativo);
-
+                    
                     txtfnumerofuncionario.setText(resultado.getString("id_funcionario"));
                     txtfnome.setText(resultado.getString("nome_funcionario"));
                     txtfrg.setText(resultado.getString("rg"));
                     txtfcpf.setText(resultado.getString("cpf"));
-                    txtfdatanascimento.setText(resultado.getString(datanascimento));
+                    
                     txtfnumerotelefone.setText(resultado.getString("celular"));
                     txtfemail.setText(resultado.getString("email"));
                     txtfcep.setText(resultado.getString("cep"));
@@ -118,24 +108,37 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
                     txtfrua.setText(resultado.getString("rua"));
                     txtfcomplemento.setText(resultado.getString("complemento"));
                     txtfcargo.setText(resultado.getString("cargo"));
-                    txtfdataadimisão.setText(resultado.getString(dataadimisao));
-                    txtfdataemissaocarteira.setText(resultado.getString(dataemissaocarteira));
+                    
                     txtfbanco.setText(resultado.getString("banco"));
                     txtfagencia.setText(resultado.getString("agencia"));
                     txtfconta.setText(resultado.getString("conta"));
                     txtfobservacoes.setText(resultado.getString("observacoes"));
                     
+                    
+                    
+                    String databanco = resultado.getString("data_nascimento");
+                    String datanascimento = formatoData(databanco);
+                    txtfdatanascimento.setText(datanascimento);
+                    
+                    databanco = resultado.getString("data_admissao");
+                    datanascimento = formatoData(databanco);
+                    txtfdataadimisão.setText(datanascimento);
+                    
+                    databanco = resultado.getString("data_emissao_carteira");
+                    datanascimento = formatoData(databanco);
+                    txtfdataemissaocarteira.setText(datanascimento);
+                    
+                    
+                    System.out.println(datanascimento);
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
-            }   
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
-    
+        } 
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -316,7 +319,7 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfnumerofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerofuncionario.setBorder(null);
         jPanel1.add(txtfnumerofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 172, 110, 30));
-        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 610, 170, 50));
+        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 610, 160, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
