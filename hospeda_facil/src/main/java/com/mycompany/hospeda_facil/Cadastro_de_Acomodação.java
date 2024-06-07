@@ -120,6 +120,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
 
         txtfnumeroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumeroacomodacao.setBorder(null);
+        txtfnumeroacomodacao.setEnabled(false);
         jPanel1.add(txtfnumeroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 176, 70, 30));
 
         txtfnomeacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -312,7 +313,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
             String senha ="";
             conexao =DriverManager.getConnection(url,usuario,senha);
             String sql = "INSERT INTO acomodacoes(tipo_quarto,capacidade,nome_acomodacao,comodidade_wifi,"
-                    + "comodidade_arcondicionado,comodidade_tv,comodidade_frigobar,comodidade_acessibiidade,decricao,"
+                    + "comodidade_arcondicionado,comodidade_tv,comodidade_frigobar,comodidade_acessibiidade,descricao,"
                     + "bloqueio_acomodacao,periodo_bloqueio_inicio,periodo_bloqueio_fim,motivo_bloqueio)"
                     + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             statement = conexao.prepareStatement(sql);

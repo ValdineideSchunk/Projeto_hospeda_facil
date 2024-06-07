@@ -10,9 +10,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -35,37 +38,86 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
            
     }
-    
+    public String formatoData(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }
+        
     public void DetalhesAcomodacao(){
-    
         try {
+            
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-
+            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-
+            
             conexao = DriverManager.getConnection(url, usuario, senha);
-
+            
             declaracaoPreparada = conexao.prepareStatement(
                     "SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
             declaracaoPreparada.setInt(1, idAcomodacao);
             resultado = declaracaoPreparada.executeQuery();
             
-            txtfcapacidade.setText(resultado.getString("capacidade"));
-            txtfnomeacomodacao.setText(resultado.getString("nome_acomodacao"));
-            txtfnumeroacomodacao.setText(resultado.getString("id_acomodacao"));
-            txtfdescricao.setText(resultado.getString("descricao"));
-            ftxtfdatainicio.setText(resultado.getString("periodo_bloqueio_inicio"));
-            ftxtfdatafinal.setText(resultado.getString("periodo_bloqueio_fim"));
-            txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));
-        } catch (SQLException ex) {
+            if (resultado.next()) {
+                try {
+                     String tipo_acomodacao = resultado.getString("tipo_quarto");
+                   if("Individual".equals(tipo_acomodacao)){
+                       btnrindividual.setSelected(true);
+                   }else if("Duplo".equals(tipo_acomodacao)){
+                       btnrduplo.setSelected(true);
+                   }else if("Triplo".equals(tipo_acomodacao)){
+                       btnrtriplo.setSelected(true);
+                   } else {
+                       btnrsuite.setSelected(true);
+                   }
+                   
+                    boolean bloqueado = resultado.getBoolean("bloqueio_acomodacao");
+                    btnrrestricao.setSelected(bloqueado);
+                    
+                    
+                    txtfcapacidade.setText(resultado.getString("capacidade"));
+                    txtfnomeacomodacao.setText(resultado.getString("nome_acomodacao"));
+                    txtfnumeroacomodacao.setText(resultado.getString("id_acomodacao"));
+                    /*"periodo_bloqueio_inicio"));
+                    ftxtfdatafinal.setText(resultado.getString("periodo_bloqueio_fim"));*/
+                    
+                    txtfdescricao.setText(resultado.getString("descricao"));
+                    txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));
+                    
+                    String dataBanco = resultado.getString("periodo_bloqueio_inicio");
+                    String dataInicio = formatoData(dataBanco);
+                    ftxtfdatainicio.setText(dataInicio);
+                    
+                    dataBanco = resultado.getString("periodo_bloqueio_fim");
+                    dataInicio = formatoData(dataBanco);
+                    ftxtfdatafinal.setText(dataInicio);                   
+                /*if(bloqueado = true){    
+               // if(btnrrestricao.isSelected()){
+                    String data = ftxtfdatainicio.getText();
+                    String datainicio = formatoData(data);
+                    JOptionPane.showMessageDialog(null,datainicio);
+                    data = ftxtfdatafinal.getText();
+                    String datafinal = formatoData(data);
+                    JOptionPane.showMessageDialog(null,datafinal);
+                    
+                    ftxtfdatainicio.setText(datainicio);
+                    ftxtfdatafinal.setText(datafinal);
+                }*/
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(Visualizando_Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {        
             Logger.getLogger(Visualizando_Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-            
     }
     
    
@@ -217,6 +269,12 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+
+        btneditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btneditarMouseClicked(evt);
+            }
+        });
         jPanel1.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 590, 160, 50));
 
         lblimagemVISUALIZANDOcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -294,6 +352,13 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void btneditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseClicked
+        // TODO add your handling code here:
+    Visualizando_Cadastro_de_Acomodação.this.dispose();
+    Editando_Cadastro_de_Acomodação objeto2 = new Editando_Cadastro_de_Acomodação();
+    objeto2.setVisible(true);
+    }//GEN-LAST:event_btneditarMouseClicked
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

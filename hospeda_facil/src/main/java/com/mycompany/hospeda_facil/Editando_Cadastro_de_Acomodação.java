@@ -4,7 +4,18 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -12,9 +23,10 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
+    int idAcomodacao = Integer.parseInt(id);
     public Editando_Cadastro_de_Acomodação() {
         initComponents();
-        
+        DetalhesAcomodacao();
         JButton[] buttons = {
         btnsalvaralteracoes, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
@@ -24,14 +36,49 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         txtfcapacidade,txtfnumeroacomodacao,txtfnomeacomodacao,txtfdescricao,
         txtfmotivobloqueio,ftxtfdatafinal,ftxtfdatainicio};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
-        
-        
-        
-        
-        
-        
-         
-        
+    }
+    public String formatoData(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }
+    
+     public void DetalhesAcomodacao(){
+        try {
+            Connection conexao = null;
+            PreparedStatement declaracaoPreparada = null;
+            ResultSet resultado = null;
+            
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+            
+            conexao = DriverManager.getConnection(url, usuario, senha);
+            
+            declaracaoPreparada = conexao.prepareStatement(
+                    "SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
+            declaracaoPreparada.setInt(1, idAcomodacao);
+            resultado = declaracaoPreparada.executeQuery();
+            
+            if (resultado.next()) {
+                try {
+                    txtfcapacidade.setText(resultado.getString("capacidade"));
+                    txtfnomeacomodacao.setText(resultado.getString("nome_acomodacao"));
+                    txtfnumeroacomodacao.setText(resultado.getString("id_acomodacao"));
+                    txtfdescricao.setText(resultado.getString("descricao"));
+                    ftxtfdatainicio.setText(resultado.getString("periodo_bloqueio_inicio"));
+                    ftxtfdatafinal.setText(resultado.getString("periodo_bloqueio_fim"));
+                    txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(Visualizando_Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {        
+            Logger.getLogger(Visualizando_Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
@@ -41,7 +88,6 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        btnsalvaralteracoes = new javax.swing.JButton();
         btnrindividual = new javax.swing.JRadioButton();
         btnrduplo = new javax.swing.JRadioButton();
         btnrtriplo = new javax.swing.JRadioButton();
@@ -65,6 +111,7 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         btnreserva = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
+        btnsalvaralteracoes = new javax.swing.JButton();
         lblimagemEDITANDOcadastroacomodacao = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -73,17 +120,6 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnsalvaralteracoes.setBorder(null);
-        btnsalvaralteracoes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnsalvaralteracoesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnsalvaralteracoesMouseExited(evt);
-            }
-        });
-        jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 586, 220, 50));
 
         btnrindividual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,8 +232,15 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
+        btnsalvaralteracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalvaralteracoesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 580, 220, 50));
+
         lblimagemEDITANDOcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemEDITANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_Acomodação.png")); // NOI18N
+        lblimagemEDITANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_Acomodação.png")); // NOI18N
         jPanel1.add(lblimagemEDITANDOcadastroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -213,14 +256,6 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnsalvaralteracoesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseEntered
-        
-    }//GEN-LAST:event_btnsalvaralteracoesMouseEntered
-
-    private void btnsalvaralteracoesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseExited
-       
-    }//GEN-LAST:event_btnsalvaralteracoesMouseExited
 
     private void btnrindividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrindividualActionPerformed
         // TODO add your handling code here:
@@ -279,6 +314,82 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void btnsalvaralteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesActionPerformed
+        try {
+            // TODO add your handling code here:
+            String opcaoSelecionada = null;
+            if (btnrindividual.isSelected()) {
+                opcaoSelecionada = "Individual";
+            }else if (btnrduplo.isSelected()) {
+                opcaoSelecionada = "Duplo";
+            }else if (btnrtriplo.isSelected()) {
+                opcaoSelecionada ="Triplo";
+            }else if (btnrsuite.isSelected()) {
+                opcaoSelecionada ="Suite";
+            }
+            
+            boolean wifi = cbxwifi.isSelected();
+            boolean arCondicionado = cbxarcondicionado.isSelected();
+            boolean tv = cbxtv.isSelected();
+            boolean frigobar = cbxfrigibar.isSelected();
+            boolean acessibilidade = cbxacessibilidade.isSelected();
+            
+            
+            boolean bloqueio = btnrrestricao.isSelected();
+            
+            
+            
+            
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario ="root";
+            String senha ="";
+            conexao =DriverManager.getConnection(url,usuario,senha);
+            String sql = "INSERT INTO acomodacoes(tipo_quarto,capacidade,nome_acomodacao,comodidade_wifi,"
+                    + "comodidade_arcondicionado,comodidade_tv,comodidade_frigobar,comodidade_acessibiidade,descricao,"
+                    + "bloqueio_acomodacao,periodo_bloqueio_inicio,periodo_bloqueio_fim,motivo_bloqueio)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            statement = conexao.prepareStatement(sql);
+
+            statement.setString(1,opcaoSelecionada);
+            statement.setString(2,txtfcapacidade.getText());
+            statement.setString(3,txtfnomeacomodacao.getText());
+            statement.setBoolean(4,wifi);
+            statement.setBoolean(5,arCondicionado);
+            statement.setBoolean(6,tv);
+            statement.setBoolean(7,frigobar);
+            statement.setBoolean(8,acessibilidade);
+            statement.setString(9,txtfdescricao.getText());
+            statement.setBoolean(10,bloqueio);
+            
+            if(btnrrestricao.isSelected()){
+                String data = ftxtfdatainicio.getText();
+                String datainicio = formatoData(data);
+                
+                data = ftxtfdatafinal.getText();
+                String datafinal = formatoData(data);
+                  
+                statement.setString(11,datainicio);
+                statement.setString(12,datafinal);
+                statement.setString(13,txtfmotivobloqueio.getText());
+            }else{
+                statement.setString(11,null);
+                statement.setString(12,null);
+                statement.setString(13," ");
+                
+                
+            }
+
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null,"Acomodação atualizaso com sucesso.");
+        } catch (SQLException ex) {
+            Logger.getLogger(Editando_Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnsalvaralteracoesActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
