@@ -45,6 +45,14 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
+    public String formatoDatavoltando(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }
     
      public void DetalhesAcomodacao(){
         try {
@@ -65,13 +73,55 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             
             if (resultado.next()) {
                 try {
+                    String tipo_acomodacao = resultado.getString("tipo_quarto");
+                    if("Individual".equals(tipo_acomodacao)){
+                       btnrindividual.setSelected(true);
+                    }else if("Duplo".equals(tipo_acomodacao)){
+                       btnrduplo.setSelected(true);
+                    }else if("Triplo".equals(tipo_acomodacao)){
+                       btnrtriplo.setSelected(true);
+                    } else {
+                       btnrsuite.setSelected(true);
+                    }
+                   
+                    boolean wifi = resultado.getBoolean("comodidade_wifi");
+                    if(Boolean.TRUE.equals(wifi)){
+                       cbxwifi.setSelected(true);
+                    }
+                    boolean arcondicionado = resultado.getBoolean("comodidade_arcondicionado");
+                    if(Boolean.TRUE.equals(arcondicionado)){
+                       cbxarcondicionado.setSelected(true);
+                    }
+                    boolean tv = resultado.getBoolean("comodidade_tv");
+                    if(Boolean.TRUE.equals(tv)){
+                       cbxtv.setSelected(true);
+                    }
+                    boolean frigobar = resultado.getBoolean("comodidade_frigobar");
+                    if(Boolean.TRUE.equals(frigobar)){
+                       cbxfrigibar.setSelected(true);
+                    }                        
+                    boolean acessibilidade = resultado.getBoolean("comodidade_acessibilidade");
+                    if(Boolean.TRUE.equals(acessibilidade)){
+                       cbxacessibilidade.setSelected(true);
+                    }
                     txtfcapacidade.setText(resultado.getString("capacidade"));
                     txtfnomeacomodacao.setText(resultado.getString("nome_acomodacao"));
                     txtfnumeroacomodacao.setText(resultado.getString("id_acomodacao"));
                     txtfdescricao.setText(resultado.getString("descricao"));
-                    ftxtfdatainicio.setText(resultado.getString("periodo_bloqueio_inicio"));
-                    ftxtfdatafinal.setText(resultado.getString("periodo_bloqueio_fim"));
-                    txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));
+
+                    boolean bloqueado = resultado.getBoolean("bloqueio_acomodacao");
+                    btnrrestricao.setSelected(bloqueado);
+                    if(Boolean.TRUE.equals(bloqueado)){
+                        String dataBanco = resultado.getString("periodo_bloqueio_inicio");
+                        String dataInicio = formatoDatavoltando(dataBanco);
+                        ftxtfdatainicio.setText(dataInicio);
+                        
+                        dataBanco = resultado.getString("periodo_bloqueio_fim");
+                        dataInicio = formatoDatavoltando(dataBanco);
+                        ftxtfdatafinal.setText(dataInicio);
+                        
+                        txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));    
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -240,7 +290,7 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 580, 220, 50));
 
         lblimagemEDITANDOcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemEDITANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_Acomodação.png")); // NOI18N
+        lblimagemEDITANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_Acomodação.png")); // NOI18N
         jPanel1.add(lblimagemEDITANDOcadastroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -347,10 +397,12 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             String usuario ="root";
             String senha ="";
             conexao =DriverManager.getConnection(url,usuario,senha);
-            String sql = "INSERT INTO acomodacoes(tipo_quarto,capacidade,nome_acomodacao,comodidade_wifi,"
-                    + "comodidade_arcondicionado,comodidade_tv,comodidade_frigobar,comodidade_acessibiidade,descricao,"
-                    + "bloqueio_acomodacao,periodo_bloqueio_inicio,periodo_bloqueio_fim,motivo_bloqueio)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            
+            String sql = "UPDATE acomodacoes SET tipo_quarto = ?,capacidade = ?,nome_acomodacao = ?,comodidade_wifi = ?,"
+                    + "comodidade_arcondicionado = ?,comodidade_tv = ?,comodidade_frigobar = ?,comodidade_acessibilidade = ?,descricao = ?,"
+                    + "bloqueio_acomodacao = ?,periodo_bloqueio_inicio = ?,periodo_bloqueio_fim = ?,motivo_bloqueio = ?"
+                    + "where id_acomodacao = ?";
             statement = conexao.prepareStatement(sql);
 
             statement.setString(1,opcaoSelecionada);
@@ -377,10 +429,10 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             }else{
                 statement.setString(11,null);
                 statement.setString(12,null);
-                statement.setString(13," ");
-                
-                
+                statement.setString(13," ");   
             }
+            statement.setString(14,txtfnumeroacomodacao.getText());
+            
 
             statement.executeUpdate();
             statement.close();

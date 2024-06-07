@@ -416,9 +416,6 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnsalvaralteracoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseClicked
-        
-        
-        
         try {
             String data = ftxtfdatanascimento.getText();
             String datanascimento = formatoData(data);

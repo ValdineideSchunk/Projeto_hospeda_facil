@@ -69,7 +69,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfrua = new javax.swing.JTextField();
         txtfcomplemento = new javax.swing.JTextField();
         txtfobservacoes = new javax.swing.JTextField();
-        btnfinalizarcadastro = new javax.swing.JButton();
         btnrmasculino = new javax.swing.JRadioButton();
         btnrfeminino = new javax.swing.JRadioButton();
         btnroutros = new javax.swing.JRadioButton();
@@ -80,6 +79,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
         ftxtfdatanascimento = new javax.swing.JFormattedTextField();
+        btnfinalizarcadastro = new javax.swing.JButton();
         lblimagemcadastrohospede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -138,22 +138,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfobservacoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfobservacoes.setBorder(null);
         jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 720, 60));
-
-        btnfinalizarcadastro.setBorder(null);
-        btnfinalizarcadastro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnfinalizarcadastroMouseExited(evt);
-            }
-        });
-        btnfinalizarcadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnfinalizarcadastroActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 597, 220, 50));
 
         btnrmasculino.setBorder(null);
         btnrmasculino.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -218,8 +202,15 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         ftxtfdatanascimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jPanel1.add(ftxtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 170, 150, 30));
 
+        btnfinalizarcadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfinalizarcadastroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(735, 593, 220, 50));
+
         lblimagemcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Hóspede.png")); // NOI18N
+        lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Hóspede.png")); // NOI18N
         jPanel1.add(lblimagemcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,14 +226,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnfinalizarcadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseEntered
-     
-    }//GEN-LAST:event_btnfinalizarcadastroMouseEntered
-
-    private void btnfinalizarcadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroMouseExited
-       
-    }//GEN-LAST:event_btnfinalizarcadastroMouseExited
 
     private void btnrmasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrmasculinoMouseClicked
         btnrfeminino.setSelected(false);
@@ -269,8 +252,31 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtfcpfFocusLost
 
+    private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
+        Cadastro_de_Hospede.this.dispose();
+        Menu_Principal objeto2 = new Menu_Principal();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmenuActionPerformed
+
+    private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
+        Cadastro_de_Hospede.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnreservaActionPerformed
+
+    private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
+        Cadastro_de_Hospede.this.dispose();
+        Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmapaActionPerformed
+
+    private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
+        Cadastro_de_Hospede.this.dispose();
+        Ajustes objeto2 = new Ajustes();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnajustesActionPerformed
+
     private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
-                    
         try {
             String data = ftxtfdatanascimento.getText();
             String datanascimento = formatoData(data);
@@ -278,11 +284,11 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
 
             String opcaoSelecionada = null;
             if (btnrmasculino.isSelected()) {
-                opcaoSelecionada = "M";
+                opcaoSelecionada = "Masculino";
             }else if (btnrfeminino.isSelected()) {
-                opcaoSelecionada = "F";
+                opcaoSelecionada = "Feminino";
             }else if (btnroutros.isSelected()) {
-                opcaoSelecionada ="O";
+                opcaoSelecionada ="Outros";
             }
             
 
@@ -320,30 +326,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             Logger.getLogger(Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnfinalizarcadastroActionPerformed
-
-    private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
-        Cadastro_de_Hospede.this.dispose();
-        Menu_Principal objeto2 = new Menu_Principal();
-        objeto2.setVisible(true);
-    }//GEN-LAST:event_btnmenuActionPerformed
-
-    private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
-        Cadastro_de_Hospede.this.dispose();
-        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
-        objeto2.setVisible(true);
-    }//GEN-LAST:event_btnreservaActionPerformed
-
-    private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
-        Cadastro_de_Hospede.this.dispose();
-        Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
-        objeto2.setVisible(true);
-    }//GEN-LAST:event_btnmapaActionPerformed
-
-    private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
-        Cadastro_de_Hospede.this.dispose();
-        Ajustes objeto2 = new Ajustes();
-        objeto2.setVisible(true);
-    }//GEN-LAST:event_btnajustesActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

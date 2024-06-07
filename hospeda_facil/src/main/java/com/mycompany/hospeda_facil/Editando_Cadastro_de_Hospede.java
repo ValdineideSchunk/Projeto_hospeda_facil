@@ -5,9 +5,6 @@
 package com.mycompany.hospeda_facil;
 
 import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -81,7 +78,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
                     txtfnome.setText(resultado.getString("nome_hospede"));
                     txtfrg.setText(resultado.getString("rg"));
                     txtfcpf.setText(resultado.getString("cpf"));
-                    txtfdatanascimento.setText(resultado.getString("data_nascimento"));
                     txtfnumerotelefone.setText(resultado.getString("celular"));
                     txtfemail.setText(resultado.getString("email"));
                     txtfcep.setText(resultado.getString("cep"));
@@ -91,6 +87,21 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
                     txtfrua.setText(resultado.getString("rua"));
                     txtfcomplemento.setText(resultado.getString("complemento"));
                     txtfobservacoes.setText(resultado.getString("observacoes"));
+                    
+                    
+                    
+                    String databanco = resultado.getString("data_nascimento");
+                    String datanascimento = formatoDatavoltando(databanco);
+                    txtfdatanascimento.setText(datanascimento);
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -108,7 +119,14 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }    
-    
+    public String formatoDatavoltando(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -283,7 +301,7 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 600, 220, 50));
 
         lblimagemEDITANDOcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemEDITANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_Hospede.png")); // NOI18N
+        lblimagemEDITANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_Hospede.png")); // NOI18N
         jPanel1.add(lblimagemEDITANDOcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -375,11 +393,11 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
 
             String opcaoSelecionada = null;
             if (btnrmasculino.isSelected()) {
-                opcaoSelecionada = "M";
+                opcaoSelecionada = "Masculino";
             }else if (btnrfeminino.isSelected()) {
-                opcaoSelecionada = "F";
+                opcaoSelecionada = "Feminino";
             }else if (btnroutros.isSelected()) {
-                opcaoSelecionada ="O";
+                opcaoSelecionada ="Outros";
             }
             
             Connection conexao = null;

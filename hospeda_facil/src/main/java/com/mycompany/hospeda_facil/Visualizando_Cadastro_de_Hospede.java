@@ -10,10 +10,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -38,6 +39,14 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
         
+    }
+    public String formatoDatavoltando(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
     }
     
   
@@ -151,6 +160,7 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfobservacoes.setBorder(null);
         jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 720, 60));
 
+        btnrmasculino.setEnabled(false);
         btnrmasculino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnrmasculinoMouseClicked(evt);
@@ -158,6 +168,7 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         });
         jPanel1.add(btnrmasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 212, -1, -1));
 
+        btnrfeminino.setEnabled(false);
         btnrfeminino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnrfemininoMouseClicked(evt);
@@ -165,6 +176,7 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         });
         jPanel1.add(btnrfeminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 212, -1, -1));
 
+        btnroutros.setEnabled(false);
         btnroutros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnroutrosMouseClicked(evt);
@@ -221,7 +233,7 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         jPanel1.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 600, 180, 50));
 
         lblimagemVISUALIZANDOcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemVISUALIZANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("D:\\Users\\msantana\\Desktop\\Gerenciamento de Hospedagens\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Cadastro_Hóspede.png")); // NOI18N
+        lblimagemVISUALIZANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Cadastro_Hóspede.png")); // NOI18N
         jPanel1.add(lblimagemVISUALIZANDOcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,7 +275,7 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
                         btnrmasculino.setSelected(true);
                     }else if("Feminino".equals(sexo)){
                         btnrfeminino.setSelected(true);
-                    }else if("Outro".equals(sexo)){
+                    }else if("Outros".equals(sexo)){
                         btnroutros.setSelected(true);
                     }
                     
@@ -271,7 +283,6 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
                     txtfnome.setText(resultado.getString("nome_hospede"));
                     txtfrg.setText(resultado.getString("rg"));
                     txtfcpf.setText(resultado.getString("cpf"));
-                    txtfdatanascimento.setText(resultado.getString("data_nascimento"));
                     txtfnumerotelefone.setText(resultado.getString("celular"));
                     txtfemail.setText(resultado.getString("email"));
                     txtfcep.setText(resultado.getString("cep"));
@@ -281,6 +292,14 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
                     txtfrua.setText(resultado.getString("rua"));
                     txtfcomplemento.setText(resultado.getString("complemento"));
                     txtfobservacoes.setText(resultado.getString("observacoes"));
+                    
+                    String databanco = resultado.getString("data_nascimento");
+                    String datanascimento = formatoDatavoltando(databanco);
+                    txtfdatanascimento.setText(datanascimento);
+                    
+                    
+                    
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -309,13 +328,7 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnroutrosMouseClicked
 
     private void txtfcpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfcpfFocusLost
-        // TODO add your handling code here:
-        String cpf = txtfcpf.getText();
-        cpf = cpf.replaceAll("[^0-9]", "");
-        if (validarCPF(cpf)) {
-        } else {
-            JOptionPane.showMessageDialog(null,"ERRO: CPF invalido, Digite um numero valido!");
-        }
+
     }//GEN-LAST:event_txtfcpfFocusLost
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
@@ -359,38 +372,7 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         Editando_Cadastro_de_Hospede objeto2 = new Editando_Cadastro_de_Hospede();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btneditarMouseClicked
-    private boolean  validarCPF(String cpf) {
-        if (cpf == null || cpf.length() != 11) {
-            return false;
-        }
-        boolean digitosIguais = true;
-        for (int i = 1; i < cpf.length(); i++) {
-            if (cpf.charAt(i) != cpf.charAt(0)) {
-                digitosIguais = false;
-                break;
-            }
-        }
-        if (digitosIguais) {
-            return false;
-        }
-        int soma = 0;
-        for (int i = 0; i < 9; i++) {
-            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
-        }
-        int digito1 = 11 - (soma % 11);
-        if (digito1 == 10 || digito1 == 11) {
-            digito1 = 0;
-        }
-        soma = 0;
-        for (int i = 0; i < 10; i++) {
-            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
-        }
-        int digito2 = 11 - (soma % 11);
-        if (digito2 == 10 || digito2 == 11) {
-            digito2 = 0;
-        }
-        return Character.getNumericValue(cpf.charAt(9)) == digito1 && Character.getNumericValue(cpf.charAt(10)) == digito2;
- }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
