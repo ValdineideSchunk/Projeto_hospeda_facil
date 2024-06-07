@@ -496,6 +496,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                     String mensagem = "";
                     lblerronome.setText(mensagem);
         }
+        
     }//GEN-LAST:event_txtfnomeFocusLost
 
     private void txtfrgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfrgFocusLost
