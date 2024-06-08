@@ -4,10 +4,14 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -16,6 +20,9 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
+    int idreserva = Integer.parseInt(id);
+    
+    
     public Visualizando_Reserva_Antes_Check_in() {
         initComponents();
         
@@ -30,12 +37,13 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         observacoes,txtfacomodacao,txtfnumeroreserva,ftxtfdatafimreserva,ftxtfdatainicioreserva};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
-         
+        PopulandoReservas(); 
     }
     
-     /*public void DetalhesAcomodacao(){
+     public void PopulandoReservas(){
       
             
+        try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
@@ -47,66 +55,46 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
             conexao = DriverManager.getConnection(url, usuario, senha);
             
             declaracaoPreparada = conexao.prepareStatement(
-                    "SELECT * FROM reserva WHERE id_acomodacao = ?");
-            declaracaoPreparada.setInt(1, idAcomodacao);
+                    "SELECT * FROM view_informações_reserva WHERE id_reserva = ?");
+            declaracaoPreparada.setInt(1, idreserva);
             resultado = declaracaoPreparada.executeQuery();
             
             if (resultado.next()) {
                 
-                    String tipo_acomodacao = resultado.getString("tipo_quarto");
-                    if("Individual".equals(tipo_acomodacao)){
-                       btnrindividual.setSelected(true);
-                    }else if("Duplo".equals(tipo_acomodacao)){
-                       btnrduplo.setSelected(true);
-                    }else if("Triplo".equals(tipo_acomodacao)){
-                       btnrtriplo.setSelected(true);
-                    } else {
-                       btnrsuite.setSelected(true);
-                    }
-                   
-                    boolean wifi = resultado.getBoolean("comodidade_wifi");
-                    if(Boolean.TRUE.equals(wifi)){
-                       cbxwifi.setSelected(true);
-                    }
-                    boolean arcondicionado = resultado.getBoolean("comodidade_arcondicionado");
-                    if(Boolean.TRUE.equals(arcondicionado)){
-                       cbxarcondicionado.setSelected(true);
-                    }
-                    boolean tv = resultado.getBoolean("comodidade_tv");
-                    if(Boolean.TRUE.equals(tv)){
-                       cbxtv.setSelected(true);
-                    }
-                    boolean frigobar = resultado.getBoolean("comodidade_frigobar");
-                    if(Boolean.TRUE.equals(frigobar)){
-                       cbxfrigibar.setSelected(true);
-                    }                        
-                    boolean acessibilidade = resultado.getBoolean("comodidade_acessibilidade");
-                    if(Boolean.TRUE.equals(acessibilidade)){
-                       cbxacessibilidade.setSelected(true);
-                    }
-                    txtfcapacidade.setText(resultado.getString("capacidade"));
-                    txtfnomeacomodacao.setText(resultado.getString("nome_acomodacao"));
-                    txtfnumeroacomodacao.setText(resultado.getString("id_acomodacao"));
-                    txtfdescricao.setText(resultado.getString("descricao"));
-
-                    boolean bloqueado = resultado.getBoolean("bloqueio_acomodacao");
-                    btnrrestricao.setSelected(bloqueado);
-                    if(Boolean.TRUE.equals(bloqueado)){
-                        String dataBanco = resultado.getString("periodo_bloqueio_inicio");
-                        String dataInicio = formatoDatavoltando(dataBanco);
-                        ftxtfdatainicio.setText(dataInicio);
-                        
-                        dataBanco = resultado.getString("periodo_bloqueio_fim");
-                        dataInicio = formatoDatavoltando(dataBanco);
-                        ftxtfdatafinal.setText(dataInicio);
-                        
-                        txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));    
-                    }
-    
+                    
+                try {
+                    txtfcpf.setText(resultado.getString("cpf_hospede"));
+                    txtfnumeroreserva.setText(resultado.getString("id_reserva"));
+                    txtfnomehospede.setText(resultado.getString("nome_hospede"));
+                    
+                    ftxtfdatainicioreserva.setText(resultado.getString("data_checkin"));
+                    ftxtfdatafimreserva.setText(resultado.getString("data_checkout"));
+                    
+                    txtfacomodacao.setText("N°: " + resultado.getString("fk_acomodacao") +
+                               "\nNome: " + resultado.getString("nome_acomodacao") +
+                               "\nTipo: " + resultado.getString("tipo_quarto"));
+                    
+                    
+                    txtfvalordiaria.setText(resultado.getString("valor_diaria"));
+                    txtfnumeroadultos.setText(resultado.getString("numero_adulto"));
+                    txtfnumerocriacas.setText(resultado.getString("numero_crianca"));
+                    observacoes.setText(resultado.getString("observacoes"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                
+                
+                
+                
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
      }
-    */
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

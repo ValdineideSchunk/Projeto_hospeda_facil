@@ -221,7 +221,6 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbllistaacomodacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistaacomodacoesMouseClicked
-        // TODO add your handling code here:
         int linha = tbllistaacomodacoes.getSelectedRow();
 
         id = tbllistaacomodacoes.getValueAt(linha, 0).toString();

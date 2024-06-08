@@ -4,6 +4,7 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -55,9 +56,9 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
                 model.addRow(new Object[]
                 {
                     resultado.getString("id_reserva"),
-                    resultado.getString("id_hospede"),
+                    resultado.getString("fk_hospede"),
                     resultado.getString("nome_hospede"),
-                    resultado.getString("data_reserva"), 
+                    resultado.getString("data_criacao_reserva"), 
                     resultado.getString("data_checkin"),
                     resultado.getString("data_checkout"),
                     resultado.getString("status_reserva"),
@@ -80,7 +81,6 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        btnnovareserva = new javax.swing.JButton();
         btnmenu = new javax.swing.JButton();
         btnhospede = new javax.swing.JButton();
         btnreserva = new javax.swing.JButton();
@@ -89,6 +89,7 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbllistareserva = new javax.swing.JTable();
         btnpesquisareserva = new javax.swing.JButton();
+        btnnovareserva = new javax.swing.JButton();
         lblimagemlistadereserva = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -102,22 +103,6 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnnovareserva.setBorder(null);
-        btnnovareserva.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnnovareservaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnnovareservaMouseExited(evt);
-            }
-        });
-        btnnovareserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnnovareservaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 580, 210, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,10 +142,22 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
                 "Numero da Reserva", "Numero do Hóspede", "Nome do Hóspede", "Data Da Resesrva", "Data Check-in", "Data Check-out", "Status"
             }
         ));
+        tbllistareserva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbllistareservaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbllistareserva);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 940, 370));
         jPanel1.add(btnpesquisareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 136, 47, 41));
+
+        btnnovareserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnovareservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 580, 230, 50));
 
         lblimagemlistadereserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemlistadereserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Reservas.png")); // NOI18N
@@ -188,20 +185,6 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnnovareservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnovareservaMouseEntered
-        btnnovareserva.setBorder(BorderFactory.createLineBorder(Color.yellow));
-    }//GEN-LAST:event_btnnovareservaMouseEntered
-
-    private void btnnovareservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnovareservaMouseExited
-        btnnovareserva.setBorder(null);
-    }//GEN-LAST:event_btnnovareservaMouseExited
-
-    private void btnnovareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovareservaActionPerformed
-        Lista_de_Reserva.this.dispose();
-        Nova_Reserva objeto2 = new Nova_Reserva();
-        objeto2.setVisible(true);
-    }//GEN-LAST:event_btnnovareservaActionPerformed
 
     private void lblimagemlistadereservaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblimagemlistadereservaAncestorAdded
         
@@ -232,9 +215,25 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-            this.Populartbllistareserva("SELECT * FROM view_lista_reservas");
+            this.Populartbllistareserva("SELECT * FROM view_informações_reserva");
 
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnnovareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovareservaActionPerformed
+        Lista_de_Reserva.this.dispose();
+        Nova_Reserva objeto2 = new Nova_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnnovareservaActionPerformed
+
+    private void tbllistareservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistareservaMouseClicked
+        int linha = tbllistareserva.getSelectedRow();
+
+        id = tbllistareserva.getValueAt(linha, 0).toString();
+        
+        Lista_de_Reserva.this.dispose();
+        Visualizando_Reserva_Antes_Check_in objeto2 = new Visualizando_Reserva_Antes_Check_in();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_tbllistareservaMouseClicked
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -125,7 +125,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 try {
                     
                     
-                    txtfdetalhesacomodacao.setText("N: " + resultado.getString("id_acomodacao") +
+                    txtfdetalhesacomodacao.setText("Nº: " + resultado.getString("id_acomodacao") +
                                "\nNome: " + resultado.getString("nome_acomodacao") +
                                "\nTipo: " + resultado.getString("tipo_quarto"));
                     
