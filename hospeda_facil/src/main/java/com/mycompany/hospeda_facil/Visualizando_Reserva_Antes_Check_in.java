@@ -4,6 +4,10 @@
  */
 package com.mycompany.hospeda_facil;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -29,6 +33,80 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
          
     }
     
+     /*public void DetalhesAcomodacao(){
+      
+            
+            Connection conexao = null;
+            PreparedStatement declaracaoPreparada = null;
+            ResultSet resultado = null;
+            
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+            
+            conexao = DriverManager.getConnection(url, usuario, senha);
+            
+            declaracaoPreparada = conexao.prepareStatement(
+                    "SELECT * FROM reserva WHERE id_acomodacao = ?");
+            declaracaoPreparada.setInt(1, idAcomodacao);
+            resultado = declaracaoPreparada.executeQuery();
+            
+            if (resultado.next()) {
+                
+                    String tipo_acomodacao = resultado.getString("tipo_quarto");
+                    if("Individual".equals(tipo_acomodacao)){
+                       btnrindividual.setSelected(true);
+                    }else if("Duplo".equals(tipo_acomodacao)){
+                       btnrduplo.setSelected(true);
+                    }else if("Triplo".equals(tipo_acomodacao)){
+                       btnrtriplo.setSelected(true);
+                    } else {
+                       btnrsuite.setSelected(true);
+                    }
+                   
+                    boolean wifi = resultado.getBoolean("comodidade_wifi");
+                    if(Boolean.TRUE.equals(wifi)){
+                       cbxwifi.setSelected(true);
+                    }
+                    boolean arcondicionado = resultado.getBoolean("comodidade_arcondicionado");
+                    if(Boolean.TRUE.equals(arcondicionado)){
+                       cbxarcondicionado.setSelected(true);
+                    }
+                    boolean tv = resultado.getBoolean("comodidade_tv");
+                    if(Boolean.TRUE.equals(tv)){
+                       cbxtv.setSelected(true);
+                    }
+                    boolean frigobar = resultado.getBoolean("comodidade_frigobar");
+                    if(Boolean.TRUE.equals(frigobar)){
+                       cbxfrigibar.setSelected(true);
+                    }                        
+                    boolean acessibilidade = resultado.getBoolean("comodidade_acessibilidade");
+                    if(Boolean.TRUE.equals(acessibilidade)){
+                       cbxacessibilidade.setSelected(true);
+                    }
+                    txtfcapacidade.setText(resultado.getString("capacidade"));
+                    txtfnomeacomodacao.setText(resultado.getString("nome_acomodacao"));
+                    txtfnumeroacomodacao.setText(resultado.getString("id_acomodacao"));
+                    txtfdescricao.setText(resultado.getString("descricao"));
+
+                    boolean bloqueado = resultado.getBoolean("bloqueio_acomodacao");
+                    btnrrestricao.setSelected(bloqueado);
+                    if(Boolean.TRUE.equals(bloqueado)){
+                        String dataBanco = resultado.getString("periodo_bloqueio_inicio");
+                        String dataInicio = formatoDatavoltando(dataBanco);
+                        ftxtfdatainicio.setText(dataInicio);
+                        
+                        dataBanco = resultado.getString("periodo_bloqueio_fim");
+                        dataInicio = formatoDatavoltando(dataBanco);
+                        ftxtfdatafinal.setText(dataInicio);
+                        
+                        txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));    
+                    }
+    
+            }
+    
+     }
+    */
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -112,9 +190,10 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 390, 30));
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 150, 50));
 
+        txtfnumeroreserva.setEditable(false);
         txtfnumeroreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumeroreserva.setBorder(null);
-        jPanel1.add(txtfnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 290, 30));
+        jPanel1.add(txtfnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 130, 30));
         jPanel1.add(btncancelarreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 590, 260, 50));
         jPanel1.add(btncheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 587, 170, 50));
 

@@ -314,8 +314,8 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
             conexao =DriverManager.getConnection(url,usuario,senha);
             String sql = "INSERT INTO acomodacoes(tipo_quarto,capacidade,nome_acomodacao,comodidade_wifi,"
                     + "comodidade_arcondicionado,comodidade_tv,comodidade_frigobar,comodidade_acessibilidade,descricao,"
-                    + "bloqueio_acomodacao,periodo_bloqueio_inicio,periodo_bloqueio_fim,motivo_bloqueio)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "bloqueio_acomodacao,periodo_bloqueio_inicio,periodo_bloqueio_fim,motivo_bloqueio,status_quarto)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             statement = conexao.prepareStatement(sql);
 
             statement.setString(1,opcaoSelecionada);
@@ -339,11 +339,12 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
                 statement.setString(11,datainicio);
                 statement.setString(12,datafinal);
                 statement.setString(13,txtfmotivobloqueio.getText());
+                statement.setString(14,"Bloqueada");
             }else{
                 statement.setString(11,null);
                 statement.setString(12,null);
                 statement.setString(13," ");
-                
+                statement.setString(14,"Disponivel");
                 
             }
 

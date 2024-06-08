@@ -5,8 +5,16 @@
 package com.mycompany.hospeda_facil;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,7 +32,47 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         
          
     }
-   
+   public void Populartbllistareserva(String sql){
+        try {
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario ="root";
+            String senha ="";
+            conexao =DriverManager.getConnection(url,usuario,senha);
+            
+            PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
+            
+            banco.execute();
+            ResultSet resultado = banco.executeQuery(sql);
+            
+            DefaultTableModel model = (DefaultTableModel) tbllistareserva.getModel();
+            
+            model.setNumRows(0);
+            
+            while(resultado.next())
+            {
+                model.addRow(new Object[]
+                {
+                    resultado.getString("id_reserva"),
+                    resultado.getString("id_hospede"),
+                    resultado.getString("nome_hospede"),
+                    resultado.getString("data_reserva"), 
+                    resultado.getString("data_checkin"),
+                    resultado.getString("data_checkout"),
+                    resultado.getString("status_reserva"),
+                    
+                    
+                    
+                });
+            }
+            
+            conexao.close();
+            banco.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Lista_de_Acomodações.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -47,6 +95,11 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -101,7 +154,7 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Numero da Reserva", "Numero do Hóspede", "Data da Reserva", "Nome do Hóspede", "Data Check-in", "Data Check-out", "Status"
+                "Numero da Reserva", "Numero do Hóspede", "Nome do Hóspede", "Data Da Resesrva", "Data Check-in", "Data Check-out", "Status"
             }
         ));
         jScrollPane1.setViewportView(tbllistareserva);
@@ -177,6 +230,11 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+            this.Populartbllistareserva("SELECT * FROM view_lista_reservas");
+
+    }//GEN-LAST:event_formWindowOpened
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

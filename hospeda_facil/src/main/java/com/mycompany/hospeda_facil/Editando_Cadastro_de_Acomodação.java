@@ -24,8 +24,11 @@ import javax.swing.JTextField;
  */
 public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
     int idAcomodacao = Integer.parseInt(id);
+    private String status;
+    
     public Editando_Cadastro_de_Acomodação() {
         initComponents();
+        
         DetalhesAcomodacao();
         JButton[] buttons = {
         btnsalvaralteracoes, btnmenu, btnhospede,
@@ -83,6 +86,9 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
                     } else {
                        btnrsuite.setSelected(true);
                     }
+                    
+                    String status = resultado.getString("status_quarto");
+                   
                    
                     boolean wifi = resultado.getBoolean("comodidade_wifi");
                     if(Boolean.TRUE.equals(wifi)){
@@ -401,7 +407,7 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             
             String sql = "UPDATE acomodacoes SET tipo_quarto = ?,capacidade = ?,nome_acomodacao = ?,comodidade_wifi = ?,"
                     + "comodidade_arcondicionado = ?,comodidade_tv = ?,comodidade_frigobar = ?,comodidade_acessibilidade = ?,descricao = ?,"
-                    + "bloqueio_acomodacao = ?,periodo_bloqueio_inicio = ?,periodo_bloqueio_fim = ?,motivo_bloqueio = ?"
+                    + "bloqueio_acomodacao = ?,periodo_bloqueio_inicio = ?,periodo_bloqueio_fim = ?,motivo_bloqueio = ?,status_quarto = ?"
                     + "where id_acomodacao = ?";
             statement = conexao.prepareStatement(sql);
 
@@ -426,12 +432,40 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
                 statement.setString(11,datainicio);
                 statement.setString(12,datafinal);
                 statement.setString(13,txtfmotivobloqueio.getText());
+                statement.setString(14,"Bloqueada");
+            }else if("Disponivel".equals(status)){
+                statement.setString(11,null);
+                statement.setString(12,null);
+                statement.setString(13," ");
+                statement.setString(14,"Disponivels");
+            }else if("Reservado".equals(status)){
+                statement.setString(11,null);
+                statement.setString(12,null);
+                statement.setString(13," ");
+                statement.setString(14,"Reservado");
+            }else if("Ocupado".equals(status)){
+                statement.setString(11,null);
+                statement.setString(12,null);
+                statement.setString(13," ");
+                statement.setString(14,"Ocupado");
+            }else if("Pronto p/ Limpeza".equals(status)){
+                statement.setString(11,null);
+                statement.setString(12,null);
+                statement.setString(13," ");
+                statement.setString(14,"Pronto p/ Limpeza");
+            }else if("Em Limpeza".equals(status)){
+                statement.setString(11,null);
+                statement.setString(12,null);
+                statement.setString(13," ");
+                statement.setString(14,"Em Limpeza");
             }else{
                 statement.setString(11,null);
                 statement.setString(12,null);
-                statement.setString(13," ");   
+                statement.setString(13," ");
+                statement.setString(14,"Disponivels");
             }
-            statement.setString(14,txtfnumeroacomodacao.getText());
+ 
+            statement.setString(15,txtfnumeroacomodacao.getText());
             
 
             statement.executeUpdate();

@@ -4,7 +4,18 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -12,6 +23,9 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Nova_Reserva extends javax.swing.JFrame {
+    
+   private String idhospede;
+
     public Nova_Reserva() {
         initComponents();
         
@@ -22,14 +36,109 @@ public class Nova_Reserva extends javax.swing.JFrame {
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
         JTextField[] textFields = {
-        jTextField1,jTextField2,jTextField4,jTextField5,jTextField6,
-        jTextField7,jTextField8,ftxtfdatafimreserva,ftxtfdatainicioreserva};
+        txtfcpfhospede,txtfnomehospede,txtfvalordiaria,txtfnumeroadultos,txtfnumerocriancas,
+        txtfobservacoes,txtfdetalhesacomodacao,ftxtfdatafimreserva,ftxtfdatainicioreserva};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
         
          
     }
     
+    public String formatoData(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }
+
+   public void consultarHospede(long cpfhospede) {
+ 
+    Connection conexao = null;
+    PreparedStatement declaracaoPreparada = null;
+    ResultSet resultado = null;
+    
+    try {
+        conexao = DriverManager.getConnection("jdbc:mysql://localhost/hospedagem", "root", "");
+        declaracaoPreparada = conexao.prepareStatement("SELECT * FROM hospedes WHERE cpf = ?");
+        
+        declaracaoPreparada.setLong(1, cpfhospede);
+        resultado = declaracaoPreparada.executeQuery();
+        
+        if (resultado.next()) {
+            txtfnomehospede.setText(resultado.getString("nome_hospede"));
+            idhospede  = resultado.getString("id_hospede");
+                   
+        } else {
+            JOptionPane.showMessageDialog(null, "CPF não encontrado no banco de dados.");
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        if (resultado != null) {
+            try {
+                resultado.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (declaracaoPreparada != null) {
+            try {
+                declaracaoPreparada.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (conexao != null) {
+            try {
+                conexao.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+}        
+        
+        
+  public void prencherdadosacomodacao(){
+       
+             int idacomodacao = Integer.parseInt(id);
+        try {
+            Connection conexao = null;
+            PreparedStatement declaracaoPreparada = null;
+            ResultSet resultado = null;
+            
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+            
+            conexao = DriverManager.getConnection(url, usuario, senha);
+            
+            declaracaoPreparada = conexao.prepareStatement(
+                    "SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
+            declaracaoPreparada.setInt(1, idacomodacao);
+            resultado = declaracaoPreparada.executeQuery();
+            
+            
+            if (resultado.next()) {
+                try {
+                    
+                    
+                    txtfdetalhesacomodacao.setText("N: " + resultado.getString("id_acomodacao") +
+                               "\nNome: " + resultado.getString("nome_acomodacao") +
+                               "\nTipo: " + resultado.getString("tipo_quarto"));
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,13 +148,13 @@ public class Nova_Reserva extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         ftxtfdatainicioreserva = new javax.swing.JFormattedTextField();
         ftxtfdatafimreserva = new javax.swing.JFormattedTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        txtfcpfhospede = new javax.swing.JTextField();
+        txtfnomehospede = new javax.swing.JTextField();
+        txtfvalordiaria = new javax.swing.JTextField();
+        txtfnumeroadultos = new javax.swing.JTextField();
+        txtfnumerocriancas = new javax.swing.JTextField();
+        txtfobservacoes = new javax.swing.JTextField();
+        txtfdetalhesacomodacao = new javax.swing.JTextField();
         btncpf = new javax.swing.JButton();
         btnacomodação = new javax.swing.JButton();
         btnnovohospede = new javax.swing.JButton();
@@ -83,43 +192,53 @@ public class Nova_Reserva extends javax.swing.JFrame {
         ftxtfdatafimreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jPanel1.add(ftxtfdatafimreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(588, 193, 120, 30));
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 240, 30));
+        txtfcpfhospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfcpfhospede.setBorder(null);
+        jPanel1.add(txtfcpfhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 240, 30));
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField2.setBorder(null);
-        jTextField2.setEnabled(false);
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 153, 290, 30));
+        txtfnomehospede.setEditable(false);
+        txtfnomehospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnomehospede.setBorder(null);
+        jPanel1.add(txtfnomehospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 153, 290, 30));
 
-        jTextField4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField4.setBorder(null);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 130, 30));
+        txtfvalordiaria.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfvalordiaria.setBorder(null);
+        jPanel1.add(txtfvalordiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 130, 30));
 
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField5.setBorder(null);
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 357, 120, 30));
+        txtfnumeroadultos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnumeroadultos.setBorder(null);
+        jPanel1.add(txtfnumeroadultos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 357, 120, 30));
 
-        jTextField6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField6.setBorder(null);
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 357, 130, 30));
+        txtfnumerocriancas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnumerocriancas.setBorder(null);
+        jPanel1.add(txtfnumerocriancas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 357, 130, 30));
 
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField7.setBorder(null);
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 580, 70));
+        txtfobservacoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfobservacoes.setBorder(null);
+        jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 580, 70));
 
-        jTextField8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField8.setBorder(null);
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 241, 390, 30));
+        txtfdetalhesacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfdetalhesacomodacao.setBorder(null);
+        jPanel1.add(txtfdetalhesacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 241, 390, 30));
 
         btncpf.setBorder(null);
+        btncpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncpfActionPerformed(evt);
+            }
+        });
         jPanel1.add(btncpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 103, 40, 40));
 
         btnacomodação.setBorder(null);
+        btnacomodação.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnacomodaçãoActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnacomodação, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 240, 40, 40));
 
         btnnovohospede.setBorder(null);
-        jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 200, 40));
+        jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 190, 40));
 
         btnvoltar.setBorder(null);
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 570, 140, 50));
@@ -158,10 +277,25 @@ public class Nova_Reserva extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
-        jPanel1.add(btnfinalizarnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 570, 200, 50));
+
+        btnfinalizarnovareserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfinalizarnovareservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnfinalizarnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 570, 220, 50));
 
         lblimagemnovareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
+        lblimagemnovareserva.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                lblimagemnovareservaAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jPanel1.add(lblimagemnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,6 +341,84 @@ public class Nova_Reserva extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void btncpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncpfActionPerformed
+         String cpfText = txtfcpfhospede.getText().trim();
+    
+    if (cpfText.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "CPF do hóspede está vazio.");
+        return;
+    }
+
+    long cpfhospede = Long.parseLong(cpfText);
+    consultarHospede(cpfhospede);
+         
+    }//GEN-LAST:event_btncpfActionPerformed
+
+    private void btnacomodaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnacomodaçãoActionPerformed
+        this.setVisible(false);
+        Lista_de_AcomodaçõesReserva objeto2 = new Lista_de_AcomodaçõesReserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnacomodaçãoActionPerformed
+
+    private void lblimagemnovareservaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblimagemnovareservaAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblimagemnovareservaAncestorAdded
+
+    private void btnfinalizarnovareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarnovareservaActionPerformed
+  
+       
+       try {
+           Connection conexao = null;
+           PreparedStatement statement = null;
+           String url = "jdbc:mysql://localhost/hospedagem";
+           String usuario ="root";
+           String senha ="";
+           conexao =DriverManager.getConnection(url,usuario,senha);
+           String sql = "INSERT INTO reservas(fk_hospede,fk_acomodacao,data_checkin,data_checkout,"
+                   + "valor_diaria,numero_adulto,numero_crianca,observacoes,status_reserva)"
+                   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+           statement = conexao.prepareStatement(sql);
+           
+           String data = ftxtfdatainicioreserva.getText();
+           String datainicio = formatoData(data);
+           
+           data = ftxtfdatafimreserva.getText();
+           String datafim = formatoData(data);
+           
+           statement.setString(1,idhospede);
+           statement.setString(2,id);
+           statement.setString(3,datainicio);
+           statement.setString(4,datafim);
+           statement.setString(5,txtfvalordiaria.getText());
+           statement.setString(6,txtfnumeroadultos.getText());
+           statement.setString(7,txtfnumerocriancas.getText());
+           statement.setString(8,txtfobservacoes.getText());
+           String status = "Reservado";
+           statement.setString(9,status);
+           
+           statement.executeUpdate();
+           statement.close();
+           
+            sql = "UPDATE acomodacoes SET status_quarto = ?"
+                    + "where id_acomodacao = ?";
+            statement = conexao.prepareStatement(sql);
+            status = "Reservado";
+            statement.setString(1,status);
+            statement.setString(2,id);
+
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null,"Reserva efetuada com sucesso.");
+            Nova_Reserva.this.dispose();
+            Menu_Principal objeto2 = new Menu_Principal();
+            objeto2.setVisible(true);
+            
+       } catch (SQLException ex) {
+           Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+       }  
+    }//GEN-LAST:event_btnfinalizarnovareservaActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -254,14 +466,14 @@ public class Nova_Reserva extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftxtfdatainicioreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lblimagemnovareserva;
+    private javax.swing.JTextField txtfcpfhospede;
+    private javax.swing.JTextField txtfdetalhesacomodacao;
+    private javax.swing.JTextField txtfnomehospede;
+    private javax.swing.JTextField txtfnumeroadultos;
+    private javax.swing.JTextField txtfnumerocriancas;
+    private javax.swing.JTextField txtfobservacoes;
+    private javax.swing.JTextField txtfvalordiaria;
     // End of variables declaration//GEN-END:variables
 
     

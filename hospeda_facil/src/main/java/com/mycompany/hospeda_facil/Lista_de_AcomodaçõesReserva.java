@@ -19,12 +19,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author NEY SCHUNK
  */
-public class Lista_de_Acomodações extends javax.swing.JFrame {
+public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
 
     /**
      * Creates new form Lista_de_Acomodações
      */
-    public Lista_de_Acomodações() {
+    public Lista_de_AcomodaçõesReserva() {
         initComponents();
         
         JButton[] buttons = {
@@ -63,7 +63,7 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbllistaacomodacoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tbllistaacomodacoes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tbllistaacomodacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -175,42 +175,42 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
             conexao.close();
             banco.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Lista_de_Acomodações.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Lista_de_AcomodaçõesReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
-        Lista_de_Acomodações.this.dispose();
+        Lista_de_AcomodaçõesReserva.this.dispose();
         Menu_Principal objeto2 = new Menu_Principal();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnmenuActionPerformed
 
     private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
-        Lista_de_Acomodações.this.dispose();
+        Lista_de_AcomodaçõesReserva.this.dispose();
         Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnhospedeActionPerformed
 
     private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
-        Lista_de_Acomodações.this.dispose();
+        Lista_de_AcomodaçõesReserva.this.dispose();
         Lista_de_Reserva objeto2 = new Lista_de_Reserva();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnreservaActionPerformed
 
     private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
-        Lista_de_Acomodações.this.dispose();
+        Lista_de_AcomodaçõesReserva.this.dispose();
         Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnmapaActionPerformed
 
     private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
-        Lista_de_Acomodações.this.dispose();
+        Lista_de_AcomodaçõesReserva.this.dispose();
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnnovaacomodaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovaacomodaçãoActionPerformed
-        Lista_de_Acomodações.this.dispose();
+        Lista_de_AcomodaçõesReserva.this.dispose();
         Cadastro_de_Acomodação objeto2 = new Cadastro_de_Acomodação();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnnovaacomodaçãoActionPerformed
@@ -221,14 +221,15 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbllistaacomodacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistaacomodacoesMouseClicked
-        // TODO add your handling code here:
+        
         int linha = tbllistaacomodacoes.getSelectedRow();
 
         id = tbllistaacomodacoes.getValueAt(linha, 0).toString();
         
-        Lista_de_Acomodações.this.dispose();
-        Visualizando_Cadastro_de_Acomodação objeto2 = new Visualizando_Cadastro_de_Acomodação();
+        Lista_de_AcomodaçõesReserva.this.dispose();
+        Nova_Reserva objeto2 = new Nova_Reserva();
         objeto2.setVisible(true);
+        objeto2.prencherdadosacomodacao();
     }//GEN-LAST:event_tbllistaacomodacoesMouseClicked
 
     /**
@@ -248,20 +249,21 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Lista_de_Acomodações.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_AcomodaçõesReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Lista_de_Acomodações.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_AcomodaçõesReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Lista_de_Acomodações.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_AcomodaçõesReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Lista_de_Acomodações.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_AcomodaçõesReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Lista_de_Acomodações().setVisible(true);
+                new Lista_de_AcomodaçõesReserva().setVisible(true);
             }
         });
     }
