@@ -5,16 +5,17 @@
 package com.mycompany.hospeda_facil;
 
 import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * @author NEY SCHUNK
  */
 public class Lista_de_Reserva extends javax.swing.JFrame {
+    String statusreserva;
     public Lista_de_Reserva() {
         initComponents();
         
@@ -33,47 +35,56 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         
          
     }
-   public void Populartbllistareserva(String sql){
-        try {
-            Connection conexao = null;
-            PreparedStatement statement = null;
-            String url = "jdbc:mysql://localhost/hospedagem";
-            String usuario ="root";
-            String senha ="";
-            conexao =DriverManager.getConnection(url,usuario,senha);
-            
-            PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
-            
-            banco.execute();
-            ResultSet resultado = banco.executeQuery(sql);
-            
-            DefaultTableModel model = (DefaultTableModel) tbllistareserva.getModel();
-            
-            model.setNumRows(0);
-            
-            while(resultado.next())
-            {
-                model.addRow(new Object[]
-                {
-                    resultado.getString("id_reserva"),
-                    resultado.getString("fk_hospede"),
-                    resultado.getString("nome_hospede"),
-                    resultado.getString("data_criacao_reserva"), 
-                    resultado.getString("data_checkin"),
-                    resultado.getString("data_checkout"),
-                    resultado.getString("status_reserva"),
-                    
-                    
-                    
-                });
-            }
-            
-            conexao.close();
-            banco.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Lista_de_Acomodações.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public String formatoDatavoltando(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
     }
+    
+    
+    
+    public void Populartbllistareserva(String sql){
+    try {
+        String url = "jdbc:mysql://localhost/hospedagem";
+        String usuario = "root";
+        String senha = "";
+        
+        Connection conexao = DriverManager.getConnection(url, usuario, senha);
+        PreparedStatement banco = conexao.prepareStatement(sql);
+        ResultSet resultado = banco.executeQuery();
+        
+        DefaultTableModel model = (DefaultTableModel) tbllistareserva.getModel();
+        model.setNumRows(0);
+        
+        while (resultado.next()) {
+            String databancoCheckin = resultado.getString("data_checkin");
+            String datacheckin = formatoDatavoltando(databancoCheckin);
+            String databancoCheckout = resultado.getString("data_checkout");
+            String datacheckout = formatoDatavoltando(databancoCheckout);
+            statusreserva = resultado.getString("status_reserva");
+            
+            model.addRow(new Object[] {
+                resultado.getString("id_reserva"),
+                resultado.getString("fk_hospede"),
+                resultado.getString("nome_hospede"),
+                resultado.getString("data_criacao_reserva"), 
+                datacheckin,
+                datacheckout,
+                resultado.getString("status_reserva"),
+            });
+        }
+        
+        resultado.close();
+        banco.close();
+        conexao.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(Lista_de_Acomodações.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+   
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -133,7 +144,7 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
-        tbllistareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tbllistareserva.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbllistareserva.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -227,12 +238,24 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
 
     private void tbllistareservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistareservaMouseClicked
         int linha = tbllistareserva.getSelectedRow();
-
         id = tbllistareserva.getValueAt(linha, 0).toString();
+        String status = tbllistareserva.getValueAt(linha, 6).toString();
+   
+        if("Reservado".equals(status)){
+            Lista_de_Reserva.this.dispose();
+            Visualizando_Reserva_Antes_Check_in objeto2 = new Visualizando_Reserva_Antes_Check_in();
+            objeto2.setVisible(true);  
+        }else if("Hospedado".equals(status)){
+            Lista_de_Reserva.this.dispose();
+            Visualizando_Reserva_Depois_Check_in objeto2 = new Visualizando_Reserva_Depois_Check_in();
+            objeto2.setVisible(true);
+        }else if("Finalizada".equals(status) || "Cancelada".equals(status)){
+            Lista_de_Reserva.this.dispose();
+            Visualizando_Reservas_Canceladas_Finalizadas objeto2 = new Visualizando_Reservas_Canceladas_Finalizadas();
+            objeto2.setVisible(true);
+        }
         
-        Lista_de_Reserva.this.dispose();
-        Visualizando_Reserva_Antes_Check_in objeto2 = new Visualizando_Reserva_Antes_Check_in();
-        objeto2.setVisible(true);
+        
     }//GEN-LAST:event_tbllistareservaMouseClicked
     
     public static void main(String args[]) {

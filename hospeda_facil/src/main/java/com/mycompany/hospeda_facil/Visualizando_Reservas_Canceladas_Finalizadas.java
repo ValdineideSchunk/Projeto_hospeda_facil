@@ -21,24 +21,26 @@ import javax.swing.JTextField;
  *
  * @author NEY SCHUNK
  */
-public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
+public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JFrame {
     int idreserva = Integer.parseInt(id);
-    public Visualizando_Reserva_Depois_Check_in() {
+    
+    
+    public Visualizando_Reservas_Canceladas_Finalizadas() {
         initComponents();
         
         JButton[] buttons = {
-        btneditarreserva, btnmenu, btnhospede,btnreserva,
-        btnmapa, btnajustes,btncheckout,btnvoltar};
+        btnmenu, btnhospede,btnreserva, btnmapa, btnajustes,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
         JTextField[] textFields = {
-        txtfcpf,txtfnomehospede,txtfvalordiaria,txtfnumeroadultos,txtfnumerocriacas,observacoes,
-        txtfacomodacao,txtfnumeroreserva,ftxtfdatafimreserva,ftxtfdatainicioreserva,txtfstatusreserva};
+        txtfcpf,txtfnomehospede,txtfvalordiaria,txtfnumeroadultos,txtfnumerocriacas,
+        observacoes,txtfacomodacao,txtfnumeroreserva,ftxtfdatafimreserva,ftxtfdatainicioreserva,
+        txtfstatusreserva};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
-        PopulandoReservas();
-         
+        
+        PopulandoReservas(); 
     }
-     public String formatoDatavoltando(String data) {
+    public String formatoDatavoltando(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -46,8 +48,8 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
-     
-    public void PopulandoReservas(){    
+    
+     public void PopulandoReservas(){    
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
@@ -84,19 +86,16 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
                     txtfnumerocriacas.setText(resultado.getString("numero_crianca"));
                     observacoes.setText(resultado.getString("observacoes"));
                 } catch (SQLException ex) {
-                    Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Visualizando_Reservas_Canceladas_Finalizadas.class.getName()).log(Level.SEVERE, null, ex);
                 }
    
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Visualizando_Reservas_Canceladas_Finalizadas.class.getName()).log(Level.SEVERE, null, ex);
         }
     
      }
-     
-     
-     
-     
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -115,15 +114,13 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
         txtfacomodacao = new javax.swing.JTextField();
         btnvoltar = new javax.swing.JButton();
         txtfnumeroreserva = new javax.swing.JTextField();
-        btncheckout = new javax.swing.JButton();
         btnmenu = new javax.swing.JButton();
         btnhospede = new javax.swing.JButton();
         btnreserva = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
-        btneditarreserva = new javax.swing.JButton();
         txtfstatusreserva = new javax.swing.JTextField();
-        lblimagemvisualizandoreservadepoisdocheckin = new javax.swing.JLabel();
+        lblVisualizando_Reservas_Canceladas_Finalizadas = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -186,13 +183,12 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
         txtfacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfacomodacao.setBorder(null);
         jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 390, 30));
-        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 150, 50));
+        jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 580, 150, 50));
 
         txtfnumeroreserva.setEditable(false);
         txtfnumeroreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumeroreserva.setBorder(null);
-        jPanel1.add(txtfnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 107, 120, 30));
-        jPanel1.add(btncheckout, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 590, 180, 50));
+        jPanel1.add(txtfnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 130, 30));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,16 +224,15 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
-        jPanel1.add(btneditarreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 590, 260, 50));
 
         txtfstatusreserva.setEditable(false);
         txtfstatusreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfstatusreserva.setBorder(null);
-        jPanel1.add(txtfstatusreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 177, 150, 30));
+        jPanel1.add(txtfstatusreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 180, 140, 30));
 
-        lblimagemvisualizandoreservadepoisdocheckin.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemvisualizandoreservadepoisdocheckin.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando reserva depois do Check-in.png")); // NOI18N
-        jPanel1.add(lblimagemvisualizandoreservadepoisdocheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
+        lblVisualizando_Reservas_Canceladas_Finalizadas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblVisualizando_Reservas_Canceladas_Finalizadas.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Reservas_Canceladas_Finalizadas.png")); // NOI18N
+        jPanel1.add(lblVisualizando_Reservas_Canceladas_Finalizadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -254,31 +249,31 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
-        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Visualizando_Reservas_Canceladas_Finalizadas.this.dispose();
         Menu_Principal objeto2 = new Menu_Principal();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnmenuActionPerformed
 
     private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
-        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Visualizando_Reservas_Canceladas_Finalizadas.this.dispose();
         Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnhospedeActionPerformed
 
     private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
-        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Visualizando_Reservas_Canceladas_Finalizadas.this.dispose();
         Lista_de_Reserva objeto2 = new Lista_de_Reserva();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnreservaActionPerformed
 
     private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
-        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Visualizando_Reservas_Canceladas_Finalizadas.this.dispose();
         Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnmapaActionPerformed
 
     private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
-        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Visualizando_Reservas_Canceladas_Finalizadas.this.dispose();
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
@@ -297,27 +292,25 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Visualizando_Reserva_Depois_Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Visualizando_Reservas_Canceladas_Finalizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Visualizando_Reserva_Depois_Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Visualizando_Reservas_Canceladas_Finalizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Visualizando_Reserva_Depois_Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Visualizando_Reservas_Canceladas_Finalizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Visualizando_Reserva_Depois_Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Visualizando_Reservas_Canceladas_Finalizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Visualizando_Reserva_Depois_Check_in().setVisible(true);
+                new Visualizando_Reservas_Canceladas_Finalizadas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnajustes;
-    private javax.swing.JButton btncheckout;
-    private javax.swing.JButton btneditarreserva;
     private javax.swing.JButton btnhospede;
     private javax.swing.JButton btnmapa;
     private javax.swing.JButton btnmenu;
@@ -327,7 +320,7 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftxtfdatainicioreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JLabel lblimagemvisualizandoreservadepoisdocheckin;
+    private javax.swing.JLabel lblVisualizando_Reservas_Canceladas_Finalizadas;
     private javax.swing.JTextField observacoes;
     private javax.swing.JTextField txtfacomodacao;
     private javax.swing.JTextField txtfcpf;

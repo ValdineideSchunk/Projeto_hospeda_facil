@@ -71,7 +71,9 @@ public class Nova_Reserva extends javax.swing.JFrame {
             idhospede  = resultado.getString("id_hospede");
                    
         } else {
-            JOptionPane.showMessageDialog(null, "CPF não encontrado no banco de dados.");
+            JOptionPane.showMessageDialog(null, "CPF não encontrado no banco de dados."
+                                            + "\nCertifique-se de estar digitando o CPF corretamente"
+                                            + "\nOu clique em 'Novo Hóspede'.");        
         }
     } catch (SQLException ex) {
         Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
@@ -238,6 +240,11 @@ public class Nova_Reserva extends javax.swing.JFrame {
         jPanel1.add(btnacomodação, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 240, 40, 40));
 
         btnnovohospede.setBorder(null);
+        btnnovohospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnovohospedeActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 190, 40));
 
         btnvoltar.setBorder(null);
@@ -419,6 +426,12 @@ public class Nova_Reserva extends javax.swing.JFrame {
            Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
        }  
     }//GEN-LAST:event_btnfinalizarnovareservaActionPerformed
+
+    private void btnnovohospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovohospedeActionPerformed
+        Nova_Reserva.this.dispose();
+        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnnovohospedeActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
