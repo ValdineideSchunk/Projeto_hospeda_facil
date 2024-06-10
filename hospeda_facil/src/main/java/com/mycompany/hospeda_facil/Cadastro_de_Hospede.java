@@ -4,6 +4,7 @@
  */
 package com.mycompany.hospeda_facil;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -47,7 +49,47 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
-    
+    public boolean validardata(String data) {
+        if (data == null || data.trim().isEmpty()) {// Verifica se a string de data está no formato correto
+            return false;
+        }
+        if (!data.matches("\\d{2}/\\d{2}/\\d{4}")) { // Verifica se a data está no formato DD/MM/YYYY
+            return false;
+        }
+        String[] partes = data.split("/"); // Data no formato DD/MM/YYYY
+        int dia = Integer.parseInt(partes[0]);
+        int mes = Integer.parseInt(partes[1]);
+        int ano = Integer.parseInt(partes[2]);
+
+        if (mes < 1 || mes > 12) {    // Verifica se o mês é válido
+            return false;
+        }
+        if (dia < 1 || dia > 31) {   // Verifica se o dia é válido para o mês
+            return false;
+        }
+        if (ano > 2024) {    // Verifica se o ano é válido
+            return false;
+        }
+        if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {    // Verifica o número de dias em cada mês
+            if (dia > 30) {
+                return false;
+            }
+        } else if (mes == 2) {
+            if (anobissexto(ano)) {
+                if (dia > 29) {
+                    return false;
+                }
+            } else {
+                if (dia > 28) {
+                    return false;
+                }
+            }
+        }
+        return true;// Data válida
+    }
+    public static boolean anobissexto(int year) {// Função auxiliar para verificar se um ano é bissexto
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
     
     
     
@@ -80,6 +122,10 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         btnajustes = new javax.swing.JButton();
         ftxtfdatanascimento = new javax.swing.JFormattedTextField();
         btnfinalizarcadastro = new javax.swing.JButton();
+        lblerronome = new javax.swing.JLabel();
+        lblerrorg = new javax.swing.JLabel();
+        lblerrocpf = new javax.swing.JLabel();
+        lblerrodatanascimento = new javax.swing.JLabel();
         lblimagemcadastrohospede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,11 +134,21 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
 
         txtfnome.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnome.setBorder(null);
-        jPanel1.add(txtfnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 132, 430, 30));
+        txtfnome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfnomeFocusLost(evt);
+            }
+        });
+        jPanel1.add(txtfnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 133, 430, 27));
 
         txtfrg.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfrg.setBorder(null);
-        jPanel1.add(txtfrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(875, 132, 120, 30));
+        txtfrg.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfrgFocusLost(evt);
+            }
+        });
+        jPanel1.add(txtfrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(877, 134, 120, 27));
 
         txtfcpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcpf.setBorder(null);
@@ -101,39 +157,39 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
                 txtfcpfFocusLost(evt);
             }
         });
-        jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 168, 280, 30));
+        jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 169, 280, 27));
 
         txtfnumerotelefone.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerotelefone.setBorder(null);
-        jPanel1.add(txtfnumerotelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 274, 226, 30));
+        jPanel1.add(txtfnumerotelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 274, 226, 27));
 
         txtfemail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfemail.setBorder(null);
-        jPanel1.add(txtfemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 308, 540, 30));
+        jPanel1.add(txtfemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 308, 540, 27));
 
         txtfcep.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcep.setBorder(null);
-        jPanel1.add(txtfcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 390, 100, 30));
+        jPanel1.add(txtfcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 390, 100, 27));
 
         txtfestado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfestado.setBorder(null);
-        jPanel1.add(txtfestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(473, 390, 260, 30));
+        jPanel1.add(txtfestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(473, 390, 260, 27));
 
         txtfcidade.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcidade.setBorder(null);
-        jPanel1.add(txtfcidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(829, 390, 260, 30));
+        jPanel1.add(txtfcidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(829, 390, 260, 27));
 
         txtfbairro.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfbairro.setBorder(null);
-        jPanel1.add(txtfbairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 427, 280, 30));
+        jPanel1.add(txtfbairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 427, 280, 27));
 
         txtfrua.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfrua.setBorder(null);
-        jPanel1.add(txtfrua, new org.netbeans.lib.awtextra.AbsoluteConstraints(633, 427, 430, 30));
+        jPanel1.add(txtfrua, new org.netbeans.lib.awtextra.AbsoluteConstraints(633, 427, 430, 27));
 
         txtfcomplemento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcomplemento.setBorder(null);
-        jPanel1.add(txtfcomplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 462, 420, 30));
+        jPanel1.add(txtfcomplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 462, 420, 27));
 
         txtfobservacoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfobservacoes.setBorder(null);
@@ -200,14 +256,35 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         ftxtfdatanascimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jPanel1.add(ftxtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 170, 150, 30));
+        ftxtfdatanascimento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftxtfdatanascimentoFocusLost(evt);
+            }
+        });
+        jPanel1.add(ftxtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 170, 180, 27));
 
         btnfinalizarcadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnfinalizarcadastroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(735, 593, 220, 50));
+        jPanel1.add(btnfinalizarcadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 593, 230, 50));
+
+        lblerronome.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerronome.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerronome, new org.netbeans.lib.awtextra.AbsoluteConstraints(742, 133, 73, 15));
+
+        lblerrorg.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerrorg.setForeground(new java.awt.Color(204, 0, 0));
+        jPanel1.add(lblerrorg, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 134, 60, 15));
+
+        lblerrocpf.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblerrocpf.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerrocpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 70, 15));
+
+        lblerrodatanascimento.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerrodatanascimento.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerrodatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 170, 70, 15));
 
         lblimagemcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Hóspede.png")); // NOI18N
@@ -243,12 +320,23 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnroutrosMouseClicked
 
     private void txtfcpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfcpfFocusLost
-        String cpf = txtfcpf.getText();
+        
+        String cpf = txtfcpf.getText().trim();
+        
+         if (cpf.isEmpty()) {
+            txtfcpf.setBorder(null);
+            lblerrocpf.setText("");  
+            return;                  
+        }
         cpf = cpf.replaceAll("[^0-9]", "");
-        if (ValidarCPF.validarCPF(cpf)) {
+        if (!ValidarCPF.validarCPF(cpf)) {
+            txtfcpf.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "CPF invalido";
+            lblerrocpf.setText(mensagem);
         } else {
-            JOptionPane.showMessageDialog(null,"ERRO: CPF invalido, Digite um numero valido!");
-            txtfcpf.requestFocus();
+            txtfcpf.setBorder(null);
+            String mensagem = "";
+            lblerrocpf.setText(mensagem);
         }
     }//GEN-LAST:event_txtfcpfFocusLost
 
@@ -326,6 +414,51 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             Logger.getLogger(Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnfinalizarcadastroActionPerformed
+
+    private void txtfnomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnomeFocusLost
+        String text = txtfnome.getText().trim();
+        if (!text.isEmpty() && !text.matches("[a-zA-Z\\s]+"))  {
+                txtfnome.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+                String mensagem = "Nome invalido";
+                lblerronome.setText(mensagem);
+                }else{
+                    txtfnome.setBorder(null);
+                    String mensagem = "";
+                    lblerronome.setText(mensagem);
+        }
+    }//GEN-LAST:event_txtfnomeFocusLost
+
+    private void txtfrgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfrgFocusLost
+        String rg = txtfrg.getText().trim();
+        if (!ValidarRG.validarRG(rg)) {
+            txtfrg.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "RG invalido";
+            lblerrorg.setText(mensagem); 
+        }else{
+            txtfrg.setBorder(null);
+            String mensagem = "";
+            lblerrorg.setText(mensagem);
+        
+    }
+    }//GEN-LAST:event_txtfrgFocusLost
+
+    private void ftxtfdatanascimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdatanascimentoFocusLost
+        String data = ftxtfdatanascimento.getText().trim();
+        if (data.equals("  /  /    ") || data.isEmpty()) {    // Verifica se o campo está vazio
+            ftxtfdatanascimento.setBorder(null);
+            lblerrodatanascimento.setText("");
+        } else {
+            boolean isValid = validardata(data); // Chama a função validardata passando a data
+            if (isValid) {
+                ftxtfdatanascimento.setBorder(null);
+                lblerrodatanascimento.setText("");
+                 String datanascimento = formatoData(data); // Chame formatoData apenas se a data for válida
+        } else {
+            ftxtfdatanascimento.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            lblerrodatanascimento.setText("Data inválida");
+        }
+    }
+    }//GEN-LAST:event_ftxtfdatanascimentoFocusLost
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -372,6 +505,10 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     private javax.swing.JButton btnvoltar;
     private javax.swing.JFormattedTextField ftxtfdatanascimento;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblerrocpf;
+    private javax.swing.JLabel lblerrodatanascimento;
+    private javax.swing.JLabel lblerronome;
+    private javax.swing.JLabel lblerrorg;
     private javax.swing.JLabel lblimagemcadastrohospede;
     private javax.swing.JTextField txtfbairro;
     private javax.swing.JTextField txtfcep;
