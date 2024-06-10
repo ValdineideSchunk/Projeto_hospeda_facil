@@ -386,7 +386,7 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
     private void btnsalvaralteracoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseClicked
 
         try {
-            // TODO add your handling code here:
+            
             String data = txtfdatanascimento.getText();
             String datanascimento = formatoData(data);
             

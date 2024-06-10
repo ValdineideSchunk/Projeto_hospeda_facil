@@ -231,6 +231,12 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+
+        btneditarreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditarreservaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btneditarreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 590, 250, 50));
 
         txtfstatusreserva.setEditable(false);
@@ -285,6 +291,12 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void btneditarreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarreservaActionPerformed
+        Visualizando_Reserva_Antes_Check_in.this.dispose();
+        Editando_Reserva_Antes_Checkin objeto2 = new Editando_Reserva_Antes_Checkin();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btneditarreservaActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

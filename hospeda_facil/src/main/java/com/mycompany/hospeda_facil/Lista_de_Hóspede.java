@@ -67,7 +67,7 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbllistahospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tbllistahospede.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tbllistahospede.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

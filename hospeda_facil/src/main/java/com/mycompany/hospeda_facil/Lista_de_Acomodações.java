@@ -63,7 +63,7 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbllistaacomodacoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tbllistaacomodacoes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tbllistaacomodacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
