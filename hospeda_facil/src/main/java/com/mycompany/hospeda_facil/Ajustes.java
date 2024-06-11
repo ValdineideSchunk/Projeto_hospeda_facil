@@ -126,7 +126,7 @@ public class Ajustes extends javax.swing.JFrame {
         });
         jPanel1.add(btnsair, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 480, 100, 44));
 
-        lblajustes.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Ajustes.png")); // NOI18N
+        lblajustes.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Ajustes.png")); // NOI18N
         jPanel1.add(lblajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 0, 1200, 665));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

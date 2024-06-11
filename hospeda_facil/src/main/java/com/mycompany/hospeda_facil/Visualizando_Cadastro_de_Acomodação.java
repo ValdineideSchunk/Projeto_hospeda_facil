@@ -283,7 +283,7 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         jPanel1.add(btneditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 590, 160, 50));
 
         lblimagemVISUALIZANDOcadastroacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemVISUALIZANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Acomodação.png")); // NOI18N
+        lblimagemVISUALIZANDOcadastroacomodacao.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Acomodação.png")); // NOI18N
         jPanel1.add(lblimagemVISUALIZANDOcadastroacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

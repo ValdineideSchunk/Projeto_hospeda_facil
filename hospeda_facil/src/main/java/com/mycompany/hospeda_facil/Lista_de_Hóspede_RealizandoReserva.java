@@ -18,56 +18,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author NEY SCHUNK
  */
-public class Lista_de_Funcionários extends javax.swing.JFrame {
-         public static String id;
-    
-    public Lista_de_Funcionários() {
+public class Lista_de_Hóspede_RealizandoReserva extends javax.swing.JFrame {
+     public static  String CPF;
+     public static  String nome;
+     
+    public Lista_de_Hóspede_RealizandoReserva() {
         initComponents();
         
         JButton[] buttons = {
-        btnmenu, btnhospede,btnpesquisarfuncionario,
-        btnreserva, btnmapa, btnajustes,btnnovofuncionario};
+        btnmenu, btnhospede,btnpesquisarhospede,
+        btnreserva, btnmapa, btnajustes,btnnovohospede};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-    }
-    public void PopularTbllistafuncionarios(String sql) {
-        try {
-            Connection conexao = null;
-            PreparedStatement statement = null;
-            String url = "jdbc:mysql://localhost/hospedagem";
-            String usuario ="root";
-            String senha ="";
-            conexao =DriverManager.getConnection(url,usuario,senha);
-            
-            PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
-            
-            banco.execute();
-            ResultSet resultado = banco.executeQuery(sql);
-            
-            DefaultTableModel model = (DefaultTableModel) tbllistafuncionarios.getModel();
-            
-            model.setNumRows(0);
-            
-            while(resultado.next())
-            {
-                String status = resultado.getInt("status_funcionario") == 1 ? "Ativo" : "Inativo";
-                model.addRow(new Object[]
-                {
-                    resultado.getString("id_funcionario"),
-                    resultado.getString("nome_funcionario"),
-                    resultado.getString("cpf"),
-                    resultado.getString("celular"), 
-                    resultado.getString("sexo"),
-                    resultado.getString("cargo"),
-                    status
-                });
-            }
-            
-            conexao.close();
-            banco.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Lista_de_Funcionários.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        
+        
     }
 
     /**
@@ -81,15 +46,15 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbllistafuncionarios = new javax.swing.JTable();
+        tbllistahospede = new javax.swing.JTable();
         btnmenu = new javax.swing.JButton();
         btnhospede = new javax.swing.JButton();
         btnreserva = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
-        btnnovofuncionario = new javax.swing.JButton();
-        btnpesquisarfuncionario = new javax.swing.JButton();
-        lblLista_de_Funcionários = new javax.swing.JLabel();
+        btnnovohospede = new javax.swing.JButton();
+        btnpesquisarhospede = new javax.swing.JButton();
+        Lista_de_Hóspede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -100,23 +65,23 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbllistafuncionarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tbllistafuncionarios.setModel(new javax.swing.table.DefaultTableModel(
+        tbllistahospede.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tbllistahospede.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Numero", "Nome", "CPF", "Telefone", "sexo", "Cargo", "Status"
+                "Numero", "Nome", "CPF", "Telefone", "Sexo"
             }
         ));
-        tbllistafuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbllistahospede.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbllistafuncionariosMouseClicked(evt);
+                tbllistahospedeMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbllistafuncionarios);
+        jScrollPane1.setViewportView(tbllistahospede);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 890, 400));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 710, 400));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,21 +118,16 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
-        btnnovofuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnnovofuncionarioMouseClicked(evt);
-            }
-        });
-        btnnovofuncionario.addActionListener(new java.awt.event.ActionListener() {
+        btnnovohospede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnnovofuncionarioActionPerformed(evt);
+                btnnovohospedeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnnovofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 583, 240, 50));
-        jPanel1.add(btnpesquisarfuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 120, 50, 40));
+        jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 590, 230, 50));
+        jPanel1.add(btnpesquisarhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 50, 50));
 
-        lblLista_de_Funcionários.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Funcionários.png")); // NOI18N
-        jPanel1.add(lblLista_de_Funcionários, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
+        jPanel1.add(Lista_de_Hóspede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,71 +137,101 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
-        Lista_de_Funcionários.this.dispose();
-        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
-        objeto2.setVisible(true);
-    }//GEN-LAST:event_btnhospedeActionPerformed
-
-    private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
-        Lista_de_Funcionários.this.dispose();
-        Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
-        objeto2.setVisible(true);
-    }//GEN-LAST:event_btnmapaActionPerformed
-
+    public void PopularTbllistahospede(String sql){        
+        try {
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario ="root";
+            String senha ="";
+            conexao =DriverManager.getConnection(url,usuario,senha);
+            
+            PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
+            
+            banco.execute();
+            ResultSet resultado = banco.executeQuery(sql);
+            
+            DefaultTableModel model = (DefaultTableModel) tbllistahospede.getModel();
+            
+            model.setNumRows(0);
+            
+            while(resultado.next())
+            {
+                model.addRow(new Object[]
+                {
+                    resultado.getString("id_hospede"),
+                    resultado.getString("nome_hospede"),
+                    resultado.getString("cpf"),
+                    resultado.getString("celular"), 
+                    resultado.getString("sexo"),
+                });
+            }
+            
+            conexao.close();
+            banco.close();        
+        } catch (SQLException ex) {
+            Logger.getLogger(Lista_de_Hóspede_RealizandoReserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+            
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
-        Lista_de_Funcionários.this.dispose();
+        Lista_de_Hóspede_RealizandoReserva.this.dispose();
         Menu_Principal objeto2 = new Menu_Principal();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnmenuActionPerformed
 
+    private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
+        Lista_de_Hóspede_RealizandoReserva.this.dispose();
+        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnhospedeActionPerformed
+
     private void btnreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservaActionPerformed
-        Lista_de_Funcionários.this.dispose();
+        Lista_de_Hóspede_RealizandoReserva.this.dispose();
         Lista_de_Reserva objeto2 = new Lista_de_Reserva();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnreservaActionPerformed
 
+    private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
+        Lista_de_Hóspede_RealizandoReserva.this.dispose();
+        Mapa_de_Reservas objeto2 = new Mapa_de_Reservas();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnmapaActionPerformed
+
     private void btnajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnajustesActionPerformed
-        Lista_de_Funcionários.this.dispose();
+        Lista_de_Hóspede_RealizandoReserva.this.dispose();
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
 
-    private void btnnovofuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovofuncionarioActionPerformed
-        Lista_de_Funcionários.this.dispose();
-        Cadastro_de_Funcionario objeto2 = new Cadastro_de_Funcionario();
+    private void btnnovohospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovohospedeActionPerformed
+        Lista_de_Hóspede_RealizandoReserva.this.dispose();
+        Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
         objeto2.setVisible(true);
-    }//GEN-LAST:event_btnnovofuncionarioActionPerformed
+    }//GEN-LAST:event_btnnovohospedeActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        this.PopularTbllistafuncionarios("SELECT * from funcionarios");
+         this.PopularTbllistahospede("SELECT * from hospedes");
     }//GEN-LAST:event_formWindowOpened
 
-    private void btnnovofuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnovofuncionarioMouseClicked
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnnovofuncionarioMouseClicked
+    private void tbllistahospedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistahospedeMouseClicked
+                                            
+        int linha = tbllistahospede.getSelectedRow();
 
-    private void tbllistafuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistafuncionariosMouseClicked
-     
-    int linha = tbllistafuncionarios.getSelectedRow();
-
-    id = tbllistafuncionarios.getValueAt(linha, 0).toString();
+        nome = tbllistahospede.getValueAt(linha, 1).toString();
+        CPF = tbllistahospede.getValueAt(linha, 2).toString();
         
-    Lista_de_Funcionários.this.dispose();
-    Visualizando_Cadastro_de_Funcinario objeto2 = new Visualizando_Cadastro_de_Funcinario();
-    objeto2.setVisible(true);
-        
-           
-        
-    }//GEN-LAST:event_tbllistafuncionariosMouseClicked
+        Lista_de_Hóspede_RealizandoReserva.this.dispose();
+        Nova_Reserva objeto2 = new Nova_Reserva();
+        objeto2.setVisible(true);
+                                                    
+    }//GEN-LAST:event_tbllistahospedeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -260,37 +250,36 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Lista_de_Funcionários.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_Hóspede_RealizandoReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Lista_de_Funcionários.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_Hóspede_RealizandoReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Lista_de_Funcionários.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_Hóspede_RealizandoReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Lista_de_Funcionários.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lista_de_Hóspede_RealizandoReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Lista_de_Funcionários().setVisible(true);
+                new Lista_de_Hóspede_RealizandoReserva().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Lista_de_Hóspede;
     private javax.swing.JButton btnajustes;
     private javax.swing.JButton btnhospede;
     private javax.swing.JButton btnmapa;
     private javax.swing.JButton btnmenu;
-    private javax.swing.JButton btnnovofuncionario;
-    private javax.swing.JButton btnpesquisarfuncionario;
+    private javax.swing.JButton btnnovohospede;
+    private javax.swing.JButton btnpesquisarhospede;
     private javax.swing.JButton btnreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblLista_de_Funcionários;
-    private javax.swing.JTable tbllistafuncionarios;
+    private javax.swing.JTable tbllistahospede;
     // End of variables declaration//GEN-END:variables
-
-    
 }

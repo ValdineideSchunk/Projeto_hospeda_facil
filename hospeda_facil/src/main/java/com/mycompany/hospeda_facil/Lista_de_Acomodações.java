@@ -126,7 +126,7 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
 
         jPanel1.add(btnpesquisaracomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(746, 120, 42, 40));
 
-        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
+        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
         jPanel1.add(lblLista_de_Acomodações, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

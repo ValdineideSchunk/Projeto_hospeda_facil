@@ -51,7 +51,7 @@ public class Inicio_Hospeda_Facil extends javax.swing.JFrame {
         });
         jPanel1.add(btniniciosistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 615, 240, 50));
 
-        lbltelainicial.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Tela_Inicial.png")); // NOI18N
+        lbltelainicial.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Tela_Inicial.png")); // NOI18N
         jPanel1.add(lbltelainicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1128, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -242,7 +242,7 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
         jPanel1.add(txtfstatusreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 177, 150, 30));
 
         lblimagemvisualizandoreservadepoisdocheckin.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemvisualizandoreservadepoisdocheckin.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando reserva depois do Check-in.png")); // NOI18N
+        lblimagemvisualizandoreservadepoisdocheckin.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando reserva depois do Check-in.png")); // NOI18N
         jPanel1.add(lblimagemvisualizandoreservadepoisdocheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

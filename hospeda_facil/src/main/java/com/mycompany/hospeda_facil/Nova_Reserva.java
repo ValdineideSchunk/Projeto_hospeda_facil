@@ -101,8 +101,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
         }
     }
 }        
-        
-        
+       
   public void prencherdadosacomodacao(){
        
              int idacomodacao = Integer.parseInt(id);
@@ -245,7 +244,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 btnnovohospedeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 190, 40));
+        jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 200, 40));
 
         btnvoltar.setBorder(null);
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 570, 140, 50));
@@ -293,7 +292,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
         jPanel1.add(btnfinalizarnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 570, 220, 50));
 
         lblimagemnovareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
+        lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
         lblimagemnovareserva.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 lblimagemnovareservaAncestorAdded(evt);
@@ -350,8 +349,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btncpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncpfActionPerformed
-         String cpfText = txtfcpfhospede.getText().trim();
-    
+    String cpfText = txtfcpfhospede.getText().trim();
     if (cpfText.isEmpty()) {
         JOptionPane.showMessageDialog(null, "CPF do hóspede está vazio.");
         return;

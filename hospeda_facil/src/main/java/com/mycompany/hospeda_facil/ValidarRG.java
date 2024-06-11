@@ -4,8 +4,6 @@
  */
 package com.mycompany.hospeda_facil;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author NEY SCHUNK
