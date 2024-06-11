@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author NEY SCHUNK
  */
 public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
-
+    public static  String ida;
     /**
      * Creates new form Lista_de_Acomodações
      */
@@ -126,7 +127,7 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
 
         jPanel1.add(btnpesquisaracomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(746, 120, 42, 40));
 
-        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
+        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
         jPanel1.add(lblLista_de_Acomodações, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,13 +224,13 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
     private void tbllistaacomodacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistaacomodacoesMouseClicked
         
         int linha = tbllistaacomodacoes.getSelectedRow();
-
-        id = tbllistaacomodacoes.getValueAt(linha, 0).toString();
+        ida = tbllistaacomodacoes.getValueAt(linha, 0).toString();
         
         Lista_de_AcomodaçõesReserva.this.dispose();
         Nova_Reserva objeto2 = new Nova_Reserva();
         objeto2.setVisible(true);
-        objeto2.prencherdadosacomodacao();
+        objeto2.prencherDadosHospede(); 
+        
     }//GEN-LAST:event_tbllistaacomodacoesMouseClicked
 
     /**

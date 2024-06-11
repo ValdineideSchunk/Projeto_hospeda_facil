@@ -128,7 +128,7 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
         jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 590, 230, 50));
         jPanel1.add(btnpesquisarhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 50, 50));
 
-        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
+        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
         jPanel1.add(Lista_de_Hóspede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

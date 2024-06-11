@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
  * @author NEY SCHUNK
  */
 public class Lista_de_Hóspede_RealizandoReserva extends javax.swing.JFrame {
-     public static  String CPF;
-     public static  String nome;
      
+
+    public static  String idh;
     public Lista_de_Hóspede_RealizandoReserva() {
         initComponents();
         
@@ -29,10 +30,7 @@ public class Lista_de_Hóspede_RealizandoReserva extends javax.swing.JFrame {
         btnmenu, btnhospede,btnpesquisarhospede,
         btnreserva, btnmapa, btnajustes,btnnovohospede};
         Efeitos_Botoes.EfeitosBotoes(buttons);
-        
-        
-        
-        
+  
     }
 
     /**
@@ -126,7 +124,7 @@ public class Lista_de_Hóspede_RealizandoReserva extends javax.swing.JFrame {
         jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 590, 230, 50));
         jPanel1.add(btnpesquisarhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 50, 50));
 
-        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
+        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
         jPanel1.add(Lista_de_Hóspede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,14 +221,12 @@ public class Lista_de_Hóspede_RealizandoReserva extends javax.swing.JFrame {
     private void tbllistahospedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistahospedeMouseClicked
                                             
         int linha = tbllistahospede.getSelectedRow();
-
-        nome = tbllistahospede.getValueAt(linha, 1).toString();
-        CPF = tbllistahospede.getValueAt(linha, 2).toString();
+        idh = tbllistahospede.getValueAt(linha, 0).toString();
         
         Lista_de_Hóspede_RealizandoReserva.this.dispose();
         Nova_Reserva objeto2 = new Nova_Reserva();
         objeto2.setVisible(true);
-                                                    
+        objeto2.prencherDadosHospede();                                     
     }//GEN-LAST:event_tbllistahospedeMouseClicked
 
     /**

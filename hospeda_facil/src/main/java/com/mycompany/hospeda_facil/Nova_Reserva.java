@@ -4,7 +4,10 @@
  */
 package com.mycompany.hospeda_facil;
 
+
+import static com.mycompany.hospeda_facil.Lista_de_AcomodaçõesReserva.ida;
 import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
+import static com.mycompany.hospeda_facil.Lista_de_Hóspede_RealizandoReserva.idh;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,12 +26,12 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Nova_Reserva extends javax.swing.JFrame {
+        public  static String salvandodatainicio;
+        public static String salvandodatafim;
     
-   private String idhospede;
-
     public Nova_Reserva() {
         initComponents();
-        
+
         JButton[] buttons = {
         btnfinalizarnovareserva, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnacomodação,
@@ -39,11 +42,9 @@ public class Nova_Reserva extends javax.swing.JFrame {
         txtfcpfhospede,txtfnomehospede,txtfvalordiaria,txtfnumeroadultos,txtfnumerocriancas,
         txtfobservacoes,txtfdetalhesacomodacao,ftxtfdatafimreserva,ftxtfdatainicioreserva};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
-        
-        
-         
+ 
     }
-    
+
     public String formatoData(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -53,58 +54,38 @@ public class Nova_Reserva extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
 
-   public void consultarHospede(long cpfhospede) {
- 
-    Connection conexao = null;
-    PreparedStatement declaracaoPreparada = null;
-    ResultSet resultado = null;
-    
-    try {
-        conexao = DriverManager.getConnection("jdbc:mysql://localhost/hospedagem", "root", "");
-        declaracaoPreparada = conexao.prepareStatement("SELECT * FROM hospedes WHERE cpf = ?");
-        
-        declaracaoPreparada.setLong(1, cpfhospede);
-        resultado = declaracaoPreparada.executeQuery();
-        
-        if (resultado.next()) {
-            txtfnomehospede.setText(resultado.getString("nome_hospede"));
-            idhospede  = resultado.getString("id_hospede");
-                   
-        } else {
-            JOptionPane.showMessageDialog(null, "CPF não encontrado no banco de dados."
-                                            + "\nCertifique-se de estar digitando o CPF corretamente"
-                                            + "\nOu clique em 'Novo Hóspede'.");        
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-        if (resultado != null) {
-            try {
-                resultado.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+   public void prencherDadosHospede() {
+        try {
+            int hospede = Integer.parseInt(idh);
+            Connection conexao = null;
+            PreparedStatement declaracaoPreparada = null;
+            ResultSet resultado = null;
+            
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/hospedagem", "root", "");
+            declaracaoPreparada = conexao.prepareStatement("SELECT * FROM hospedes WHERE id_hospede= ?");
+            
+            declaracaoPreparada.setLong(1,hospede);
+            resultado = declaracaoPreparada.executeQuery();
+            
+            if (resultado.next()) {
+                try {
+                    txtfnomehospede.setText(resultado.getString("nome_hospede"));
+                    txtfcpfhospede.setText(resultado.getString("cpf"));
+                    if (ida != null) {
+                    prencherdadosacomodacao();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (declaracaoPreparada != null) {
-            try {
-                declaracaoPreparada.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        if (conexao != null) {
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-}        
+    }       
        
   public void prencherdadosacomodacao(){
-       
-             int idacomodacao = Integer.parseInt(id);
+             int idacomodacao = Integer.parseInt(ida);
+             
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
@@ -124,8 +105,6 @@ public class Nova_Reserva extends javax.swing.JFrame {
             
             if (resultado.next()) {
                 try {
-                    
-                    
                     txtfdetalhesacomodacao.setText("Nº: " + resultado.getString("id_acomodacao") +
                                "\nNome: " + resultado.getString("nome_acomodacao") +
                                "\nTipo: " + resultado.getString("tipo_quarto"));
@@ -133,9 +112,10 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
             }
+            ftxtfdatainicioreserva.setText(salvandodatainicio);
+            ftxtfdatafimreserva.setText(salvandodatafim);
+            ida = null;
         } catch (SQLException ex) {
             Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -182,6 +162,16 @@ public class Nova_Reserva extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         ftxtfdatainicioreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        ftxtfdatainicioreserva.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftxtfdatainicioreservaFocusLost(evt);
+            }
+        });
+        ftxtfdatainicioreserva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ftxtfdatainicioreservaMouseExited(evt);
+            }
+        });
         jPanel1.add(ftxtfdatainicioreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 193, 120, 30));
 
         ftxtfdatafimreserva.setBorder(null);
@@ -191,6 +181,16 @@ public class Nova_Reserva extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         ftxtfdatafimreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        ftxtfdatafimreserva.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftxtfdatafimreservaFocusLost(evt);
+            }
+        });
+        ftxtfdatafimreserva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ftxtfdatafimreservaMouseExited(evt);
+            }
+        });
         jPanel1.add(ftxtfdatafimreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(588, 193, 120, 30));
 
         txtfcpfhospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -292,7 +292,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
         jPanel1.add(btnfinalizarnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 570, 220, 50));
 
         lblimagemnovareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
+        lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
         lblimagemnovareserva.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 lblimagemnovareservaAncestorAdded(evt);
@@ -349,15 +349,9 @@ public class Nova_Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btncpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncpfActionPerformed
-    String cpfText = txtfcpfhospede.getText().trim();
-    if (cpfText.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "CPF do hóspede está vazio.");
-        return;
-    }
-
-    long cpfhospede = Long.parseLong(cpfText);
-    consultarHospede(cpfhospede);
-         
+        Nova_Reserva.this.dispose();
+        Lista_de_Hóspede_RealizandoReserva objeto2 = new Lista_de_Hóspede_RealizandoReserva();
+        objeto2.setVisible(true);
     }//GEN-LAST:event_btncpfActionPerformed
 
     private void btnacomodaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnacomodaçãoActionPerformed
@@ -371,58 +365,94 @@ public class Nova_Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_lblimagemnovareservaAncestorAdded
 
     private void btnfinalizarnovareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarnovareservaActionPerformed
-  
-       
-       try {
-           Connection conexao = null;
-           PreparedStatement statement = null;
-           String url = "jdbc:mysql://localhost/hospedagem";
-           String usuario ="root";
-           String senha ="";
-           conexao =DriverManager.getConnection(url,usuario,senha);
-           String sql = "INSERT INTO reservas(fk_hospede,fk_acomodacao,data_checkin,data_checkout,"
-                   + "valor_diaria,numero_adulto,numero_crianca,observacoes,status_reserva)"
-                   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-           statement = conexao.prepareStatement(sql);
-           
-           String data = ftxtfdatainicioreserva.getText();
-           String datainicio = formatoData(data);
-           
-           data = ftxtfdatafimreserva.getText();
-           String datafim = formatoData(data);
-           
-           statement.setString(1,idhospede);
-           statement.setString(2,id);
-           statement.setString(3,datainicio);
-           statement.setString(4,datafim);
-           statement.setString(5,txtfvalordiaria.getText());
-           statement.setString(6,txtfnumeroadultos.getText());
-           statement.setString(7,txtfnumerocriancas.getText());
-           statement.setString(8,txtfobservacoes.getText());
-           String status = "Reservado";
-           statement.setString(9,status);
-           
-           statement.executeUpdate();
-           statement.close();
-           
-            sql = "UPDATE acomodacoes SET status_quarto = ?"
-                    + "where id_acomodacao = ?";
+        
+            try {
+    Connection conexao = null;
+    PreparedStatement statement = null;
+    String url = "jdbc:mysql://localhost/hospedagem";
+    String usuario = "root";
+    String senha = "";
+    conexao = DriverManager.getConnection(url, usuario, senha);
+
+    if (conexao != null) {
+        try {
+            String sql = "INSERT INTO reservas(fk_hospede,fk_acomodacao,data_checkin,data_checkout,"
+                    + "valor_diaria,numero_adulto,numero_crianca,observacoes,status_reserva)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             statement = conexao.prepareStatement(sql);
-            status = "Reservado";
-            statement.setString(1,status);
-            statement.setString(2,id);
+
+            String data = ftxtfdatainicioreserva.getText();
+            String datainicio = formatoData(data);
+
+            data = ftxtfdatafimreserva.getText();
+            String datafim = formatoData(data);
+
+            statement.setString(1, idh);
+            statement.setString(2, ida);
+            statement.setString(3, datainicio);
+            statement.setString(4, datafim);
+            statement.setString(5, txtfvalordiaria.getText());
+            statement.setString(6, txtfnumeroadultos.getText());
+            statement.setString(7, txtfnumerocriancas.getText());
+            statement.setString(8, txtfobservacoes.getText());
+            String status = "Reservado";
+            statement.setString(9, status);
 
             statement.executeUpdate();
             statement.close();
+
+            sql = "UPDATE acomodacoes SET status_quarto = ?"
+                    + "where id_acomodacao = ?";
+            statement = conexao.prepareStatement(sql);
+            statement.setString(1, status);
+            statement.setString(2, ida);
+
+            statement.executeUpdate();
+            statement.close();
+
+            sql = "DROP VIEW IF EXISTS view_informacoes_reserva";
+            statement = conexao.prepareStatement(sql);
+            statement.executeUpdate();
+            statement.close();
+
+            sql = "CREATE VIEW view_informacoes_reserva AS "
+                    + "SELECT "
+                    + "r.id_reserva, "
+                    + "r.fk_hospede, "
+                    + "h.nome_hospede, "
+                    + "h.cpf, "
+                    + "r.data_criacao_reserva, "
+                    + "r.data_checkin, "
+                    + "r.data_checkout, "
+                    + "r.valor_diaria, "
+                    + "r.numero_adulto, "
+                    + "r.numero_crianca, "
+                    + "r.observacoes, "
+                    + "r.status_reserva, "
+                    + "r.fk_acomodacao, "
+                    + "a.nome_acomodacao, "
+                    + "a.tipo_quarto "
+                    + "FROM reservas r "
+                    + "INNER JOIN hospedes h ON r.fk_hospede = h.id_hospede "
+                    + "INNER JOIN acomodacoes a ON r.fk_acomodacao = a.id_acomodacao";
+
+            statement = conexao.prepareStatement(sql);
+            statement.executeUpdate();
+            statement.close();
+
             conexao.close();
-            JOptionPane.showMessageDialog(null,"Reserva efetuada com sucesso.");
+
+            JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso.");
             Nova_Reserva.this.dispose();
             Menu_Principal objeto2 = new Menu_Principal();
             objeto2.setVisible(true);
-            
-       } catch (SQLException ex) {
-           Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
-       }  
+        } catch (SQLException ex) {
+            Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+} catch (SQLException ex) {
+    Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
+}
     }//GEN-LAST:event_btnfinalizarnovareservaActionPerformed
 
     private void btnnovohospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovohospedeActionPerformed
@@ -430,6 +460,24 @@ public class Nova_Reserva extends javax.swing.JFrame {
         Cadastro_de_Hospede objeto2 = new Cadastro_de_Hospede();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnnovohospedeActionPerformed
+
+    private void ftxtfdatainicioreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ftxtfdatainicioreservaMouseExited
+ 
+    }//GEN-LAST:event_ftxtfdatainicioreservaMouseExited
+
+    private void ftxtfdatafimreservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ftxtfdatafimreservaMouseExited
+        
+    }//GEN-LAST:event_ftxtfdatafimreservaMouseExited
+
+    private void ftxtfdatainicioreservaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdatainicioreservaFocusLost
+        salvandodatainicio = ftxtfdatainicioreserva.getText();
+        
+    }//GEN-LAST:event_ftxtfdatainicioreservaFocusLost
+
+    private void ftxtfdatafimreservaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdatafimreservaFocusLost
+        salvandodatafim = ftxtfdatafimreserva.getText();
+        
+    }//GEN-LAST:event_ftxtfdatafimreservaFocusLost
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -486,6 +534,8 @@ public class Nova_Reserva extends javax.swing.JFrame {
     private javax.swing.JTextField txtfobservacoes;
     private javax.swing.JTextField txtfvalordiaria;
     // End of variables declaration//GEN-END:variables
+
+    
 
     
 
