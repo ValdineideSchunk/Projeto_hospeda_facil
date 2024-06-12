@@ -512,7 +512,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 return;
             }
             if (validarCPFExistenteBanco.validarCPFExistente(txtfcpf.getText())) {
-                JOptionPane.showMessageDialog(null, "Já existe um hóspede cadastrado com o CPF informado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Já existe um funcionario cadastrado com o CPF informado.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             ValidarData validarData = new ValidarData();

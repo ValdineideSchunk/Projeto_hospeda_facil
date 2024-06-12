@@ -261,7 +261,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         lblerroemail.setForeground(new java.awt.Color(255, 0, 0));
         jPanel1.add(lblerroemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 310, 80, 15));
 
-        lblerrocep.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerrocep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblerrocep.setForeground(new java.awt.Color(255, 0, 0));
         lblerrocep.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -409,7 +409,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             return;
             }
             
-            
             try {
                 String data = ftxtfdatanascimento.getText();
                 String datanascimento = formatoData(data);
@@ -455,6 +454,9 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
                 statement.close();
                 conexao.close();
                 JOptionPane.showMessageDialog(null,"Hospede Cadastrado Com Sucesso..");
+                Cadastro_de_Hospede.this.dispose();
+                Menu_Principal objeto2 = new Menu_Principal();
+                objeto2.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -510,7 +512,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
 
     private void txtfnumerotelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnumerotelefoneFocusLost
         String text = txtfnumerotelefone.getText().trim();
-        if (!text.isEmpty() && (!text.matches("\\d{13}") || !text.matches("\\d+"))) {
+        if (!text.isEmpty() && (!text.matches("\\d{0,13}") || !text.matches("\\d+"))) {
             txtfnumerotelefone.setBorder(BorderFactory.createLineBorder(Color.red, 2));
             String mensagem = "Número inválido. Deve conter exatamente 13 dígitos.";
             lblerronumerotelefone.setText(mensagem);

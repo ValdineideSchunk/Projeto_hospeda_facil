@@ -4,7 +4,11 @@
  */
 package com.mycompany.hospeda_facil;
 
+import static com.mycompany.hospeda_facil.Lista_de_AcomodaçõesReserva.ida;
 import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
+import static com.mycompany.hospeda_facil.Lista_de_Hóspede_RealizandoReserva.idh;
+import static com.mycompany.hospeda_facil.Nova_Reserva.salvandodatafim;
+import static com.mycompany.hospeda_facil.Nova_Reserva.salvandodatainicio;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,9 +27,15 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
-
-    int idreserva = Integer.parseInt(id);
-    
+    String  idhospede,idacomodacao;
+    public int idreserva = Integer.parseInt(id);
+    public static String salvandodatainicio;
+    public static String salvandodatafim;
+    public static String salvandocpf;    
+    public static String salvandonome;   
+        
+        
+        
     public Editando_Reserva_Antes_Checkin() {
         initComponents();
         
@@ -35,13 +45,21 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
         JTextField[] textFields = {
-            txtfcpf, txtfnomehospede, txtfnumeroadutos, txtfnumeroreserva,
-            txtfnumerocriancas, txtfacomodacao,txtfvalordiaria,txtfobservacoes,
-            ftxtfdatafimreserva, ftxtfdatainicioreserva, txtfstatus
+            txtfcpfhospede, txtfnomehospede, txtfnumeroadutos, txtfnumeroreserva,
+            txtfnumerocriancas, txtfdetalhesacomodacao,txtfvalordiaria,txtfobservacoes,
+            ftxtfdatainicioreserva, ftxtfdatafimreserva, txtfstatus
         };
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
         PopulandoReservas(); 
+    }
+    public String formatoData(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
     }
     
     public String formatoDatavoltando(String data) {
@@ -75,14 +93,19 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
                     String databanco = resultado.getString("data_checkin");
                     String datacheckin = formatoDatavoltando(databanco);
                     ftxtfdatainicioreserva.setText(datacheckin);
+                    salvandodatainicio = datacheckin;
+                    
+                    idhospede = resultado.getString("fk_hospede");
+                    idacomodacao = resultado.getString("fk_acomodacao");
                     databanco = resultado.getString("data_checkout");
                     String datacheckout = formatoDatavoltando(databanco);
                     ftxtfdatafimreserva.setText(datacheckout);
-                    txtfcpf.setText(resultado.getString("cpf"));
+                    salvandodatafim = datacheckout;
+                    txtfcpfhospede.setText(resultado.getString("cpf"));
                     txtfnumeroreserva.setText(resultado.getString("id_reserva"));
                     txtfstatus.setText(resultado.getString("status_reserva"));
                     txtfnomehospede.setText(resultado.getString("nome_hospede"));
-                    txtfacomodacao.setText("N°: " + resultado.getString("fk_acomodacao") +
+                    txtfdetalhesacomodacao.setText("N°: " + resultado.getString("fk_acomodacao") +
                                "\nNome: " + resultado.getString("nome_acomodacao") +
                                "\nTipo: " + resultado.getString("tipo_quarto"));
                     txtfvalordiaria.setText(resultado.getString("valor_diaria"));
@@ -99,7 +122,7 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
         }
     
      }
-
+ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -112,16 +135,16 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
         btnajustes = new javax.swing.JButton();
         btnvoltar = new javax.swing.JButton();
         btnsalvaralteracoes = new javax.swing.JButton();
-        txtfcpf = new javax.swing.JTextField();
+        txtfcpfhospede = new javax.swing.JTextField();
         txtfnomehospede = new javax.swing.JTextField();
         txtfstatus = new javax.swing.JTextField();
         txtfnumeroadutos = new javax.swing.JTextField();
         txtfnumerocriancas = new javax.swing.JTextField();
-        txtfacomodacao = new javax.swing.JTextField();
+        txtfdetalhesacomodacao = new javax.swing.JTextField();
         txtfvalordiaria = new javax.swing.JTextField();
         btnpesquisaracomodação = new javax.swing.JButton();
-        ftxtfdatafimreserva = new javax.swing.JFormattedTextField();
         ftxtfdatainicioreserva = new javax.swing.JFormattedTextField();
+        ftxtfdatafimreserva = new javax.swing.JFormattedTextField();
         txtfnumeroreserva = new javax.swing.JTextField();
         txtfobservacoes = new javax.swing.JTextField();
         lblimagemEditando_REserva_Antes_Checkin = new javax.swing.JLabel();
@@ -173,10 +196,10 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
         });
         jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 570, 210, 50));
 
-        txtfcpf.setEditable(false);
-        txtfcpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfcpf.setBorder(null);
-        jPanel1.add(txtfcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 230, 30));
+        txtfcpfhospede.setEditable(false);
+        txtfcpfhospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfcpfhospede.setBorder(null);
+        jPanel1.add(txtfcpfhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 230, 30));
 
         txtfnomehospede.setEditable(false);
         txtfnomehospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -196,24 +219,21 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
         txtfnumerocriancas.setBorder(null);
         jPanel1.add(txtfnumerocriancas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 360, 130, 30));
 
-        txtfacomodacao.setEditable(false);
-        txtfacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfacomodacao.setBorder(null);
-        jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 390, 30));
+        txtfdetalhesacomodacao.setEditable(false);
+        txtfdetalhesacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfdetalhesacomodacao.setBorder(null);
+        jPanel1.add(txtfdetalhesacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 390, 30));
 
         txtfvalordiaria.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfvalordiaria.setBorder(null);
         jPanel1.add(txtfvalordiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 120, 30));
-        jPanel1.add(btnpesquisaracomodação, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 240, 50, 40));
 
-        ftxtfdatafimreserva.setBorder(null);
-        try {
-            ftxtfdatafimreserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        ftxtfdatafimreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jPanel1.add(ftxtfdatafimreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 140, 30));
+        btnpesquisaracomodação.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisaracomodaçãoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisaracomodação, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 240, 50, 40));
 
         ftxtfdatainicioreserva.setBorder(null);
         try {
@@ -222,7 +242,16 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         ftxtfdatainicioreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jPanel1.add(ftxtfdatainicioreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 150, 30));
+        jPanel1.add(ftxtfdatainicioreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 140, 30));
+
+        ftxtfdatafimreserva.setBorder(null);
+        try {
+            ftxtfdatafimreserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtfdatafimreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel1.add(ftxtfdatafimreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 150, 30));
 
         txtfnumeroreserva.setEditable(false);
         txtfnumeroreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -234,7 +263,7 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
         jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 580, 70));
 
         lblimagemEditando_REserva_Antes_Checkin.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemEditando_REserva_Antes_Checkin.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando Reserva Antes do Chech-in.png")); // NOI18N
+        lblimagemEditando_REserva_Antes_Checkin.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando Reserva Antes do Chech-in.png")); // NOI18N
         jPanel1.add(lblimagemEditando_REserva_Antes_Checkin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -282,8 +311,68 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnsalvaralteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesActionPerformed
-       
+        
+        try {
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+            
+            conexao = DriverManager.getConnection(url, usuario, senha);
+            
+            String sql = "UPDATE reservas SET fk_acomodacao = ?, data_checkin = ?, data_checkout = ?, valor_diaria = ?,"
+                    + " numero_adulto = ?, numero_crianca = ?, observacoes = ? WHERE id_reserva = ?";
+            
+            statement = conexao.prepareStatement(sql);
+            
+            String data = ftxtfdatainicioreserva.getText();
+            String datainicio = formatoData(data);
+
+            data = ftxtfdatafimreserva.getText();
+            String datafim = formatoData(data);
+            
+            statement.setString(1,idacomodacao);
+            statement.setString(2,datainicio);
+            statement.setString(3,datafim);
+            statement.setString(4,txtfvalordiaria.getText());
+            statement.setString(5,txtfnumeroadutos.getText());
+            statement.setString(6,txtfnumerocriancas.getText());
+            statement.setString(7,txtfobservacoes.getText());
+            statement.setString(8,id);
+            
+            
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null, "Dados atualizados com Sucesso!!!");
+        } catch (SQLException ex) {
+            Logger.getLogger(Editando_Reserva_Antes_Checkin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_btnsalvaralteracoesActionPerformed
+
+    private void btnpesquisaracomodaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisaracomodaçãoActionPerformed
+        
+        
+        this.setVisible(false);
+        Lista_de_AcomodaçõesReserva objeto2 = new Lista_de_AcomodaçõesReserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnpesquisaracomodaçãoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,8 +423,8 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftxtfdatainicioreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblimagemEditando_REserva_Antes_Checkin;
-    private javax.swing.JTextField txtfacomodacao;
-    private javax.swing.JTextField txtfcpf;
+    private javax.swing.JTextField txtfcpfhospede;
+    private javax.swing.JTextField txtfdetalhesacomodacao;
     private javax.swing.JTextField txtfnomehospede;
     private javax.swing.JTextField txtfnumeroadutos;
     private javax.swing.JTextField txtfnumerocriancas;

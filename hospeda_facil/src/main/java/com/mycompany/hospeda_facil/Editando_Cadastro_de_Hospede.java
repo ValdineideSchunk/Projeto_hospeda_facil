@@ -5,6 +5,7 @@
 package com.mycompany.hospeda_facil;
 
 import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,11 +35,13 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         
         JTextField[] textFields = {
         txtfnome, txtfrg, txtfcpf, txtfdatanascimento,
-        txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
+        txtfnumerotelefone, txtfemail, txtfcep,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento,
         txtfobservacoes,txtfnumerohospede};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
+        cbxestados.setOpaque(false);
+        cbxestados.setBackground(new Color(0, 0, 0, 0));
         
         
         
@@ -73,6 +76,8 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
                     }else if("Outro".equals(sexo)){
                         btnroutros.setSelected(true);
                     }
+                    String estado = resultado.getString("estado");
+                    
                     
                     txtfnumerohospede.setText(resultado.getString("id_hospede"));
                     txtfnome.setText(resultado.getString("nome_hospede"));
@@ -81,7 +86,7 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
                     txtfnumerotelefone.setText(resultado.getString("celular"));
                     txtfemail.setText(resultado.getString("email"));
                     txtfcep.setText(resultado.getString("cep"));
-                    txtfestado.setText(resultado.getString("estado"));
+                    cbxestados.setSelectedItem(estado);
                     txtfcidade.setText(resultado.getString("cidade"));
                     txtfbairro.setText(resultado.getString("bairro"));
                     txtfrua.setText(resultado.getString("rua"));
@@ -140,7 +145,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfnumerotelefone = new javax.swing.JTextField();
         txtfemail = new javax.swing.JTextField();
         txtfcep = new javax.swing.JTextField();
-        txtfestado = new javax.swing.JTextField();
         txtfcidade = new javax.swing.JTextField();
         txtfbairro = new javax.swing.JTextField();
         txtfrua = new javax.swing.JTextField();
@@ -157,6 +161,7 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
         btnsalvaralteracoes = new javax.swing.JButton();
+        cbxestados = new javax.swing.JComboBox<>();
         lblimagemEDITANDOcadastrohospede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -200,10 +205,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfcep.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcep.setBorder(null);
         jPanel1.add(txtfcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 390, 100, 30));
-
-        txtfestado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfestado.setBorder(null);
-        jPanel1.add(txtfestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(473, 390, 260, 30));
 
         txtfcidade.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcidade.setBorder(null);
@@ -300,8 +301,13 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         });
         jPanel1.add(btnsalvaralteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 600, 220, 50));
 
+        cbxestados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cbxestados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um estado", "Acre (AC)", "Alagoas (AL)", "Amapá (AP)", "Amazonas (AM)", "Bahia (BA)", "Ceará (CE)", "Distrito Federal (DF)", "Espírito Santo (ES)", "Goiás (GO)", "Maranhão (MA)", "Mato Grosso (MT)", "Mato Grosso do Sul (MS)", "Minas Gerais (MG)", "Pará (PA)", "Paraíba (PB)", "Paraná (PR)", "Pernambuco (PE)", "Piauí (PI)", "Rio de Janeiro (RJ)", "Rio Grande do Norte (RN)", "Rio Grande do Sul (RS)", "Rondônia (RO)", "Roraima (RR)", "Santa Catarina (SC)", "São Paulo (SP)", "Sergipe (SE)", "Tocantins (TO)" }));
+        cbxestados.setBorder(null);
+        jPanel1.add(cbxestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 260, 30));
+
         lblimagemEDITANDOcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemEDITANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_Hospede.png")); // NOI18N
+        lblimagemEDITANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_Hospede.png")); // NOI18N
         jPanel1.add(lblimagemEDITANDOcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -399,7 +405,7 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
             }else if (btnroutros.isSelected()) {
                 opcaoSelecionada ="Outros";
             }
-            
+            String estadoselecionado = (String) cbxestados.getSelectedItem();
             Connection conexao = null;
             PreparedStatement statement = null;
             
@@ -423,7 +429,7 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
             statement.setString(6,txtfnumerotelefone.getText());
             statement.setString(7,txtfemail.getText());
             statement.setString(8,txtfcep.getText());
-            statement.setString(9,txtfestado.getText());
+            statement.setString(9,estadoselecionado);
             statement.setString(10,txtfcidade.getText());
             statement.setString(11,txtfbairro.getText());
             statement.setString(12,txtfrua.getText());
@@ -530,6 +536,7 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnroutros;
     private javax.swing.JButton btnsalvaralteracoes;
     private javax.swing.JButton btnvoltar;
+    private javax.swing.JComboBox<String> cbxestados;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblimagemEDITANDOcadastrohospede;
     private javax.swing.JTextField txtfbairro;
@@ -539,7 +546,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
     private javax.swing.JTextField txtfcpf;
     private javax.swing.JTextField txtfdatanascimento;
     private javax.swing.JTextField txtfemail;
-    private javax.swing.JTextField txtfestado;
     private javax.swing.JTextField txtfnome;
     private javax.swing.JTextField txtfnumerohospede;
     private javax.swing.JTextField txtfnumerotelefone;
