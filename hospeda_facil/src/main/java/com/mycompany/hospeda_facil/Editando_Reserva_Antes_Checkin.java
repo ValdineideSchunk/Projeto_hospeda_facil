@@ -66,7 +66,7 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
             conexao = DriverManager.getConnection(url, usuario, senha);
             
             declaracaoPreparada = conexao.prepareStatement(
-                    "SELECT * FROM view_informações_reserva WHERE id_reserva = ?");
+                    "SELECT * FROM view_informacoes_reserva WHERE id_reserva = ?");
             declaracaoPreparada.setInt(1, idreserva);
             resultado = declaracaoPreparada.executeQuery();
             

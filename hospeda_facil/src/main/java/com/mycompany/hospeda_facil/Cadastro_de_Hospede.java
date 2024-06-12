@@ -33,7 +33,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         
         JTextField[] textFields = {
         txtfnome, txtfrg, txtfcpf, ftxtfdatanascimento,
-        txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
+        txtfnumerotelefone, txtfemail, ftxtfcep, txtfestado,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
@@ -104,7 +104,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfcpf = new javax.swing.JTextField();
         txtfnumerotelefone = new javax.swing.JTextField();
         txtfemail = new javax.swing.JTextField();
-        txtfcep = new javax.swing.JTextField();
         txtfestado = new javax.swing.JTextField();
         txtfcidade = new javax.swing.JTextField();
         txtfbairro = new javax.swing.JTextField();
@@ -126,6 +125,10 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         lblerrorg = new javax.swing.JLabel();
         lblerrocpf = new javax.swing.JLabel();
         lblerrodatanascimento = new javax.swing.JLabel();
+        lblerronumerotelefone = new javax.swing.JLabel();
+        lblerroemail = new javax.swing.JLabel();
+        lblerrocep = new javax.swing.JLabel();
+        ftxtfcep = new javax.swing.JFormattedTextField();
         lblimagemcadastrohospede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,15 +164,21 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
 
         txtfnumerotelefone.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerotelefone.setBorder(null);
-        jPanel1.add(txtfnumerotelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 274, 226, 27));
+        txtfnumerotelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfnumerotelefoneFocusLost(evt);
+            }
+        });
+        jPanel1.add(txtfnumerotelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 275, 226, 27));
 
         txtfemail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfemail.setBorder(null);
+        txtfemail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfemailFocusLost(evt);
+            }
+        });
         jPanel1.add(txtfemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 308, 540, 27));
-
-        txtfcep.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfcep.setBorder(null);
-        jPanel1.add(txtfcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 390, 100, 27));
 
         txtfestado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfestado.setBorder(null);
@@ -286,8 +295,34 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         lblerrodatanascimento.setForeground(new java.awt.Color(255, 0, 0));
         jPanel1.add(lblerrodatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 170, 70, 15));
 
+        lblerronumerotelefone.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerronumerotelefone.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel1.add(lblerronumerotelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 275, 80, 15));
+
+        lblerroemail.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerroemail.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerroemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 310, 80, 15));
+
+        lblerrocep.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerrocep.setForeground(new java.awt.Color(255, 0, 0));
+        lblerrocep.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lblerrocepFocusLost(evt);
+            }
+        });
+        jPanel1.add(lblerrocep, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 392, 50, 15));
+
+        ftxtfcep.setBorder(null);
+        try {
+            ftxtfcep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtfcep.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel1.add(ftxtfcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 391, 100, 27));
+
         lblimagemcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Hóspede.png")); // NOI18N
+        lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Hóspede.png")); // NOI18N
         jPanel1.add(lblimagemcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,7 +433,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             statement.setString(5,opcaoSelecionada);
             statement.setString(6,txtfnumerotelefone.getText());
             statement.setString(7,txtfemail.getText());
-            statement.setString(8,txtfcep.getText());
+            statement.setString(8,ftxtfcep.getText());
             statement.setString(9,txtfestado.getText());
             statement.setString(10,txtfcidade.getText());
             statement.setString(11,txtfbairro.getText());
@@ -459,6 +494,49 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_ftxtfdatanascimentoFocusLost
+
+    private void txtfnumerotelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnumerotelefoneFocusLost
+        String text = txtfnumerotelefone.getText().trim();
+if (!text.isEmpty() && !text.matches("\\d+")) {
+    txtfnumerotelefone.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+    String mensagem = "Número inválido";
+    lblerronumerotelefone.setText(mensagem);
+} else {
+    txtfnumerotelefone.setBorder(null);
+    String mensagem = "";
+    lblerronumerotelefone.setText(mensagem);
+}
+        
+        
+        
+        
+    }//GEN-LAST:event_txtfnumerotelefoneFocusLost
+
+    private void txtfemailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfemailFocusLost
+        String text = txtfemail.getText().trim();
+if (!text.isEmpty() && !text.contains("@")) {
+    txtfemail.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+    String mensagem = "Email inválido";
+    lblerroemail.setText(mensagem);
+} else {
+    txtfemail.setBorder(null);
+    String mensagem = "";
+    lblerroemail.setText(mensagem);
+}
+    }//GEN-LAST:event_txtfemailFocusLost
+
+    private void lblerrocepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblerrocepFocusLost
+       String text = ftxtfcep.getText().trim();
+                if (!text.isEmpty() && !text.matches("^[0-9]{5}-[0-9]{3}$")) {
+                    ftxtfcep.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+                    String mensagem = "cep inválido";
+                    lblerrocep.setText(mensagem); 
+                } else {
+                    ftxtfcep.setBorder(null);
+                    String mensagem = "";
+                    lblerrocep.setText(mensagem);
+                }
+    }//GEN-LAST:event_lblerrocepFocusLost
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -503,15 +581,18 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnrmasculino;
     private javax.swing.JRadioButton btnroutros;
     private javax.swing.JButton btnvoltar;
+    private javax.swing.JFormattedTextField ftxtfcep;
     private javax.swing.JFormattedTextField ftxtfdatanascimento;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblerrocep;
     private javax.swing.JLabel lblerrocpf;
     private javax.swing.JLabel lblerrodatanascimento;
+    private javax.swing.JLabel lblerroemail;
     private javax.swing.JLabel lblerronome;
+    private javax.swing.JLabel lblerronumerotelefone;
     private javax.swing.JLabel lblerrorg;
     private javax.swing.JLabel lblimagemcadastrohospede;
     private javax.swing.JTextField txtfbairro;
-    private javax.swing.JTextField txtfcep;
     private javax.swing.JTextField txtfcidade;
     private javax.swing.JTextField txtfcomplemento;
     private javax.swing.JTextField txtfcpf;

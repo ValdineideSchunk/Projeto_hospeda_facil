@@ -60,7 +60,7 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
             conexao = DriverManager.getConnection(url, usuario, senha);
             
             declaracaoPreparada = conexao.prepareStatement(
-                    "SELECT * FROM view_informações_reserva WHERE id_reserva = ?");
+                    "SELECT * FROM view_informacoes_reserva WHERE id_reserva = ?");
             declaracaoPreparada.setInt(1, idreserva);
             resultado = declaracaoPreparada.executeQuery();
             

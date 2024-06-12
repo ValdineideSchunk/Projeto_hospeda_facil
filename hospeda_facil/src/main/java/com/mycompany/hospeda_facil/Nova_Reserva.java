@@ -6,7 +6,6 @@ package com.mycompany.hospeda_facil;
 
 
 import static com.mycompany.hospeda_facil.Lista_de_AcomodaçõesReserva.ida;
-import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
 import static com.mycompany.hospeda_facil.Lista_de_Hóspede_RealizandoReserva.idh;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,7 +25,7 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Nova_Reserva extends javax.swing.JFrame {
-        public  static String salvandodatainicio;
+        public static String salvandodatainicio;
         public static String salvandodatafim;
     
     public Nova_Reserva() {
@@ -115,7 +114,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
             }
             ftxtfdatainicioreserva.setText(salvandodatainicio);
             ftxtfdatafimreserva.setText(salvandodatafim);
-            ida = null;
+            
         } catch (SQLException ex) {
             Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -292,7 +291,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
         jPanel1.add(btnfinalizarnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 570, 220, 50));
 
         lblimagemnovareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
+        lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
         lblimagemnovareserva.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 lblimagemnovareservaAncestorAdded(evt);
@@ -410,39 +409,10 @@ public class Nova_Reserva extends javax.swing.JFrame {
             statement.executeUpdate();
             statement.close();
 
-            sql = "DROP VIEW IF EXISTS view_informacoes_reserva";
-            statement = conexao.prepareStatement(sql);
-            statement.executeUpdate();
-            statement.close();
-
-            sql = "CREATE VIEW view_informacoes_reserva AS "
-                    + "SELECT "
-                    + "r.id_reserva, "
-                    + "r.fk_hospede, "
-                    + "h.nome_hospede, "
-                    + "h.cpf, "
-                    + "r.data_criacao_reserva, "
-                    + "r.data_checkin, "
-                    + "r.data_checkout, "
-                    + "r.valor_diaria, "
-                    + "r.numero_adulto, "
-                    + "r.numero_crianca, "
-                    + "r.observacoes, "
-                    + "r.status_reserva, "
-                    + "r.fk_acomodacao, "
-                    + "a.nome_acomodacao, "
-                    + "a.tipo_quarto "
-                    + "FROM reservas r "
-                    + "INNER JOIN hospedes h ON r.fk_hospede = h.id_hospede "
-                    + "INNER JOIN acomodacoes a ON r.fk_acomodacao = a.id_acomodacao";
-
-            statement = conexao.prepareStatement(sql);
-            statement.executeUpdate();
-            statement.close();
-
             conexao.close();
 
             JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso.");
+            ida = null;
             Nova_Reserva.this.dispose();
             Menu_Principal objeto2 = new Menu_Principal();
             objeto2.setVisible(true);
