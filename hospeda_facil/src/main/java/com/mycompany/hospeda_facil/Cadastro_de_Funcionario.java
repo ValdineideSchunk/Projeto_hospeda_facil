@@ -33,12 +33,16 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         
         JTextField[] textFields = {
         txtfnome, txtfrg, txtfcpf, ftxtfdatanascimento,
-        txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
-        txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes,
-        txtfcargo,ftxtfdataadimisao,ftxtfdataemissaocarteira,
+        txtfnumerotelefone, txtfemail, ftxtfcep,
+        txtfcidade, txtfbairro, txtfrua, txtfcomplemento, 
+        txtfobservacoes,ftxtfdataadimisao,ftxtfdataemissaocarteira,
         txtfbanco,txtfagencia,txtfconta,txtnnumerofuncionario};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
-           
+        
+        cbxestados.setOpaque(false);
+        cbxestados.setBackground(new Color(0, 0, 0, 0));
+        cbxcargos.setOpaque(false);
+        cbxcargos.setBackground(new Color(0, 0, 0, 0));
     }
  
     public String formatoData(String data) {
@@ -104,8 +108,6 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         txtfnome = new javax.swing.JTextField();
         txtfnumerotelefone = new javax.swing.JTextField();
         txtfemail = new javax.swing.JTextField();
-        txtfcep = new javax.swing.JTextField();
-        txtfestado = new javax.swing.JTextField();
         txtfcidade = new javax.swing.JTextField();
         txtfbairro = new javax.swing.JTextField();
         txtfrua = new javax.swing.JTextField();
@@ -114,7 +116,6 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         btnrmasculino = new javax.swing.JRadioButton();
         btnrfeminino = new javax.swing.JRadioButton();
         btnroutros = new javax.swing.JRadioButton();
-        txtfcargo = new javax.swing.JTextField();
         txtfbanco = new javax.swing.JTextField();
         txtfagencia = new javax.swing.JTextField();
         txtfconta = new javax.swing.JTextField();
@@ -134,6 +135,14 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         lblerrorg = new javax.swing.JLabel();
         lblerrocpf = new javax.swing.JLabel();
         lblerrodatanascimento = new javax.swing.JLabel();
+        cbxestados = new javax.swing.JComboBox<>();
+        ftxtfcep = new javax.swing.JFormattedTextField();
+        lblerronumerotelefone = new javax.swing.JLabel();
+        lblerroemail = new javax.swing.JLabel();
+        lblerrocep = new javax.swing.JLabel();
+        lblerrodataadimisao = new javax.swing.JLabel();
+        lblerrodataemissaocarteira = new javax.swing.JLabel();
+        cbxcargos = new javax.swing.JComboBox<>();
         lblimagemcadastrofuncionario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -170,19 +179,21 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
 
         txtfnumerotelefone.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerotelefone.setBorder(null);
+        txtfnumerotelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfnumerotelefoneFocusLost(evt);
+            }
+        });
         jPanel1.add(txtfnumerotelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 231, 170, 30));
 
         txtfemail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfemail.setBorder(null);
+        txtfemail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfemailFocusLost(evt);
+            }
+        });
         jPanel1.add(txtfemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 231, 420, 30));
-
-        txtfcep.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfcep.setBorder(null);
-        jPanel1.add(txtfcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 300, 150, 30));
-
-        txtfestado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfestado.setBorder(null);
-        jPanel1.add(txtfestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 298, 250, 30));
 
         txtfcidade.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcidade.setBorder(null);
@@ -226,10 +237,6 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         });
         jPanel1.add(btnroutros, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 179, -1, -1));
 
-        txtfcargo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfcargo.setBorder(null);
-        jPanel1.add(txtfcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 440, 140, 30));
-
         txtfbanco.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfbanco.setBorder(null);
         jPanel1.add(txtfbanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 475, 120, 30));
@@ -256,7 +263,12 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         ftxtfdataadimisao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jPanel1.add(ftxtfdataadimisao, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 130, 30));
+        ftxtfdataadimisao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftxtfdataadimisaoFocusLost(evt);
+            }
+        });
+        jPanel1.add(ftxtfdataadimisao, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 440, 150, 30));
 
         ftxtfdataemissaocarteira.setBorder(null);
         try {
@@ -265,7 +277,12 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         ftxtfdataemissaocarteira.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jPanel1.add(ftxtfdataemissaocarteira, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 440, 110, 30));
+        ftxtfdataemissaocarteira.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftxtfdataemissaocarteiraFocusLost(evt);
+            }
+        });
+        jPanel1.add(ftxtfdataemissaocarteira, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 130, 30));
 
         ftxtfdatanascimento.setBorder(null);
         try {
@@ -338,8 +355,56 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         lblerrodatanascimento.setForeground(new java.awt.Color(255, 0, 0));
         jPanel1.add(lblerrodatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(955, 140, 70, 15));
 
+        cbxestados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cbxestados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um estado", "Acre (AC)", "Alagoas (AL)", "Amapá (AP)", "Amazonas (AM)", "Bahia (BA)", "Ceará (CE)", "Distrito Federal (DF)", "Espírito Santo (ES)", "Goiás (GO)", "Maranhão (MA)", "Mato Grosso (MT)", "Mato Grosso do Sul (MS)", "Minas Gerais (MG)", "Pará (PA)", "Paraíba (PB)", "Paraná (PR)", "Pernambuco (PE)", "Piauí (PI)", "Rio de Janeiro (RJ)", "Rio Grande do Norte (RN)", "Rio Grande do Sul (RS)", "Rondônia (RO)", "Roraima (RR)", "Santa Catarina (SC)", "São Paulo (SP)", "Sergipe (SE)", "Tocantins (TO)" }));
+        cbxestados.setBorder(null);
+        jPanel1.add(cbxestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, 240, 30));
+
+        ftxtfcep.setBorder(null);
+        try {
+            ftxtfcep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtfcep.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ftxtfcep.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftxtfcepFocusLost(evt);
+            }
+        });
+        jPanel1.add(ftxtfcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 150, 30));
+
+        lblerronumerotelefone.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerronumerotelefone.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerronumerotelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 231, 80, 15));
+
+        lblerroemail.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerroemail.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerroemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 231, 80, 15));
+
+        lblerrocep.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerrocep.setForeground(new java.awt.Color(255, 0, 0));
+        lblerrocep.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lblerrocepFocusLost(evt);
+            }
+        });
+        jPanel1.add(lblerrocep, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 60, 15));
+
+        lblerrodataadimisao.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerrodataadimisao.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerrodataadimisao, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 440, 70, 15));
+
+        lblerrodataemissaocarteira.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblerrodataemissaocarteira.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lblerrodataemissaocarteira, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 440, 70, 15));
+
+        cbxcargos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cbxcargos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um cargo", "Gerente", "Recepcionista", "Camareira" }));
+        jPanel1.add(cbxcargos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 160, 30));
+
         lblimagemcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
+        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
         jPanel1.add(lblimagemcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -422,63 +487,126 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
-        try {
-            String data = ftxtfdatanascimento.getText();
-            String datanascimento = formatoData(data);
-
-            data = ftxtfdataadimisao.getText();
-            String dataadimisao = formatoData(data);
-
-            data = ftxtfdataemissaocarteira.getText();
-            String dataemissaocarteira = formatoData(data);
-
-            String opcaoSelecionada = null;
-            if (btnrmasculino.isSelected()) {
-                opcaoSelecionada = "Masculino";
-            }else if (btnrfeminino.isSelected()) {
-                opcaoSelecionada = "Feminino";
-            }else if (btnroutros.isSelected()) {
-                opcaoSelecionada ="Outro";
+        try {                                                     
+            if (txtfnome.getText().isEmpty() || txtfrg.getText().isEmpty() || txtfcpf.getText().isEmpty() ||
+                ftxtfdatanascimento.getText().isEmpty() || (!btnrmasculino.isSelected() && !btnrfeminino.isSelected() && !btnroutros.isSelected()) ||
+                txtfnumerotelefone.getText().isEmpty() || txtfemail.getText().isEmpty() || ftxtfcep.getText().isEmpty() ||
+                cbxestados.getSelectedIndex() == 0 || txtfcidade.getText().isEmpty() || txtfbairro.getText().isEmpty() ||
+                txtfrua.getText().isEmpty() || txtfcomplemento.getText().isEmpty() || txtfobservacoes.getText().isEmpty() ||
+                ftxtfdataadimisao.getText().isEmpty() || cbxcargos.getSelectedIndex() == 0 || txtfbanco.getText().isEmpty() ||
+                txtfconta.getText().isEmpty() || txtfagencia.getText().isEmpty() || ftxtfdataemissaocarteira.getText().isEmpty() )
+            {
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!txtfnome.getText().matches("[a-zA-ZÀ-ÿ\\s]+")) {
+                JOptionPane.showMessageDialog(null, "O campo de nome deve conter apenas letras e espaços.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!ValidarRG.validarRG(txtfrg.getText())) {
+                JOptionPane.showMessageDialog(null, "RG inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!ValidarCPF.validarCPF(txtfcpf.getText())) {
+                JOptionPane.showMessageDialog(null, "CPF inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (validarCPFExistenteBanco.validarCPFExistente(txtfcpf.getText())) {
+                JOptionPane.showMessageDialog(null, "Já existe um hóspede cadastrado com o CPF informado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ValidarData validarData = new ValidarData();
+            if (!validarData.validardata(ftxtfdatanascimento.getText())) {
+                JOptionPane.showMessageDialog(null, "Data de Nascimento inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!txtfnumerotelefone.getText().trim().matches("\\d{0,13}")) {
+                JOptionPane.showMessageDialog(null, "Número de telefone inválido. Por favor, insira no Máximo 13 números.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!txtfemail.getText().contains("@")) {
+                JOptionPane.showMessageDialog(null, "E-mail inválido. Por favor, insira um e-mail válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return; 
+            }
+            if (!ftxtfcep.getText().isEmpty() && !ftxtfcep.getText().matches("^[0-9]{5}-[0-9]{3}$")) {
+                JOptionPane.showMessageDialog(null, "Formato de CEP inválido. Por favor, insira no formato 99999-999.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!validarData.validardata(ftxtfdataadimisao.getText())) {
+                JOptionPane.showMessageDialog(null, "Data de Adimisao inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!validarData.validardata(ftxtfdataemissaocarteira.getText())) {
+                JOptionPane.showMessageDialog(null, "Data de Emissão da Carteira inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             
             
-            Connection conexao = null;
-            PreparedStatement statement = null;
-            String url = "jdbc:mysql://localhost/hospedagem";
-            String usuario ="root";
-            String senha ="";
-            conexao =DriverManager.getConnection(url,usuario,senha);
-            String sql = "INSERT INTO funcionarios(nome_funcionario,rg,cpf,data_nascimento,sexo,celular,email,cep,Estado,cidade,"
-                    + "bairro,rua,complemento,cargo,data_admissao,data_emissao_carteira,banco,agencia,conta,status_funcionario,observacoes)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            statement = conexao.prepareStatement(sql);
-
-            statement.setString(1,txtfnome.getText());
-            statement.setString(2,txtfrg.getText());
-            statement.setString(3,txtfcpf.getText());
-            statement.setString(4,datanascimento);
-            statement.setString(5,opcaoSelecionada);
-            statement.setString(6,txtfnumerotelefone.getText());
-            statement.setString(7,txtfemail.getText());
-            statement.setString(8,txtfcep.getText());
-            statement.setString(9,txtfestado.getText());
-            statement.setString(10,txtfcidade.getText());
-            statement.setString(11,txtfbairro.getText());
-            statement.setString(12,txtfrua.getText());
-            statement.setString(13,txtfcomplemento.getText());
-            statement.setString(14,txtfcargo.getText());
-            statement.setString(15,dataadimisao);
-            statement.setString(16,dataemissaocarteira);
-            statement.setString(17,txtfbanco.getText());
-            statement.setString(18,txtfagencia.getText());
-            statement.setString(19,txtfconta.getText());
-            statement.setBoolean(20,rbtnstatus.isSelected());
-            statement.setString(21,txtfobservacoes.getText());
-
-            statement.executeUpdate();
-            statement.close();
-            conexao.close();
-            JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso.");
+            
+            
+            
+            try {
+                String data = ftxtfdatanascimento.getText();
+                String datanascimento = formatoData(data);
+                
+                data = ftxtfdataadimisao.getText();
+                String dataadimisao = formatoData(data);
+                
+                data = ftxtfdataemissaocarteira.getText();
+                String dataemissaocarteira = formatoData(data);
+                
+                String opcaoSelecionada = null;
+                if (btnrmasculino.isSelected()) {
+                    opcaoSelecionada = "Masculino";
+                }else if (btnrfeminino.isSelected()) {
+                    opcaoSelecionada = "Feminino";
+                }else if (btnroutros.isSelected()) {
+                    opcaoSelecionada ="Outro";
+                }
+                String cargo = (String) cbxcargos.getSelectedItem();
+                String estadoselecionado = (String) cbxestados.getSelectedItem();
+                
+                Connection conexao = null;
+                PreparedStatement statement = null;
+                String url = "jdbc:mysql://localhost/hospedagem";
+                String usuario ="root";
+                String senha ="";
+                conexao =DriverManager.getConnection(url,usuario,senha);
+                String sql = "INSERT INTO funcionarios(nome_funcionario,rg,cpf,data_nascimento,sexo,celular,email,cep,Estado,cidade,"
+                        + "bairro,rua,complemento,cargo,data_admissao,data_emissao_carteira,banco,agencia,conta,status_funcionario,observacoes)"
+                        + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                statement = conexao.prepareStatement(sql);
+                
+                statement.setString(1,txtfnome.getText());
+                statement.setString(2,txtfrg.getText());
+                statement.setString(3,txtfcpf.getText());
+                statement.setString(4,datanascimento);
+                statement.setString(5,opcaoSelecionada);
+                statement.setString(6,txtfnumerotelefone.getText());
+                statement.setString(7,txtfemail.getText());
+                statement.setString(8,ftxtfcep.getText());
+                statement.setString(9,estadoselecionado);
+                statement.setString(10,txtfcidade.getText());
+                statement.setString(11,txtfbairro.getText());
+                statement.setString(12,txtfrua.getText());
+                statement.setString(13,txtfcomplemento.getText());
+                statement.setString(14,cargo);
+                statement.setString(15,dataadimisao);
+                statement.setString(16,dataemissaocarteira);
+                statement.setString(17,txtfbanco.getText());
+                statement.setString(18,txtfagencia.getText());
+                statement.setString(19,txtfconta.getText());
+                statement.setBoolean(20,rbtnstatus.isSelected());
+                statement.setString(21,txtfobservacoes.getText());
+                
+                statement.executeUpdate();
+                statement.close();
+                conexao.close();
+                JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso.");
+            } catch (SQLException ex) {
+                Logger.getLogger(Cadastro_de_Funcionario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(Cadastro_de_Funcionario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -531,6 +659,94 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_ftxtfdatanascimentoFocusLost
+
+    private void txtfnumerotelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnumerotelefoneFocusLost
+        String text = txtfnumerotelefone.getText().trim();
+        if (!text.isEmpty() && !text.matches("\\d+")) {
+            txtfnumerotelefone.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "Número inválido";
+            lblerronumerotelefone.setText(mensagem);
+        } else {
+            txtfnumerotelefone.setBorder(null);
+            String mensagem = "";
+            lblerronumerotelefone.setText(mensagem);
+        } 
+    }//GEN-LAST:event_txtfnumerotelefoneFocusLost
+
+    private void txtfemailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfemailFocusLost
+        String text = txtfemail.getText().trim();
+        if (!text.isEmpty() && !text.contains("@")) {
+            txtfemail.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "Email inválido";
+            lblerroemail.setText(mensagem);
+        } else {
+            txtfemail.setBorder(null);
+            String mensagem = "";
+            lblerroemail.setText(mensagem);
+        }
+    }//GEN-LAST:event_txtfemailFocusLost
+
+    private void ftxtfcepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfcepFocusLost
+        String text = ftxtfcep.getText().trim();
+        if (!text.isEmpty() && !text.matches("^[0-9]{5}-[0-9]{3}$")) {
+            ftxtfcep.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "cep inválido";
+            lblerrocep.setText(mensagem); 
+        } else {
+            ftxtfcep.setBorder(null);
+            String mensagem = "";
+            lblerrocep.setText(mensagem);
+        }
+    }//GEN-LAST:event_ftxtfcepFocusLost
+
+    private void lblerrocepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblerrocepFocusLost
+        String text = ftxtfcep.getText().trim();
+        if (!text.isEmpty() && !text.matches("^[0-9]{5}-[0-9]{3}$")) {
+            ftxtfcep.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "cep inválido";
+            lblerrocep.setText(mensagem);
+        } else {
+            ftxtfcep.setBorder(null);
+            String mensagem = "";
+            lblerrocep.setText(mensagem);
+        }
+    }//GEN-LAST:event_lblerrocepFocusLost
+
+    private void ftxtfdataadimisaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdataadimisaoFocusLost
+        String data = ftxtfdatanascimento.getText().trim();
+        if (data.equals("  /  /    ") || data.isEmpty()) {    // Verifica se o campo está vazio
+            ftxtfdataadimisao.setBorder(null);
+            lblerrodataadimisao.setText("");
+        } else {
+            ValidarData validarData = new ValidarData();
+            boolean valida = validarData.validardata(data); // Chama a função validardata passando a data
+            if (valida) {
+                ftxtfdataadimisao.setBorder(null);
+                lblerrodataadimisao.setText("");
+            } else {
+                ftxtfdataadimisao.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+                lblerrodataadimisao.setText("Data inválida");
+            }
+        }
+    }//GEN-LAST:event_ftxtfdataadimisaoFocusLost
+
+    private void ftxtfdataemissaocarteiraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdataemissaocarteiraFocusLost
+        String data = ftxtfdatanascimento.getText().trim();
+        if (data.equals("  /  /    ") || data.isEmpty()) {    // Verifica se o campo está vazio
+            ftxtfdataemissaocarteira.setBorder(null);
+            lblerrodataemissaocarteira.setText("");
+        } else {
+            ValidarData validarData = new ValidarData();
+            boolean valida = validarData.validardata(data); // Chama a função validardata passando a data
+            if (valida) {
+                ftxtfdataemissaocarteira.setBorder(null);
+                lblerrodataemissaocarteira.setText("");
+            } else {
+                ftxtfdataemissaocarteira.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+                lblerrodataemissaocarteira.setText("Data inválida");
+            }
+        }
+    }//GEN-LAST:event_ftxtfdataemissaocarteiraFocusLost
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -582,27 +798,32 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnrmasculino;
     private javax.swing.JRadioButton btnroutros;
     private javax.swing.JButton btnvoltar;
+    private javax.swing.JComboBox<String> cbxcargos;
+    private javax.swing.JComboBox<String> cbxestados;
+    private javax.swing.JFormattedTextField ftxtfcep;
     private javax.swing.JFormattedTextField ftxtfdataadimisao;
     private javax.swing.JFormattedTextField ftxtfdataemissaocarteira;
     private javax.swing.JFormattedTextField ftxtfdatanascimento;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblerrocep;
     private javax.swing.JLabel lblerrocpf;
+    private javax.swing.JLabel lblerrodataadimisao;
+    private javax.swing.JLabel lblerrodataemissaocarteira;
     private javax.swing.JLabel lblerrodatanascimento;
+    private javax.swing.JLabel lblerroemail;
     private javax.swing.JLabel lblerronome;
+    private javax.swing.JLabel lblerronumerotelefone;
     private javax.swing.JLabel lblerrorg;
     private javax.swing.JLabel lblimagemcadastrofuncionario;
     private javax.swing.JRadioButton rbtnstatus;
     private javax.swing.JTextField txtfagencia;
     private javax.swing.JTextField txtfbairro;
     private javax.swing.JTextField txtfbanco;
-    private javax.swing.JTextField txtfcargo;
-    private javax.swing.JTextField txtfcep;
     private javax.swing.JTextField txtfcidade;
     private javax.swing.JTextField txtfcomplemento;
     private javax.swing.JTextField txtfconta;
     private javax.swing.JTextField txtfcpf;
     private javax.swing.JTextField txtfemail;
-    private javax.swing.JTextField txtfestado;
     private javax.swing.JTextField txtfnome;
     private javax.swing.JTextField txtfnumerotelefone;
     private javax.swing.JTextField txtfobservacoes;

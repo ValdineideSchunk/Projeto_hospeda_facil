@@ -33,10 +33,12 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         
         JTextField[] textFields = {
         txtfnome, txtfrg, txtfcpf, ftxtfdatanascimento,
-        txtfnumerotelefone, txtfemail, ftxtfcep, txtfestado,
+        txtfnumerotelefone, txtfemail, ftxtfcep,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
+        cbxestados.setOpaque(false);
+        cbxestados.setBackground(new Color(0, 0, 0, 0));
         
 
     }
@@ -49,47 +51,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
-    public boolean validardata(String data) {
-        if (data == null || data.trim().isEmpty()) {// Verifica se a string de data está no formato correto
-            return false;
-        }
-        if (!data.matches("\\d{2}/\\d{2}/\\d{4}")) { // Verifica se a data está no formato DD/MM/YYYY
-            return false;
-        }
-        String[] partes = data.split("/"); // Data no formato DD/MM/YYYY
-        int dia = Integer.parseInt(partes[0]);
-        int mes = Integer.parseInt(partes[1]);
-        int ano = Integer.parseInt(partes[2]);
-
-        if (mes < 1 || mes > 12) {    // Verifica se o mês é válido
-            return false;
-        }
-        if (dia < 1 || dia > 31) {   // Verifica se o dia é válido para o mês
-            return false;
-        }
-        if (ano > 2024) {    // Verifica se o ano é válido
-            return false;
-        }
-        if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {    // Verifica o número de dias em cada mês
-            if (dia > 30) {
-                return false;
-            }
-        } else if (mes == 2) {
-            if (anobissexto(ano)) {
-                if (dia > 29) {
-                    return false;
-                }
-            } else {
-                if (dia > 28) {
-                    return false;
-                }
-            }
-        }
-        return true;// Data válida
-    }
-    public static boolean anobissexto(int year) {// Função auxiliar para verificar se um ano é bissexto
-    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    }
+    
     
     
     
@@ -104,7 +66,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         txtfcpf = new javax.swing.JTextField();
         txtfnumerotelefone = new javax.swing.JTextField();
         txtfemail = new javax.swing.JTextField();
-        txtfestado = new javax.swing.JTextField();
         txtfcidade = new javax.swing.JTextField();
         txtfbairro = new javax.swing.JTextField();
         txtfrua = new javax.swing.JTextField();
@@ -129,6 +90,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         lblerroemail = new javax.swing.JLabel();
         lblerrocep = new javax.swing.JLabel();
         ftxtfcep = new javax.swing.JFormattedTextField();
+        cbxestados = new javax.swing.JComboBox<>();
         lblimagemcadastrohospede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -178,11 +140,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
                 txtfemailFocusLost(evt);
             }
         });
-        jPanel1.add(txtfemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 308, 540, 27));
-
-        txtfestado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtfestado.setBorder(null);
-        jPanel1.add(txtfestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(473, 390, 260, 27));
+        jPanel1.add(txtfemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 309, 540, 27));
 
         txtfcidade.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcidade.setBorder(null);
@@ -321,8 +279,13 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         ftxtfcep.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jPanel1.add(ftxtfcep, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 391, 100, 27));
 
+        cbxestados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cbxestados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um estado", "Acre (AC)", "Alagoas (AL)", "Amapá (AP)", "Amazonas (AM)", "Bahia (BA)", "Ceará (CE)", "Distrito Federal (DF)", "Espírito Santo (ES)", "Goiás (GO)", "Maranhão (MA)", "Mato Grosso (MT)", "Mato Grosso do Sul (MS)", "Minas Gerais (MG)", "Pará (PA)", "Paraíba (PB)", "Paraná (PR)", "Pernambuco (PE)", "Piauí (PI)", "Rio de Janeiro (RJ)", "Rio Grande do Norte (RN)", "Rio Grande do Sul (RS)", "Rondônia (RO)", "Roraima (RR)", "Santa Catarina (SC)", "São Paulo (SP)", "Sergipe (SE)", "Tocantins (TO)" }));
+        cbxestados.setBorder(null);
+        jPanel1.add(cbxestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 260, 30));
+
         lblimagemcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Hóspede.png")); // NOI18N
+        lblimagemcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Hóspede.png")); // NOI18N
         jPanel1.add(lblimagemcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -400,51 +363,101 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
+        
         try {
-            String data = ftxtfdatanascimento.getText();
-            String datanascimento = formatoData(data);
             
-
-            String opcaoSelecionada = null;
-            if (btnrmasculino.isSelected()) {
-                opcaoSelecionada = "Masculino";
-            }else if (btnrfeminino.isSelected()) {
-                opcaoSelecionada = "Feminino";
-            }else if (btnroutros.isSelected()) {
-                opcaoSelecionada ="Outros";
+            if (txtfnome.getText().isEmpty() || txtfrg.getText().isEmpty() || txtfcpf.getText().isEmpty() ||
+                ftxtfdatanascimento.getText().isEmpty() || (!btnrmasculino.isSelected() && !btnrfeminino.isSelected() && !btnroutros.isSelected()) ||
+                txtfnumerotelefone.getText().isEmpty() || txtfemail.getText().isEmpty() || ftxtfcep.getText().isEmpty() ||
+                cbxestados.getSelectedIndex() == 0 || txtfcidade.getText().isEmpty() || txtfbairro.getText().isEmpty() ||
+                txtfrua.getText().isEmpty() || txtfcomplemento.getText().isEmpty() || txtfobservacoes.getText().isEmpty()) {
+                
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!txtfnome.getText().matches("[a-zA-ZÀ-ÿ\\s]+")) {
+                JOptionPane.showMessageDialog(null, "O campo de nome deve conter apenas letras e espaços.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!ValidarRG.validarRG(txtfrg.getText())) {
+                JOptionPane.showMessageDialog(null, "RG inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!ValidarCPF.validarCPF(txtfcpf.getText())) {
+                JOptionPane.showMessageDialog(null, "CPF inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (validarCPFExistenteBanco.validarCPFExistente(txtfcpf.getText())) {
+                JOptionPane.showMessageDialog(null, "Já existe um hóspede cadastrado com o CPF informado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ValidarData validarData = new ValidarData();
+            if (!validarData.validardata(ftxtfdatanascimento.getText())) {
+                JOptionPane.showMessageDialog(null, "Data inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!txtfnumerotelefone.getText().trim().matches("\\d{0,13}")) {
+                JOptionPane.showMessageDialog(null, "Número de telefone inválido. Por favor, insira no Máximo 13 números.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+            if (!txtfemail.getText().contains("@")) {
+                JOptionPane.showMessageDialog(null, "E-mail inválido. Por favor, insira um e-mail válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+            if (!ftxtfcep.getText().isEmpty() && !ftxtfcep.getText().matches("^[0-9]{5}-[0-9]{3}$")) {
+                JOptionPane.showMessageDialog(null, "Formato de CEP inválido. Por favor, insira no formato 99999-999.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
             }
             
-
-            Connection conexao = null;
-            PreparedStatement statement = null;
-            String url = "jdbc:mysql://localhost/hospedagem";
-            String usuario ="root";
-            String senha ="";
-            conexao =DriverManager.getConnection(url,usuario,senha);
-            String sql = "INSERT INTO hospedes(nome_hospede,rg,cpf,data_nascimento,sexo,celular,email,cep,Estado,cidade,"
-                    + "bairro,rua,complemento,observacoes)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            statement = conexao.prepareStatement(sql);
-
-            statement.setString(1,txtfnome.getText());
-            statement.setString(2,txtfrg.getText());
-            statement.setString(3,txtfcpf.getText());
-            statement.setString(4,datanascimento);
-            statement.setString(5,opcaoSelecionada);
-            statement.setString(6,txtfnumerotelefone.getText());
-            statement.setString(7,txtfemail.getText());
-            statement.setString(8,ftxtfcep.getText());
-            statement.setString(9,txtfestado.getText());
-            statement.setString(10,txtfcidade.getText());
-            statement.setString(11,txtfbairro.getText());
-            statement.setString(12,txtfrua.getText());
-            statement.setString(13,txtfcomplemento.getText());
-            statement.setString(14,txtfobservacoes.getText());
-
-            statement.executeUpdate();
-            statement.close();
-            conexao.close();
-            JOptionPane.showMessageDialog(null,"Hospede Cadastrado Com Sucesso..");
+            
+            try {
+                String data = ftxtfdatanascimento.getText();
+                String datanascimento = formatoData(data);
+                
+                
+                String opcaoSelecionada = null;
+                if (btnrmasculino.isSelected()) {
+                    opcaoSelecionada = "Masculino";
+                }else if (btnrfeminino.isSelected()) {
+                    opcaoSelecionada = "Feminino";
+                }else if (btnroutros.isSelected()) {
+                    opcaoSelecionada ="Outros";
+                }
+                String estadoselecionado = (String) cbxestados.getSelectedItem();
+                
+                Connection conexao = null;
+                PreparedStatement statement = null;
+                String url = "jdbc:mysql://localhost/hospedagem";
+                String usuario ="root";
+                String senha ="";
+                conexao =DriverManager.getConnection(url,usuario,senha);
+                String sql = "INSERT INTO hospedes(nome_hospede,rg,cpf,data_nascimento,sexo,celular,email,cep,Estado,cidade,"
+                        + "bairro,rua,complemento,observacoes)"
+                        + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                statement = conexao.prepareStatement(sql);
+                
+                statement.setString(1,txtfnome.getText());
+                statement.setString(2,txtfrg.getText());
+                statement.setString(3,txtfcpf.getText());
+                statement.setString(4,datanascimento);
+                statement.setString(5,opcaoSelecionada);
+                statement.setString(6,txtfnumerotelefone.getText());
+                statement.setString(7,txtfemail.getText());
+                statement.setString(8,ftxtfcep.getText());
+                statement.setString(9,estadoselecionado);
+                statement.setString(10,txtfcidade.getText());
+                statement.setString(11,txtfbairro.getText());
+                statement.setString(12,txtfrua.getText());
+                statement.setString(13,txtfcomplemento.getText());
+                statement.setString(14,txtfobservacoes.getText());
+                
+                statement.executeUpdate();
+                statement.close();
+                conexao.close();
+                JOptionPane.showMessageDialog(null,"Hospede Cadastrado Com Sucesso..");
+            } catch (SQLException ex) {
+                Logger.getLogger(Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -483,59 +496,55 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             ftxtfdatanascimento.setBorder(null);
             lblerrodatanascimento.setText("");
         } else {
-            boolean isValid = validardata(data); // Chama a função validardata passando a data
-            if (isValid) {
+            ValidarData validarData = new ValidarData();
+            boolean valida = validarData.validardata(data); // Chama a função validardata passando a data
+            if (valida) {
                 ftxtfdatanascimento.setBorder(null);
                 lblerrodatanascimento.setText("");
-                 String datanascimento = formatoData(data); // Chame formatoData apenas se a data for válida
-        } else {
-            ftxtfdatanascimento.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-            lblerrodatanascimento.setText("Data inválida");
+            } else {
+                ftxtfdatanascimento.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+                lblerrodatanascimento.setText("Data inválida");
+            }
         }
-    }
     }//GEN-LAST:event_ftxtfdatanascimentoFocusLost
 
     private void txtfnumerotelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnumerotelefoneFocusLost
         String text = txtfnumerotelefone.getText().trim();
-if (!text.isEmpty() && !text.matches("\\d+")) {
-    txtfnumerotelefone.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-    String mensagem = "Número inválido";
-    lblerronumerotelefone.setText(mensagem);
-} else {
-    txtfnumerotelefone.setBorder(null);
-    String mensagem = "";
-    lblerronumerotelefone.setText(mensagem);
-}
-        
-        
-        
-        
+        if (!text.isEmpty() && (!text.matches("\\d{13}") || !text.matches("\\d+"))) {
+            txtfnumerotelefone.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "Número inválido. Deve conter exatamente 13 dígitos.";
+            lblerronumerotelefone.setText(mensagem);
+        } else {
+            txtfnumerotelefone.setBorder(null);
+            String mensagem = "";
+            lblerronumerotelefone.setText(mensagem);
+        }   
     }//GEN-LAST:event_txtfnumerotelefoneFocusLost
 
     private void txtfemailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfemailFocusLost
         String text = txtfemail.getText().trim();
-if (!text.isEmpty() && !text.contains("@")) {
-    txtfemail.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-    String mensagem = "Email inválido";
-    lblerroemail.setText(mensagem);
-} else {
-    txtfemail.setBorder(null);
-    String mensagem = "";
-    lblerroemail.setText(mensagem);
-}
+        if (!text.isEmpty() && !text.contains("@")) {
+            txtfemail.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "Email inválido";
+            lblerroemail.setText(mensagem);
+        } else {
+            txtfemail.setBorder(null);
+            String mensagem = "";
+            lblerroemail.setText(mensagem);
+        }
     }//GEN-LAST:event_txtfemailFocusLost
 
     private void lblerrocepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblerrocepFocusLost
-       String text = ftxtfcep.getText().trim();
-                if (!text.isEmpty() && !text.matches("^[0-9]{5}-[0-9]{3}$")) {
-                    ftxtfcep.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-                    String mensagem = "cep inválido";
-                    lblerrocep.setText(mensagem); 
-                } else {
-                    ftxtfcep.setBorder(null);
-                    String mensagem = "";
-                    lblerrocep.setText(mensagem);
-                }
+        String text = ftxtfcep.getText().trim();
+        if (!text.isEmpty() && !text.matches("^[0-9]{5}-[0-9]{3}$")) {
+            ftxtfcep.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "cep inválido";
+            lblerrocep.setText(mensagem); 
+        } else {
+            ftxtfcep.setBorder(null);
+            String mensagem = "";
+            lblerrocep.setText(mensagem);
+        }
     }//GEN-LAST:event_lblerrocepFocusLost
     
     public static void main(String args[]) {
@@ -581,6 +590,7 @@ if (!text.isEmpty() && !text.contains("@")) {
     private javax.swing.JRadioButton btnrmasculino;
     private javax.swing.JRadioButton btnroutros;
     private javax.swing.JButton btnvoltar;
+    private javax.swing.JComboBox<String> cbxestados;
     private javax.swing.JFormattedTextField ftxtfcep;
     private javax.swing.JFormattedTextField ftxtfdatanascimento;
     private javax.swing.JPanel jPanel1;
@@ -597,7 +607,6 @@ if (!text.isEmpty() && !text.contains("@")) {
     private javax.swing.JTextField txtfcomplemento;
     private javax.swing.JTextField txtfcpf;
     private javax.swing.JTextField txtfemail;
-    private javax.swing.JTextField txtfestado;
     private javax.swing.JTextField txtfnome;
     private javax.swing.JTextField txtfnumerotelefone;
     private javax.swing.JTextField txtfobservacoes;
