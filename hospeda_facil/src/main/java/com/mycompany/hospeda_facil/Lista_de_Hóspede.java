@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,18 +23,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Lista_de_Hóspede extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Lista_de_Hóspede
-     */
+    int pesquisa = 0;
     public Lista_de_Hóspede() {
         initComponents();
         
         JButton[] buttons = {
         btnmenu, btnhospede,btnpesquisarhospede,
-        btnreserva, btnmapa, btnajustes,btnnovohospede};
+        btnreserva, btnmapa, btnajustes,btnnovohospede,
+        btnpesquisarporcpf, btnpesquisarpornome};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        
+        JTextField[] textFields = {
+        txtfpesquisahospede};
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
         
     }
@@ -56,6 +59,9 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
         btnajustes = new javax.swing.JButton();
         btnnovohospede = new javax.swing.JButton();
         btnpesquisarhospede = new javax.swing.JButton();
+        btnpesquisarporcpf = new javax.swing.JButton();
+        btnpesquisarpornome = new javax.swing.JButton();
+        txtfpesquisahospede = new javax.swing.JTextField();
         Lista_de_Hóspede = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -126,7 +132,31 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 590, 230, 50));
+
+        btnpesquisarhospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarhospedeActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnpesquisarhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 50, 50));
+
+        btnpesquisarporcpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarporcpfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisarporcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 128, 60, 36));
+
+        btnpesquisarpornome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarpornomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisarpornome, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 125, 80, 40));
+
+        txtfpesquisahospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfpesquisahospede.setBorder(null);
+        jPanel1.add(txtfpesquisahospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 310, 30));
 
         Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
         jPanel1.add(Lista_de_Hóspede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -234,6 +264,32 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
                                                     
     }//GEN-LAST:event_tbllistahospedeMouseClicked
 
+    private void btnpesquisarporcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarporcpfActionPerformed
+        pesquisa = 1;
+        txtfpesquisahospede.requestFocus();
+    }//GEN-LAST:event_btnpesquisarporcpfActionPerformed
+
+    private void btnpesquisarpornomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarpornomeActionPerformed
+        pesquisa = 2;
+        txtfpesquisahospede.requestFocus();
+    }//GEN-LAST:event_btnpesquisarpornomeActionPerformed
+
+    private void btnpesquisarhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarhospedeActionPerformed
+         String textoDoCampo = txtfpesquisahospede.getText();
+        switch(pesquisa) {
+    case 1:
+        this.PopularTbllistahospede("SELECT * FROM hospedes WHERE cpf = '" + textoDoCampo + "'");
+        
+        break;
+    case 2:
+        this.PopularTbllistahospede("SELECT * FROM hospedes WHERE nome_hospede LIKE '%" + textoDoCampo + "%'");
+        break;
+    default:
+        JOptionPane.showMessageDialog(null, "Selecione como Deseja Pesquisar");
+        break;
+}
+    }//GEN-LAST:event_btnpesquisarhospedeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -277,9 +333,12 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
     private javax.swing.JButton btnmenu;
     private javax.swing.JButton btnnovohospede;
     private javax.swing.JButton btnpesquisarhospede;
+    private javax.swing.JButton btnpesquisarporcpf;
+    private javax.swing.JButton btnpesquisarpornome;
     private javax.swing.JButton btnreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbllistahospede;
+    private javax.swing.JTextField txtfpesquisahospede;
     // End of variables declaration//GEN-END:variables
 }

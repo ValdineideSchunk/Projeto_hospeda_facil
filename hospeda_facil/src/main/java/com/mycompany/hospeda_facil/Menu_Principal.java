@@ -80,7 +80,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         jPanel1.add(btnnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 603, 220, 50));
 
         lblimagemMenuprincipal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemMenuprincipal.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Menu_Principal.png")); // NOI18N
+        lblimagemMenuprincipal.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Menu_Principal.png")); // NOI18N
         jPanel1.add(lblimagemMenuprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

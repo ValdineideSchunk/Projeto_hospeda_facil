@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,15 +25,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Lista_de_Reserva extends javax.swing.JFrame {
     String statusreserva;
+    int pesquisa = 0;
+    int filtrar = 0;
     public Lista_de_Reserva() {
         initComponents();
         
         JButton[] buttons = {
         btnnovareserva, btnmenu, btnhospede,
-        btnreserva, btnmapa, btnajustes,btnpesquisareserva};
+        btnreserva, btnmapa, btnajustes,btnpesquisareserva,
+        btnreservado,btnhospedado,btnfinalizado,btncancelada,btntodos,btnpesquisarpornome,
+        btnpesquisarnumeroreserva};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
         
+        JTextField[] textFields = {
+        txtfdadopesquisa};
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);
          
     }
     public String formatoDatavoltando(String data) {
@@ -76,7 +84,6 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
                 resultado.getString("status_reserva"),
             });
         }
-        
         resultado.close();
         banco.close();
         conexao.close();
@@ -101,6 +108,14 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         tbllistareserva = new javax.swing.JTable();
         btnpesquisareserva = new javax.swing.JButton();
         btnnovareserva = new javax.swing.JButton();
+        btnreservado = new javax.swing.JButton();
+        btnhospedado = new javax.swing.JButton();
+        btnfinalizado = new javax.swing.JButton();
+        btncancelada = new javax.swing.JButton();
+        btntodos = new javax.swing.JButton();
+        btnpesquisarpornome = new javax.swing.JButton();
+        btnpesquisarnumeroreserva = new javax.swing.JButton();
+        txtfdadopesquisa = new javax.swing.JTextField();
         lblimagemlistadereserva = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -161,7 +176,13 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbllistareserva);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 940, 370));
-        jPanel1.add(btnpesquisareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 136, 47, 41));
+
+        btnpesquisareserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisareservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(1019, 140, 47, 41));
 
         btnnovareserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +190,59 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 580, 230, 50));
+
+        btnreservado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreservadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnreservado, new org.netbeans.lib.awtextra.AbsoluteConstraints(495, 90, 110, 40));
+
+        btnhospedado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhospedadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnhospedado, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 120, 40));
+
+        btnfinalizado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfinalizadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnfinalizado, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 90, 120, 40));
+
+        btncancelada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncanceladaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btncancelada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 90, 120, 40));
+
+        btntodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntodosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btntodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 90, 40));
+
+        btnpesquisarpornome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarpornomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisarpornome, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 60, 40));
+
+        btnpesquisarnumeroreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarnumeroreservaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisarnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, 200, 40));
+
+        txtfdadopesquisa.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfdadopesquisa.setBorder(null);
+        jPanel1.add(txtfdadopesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 142, 200, 30));
 
         lblimagemlistadereserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemlistadereserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Reservas.png")); // NOI18N
@@ -226,7 +300,7 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-            this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva");
+       this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva");
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -257,6 +331,51 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_tbllistareservaMouseClicked
+
+    private void btnreservadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservadoActionPerformed
+        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE status_reserva = 'Reservado'");
+    }//GEN-LAST:event_btnreservadoActionPerformed
+
+    private void btntodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntodosActionPerformed
+        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva");
+    }//GEN-LAST:event_btntodosActionPerformed
+
+    private void btnhospedadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedadoActionPerformed
+        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE status_reserva = 'Hospedado'");
+    }//GEN-LAST:event_btnhospedadoActionPerformed
+
+    private void btnfinalizadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizadoActionPerformed
+        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE status_reserva = 'Finalizada'");
+    }//GEN-LAST:event_btnfinalizadoActionPerformed
+
+    private void btncanceladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncanceladaActionPerformed
+        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE status_reserva = 'Cancelada'");
+    }//GEN-LAST:event_btncanceladaActionPerformed
+
+    private void btnpesquisarpornomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarpornomeActionPerformed
+        pesquisa = 1;
+        txtfdadopesquisa.requestFocus();
+    }//GEN-LAST:event_btnpesquisarpornomeActionPerformed
+
+    private void btnpesquisarnumeroreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarnumeroreservaActionPerformed
+        pesquisa = 2;
+        txtfdadopesquisa.requestFocus();
+    }//GEN-LAST:event_btnpesquisarnumeroreservaActionPerformed
+
+    private void btnpesquisareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisareservaActionPerformed
+       String textoDoCampo = txtfdadopesquisa.getText();
+        switch(pesquisa) {
+    case 1:
+        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE nome_hospede LIKE '%" + textoDoCampo + "%'");
+        break;
+    case 2:
+        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE id_reserva = '" + textoDoCampo + "'");
+        break;
+    default:
+        JOptionPane.showMessageDialog(null, "Selecione como Deseja Pesquisar");
+        break;
+}
+    }//GEN-LAST:event_btnpesquisareservaActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -291,17 +410,25 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnajustes;
+    private javax.swing.JButton btncancelada;
+    private javax.swing.JButton btnfinalizado;
+    private javax.swing.JButton btnhospedado;
     private javax.swing.JButton btnhospede;
     private javax.swing.JButton btnmapa;
     private javax.swing.JButton btnmenu;
     private javax.swing.JButton btnnovareserva;
     private javax.swing.JButton btnpesquisareserva;
+    private javax.swing.JButton btnpesquisarnumeroreserva;
+    private javax.swing.JButton btnpesquisarpornome;
     private javax.swing.JButton btnreserva;
+    private javax.swing.JButton btnreservado;
+    private javax.swing.JButton btntodos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblimagemlistadereserva;
     private javax.swing.JTable tbllistareserva;
+    private javax.swing.JTextField txtfdadopesquisa;
     // End of variables declaration//GEN-END:variables
 
     

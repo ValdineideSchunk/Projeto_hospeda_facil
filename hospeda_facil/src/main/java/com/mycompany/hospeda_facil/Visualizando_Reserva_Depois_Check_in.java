@@ -186,12 +186,24 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
         txtfacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfacomodacao.setBorder(null);
         jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 390, 30));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 150, 50));
 
         txtfnumeroreserva.setEditable(false);
         txtfnumeroreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumeroreserva.setBorder(null);
         jPanel1.add(txtfnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 107, 120, 30));
+
+        btncheckout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncheckoutActionPerformed(evt);
+            }
+        });
         jPanel1.add(btncheckout, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 590, 180, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -242,7 +254,7 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
         jPanel1.add(txtfstatusreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 177, 150, 30));
 
         lblimagemvisualizandoreservadepoisdocheckin.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemvisualizandoreservadepoisdocheckin.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando reserva depois do Check-in.png")); // NOI18N
+        lblimagemvisualizandoreservadepoisdocheckin.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando reserva depois do Check-in.png")); // NOI18N
         jPanel1.add(lblimagemvisualizandoreservadepoisdocheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -294,6 +306,17 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
         Editando_Reserva_Depois_Checkin objeto2 = new Editando_Reserva_Depois_Checkin();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btneditarreservaActionPerformed
+
+    private void btncheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncheckoutActionPerformed
+        Check_out objeto2 = new Check_out();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btncheckoutActionPerformed
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Visualizando_Reserva_Depois_Check_in.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

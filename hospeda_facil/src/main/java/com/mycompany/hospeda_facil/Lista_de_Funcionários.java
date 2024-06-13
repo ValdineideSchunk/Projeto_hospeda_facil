@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,14 +22,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Lista_de_Funcionários extends javax.swing.JFrame {
          public static String id;
-    
+         int pesquisa = 0;
     public Lista_de_Funcionários() {
         initComponents();
         
         JButton[] buttons = {
         btnmenu, btnhospede,btnpesquisarfuncionario,
-        btnreserva, btnmapa, btnajustes,btnnovofuncionario};
+        btnreserva, btnmapa, btnajustes,btnnovofuncionario,
+        btnpesquisarpornome,btnpesquisarporcpf};
         Efeitos_Botoes.EfeitosBotoes(buttons);
+        
+        JTextField[] textFields = {
+        txtfpesquisafuncionario};
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);
+        
+        
         
     }
     public void PopularTbllistafuncionarios(String sql) {
@@ -88,6 +97,9 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
         btnnovofuncionario = new javax.swing.JButton();
+        btnpesquisarporcpf = new javax.swing.JButton();
+        btnpesquisarpornome = new javax.swing.JButton();
+        txtfpesquisafuncionario = new javax.swing.JTextField();
         btnpesquisarfuncionario = new javax.swing.JButton();
         lblLista_de_Funcionários = new javax.swing.JLabel();
 
@@ -164,9 +176,33 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnnovofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 583, 240, 50));
-        jPanel1.add(btnpesquisarfuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 120, 50, 40));
 
-        lblLista_de_Funcionários.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Funcionários.png")); // NOI18N
+        btnpesquisarporcpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarporcpfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisarporcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 123, 60, 38));
+
+        btnpesquisarpornome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarpornomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisarpornome, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 120, 80, 40));
+
+        txtfpesquisafuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfpesquisafuncionario.setBorder(null);
+        jPanel1.add(txtfpesquisafuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 128, 310, 30));
+
+        btnpesquisarfuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarfuncionarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisarfuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 114, 48, 48));
+
+        lblLista_de_Funcionários.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Funcionários.png")); // NOI18N
         jPanel1.add(lblLista_de_Funcionários, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,6 +279,32 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tbllistafuncionariosMouseClicked
 
+    private void btnpesquisarporcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarporcpfActionPerformed
+        pesquisa = 1;
+        txtfpesquisafuncionario.requestFocus();
+    }//GEN-LAST:event_btnpesquisarporcpfActionPerformed
+
+    private void btnpesquisarpornomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarpornomeActionPerformed
+        pesquisa = 2;
+        txtfpesquisafuncionario.requestFocus();
+    }//GEN-LAST:event_btnpesquisarpornomeActionPerformed
+
+    private void btnpesquisarfuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarfuncionarioActionPerformed
+        String textoDoCampo = txtfpesquisafuncionario.getText();
+        switch(pesquisa) {
+            case 1:
+            this.PopularTbllistafuncionarios("SELECT * FROM funcionarios WHERE cpf = '" + textoDoCampo + "'");
+
+            break;
+            case 2:
+            this.PopularTbllistafuncionarios("SELECT * FROM funcionarios WHERE nome_funcionario LIKE '%" + textoDoCampo + "%'");
+            break;
+            default:
+            JOptionPane.showMessageDialog(null, "Selecione como Deseja Pesquisar");
+            break;
+        }
+    }//GEN-LAST:event_btnpesquisarfuncionarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,11 +347,14 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
     private javax.swing.JButton btnmenu;
     private javax.swing.JButton btnnovofuncionario;
     private javax.swing.JButton btnpesquisarfuncionario;
+    private javax.swing.JButton btnpesquisarporcpf;
+    private javax.swing.JButton btnpesquisarpornome;
     private javax.swing.JButton btnreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLista_de_Funcionários;
     private javax.swing.JTable tbllistafuncionarios;
+    private javax.swing.JTextField txtfpesquisafuncionario;
     // End of variables declaration//GEN-END:variables
 
     

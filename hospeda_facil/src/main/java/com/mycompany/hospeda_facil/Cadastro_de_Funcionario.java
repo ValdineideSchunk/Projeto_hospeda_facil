@@ -366,7 +366,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        ftxtfcep.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ftxtfcep.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         ftxtfcep.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 ftxtfcepFocusLost(evt);
@@ -404,7 +404,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         jPanel1.add(cbxcargos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 160, 30));
 
         lblimagemcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
+        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
         jPanel1.add(lblimagemcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -713,7 +713,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     }//GEN-LAST:event_lblerrocepFocusLost
 
     private void ftxtfdataadimisaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdataadimisaoFocusLost
-        String data = ftxtfdatanascimento.getText().trim();
+        String data = ftxtfdataadimisao.getText().trim();
         if (data.equals("  /  /    ") || data.isEmpty()) {    // Verifica se o campo está vazio
             ftxtfdataadimisao.setBorder(null);
             lblerrodataadimisao.setText("");
@@ -731,7 +731,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     }//GEN-LAST:event_ftxtfdataadimisaoFocusLost
 
     private void ftxtfdataemissaocarteiraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdataemissaocarteiraFocusLost
-        String data = ftxtfdatanascimento.getText().trim();
+        String data = ftxtfdataemissaocarteira.getText().trim();
         if (data.equals("  /  /    ") || data.isEmpty()) {    // Verifica se o campo está vazio
             ftxtfdataemissaocarteira.setBorder(null);
             lblerrodataemissaocarteira.setText("");

@@ -74,7 +74,7 @@ public class Mapa_de_Reservas extends javax.swing.JFrame {
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
 
         lblimagemmapadereservas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemmapadereservas.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Mapa_de_Reservas.png")); // NOI18N
+        lblimagemmapadereservas.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Mapa_de_Reservas.png")); // NOI18N
         jPanel1.add(lblimagemmapadereservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

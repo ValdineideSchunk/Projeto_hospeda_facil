@@ -62,7 +62,7 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
             conexao = DriverManager.getConnection(url, usuario, senha);
             
             declaracaoPreparada = conexao.prepareStatement(
-                    "SELECT * FROM view_informações_reserva WHERE id_reserva = ?");
+                    "SELECT * FROM view_informacoes_reserva WHERE id_reserva = ?");
             declaracaoPreparada.setInt(1, idreserva);
             resultado = declaracaoPreparada.executeQuery();
             
@@ -183,6 +183,12 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
         txtfacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfacomodacao.setBorder(null);
         jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 390, 30));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 580, 150, 50));
 
         txtfnumeroreserva.setEditable(false);
@@ -228,10 +234,10 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
         txtfstatusreserva.setEditable(false);
         txtfstatusreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfstatusreserva.setBorder(null);
-        jPanel1.add(txtfstatusreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 180, 140, 30));
+        jPanel1.add(txtfstatusreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 173, 140, 30));
 
         lblVisualizando_Reservas_Canceladas_Finalizadas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblVisualizando_Reservas_Canceladas_Finalizadas.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Reservas_Canceladas_Finalizadas.png")); // NOI18N
+        lblVisualizando_Reservas_Canceladas_Finalizadas.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Reservas_Canceladas_Finalizadas.png")); // NOI18N
         jPanel1.add(lblVisualizando_Reservas_Canceladas_Finalizadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,6 +283,12 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
         Ajustes objeto2 = new Ajustes();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnajustesActionPerformed
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Visualizando_Reservas_Canceladas_Finalizadas.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

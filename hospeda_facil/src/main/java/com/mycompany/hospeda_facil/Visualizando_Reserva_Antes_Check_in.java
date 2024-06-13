@@ -42,6 +42,19 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         
         PopulandoReservas(); 
     }
+    
+     public static void fechartela(){
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+        }
+   
+ 
+    
+    
+    
+    
+    
+    
     public String formatoDatavoltando(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -97,6 +110,7 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         }
     
      }
+     
     
     
     @SuppressWarnings("unchecked")
@@ -188,6 +202,12 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         txtfacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfacomodacao.setBorder(null);
         jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 390, 30));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 150, 50));
 
         txtfnumeroreserva.setEditable(false);
@@ -195,6 +215,12 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         txtfnumeroreserva.setBorder(null);
         jPanel1.add(txtfnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 130, 30));
         jPanel1.add(btncancelarreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 590, 260, 50));
+
+        btncheckin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncheckinActionPerformed(evt);
+            }
+        });
         jPanel1.add(btncheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 587, 170, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +271,7 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         jPanel1.add(txtfstatusreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 177, 140, 30));
 
         lblimagemvisualizandoReservaAntesCheck_in.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemvisualizandoReservaAntesCheck_in.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Reserva_Antes_Check-in.png")); // NOI18N
+        lblimagemvisualizandoReservaAntesCheck_in.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Reserva_Antes_Check-in.png")); // NOI18N
         jPanel1.add(lblimagemvisualizandoReservaAntesCheck_in, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -278,6 +304,7 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         Visualizando_Reserva_Antes_Check_in.this.dispose();
         Lista_de_Reserva objeto2 = new Lista_de_Reserva();
         objeto2.setVisible(true);
+       
     }//GEN-LAST:event_btnreservaActionPerformed
 
     private void btnmapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapaActionPerformed
@@ -297,6 +324,17 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         Editando_Reserva_Antes_Checkin objeto2 = new Editando_Reserva_Antes_Checkin();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btneditarreservaActionPerformed
+
+    private void btncheckinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncheckinActionPerformed
+        Check_in objeto2 = new Check_in();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btncheckinActionPerformed
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Visualizando_Reserva_Antes_Check_in.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

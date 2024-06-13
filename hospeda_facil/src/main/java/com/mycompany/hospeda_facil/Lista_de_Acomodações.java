@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,16 +23,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Lista_de_Acomodações extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Lista_de_Acomodações
-     */
+    int pesquisa = 0;
     public Lista_de_Acomodações() {
         initComponents();
         
         JButton[] buttons = {
         btnmenu, btnhospede,btnpesquisaracomodacao,
-        btnreserva, btnmapa, btnajustes,btnnovaacomodação};
+        btnreserva, btnmapa, btnajustes,btnnovaacomodação,
+        btnpesquisarporcpf,btnpesquisarpornome};
         Efeitos_Botoes.EfeitosBotoes(buttons);
+        
+        JTextField[] textFields = {
+        txtfpesquisaacomodação};
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);
     }
 
     /**
@@ -51,6 +56,9 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
         btnmapa = new javax.swing.JButton();
         btnajustes = new javax.swing.JButton();
         btnnovaacomodação = new javax.swing.JButton();
+        btnpesquisarporcpf = new javax.swing.JButton();
+        btnpesquisarpornome = new javax.swing.JButton();
+        txtfpesquisaacomodação = new javax.swing.JTextField();
         btnpesquisaracomodacao = new javax.swing.JButton();
         lblLista_de_Acomodações = new javax.swing.JLabel();
 
@@ -124,9 +132,32 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
         jPanel1.add(btnnovaacomodação, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 596, 280, 50));
         btnnovaacomodação.getAccessibleContext().setAccessibleDescription("");
 
-        jPanel1.add(btnpesquisaracomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(746, 120, 42, 40));
+        btnpesquisarporcpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarporcpfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisarporcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 60, 38));
 
-        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
+        btnpesquisarpornome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarpornomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisarpornome, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 80, 40));
+
+        txtfpesquisaacomodação.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfpesquisaacomodação.setBorder(null);
+        jPanel1.add(txtfpesquisaacomodação, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 128, 200, 30));
+
+        btnpesquisaracomodacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisaracomodacaoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnpesquisaracomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, 48, 48));
+
+        lblLista_de_Acomodações.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Acomodações.png")); // NOI18N
         jPanel1.add(lblLista_de_Acomodações, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,7 +247,6 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
     }//GEN-LAST:event_btnnovaacomodaçãoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
         this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes");
     }//GEN-LAST:event_formWindowOpened
 
@@ -229,6 +259,32 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
         Visualizando_Cadastro_de_Acomodação objeto2 = new Visualizando_Cadastro_de_Acomodação();
         objeto2.setVisible(true);
     }//GEN-LAST:event_tbllistaacomodacoesMouseClicked
+
+    private void btnpesquisarporcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarporcpfActionPerformed
+        pesquisa = 1;
+        txtfpesquisaacomodação.requestFocus();
+    }//GEN-LAST:event_btnpesquisarporcpfActionPerformed
+
+    private void btnpesquisarpornomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarpornomeActionPerformed
+        pesquisa = 2;
+        txtfpesquisaacomodação.requestFocus();
+    }//GEN-LAST:event_btnpesquisarpornomeActionPerformed
+
+    private void btnpesquisaracomodacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisaracomodacaoActionPerformed
+        String textoDoCampo = txtfpesquisaacomodação.getText();
+        switch(pesquisa) {
+            case 1:
+                this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes WHERE nome_acomodacao LIKE '%" + textoDoCampo + "%'");
+            
+            break;
+            case 2:
+                this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes WHERE id_acomodacao = '" + textoDoCampo + "'");
+            break;
+            default:
+            JOptionPane.showMessageDialog(null, "Selecione como Deseja Pesquisar");
+            break;
+        }
+    }//GEN-LAST:event_btnpesquisaracomodacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,10 +328,13 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
     private javax.swing.JButton btnmenu;
     private javax.swing.JButton btnnovaacomodação;
     private javax.swing.JButton btnpesquisaracomodacao;
+    private javax.swing.JButton btnpesquisarporcpf;
+    private javax.swing.JButton btnpesquisarpornome;
     private javax.swing.JButton btnreserva;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLista_de_Acomodações;
     private javax.swing.JTable tbllistaacomodacoes;
+    private javax.swing.JTextField txtfpesquisaacomodação;
     // End of variables declaration//GEN-END:variables
 }
