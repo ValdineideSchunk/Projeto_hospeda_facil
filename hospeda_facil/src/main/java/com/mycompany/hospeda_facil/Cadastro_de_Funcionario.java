@@ -404,7 +404,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         jPanel1.add(cbxcargos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 160, 30));
 
         lblimagemcadastrofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
+        lblimagemcadastrofuncionario.setIcon(new javax.swing.ImageIcon("D:\\Users\\vschunk\\Desktop\\GERENCIAMENTO_HOSPEDAGEM\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Cadastro_Funcionario.png")); // NOI18N
         jPanel1.add(lblimagemcadastrofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -511,7 +511,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "CPF inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (validarCPFExistenteBanco.validarCPFExistente(txtfcpf.getText())) {
+            if (validarCPFExistenteBanco.validarCPFExistentefuncionario(txtfcpf.getText())) {
                 JOptionPane.showMessageDialog(null, "Já existe um funcionario cadastrado com o CPF informado.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

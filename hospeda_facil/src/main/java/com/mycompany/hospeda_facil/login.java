@@ -4,7 +4,11 @@
  */
 package com.mycompany.hospeda_facil;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -13,9 +17,8 @@ import javax.swing.JTextField;
  */
 public class login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form login
-     */
+    String usuario = "1234";
+    String senha = "1234";
     public login() {
         initComponents();
         
@@ -78,11 +81,43 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnfazerloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfazerloginActionPerformed
-        login.this.dispose();
-        Menu_Principal objeto2 = new Menu_Principal();
-        objeto2.setVisible(true);
+        try {
+            String campousuario = txtfusuario.getText();
+            String camposenha = ptxtfsenha.getText();
+            
+            if (!validarCPFExistenteBanco.validarCPFExistentefuncionario(txtfusuario.getText())) {
+                JOptionPane.showMessageDialog(null, "Usuario ou Senha incorreta.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            
+            if(campousuario.equals(camposenha)){
+                login.this.dispose();
+                Menu_Principal objeto2 = new Menu_Principal();
+                objeto2.setVisible(true); 
+            }else{
+                 JOptionPane.showMessageDialog(null, "Usuario ou Senha incorreta.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            
+            
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnfazerloginActionPerformed
 
+    
+    
+    
+    
+    
+    
+
+    // Código a ser executado se os valores não forem iguais
+   
     /**
      * @param args the command line arguments
      */
