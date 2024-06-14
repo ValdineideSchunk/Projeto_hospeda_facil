@@ -252,6 +252,7 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed

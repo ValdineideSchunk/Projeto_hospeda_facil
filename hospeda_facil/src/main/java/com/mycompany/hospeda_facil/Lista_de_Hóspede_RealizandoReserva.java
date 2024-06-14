@@ -174,6 +174,7 @@ public class Lista_de_Hóspede_RealizandoReserva extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public void PopularTbllistahospede(String sql){        
         try {

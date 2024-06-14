@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -214,6 +215,12 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         txtfnumeroreserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumeroreserva.setBorder(null);
         jPanel1.add(txtfnumeroreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 130, 30));
+
+        btncancelarreserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarreservaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btncancelarreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 590, 260, 50));
 
         btncheckin.addActionListener(new java.awt.event.ActionListener() {
@@ -286,6 +293,7 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
@@ -335,6 +343,32 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         Lista_de_Reserva objeto2 = new Lista_de_Reserva();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnvoltarActionPerformed
+
+    private void btncancelarreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarreservaActionPerformed
+        try {
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+            conexao = DriverManager.getConnection(url, usuario, senha);
+            String sql = "UPDATE reservas SET status_reserva = ? WHERE id_reserva = ?";
+            statement = conexao.prepareStatement(sql);
+            String status ="Cancelada";
+            statement.setString(1,status);
+            statement.setString(2,id);
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null, "Cancelamento Realizado com Sucesso!!!");
+            Visualizando_Reserva_Antes_Check_in.this.dispose();
+            Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+            objeto2.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }//GEN-LAST:event_btncancelarreservaActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -42,6 +42,12 @@ public class Menu_Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
 
         btnhospede.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +101,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhospedeActionPerformed
@@ -126,6 +133,10 @@ public class Menu_Principal extends javax.swing.JFrame {
         Nova_Reserva objeto2 = new Nova_Reserva();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btnnovareservaActionPerformed
+
+    private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnmenuActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

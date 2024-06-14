@@ -48,6 +48,10 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
+    
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -274,6 +278,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         cbxestados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cbxestados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um estado", "Acre (AC)", "Alagoas (AL)", "Amapá (AP)", "Amazonas (AM)", "Bahia (BA)", "Ceará (CE)", "Distrito Federal (DF)", "Espírito Santo (ES)", "Goiás (GO)", "Maranhão (MA)", "Mato Grosso (MT)", "Mato Grosso do Sul (MS)", "Minas Gerais (MG)", "Pará (PA)", "Paraíba (PB)", "Paraná (PR)", "Pernambuco (PE)", "Piauí (PI)", "Rio de Janeiro (RJ)", "Rio Grande do Norte (RN)", "Rio Grande do Sul (RS)", "Rondônia (RO)", "Roraima (RR)", "Santa Catarina (SC)", "São Paulo (SP)", "Sergipe (SE)", "Tocantins (TO)" }));
         cbxestados.setBorder(null);
+        cbxestados.setOpaque(true);
         jPanel1.add(cbxestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 260, 30));
 
         lblimagemcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -292,6 +297,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnrmasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrmasculinoMouseClicked

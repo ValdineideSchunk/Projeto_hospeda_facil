@@ -248,6 +248,7 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public void DetalhesHospede(){
         

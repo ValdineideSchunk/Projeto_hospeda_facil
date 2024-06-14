@@ -173,6 +173,7 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public void PopularTbllistaacomodacoes(String sql){
         try {

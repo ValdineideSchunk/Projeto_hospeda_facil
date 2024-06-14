@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author NEY SCHUNK
+ * @author NEY SCHUNK ok
  */
 public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
     int idFuncionario = Integer.parseInt(id);
@@ -366,6 +366,7 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnrmasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrmasculinoMouseClicked
@@ -488,21 +489,15 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
             
         } catch (SQLException ex) {
             Logger.getLogger(Editando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-            
-            
-            
+        }       
     }//GEN-LAST:event_btnsalvaralteracoesMouseClicked
 
     private void ftxtfcepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfcepFocusLost
         String text = ftxtfcep.getText().trim();
         if (!text.isEmpty() && !text.matches("^[0-9]{5}-[0-9]{3}$")) {
             ftxtfcep.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-            
         } else {
             ftxtfcep.setBorder(null);
-            
         }
     }//GEN-LAST:event_ftxtfcepFocusLost
     private boolean  validarCPF(String cpf) {

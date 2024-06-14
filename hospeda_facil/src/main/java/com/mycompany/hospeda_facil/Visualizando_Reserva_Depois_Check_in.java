@@ -269,6 +269,7 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
@@ -302,6 +303,7 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btneditarreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarreservaActionPerformed
+        
         Visualizando_Reserva_Depois_Check_in.this.dispose();
         Editando_Reserva_Depois_Checkin objeto2 = new Editando_Reserva_Depois_Checkin();
         objeto2.setVisible(true);

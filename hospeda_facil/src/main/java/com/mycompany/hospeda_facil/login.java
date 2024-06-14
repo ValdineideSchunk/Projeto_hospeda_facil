@@ -17,8 +17,6 @@ import javax.swing.JTextField;
  */
 public class login extends javax.swing.JFrame {
 
-    String usuario = "1234";
-    String senha = "1234";
     public login() {
         initComponents();
         
@@ -27,7 +25,7 @@ public class login extends javax.swing.JFrame {
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
         JTextField[] textFields = {
-        txtfusuario,ptxtfsenha};
+        txtfusuario, ptxtfsenha};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
 
@@ -60,7 +58,7 @@ public class login extends javax.swing.JFrame {
 
         ptxtfsenha.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         ptxtfsenha.setBorder(null);
-        jPanel1.add(ptxtfsenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, 360, 30));
+        jPanel1.add(ptxtfsenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 377, 360, 30));
 
         lbllogin.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lbllogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Login.png")); // NOI18N
@@ -78,6 +76,7 @@ public class login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnfazerloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfazerloginActionPerformed
@@ -89,21 +88,13 @@ public class login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuario ou Senha incorreta.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
-            
             if(campousuario.equals(camposenha)){
                 login.this.dispose();
                 Menu_Principal objeto2 = new Menu_Principal();
                 objeto2.setVisible(true); 
             }else{
                  JOptionPane.showMessageDialog(null, "Usuario ou Senha incorreta.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-            
-            
-            
-            
-            
-            
+            }  
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }

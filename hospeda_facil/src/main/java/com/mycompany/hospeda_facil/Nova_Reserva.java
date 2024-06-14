@@ -9,10 +9,13 @@ import static com.mycompany.hospeda_facil.Lista_de_AcomodaçõesReserva.ida;
 import static com.mycompany.hospeda_facil.Lista_de_Hóspede_RealizandoReserva.idh;
 import java.awt.Color;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
@@ -29,8 +32,10 @@ import javax.swing.JTextField;
 public class Nova_Reserva extends javax.swing.JFrame {
         public static String salvandodatainicio;
         public static String salvandodatafim;
-        
+        int capacidade;
+        int adultos, criancas, total;
     public Nova_Reserva() {
+        
         initComponents();
 
         JButton[] buttons = {
@@ -43,6 +48,11 @@ public class Nova_Reserva extends javax.swing.JFrame {
         txtfcpfhospede,txtfnomehospede,txtfvalordiaria,txtfnumeroadultos,txtfnumerocriancas,
         txtfobservacoes,txtfdetalhesacomodacao,ftxtfdatafimreserva,ftxtfdatainicioreserva};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
+        
+        
+        
+        
+        
     }
 
     public String formatoData(String data) {
@@ -102,6 +112,7 @@ public void prencherdadosacomodacao(){
         resultado = declaracaoPreparada.executeQuery();
         if (resultado.next()) {
             try {
+                capacidade = resultado.getInt("capacidade");
                 txtfdetalhesacomodacao.setText("Nº: " + resultado.getString("id_acomodacao") +
                     "\nNome: " + resultado.getString("nome_acomodacao") +
                     "\nTipo: " + resultado.getString("tipo_quarto"));
@@ -133,7 +144,7 @@ public void prencherdadosacomodacao(){
         if (dia < 1 || dia > 31) {   // Verifica se o dia é válido para o mês
             return false;
         }
-        if (ano > 2024) {    // Verifica se o ano é válido
+        if (ano > 2100 || ano < 1824) {    // Verifica se o ano é válido
             return false;
         }
         if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {    // Verifica o número de dias em cada mês
@@ -156,6 +167,8 @@ public void prencherdadosacomodacao(){
     public static boolean anobissexto(int year) {// Função auxiliar para verificar se um ano é bissexto
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -208,7 +221,7 @@ public void prencherdadosacomodacao(){
                 ftxtfdatainicioreservaMouseExited(evt);
             }
         });
-        jPanel1.add(ftxtfdatainicioreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 150, 30));
+        jPanel1.add(ftxtfdatainicioreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 140, 30));
 
         ftxtfdatafimreserva.setBorder(null);
         try {
@@ -369,6 +382,7 @@ public void prencherdadosacomodacao(){
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
@@ -438,6 +452,18 @@ public void prencherdadosacomodacao(){
             JOptionPane.showMessageDialog(null, "Data final do periodo inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
         return;
         }
+        LocalDate salvandodatatainicio = LocalDate.parse(salvandodatainicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate dataatual = LocalDate.now();
+        if (salvandodatatainicio.isBefore(dataatual)) {
+            JOptionPane.showMessageDialog(null,"data de inici da reserva não pode ser inferior a data atual", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        } 
+        LocalDate salvandodatafimm = LocalDate.parse(salvandodatafim, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if (salvandodatatainicio.isAfter(salvandodatafimm)) {
+            JOptionPane.showMessageDialog(null, "A data de início da reserva não pode ser superior à data de fim da reserva", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        
         if (!txtfvalordiaria.getText().trim().matches("\\d+(\\.\\d+)?")) {
             JOptionPane.showMessageDialog(null, "Valor inválido,\n"
                 + "Digite somente Numeros.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -456,6 +482,15 @@ public void prencherdadosacomodacao(){
         if (txtfobservacoes.getText().trim().isEmpty()) {
             txtfobservacoes.setText(" ");
         }
+        adultos = Integer.parseInt(txtfnumeroadultos.getText());
+        criancas = Integer.parseInt(txtfnumerocriancas.getText());
+        total = (adultos + criancas);
+        if(total > capacidade){
+           JOptionPane.showMessageDialog(null,"A capaciade da acomodação é incompativel com a quantidade de hospedes.",
+                                         "Erro", JOptionPane.ERROR_MESSAGE); 
+        return;
+        }
+
     try {
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -500,7 +535,7 @@ public void prencherdadosacomodacao(){
             JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso.");
             ida = null;
             Nova_Reserva.this.dispose();
-            Menu_Principal objeto2 = new Menu_Principal();
+            Lista_de_Reserva objeto2 = new Lista_de_Reserva();
             objeto2.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
@@ -628,6 +663,10 @@ public void prencherdadosacomodacao(){
     private javax.swing.JTextField txtfobservacoes;
     private javax.swing.JTextField txtfvalordiaria;
     // End of variables declaration//GEN-END:variables
+
+    private String formatoDataAtual(LocalDate dataAtual) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     
 

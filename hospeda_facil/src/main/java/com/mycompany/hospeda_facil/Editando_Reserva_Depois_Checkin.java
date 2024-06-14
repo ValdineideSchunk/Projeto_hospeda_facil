@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  * @author NEY SCHUNK
  */
 public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
-
+    String  idhospede,idacomodacao;
     int idreserva = Integer.parseInt(id);
     
     public Editando_Reserva_Depois_Checkin() {
@@ -89,6 +89,7 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
                     txtfnumeroadutos.setText(resultado.getString("numero_adulto"));
                     txtfnumerocriancas.setText(resultado.getString("numero_crianca"));
                     txtfobservacoes.setText(resultado.getString("observacoes"));
+                    idacomodacao = resultado.getString("fk_acomodacao");
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -99,6 +100,14 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
         }
     
      }
+     public String formatoData(String data) {
+        String dateStr = data;//Data no formato DD/MM/YYYY
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
+        String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
+        return formattedDate;// retorno -> YYYY/MM/DD
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -248,6 +257,7 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
@@ -281,7 +291,44 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnsalvaralteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesActionPerformed
-       
+        try {
+            Connection conexao = null;
+            PreparedStatement statement = null;
+            
+            String url = "jdbc:mysql://localhost/hospedagem";
+            String usuario = "root";
+            String senha = "";
+            
+            conexao = DriverManager.getConnection(url, usuario, senha);
+            
+            String sql = "UPDATE reservas SET fk_acomodacao = ?, data_checkin = ?, data_checkout = ?, valor_diaria = ?,"
+                    + " numero_adulto = ?, numero_crianca = ?, observacoes = ? WHERE id_reserva = ?";
+            
+            statement = conexao.prepareStatement(sql);
+            
+            String data = ftxtfdatainicioreserva.getText();
+            String datainicio = formatoData(data);
+
+            data = ftxtfdatafimreserva.getText();
+            String datafim = formatoData(data);
+            
+            statement.setString(1,idacomodacao);
+            statement.setString(2,datainicio);
+            statement.setString(3,datafim);
+            statement.setString(4,txtfvalordiaria.getText());
+            statement.setString(5,txtfnumeroadutos.getText());
+            statement.setString(6,txtfnumerocriancas.getText());
+            statement.setString(7,txtfobservacoes.getText());
+            statement.setString(8,id);
+            
+            
+            statement.executeUpdate();
+            statement.close();
+            conexao.close();
+            JOptionPane.showMessageDialog(null, "Dados atualizados com Sucesso!!!");
+        } catch (SQLException ex) {
+            Logger.getLogger(Editando_Reserva_Depois_Checkin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnsalvaralteracoesActionPerformed
 
     /**
