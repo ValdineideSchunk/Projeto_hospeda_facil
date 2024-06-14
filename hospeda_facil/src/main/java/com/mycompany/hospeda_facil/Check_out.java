@@ -20,11 +20,12 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author vschunk
+ * @author vschunk ok
  */
 public class Check_out extends javax.swing.JFrame {
 
     int idreserva = Integer.parseInt(id);
+    
     public Check_out() {
         initComponents();
         
@@ -36,9 +37,7 @@ public class Check_out extends javax.swing.JFrame {
         ftxtfdataentrada, txtfacomodacao, txtfhospede};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
  
-    
-        
-       PopulandoRCheckin(); 
+        PopulandoRCheckin(); 
     }
     public String formatoDatavoltando(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
@@ -74,19 +73,16 @@ public class Check_out extends javax.swing.JFrame {
 
                     txtfhospede.setText(resultado.getString("nome_hospede"));
                     txtfacomodacao.setText("N°: " + resultado.getString("fk_acomodacao") +
-                               "\nNome: " + resultado.getString("nome_acomodacao"));
+                                         "\nNome: " + resultado.getString("nome_acomodacao"));
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
                 }
-   
             }
         } catch (SQLException ex) {
             Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
      }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -170,31 +166,21 @@ public class Check_out extends javax.swing.JFrame {
         try {
             Connection conexao = null;
             PreparedStatement statement = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
             String sql = "UPDATE reservas SET status_reserva = ? WHERE id_reserva = ?";
-            
             statement = conexao.prepareStatement(sql);
-            
             String status ="Finalizada";
-            
             statement.setString(1,status);
             statement.setString(2,id);
-            
-            
-            
             statement.executeUpdate();
             statement.close();
             conexao.close();
             JOptionPane.showMessageDialog(null, "Check-out Realizado com Sucesso!!!");
             Check_out.this.dispose();
             Visualizando_Reserva_Antes_Check_in.fechartela();
-            
         } catch (SQLException ex) {
             Logger.getLogger(Check_out.class.getName()).log(Level.SEVERE, null, ex);
         }

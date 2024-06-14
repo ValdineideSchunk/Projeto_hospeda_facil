@@ -32,11 +32,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         JTextField[] textFields = {
         txtfcapacidade,txtfnumeroacomodacao,txtfnomeacomodacao,txtfdescricao,
         txtfmotivobloqueio,ftxtfdatafinal,ftxtfdatainicio};
-        TextFields_Transparentes.TextFieldsTransparentes(textFields);
-        
-        
-        
-           
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);    
     }
     public String formatoData(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
@@ -46,7 +42,6 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -223,28 +218,24 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnrindividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrindividualActionPerformed
-        // TODO add your handling code here:
         btnrduplo.setSelected(false);
         btnrtriplo.setSelected(false);
         btnrsuite.setSelected(false);
     }//GEN-LAST:event_btnrindividualActionPerformed
 
     private void btnrduploActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrduploActionPerformed
-        // TODO add your handling code here:
         btnrindividual.setSelected(false);
         btnrtriplo.setSelected(false);
         btnrsuite.setSelected(false);
     }//GEN-LAST:event_btnrduploActionPerformed
 
     private void btnrtriploActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrtriploActionPerformed
-        // TODO add your handling code here:
         btnrduplo.setSelected(false);
         btnrindividual.setSelected(false);
         btnrsuite.setSelected(false);
     }//GEN-LAST:event_btnrtriploActionPerformed
 
     private void btnrsuiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrsuiteActionPerformed
-        // TODO add your handling code here:
         btnrduplo.setSelected(false);
         btnrtriplo.setSelected(false);
         btnrindividual.setSelected(false);
@@ -282,7 +273,6 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
 
     private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
         try {
-            
             String opcaoSelecionada = null;
             if (btnrindividual.isSelected()) {
                 opcaoSelecionada = "Individual";
@@ -293,18 +283,12 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
             }else if (btnrsuite.isSelected()) {
                 opcaoSelecionada ="Suite";
             }
-            
             boolean wifi = cbxwifi.isSelected();
             boolean arCondicionado = cbxarcondicionado.isSelected();
             boolean tv = cbxtv.isSelected();
             boolean frigobar = cbxfrigibar.isSelected();
             boolean acessibilidade = cbxacessibilidade.isSelected();
-            
-            
             boolean bloqueio = btnrrestricao.isSelected();
-            
-            
-            
             
             Connection conexao = null;
             PreparedStatement statement = null;
@@ -334,8 +318,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
             String datainicio = formatoData(data);
             
             data = ftxtfdatafinal.getText();
-                String datafinal = formatoData(data);
-                  
+                String datafinal = formatoData(data); 
                 statement.setString(11,datainicio);
                 statement.setString(12,datafinal);
                 statement.setString(13,txtfmotivobloqueio.getText());
@@ -345,9 +328,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
                 statement.setString(12,null);
                 statement.setString(13," ");
                 statement.setString(14,"Disponivel");
-                
             }
-
             statement.executeUpdate();
             statement.close();
             conexao.close();
@@ -357,19 +338,7 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
             objeto2.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        }  
     }//GEN-LAST:event_btnfinalizarcadastroActionPerformed
     
     public static void main(String args[]) {
@@ -432,8 +401,5 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
     private javax.swing.JTextField txtfnomeacomodacao;
     private javax.swing.JTextField txtfnumeroacomodacao;
     // End of variables declaration//GEN-END:variables
-
-    
-
-    
+   
 }

@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author NEY SCHUNK
+ * @author NEY SCHUNK ok
  */
 public class Cadastro_de_Hospede extends javax.swing.JFrame {
     public Cadastro_de_Hospede() {
@@ -39,10 +39,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         
         cbxestados.setOpaque(false);
         cbxestados.setBackground(new Color(0, 0, 0, 0));
-        
-
     }
-    
     public String formatoData(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -51,11 +48,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
-    
-    
-    
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -318,10 +310,8 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnroutrosMouseClicked
 
     private void txtfcpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfcpfFocusLost
-        
         String cpf = txtfcpf.getText().trim();
-        
-         if (cpf.isEmpty()) {
+        if (cpf.isEmpty()) {
             txtfcpf.setBorder(null);
             lblerrocpf.setText("");  
             return;                  
@@ -363,15 +353,12 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
-        
         try {
-            
             if (txtfnome.getText().isEmpty() || txtfrg.getText().isEmpty() || txtfcpf.getText().isEmpty() ||
                 ftxtfdatanascimento.getText().isEmpty() || (!btnrmasculino.isSelected() && !btnrfeminino.isSelected() && !btnroutros.isSelected()) ||
                 txtfnumerotelefone.getText().isEmpty() || txtfemail.getText().isEmpty() || ftxtfcep.getText().isEmpty() ||
                 cbxestados.getSelectedIndex() == 0 || txtfcidade.getText().isEmpty() || txtfbairro.getText().isEmpty() ||
                 txtfrua.getText().isEmpty() || txtfcomplemento.getText().isEmpty() || txtfobservacoes.getText().isEmpty()) {
-                
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -412,8 +399,6 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             try {
                 String data = ftxtfdatanascimento.getText();
                 String datanascimento = formatoData(data);
-                
-                
                 String opcaoSelecionada = null;
                 if (btnrmasculino.isSelected()) {
                     opcaoSelecionada = "Masculino";
@@ -468,13 +453,13 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     private void txtfnomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnomeFocusLost
         String text = txtfnome.getText().trim();
         if (!text.isEmpty() && !text.matches("[a-zA-Z\\s]+"))  {
-                txtfnome.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-                String mensagem = "Nome invalido";
-                lblerronome.setText(mensagem);
-                }else{
-                    txtfnome.setBorder(null);
-                    String mensagem = "";
-                    lblerronome.setText(mensagem);
+            txtfnome.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "Nome invalido";
+            lblerronome.setText(mensagem);
+        }else{
+            txtfnome.setBorder(null);
+            String mensagem = "";
+            lblerronome.setText(mensagem);
         }
     }//GEN-LAST:event_txtfnomeFocusLost
 
@@ -488,8 +473,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             txtfrg.setBorder(null);
             String mensagem = "";
             lblerrorg.setText(mensagem);
-        
-    }
+        }
     }//GEN-LAST:event_txtfrgFocusLost
 
     private void ftxtfdatanascimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdatanascimentoFocusLost

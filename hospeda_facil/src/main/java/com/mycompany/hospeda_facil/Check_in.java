@@ -35,10 +35,8 @@ public class Check_in extends javax.swing.JFrame {
         JTextField[] textFields = {
         ftxtfdataentrada, txtfacomodacao, txtfhospede};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
- 
-    
-        
-       PopulandoRCheckin(); 
+
+        PopulandoRCheckin(); 
     }
     public String formatoDatavoltando(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
@@ -71,22 +69,17 @@ public class Check_in extends javax.swing.JFrame {
                     String databanco = resultado.getString("data_checkin");
                     String datacheckin = formatoDatavoltando(databanco);
                     ftxtfdataentrada.setText(datacheckin);
-
                     txtfhospede.setText(resultado.getString("nome_hospede"));
                     txtfacomodacao.setText("N°: " + resultado.getString("fk_acomodacao") +
-                               "\nNome: " + resultado.getString("nome_acomodacao"));
-                    
+                                          "\nNome: " + resultado.getString("nome_acomodacao"));
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
                 }
-   
             }
         } catch (SQLException ex) {
             Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
      }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -203,10 +196,6 @@ public class Check_in extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         Visualizando_Reserva_Antes_Check_in.fechartela();
     }//GEN-LAST:event_formWindowClosing
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

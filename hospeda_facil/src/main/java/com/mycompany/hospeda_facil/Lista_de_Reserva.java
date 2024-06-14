@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author NEY SCHUNK
+ * @author NEY SCHUNK ok
  */
 public class Lista_de_Reserva extends javax.swing.JFrame {
     String statusreserva;
@@ -37,11 +37,9 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         btnpesquisarnumeroreserva};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        
         JTextField[] textFields = {
         txtfdadopesquisa};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
-         
     }
     public String formatoDatavoltando(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
@@ -51,9 +49,6 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
-    
-    
-    
     public void Populartbllistareserva(String sql){
     try {
         String url = "jdbc:mysql://localhost/hospedagem";
@@ -91,8 +86,6 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         Logger.getLogger(Lista_de_Acomodações.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
-   
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -301,7 +294,6 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva");
-
     }//GEN-LAST:event_formWindowOpened
 
     private void btnnovareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovareservaActionPerformed
@@ -314,7 +306,6 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         int linha = tbllistareserva.getSelectedRow();
         id = tbllistareserva.getValueAt(linha, 0).toString();
         String status = tbllistareserva.getValueAt(linha, 6).toString();
-   
         if("Reservado".equals(status)){
             Lista_de_Reserva.this.dispose();
             Visualizando_Reserva_Antes_Check_in objeto2 = new Visualizando_Reserva_Antes_Check_in();
@@ -328,8 +319,6 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
             Visualizando_Reservas_Canceladas_Finalizadas objeto2 = new Visualizando_Reservas_Canceladas_Finalizadas();
             objeto2.setVisible(true);
         }
-        
-        
     }//GEN-LAST:event_tbllistareservaMouseClicked
 
     private void btnreservadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreservadoActionPerformed
@@ -365,16 +354,16 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
     private void btnpesquisareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisareservaActionPerformed
        String textoDoCampo = txtfdadopesquisa.getText();
         switch(pesquisa) {
-    case 1:
-        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE nome_hospede LIKE '%" + textoDoCampo + "%'");
-        break;
-    case 2:
-        this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE id_reserva = '" + textoDoCampo + "'");
-        break;
-    default:
-        JOptionPane.showMessageDialog(null, "Selecione como Deseja Pesquisar");
-        break;
-}
+            case 1:
+                this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE nome_hospede LIKE '%" + textoDoCampo + "%'");
+            break;
+            case 2:
+                this.Populartbllistareserva("SELECT * FROM view_informacoes_reserva WHERE id_reserva = '" + textoDoCampo + "'");
+            break;
+            default:
+                JOptionPane.showMessageDialog(null, "Selecione como Deseja Pesquisar");
+            break;
+        }
     }//GEN-LAST:event_btnpesquisareservaActionPerformed
     
     public static void main(String args[]) {

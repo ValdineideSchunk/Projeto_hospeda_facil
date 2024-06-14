@@ -27,7 +27,6 @@ import javax.swing.JTextField;
 public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
     int idFuncionario = Integer.parseInt(id);
     public Editando_Cadastro_de_Funcinario() {
-        
         initComponents();
         DetalhesFuncionario();
         
@@ -75,32 +74,26 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-
             conexao = DriverManager.getConnection(url, usuario, senha);
-
-            declaracaoPreparada = conexao.prepareStatement(
-                    "SELECT * FROM funcionarios WHERE id_funcionario = ?");
+            declaracaoPreparada = conexao.prepareStatement("SELECT * FROM funcionarios WHERE id_funcionario = ?");
             declaracaoPreparada.setInt(1, idFuncionario);
             resultado = declaracaoPreparada.executeQuery();
 
             if (resultado.next()) {
-                
                 try {
                     String sexo = resultado.getString("sexo");
-                   if("Masculino".equals(sexo)){
+                    if("Masculino".equals(sexo)){
                        btnrmasculino.setSelected(true);
-                   }else if("Feminino".equals(sexo)){
+                    }else if("Feminino".equals(sexo)){
                        btnrfeminino.setSelected(true);
-                   }else if("Outro".equals(sexo)){
+                    }else if("Outro".equals(sexo)){
                        btnroutros.setSelected(true);
-                   }
-
-                   String estado = resultado.getString("estado");
-                   String cargo = resultado.getString("cargo");
+                    }
+                    String estado = resultado.getString("estado");
+                    String cargo = resultado.getString("cargo");
                    
                     boolean ativo = resultado.getBoolean("status_funcionario");
                     rbtnstatus.setSelected(ativo);
-
                     txtnnumerofuncionario.setText(resultado.getString("id_funcionario"));
                     txtfnome.setText(resultado.getString("nome_funcionario"));
                     txtfrg.setText(resultado.getString("rg"));
@@ -119,32 +112,24 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
                     txtfconta.setText(resultado.getString("conta"));
                     txtfobservacoes.setText(resultado.getString("observacoes"));
                     
-                    
                     String databanco = resultado.getString("data_nascimento");
                     String datanascimento = formatoDatavoltando(databanco);
                     ftxtfdatanascimento.setText(datanascimento);
-                    
                     databanco = resultado.getString("data_admissao");
                     datanascimento = formatoDatavoltando(databanco);
                     ftxtfdataadimisao.setText(datanascimento);
-                    
                     databanco = resultado.getString("data_emissao_carteira");
                     datanascimento = formatoDatavoltando(databanco);
                     ftxtfdataemissaocarteira.setText(datanascimento);
-                    
-                    
-                    
-                    
+    
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
             }   
         } catch (SQLException ex) {
             Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

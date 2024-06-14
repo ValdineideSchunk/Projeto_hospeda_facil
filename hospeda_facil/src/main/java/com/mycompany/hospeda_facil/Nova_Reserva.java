@@ -7,6 +7,7 @@ package com.mycompany.hospeda_facil;
 
 import static com.mycompany.hospeda_facil.Lista_de_AcomodaçõesReserva.ida;
 import static com.mycompany.hospeda_facil.Lista_de_Hóspede_RealizandoReserva.idh;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,18 +17,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
  *
- * @author NEY SCHUNK
+ * @author NEY SCHUNK ok
  */
 public class Nova_Reserva extends javax.swing.JFrame {
         public static String salvandodatainicio;
         public static String salvandodatafim;
-    
+        
     public Nova_Reserva() {
         initComponents();
 
@@ -41,7 +43,6 @@ public class Nova_Reserva extends javax.swing.JFrame {
         txtfcpfhospede,txtfnomehospede,txtfvalordiaria,txtfnumeroadultos,txtfnumerocriancas,
         txtfobservacoes,txtfdetalhesacomodacao,ftxtfdatafimreserva,ftxtfdatainicioreserva};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
- 
     }
 
     public String formatoData(String data) {
@@ -53,7 +54,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
 
-   public void prencherDadosHospede() {
+    public void prencherDadosHospede() {
         try {
             int hospede = Integer.parseInt(idh);
             Connection conexao = null;
@@ -75,50 +76,86 @@ public class Nova_Reserva extends javax.swing.JFrame {
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }       
+   }       
        
-  public void prencherdadosacomodacao(){
-             int idacomodacao = Integer.parseInt(ida);
-             
-        try {
-            Connection conexao = null;
-            PreparedStatement declaracaoPreparada = null;
-            ResultSet resultado = null;
+public void prencherdadosacomodacao(){
+    int idacomodacao = Integer.parseInt(ida);
+    try {
+        Connection conexao = null;
+        PreparedStatement declaracaoPreparada = null;
+        ResultSet resultado = null;
             
-            String url = "jdbc:mysql://localhost/hospedagem";
-            String usuario = "root";
-            String senha = "";
+        String url = "jdbc:mysql://localhost/hospedagem";
+        String usuario = "root";
+        String senha = "";
             
-            conexao = DriverManager.getConnection(url, usuario, senha);
+        conexao = DriverManager.getConnection(url, usuario, senha);
             
-            declaracaoPreparada = conexao.prepareStatement(
-                    "SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
-            declaracaoPreparada.setInt(1, idacomodacao);
-            resultado = declaracaoPreparada.executeQuery();
-            
-            
-            if (resultado.next()) {
-                try {
-                    txtfdetalhesacomodacao.setText("Nº: " + resultado.getString("id_acomodacao") +
-                               "\nNome: " + resultado.getString("nome_acomodacao") +
-                               "\nTipo: " + resultado.getString("tipo_quarto"));
-                    
+        declaracaoPreparada = conexao.prepareStatement(
+            "SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
+        declaracaoPreparada.setInt(1, idacomodacao);
+        resultado = declaracaoPreparada.executeQuery();
+        if (resultado.next()) {
+            try {
+                txtfdetalhesacomodacao.setText("Nº: " + resultado.getString("id_acomodacao") +
+                    "\nNome: " + resultado.getString("nome_acomodacao") +
+                    "\nTipo: " + resultado.getString("tipo_quarto"));
                 } catch (SQLException ex) {
                     Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+        }
             ftxtfdatainicioreserva.setText(salvandodatainicio);
-            ftxtfdatafimreserva.setText(salvandodatafim);
-            
+            ftxtfdatafimreserva.setText(salvandodatafim); 
         } catch (SQLException ex) {
             Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+  public boolean validardata(String data) {
+        if (data == null || data.trim().isEmpty()) {// Verifica se a string de data está no formato correto
+            return false;
+        }
+        if (!data.matches("\\d{2}/\\d{2}/\\d{4}")) { // Verifica se a data está no formato DD/MM/YYYY
+            return false;
+        }
+        String[] partes = data.split("/"); // Data no formato DD/MM/YYYY
+        int dia = Integer.parseInt(partes[0]);
+        int mes = Integer.parseInt(partes[1]);
+        int ano = Integer.parseInt(partes[2]);
+
+        if (mes < 1 || mes > 12) {    // Verifica se o mês é válido
+            return false;
+        }
+        if (dia < 1 || dia > 31) {   // Verifica se o dia é válido para o mês
+            return false;
+        }
+        if (ano > 2024) {    // Verifica se o ano é válido
+            return false;
+        }
+        if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {    // Verifica o número de dias em cada mês
+            if (dia > 30) {
+                return false;
             }
+        } else if (mes == 2) {
+            if (anobissexto(ano)) {
+                if (dia > 29) {
+                    return false;
+                }
+            } else {
+                if (dia > 28) {
+                    return false;
+                }
+            }
+        }
+        return true;// Data válida
+    }
+    public static boolean anobissexto(int year) {// Função auxiliar para verificar se um ano é bissexto
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -171,7 +208,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 ftxtfdatainicioreservaMouseExited(evt);
             }
         });
-        jPanel1.add(ftxtfdatainicioreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 193, 120, 30));
+        jPanel1.add(ftxtfdatainicioreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 150, 30));
 
         ftxtfdatafimreserva.setBorder(null);
         try {
@@ -190,11 +227,13 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 ftxtfdatafimreservaMouseExited(evt);
             }
         });
-        jPanel1.add(ftxtfdatafimreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(588, 193, 120, 30));
+        jPanel1.add(ftxtfdatafimreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(558, 190, 150, 30));
 
+        txtfcpfhospede.setEditable(false);
         txtfcpfhospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcpfhospede.setBorder(null);
-        jPanel1.add(txtfcpfhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 240, 30));
+        txtfcpfhospede.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(txtfcpfhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 109, 240, 30));
 
         txtfnomehospede.setEditable(false);
         txtfnomehospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -203,23 +242,38 @@ public class Nova_Reserva extends javax.swing.JFrame {
 
         txtfvalordiaria.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfvalordiaria.setBorder(null);
-        jPanel1.add(txtfvalordiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 130, 30));
+        jPanel1.add(txtfvalordiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 288, 130, 30));
 
         txtfnumeroadultos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumeroadultos.setBorder(null);
-        jPanel1.add(txtfnumeroadultos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 357, 120, 30));
+        jPanel1.add(txtfnumeroadultos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 356, 120, 30));
 
         txtfnumerocriancas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtfnumerocriancas.setText("0");
         txtfnumerocriancas.setBorder(null);
-        jPanel1.add(txtfnumerocriancas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 357, 130, 30));
+        txtfnumerocriancas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfnumerocriancasFocusLost(evt);
+            }
+        });
+        txtfnumerocriancas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtfnumerocriancasMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtfnumerocriancasMouseExited(evt);
+            }
+        });
+        jPanel1.add(txtfnumerocriancas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 356, 130, 30));
 
         txtfobservacoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfobservacoes.setBorder(null);
         jPanel1.add(txtfobservacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 580, 70));
 
+        txtfdetalhesacomodacao.setEditable(false);
         txtfdetalhesacomodacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfdetalhesacomodacao.setBorder(null);
-        jPanel1.add(txtfdetalhesacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 241, 390, 30));
+        jPanel1.add(txtfdetalhesacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 238, 390, 30));
 
         btncpf.setBorder(null);
         btncpf.addActionListener(new java.awt.event.ActionListener() {
@@ -288,7 +342,7 @@ public class Nova_Reserva extends javax.swing.JFrame {
                 btnfinalizarnovareservaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnfinalizarnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 570, 220, 50));
+        jPanel1.add(btnfinalizarnovareserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 568, 223, 50));
 
         lblimagemnovareserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblimagemnovareserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Nova_Reserva.png")); // NOI18N
@@ -354,26 +408,62 @@ public class Nova_Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_btncpfActionPerformed
 
     private void btnacomodaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnacomodaçãoActionPerformed
-        this.setVisible(false);
-        Lista_de_AcomodaçõesReserva objeto2 = new Lista_de_AcomodaçõesReserva();
-        objeto2.setVisible(true);
+        if (txtfcpfhospede.getText().isEmpty() || txtfnomehospede.getText().isEmpty()){
+           JOptionPane.showMessageDialog(null, "Dados do hospede devem ser prenchidos \n"
+                   + "antes de escolher uma acomodaçõa.", "Atenção", JOptionPane.ERROR_MESSAGE);
+                return; 
+        }else{
+           this.setVisible(false);
+            Lista_de_AcomodaçõesReserva objeto2 = new Lista_de_AcomodaçõesReserva();
+            objeto2.setVisible(true); 
+        }
     }//GEN-LAST:event_btnacomodaçãoActionPerformed
 
     private void lblimagemnovareservaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblimagemnovareservaAncestorAdded
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_lblimagemnovareservaAncestorAdded
 
     private void btnfinalizarnovareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarnovareservaActionPerformed
-        
-            try {
-    Connection conexao = null;
-    PreparedStatement statement = null;
-    String url = "jdbc:mysql://localhost/hospedagem";
-    String usuario = "root";
-    String senha = "";
-    conexao = DriverManager.getConnection(url, usuario, senha);
-
-    if (conexao != null) {
+        if (txtfcpfhospede.getText().isEmpty() || txtfnomehospede.getText().isEmpty() || ftxtfdatainicioreserva.getText().isEmpty() ||
+            ftxtfdatafimreserva.getText().isEmpty()  || txtfdetalhesacomodacao.getText().isEmpty() || txtfvalordiaria.getText().isEmpty() || 
+            txtfnumeroadultos.getText().isEmpty() ||txtfnumerocriancas.getText().isEmpty())
+            {JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        if (!validardata(ftxtfdatainicioreserva.getText())) {
+            JOptionPane.showMessageDialog(null, "Data inicio do periodo inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        if (!validardata(ftxtfdatafimreserva.getText())) {
+            JOptionPane.showMessageDialog(null, "Data final do periodo inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        if (!txtfvalordiaria.getText().trim().matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(null, "Valor inválido,\n"
+                + "Digite somente Numeros.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        if (!txtfnumeroadultos.getText().trim().matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "numero de adutos inválido,\n"
+                + "Digite somente Numeros.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        if (!txtfnumerocriancas.getText().trim().matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "numero de crianças inválido,\n"
+                + "Digite somente Numeros.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        if (txtfobservacoes.getText().trim().isEmpty()) {
+            txtfobservacoes.setText(" ");
+        }
+    try {
+        Connection conexao = null;
+        PreparedStatement statement = null;
+        String url = "jdbc:mysql://localhost/hospedagem";
+        String usuario = "root";
+        String senha = "";
+        conexao = DriverManager.getConnection(url, usuario, senha);
+    if (conexao != null){
         try {
             String sql = "INSERT INTO reservas(fk_hospede,fk_acomodacao,data_checkin,data_checkout,"
                     + "valor_diaria,numero_adulto,numero_crianca,observacoes,status_reserva)"
@@ -396,7 +486,6 @@ public class Nova_Reserva extends javax.swing.JFrame {
             statement.setString(8, txtfobservacoes.getText());
             String status = "Reservado";
             statement.setString(9, status);
-
             statement.executeUpdate();
             statement.close();
 
@@ -404,13 +493,10 @@ public class Nova_Reserva extends javax.swing.JFrame {
                     + "where id_acomodacao = ?";
             statement = conexao.prepareStatement(sql);
             statement.setString(1, status);
-            statement.setString(2, ida);
-
+            statement.setString(2,ida);
             statement.executeUpdate();
             statement.close();
-
             conexao.close();
-
             JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso.");
             ida = null;
             Nova_Reserva.this.dispose();
@@ -420,9 +506,9 @@ public class Nova_Reserva extends javax.swing.JFrame {
             Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-} catch (SQLException ex) {
+    } catch (SQLException ex) {
     Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
-}
+    }
     }//GEN-LAST:event_btnfinalizarnovareservaActionPerformed
 
     private void btnnovohospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovohospedeActionPerformed
@@ -441,13 +527,51 @@ public class Nova_Reserva extends javax.swing.JFrame {
 
     private void ftxtfdatainicioreservaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdatainicioreservaFocusLost
         salvandodatainicio = ftxtfdatainicioreserva.getText();
-        
+        String data = ftxtfdatainicioreserva.getText().trim();
+        if (data.equals("  /  /    ") || data.isEmpty()) {    // Verifica se o campo está vazio
+            ftxtfdatainicioreserva.setBorder(null);
+            ftxtfdatainicioreserva.setText("");
+        } else {
+            boolean isValid = validardata(data); // Chama a função validardata passando a data
+        if (isValid) {
+           ftxtfdatainicioreserva.setBorder(null);
+        } else {
+            ftxtfdatainicioreserva.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+        }
+        }   
     }//GEN-LAST:event_ftxtfdatainicioreservaFocusLost
 
     private void ftxtfdatafimreservaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdatafimreservaFocusLost
-        salvandodatafim = ftxtfdatafimreserva.getText();
-        
+    salvandodatafim = ftxtfdatafimreserva.getText();
+    String data = ftxtfdatafimreserva.getText().trim();
+    if (data.equals("  /  /    ") || data.isEmpty()) {    // Verifica se o campo está vazio
+        ftxtfdatafimreserva.setBorder(null);
+        ftxtfdatafimreserva.setText("");
+    } else {
+            boolean isValid = validardata(data); // Chama a função validardata passando a data
+            if (isValid) {
+                ftxtfdatafimreserva.setBorder(null);
+            } else {
+                ftxtfdatafimreserva.setBorder(BorderFactory.createLineBorder(Color.red, 2));  
+            }
+        }
     }//GEN-LAST:event_ftxtfdatafimreservaFocusLost
+
+    private void txtfnumerocriancasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtfnumerocriancasMouseClicked
+    if (txtfnumerocriancas.getText().equals("0")) {
+        txtfnumerocriancas.setText("");
+        }
+    }//GEN-LAST:event_txtfnumerocriancasMouseClicked
+
+    private void txtfnumerocriancasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtfnumerocriancasMouseExited
+        
+    }//GEN-LAST:event_txtfnumerocriancasMouseExited
+
+    private void txtfnumerocriancasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnumerocriancasFocusLost
+    if (txtfnumerocriancas.getText().equals("")) {
+        txtfnumerocriancas.setText("0");
+        }
+    }//GEN-LAST:event_txtfnumerocriancasFocusLost
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

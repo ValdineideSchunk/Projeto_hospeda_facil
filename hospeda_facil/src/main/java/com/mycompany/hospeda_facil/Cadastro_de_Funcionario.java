@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author NEY SCHUNK
+ * @author NEY SCHUNK ok
  */
 public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     public Cadastro_de_Funcionario() {
@@ -54,50 +54,47 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
     
-    public boolean validardata(String data) {
-        if (data == null || data.trim().isEmpty()) {// Verifica se a string de data está no formato correto
-            return false;
-        }
-        if (!data.matches("\\d{2}/\\d{2}/\\d{4}")) { // Verifica se a data está no formato DD/MM/YYYY
-            return false;
-        }
-        String[] partes = data.split("/"); // Data no formato DD/MM/YYYY
+public boolean validardata(String data) {
+    if (data == null || data.trim().isEmpty()) {// Verifica se a string de data está no formato correto
+        return false;
+    }
+    if (!data.matches("\\d{2}/\\d{2}/\\d{4}")) { // Verifica se a data está no formato DD/MM/YYYY
+        return false;
+    }
+    String[] partes = data.split("/"); // Data no formato DD/MM/YYYY
         int dia = Integer.parseInt(partes[0]);
         int mes = Integer.parseInt(partes[1]);
         int ano = Integer.parseInt(partes[2]);
 
-        if (mes < 1 || mes > 12) {    // Verifica se o mês é válido
+    if (mes < 1 || mes > 12) {    // Verifica se o mês é válido
+        return false;
+    }
+    if (dia < 1 || dia > 31) {   // Verifica se o dia é válido para o mês
+        return false;
+    }
+    if (ano > 2024) {    // Verifica se o ano é válido
+        return false;
+    }
+    if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {    // Verifica o número de dias em cada mês
+        if (dia > 30) {
             return false;
         }
-        if (dia < 1 || dia > 31) {   // Verifica se o dia é válido para o mês
-            return false;
-        }
-        if (ano > 2024) {    // Verifica se o ano é válido
-            return false;
-        }
-        if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {    // Verifica o número de dias em cada mês
-            if (dia > 30) {
+    } else if (mes == 2) {
+        if (anobissexto(ano)) {
+            if (dia > 29) {
                 return false;
             }
-        } else if (mes == 2) {
-            if (anobissexto(ano)) {
-                if (dia > 29) {
-                    return false;
-                }
-            } else {
-                if (dia > 28) {
-                    return false;
-                }
+        } else {
+            if (dia > 28) {
+                return false;
             }
         }
+    }
         return true;// Data válida
     }
     public static boolean anobissexto(int year) {// Função auxiliar para verificar se um ano é bissexto
-    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
-    
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -296,6 +293,11 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 ftxtfdatanascimentoFocusLost(evt);
             }
         });
+        ftxtfdatanascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftxtfdatanascimentoActionPerformed(evt);
+            }
+        });
         jPanel1.add(ftxtfdatanascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, 210, 30));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -437,12 +439,11 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnroutrosMouseClicked
 
     private void txtfcpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfcpfFocusLost
-        String cpf = txtfcpf.getText().trim();
-        
-         if (cpf.isEmpty()) {
+    String cpf = txtfcpf.getText().trim();
+        if (cpf.isEmpty()){
             txtfcpf.setBorder(null);
             lblerrocpf.setText("");  
-            return;                  
+        return;                  
         }
         cpf = cpf.replaceAll("[^0-9]", "");
         if (!ValidarCPF.validarCPF(cpf)) {
@@ -492,7 +493,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 ftxtfdatanascimento.getText().isEmpty() || (!btnrmasculino.isSelected() && !btnrfeminino.isSelected() && !btnroutros.isSelected()) ||
                 txtfnumerotelefone.getText().isEmpty() || txtfemail.getText().isEmpty() || ftxtfcep.getText().isEmpty() ||
                 cbxestados.getSelectedIndex() == 0 || txtfcidade.getText().isEmpty() || txtfbairro.getText().isEmpty() ||
-                txtfrua.getText().isEmpty() || txtfcomplemento.getText().isEmpty() || txtfobservacoes.getText().isEmpty() ||
+                txtfrua.getText().isEmpty() || txtfcomplemento.getText().isEmpty() ||
                 ftxtfdataadimisao.getText().isEmpty() || cbxcargos.getSelectedIndex() == 0 || txtfbanco.getText().isEmpty() ||
                 txtfconta.getText().isEmpty() || txtfagencia.getText().isEmpty() || ftxtfdataemissaocarteira.getText().isEmpty() )
             {
@@ -521,7 +522,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 return;
             }
             if (!txtfnumerotelefone.getText().trim().matches("\\d{0,13}")) {
-                JOptionPane.showMessageDialog(null, "Número de telefone inválido. Por favor, insira no Máximo 13 números.", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Número de telefone inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (!txtfemail.getText().contains("@")) {
@@ -540,11 +541,18 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Data de Emissão da Carteira inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
-            
-            
-            
-            
+            if (!txtfagencia.getText().trim().matches("\\d{0,13}")) {
+                JOptionPane.showMessageDialog(null, "Número da agência inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!txtfconta.getText().trim().matches("\\d{0,13}")) {
+                JOptionPane.showMessageDialog(null, "Número da conta inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (txtfobservacoes.getText().trim().isEmpty()) {
+            txtfobservacoes.setText(" ");
+            }
+
             try {
                 String data = ftxtfdatanascimento.getText();
                 String datanascimento = formatoData(data);
@@ -598,15 +606,13 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 statement.setString(19,txtfconta.getText());
                 statement.setBoolean(20,rbtnstatus.isSelected());
                 statement.setString(21,txtfobservacoes.getText());
-                
                 statement.executeUpdate();
                 statement.close();
                 conexao.close();
-                JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso.");
+                JOptionPane.showMessageDialog(null,"Funcionario cadastrado com sucesso.");
             } catch (SQLException ex) {
                 Logger.getLogger(Cadastro_de_Funcionario.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         } catch (SQLException ex) {
             Logger.getLogger(Cadastro_de_Funcionario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -615,16 +621,15 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
 
     private void txtfnomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnomeFocusLost
         String text = txtfnome.getText().trim();
-        if (!text.isEmpty() && !text.matches("[a-zA-Z\\s]+"))  {
-                txtfnome.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-                String mensagem = "Nome invalido";
-                lblerronome.setText(mensagem);
-                }else{
-                    txtfnome.setBorder(null);
-                    String mensagem = "";
-                    lblerronome.setText(mensagem);
+        if (!text.isEmpty() && !text.matches("[a-zA-Z\\s]+")){
+            txtfnome.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+            String mensagem = "Nome invalido";
+            lblerronome.setText(mensagem);
+        }else{
+            txtfnome.setBorder(null);
+            String mensagem = "";
+            lblerronome.setText(mensagem);
         }
-        
     }//GEN-LAST:event_txtfnomeFocusLost
 
     private void txtfrgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfrgFocusLost
@@ -637,9 +642,7 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
             txtfrg.setBorder(null);
             String mensagem = "";
             lblerrorg.setText(mensagem);
-        
-    }
-                 
+        }           
     }//GEN-LAST:event_txtfrgFocusLost
 
     private void ftxtfdatanascimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdatanascimentoFocusLost
@@ -653,11 +656,11 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
                 ftxtfdatanascimento.setBorder(null);
                 lblerrodatanascimento.setText("");
                  String datanascimento = formatoData(data); // Chame formatoData apenas se a data for válida
-        } else {
-            ftxtfdatanascimento.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-            lblerrodatanascimento.setText("Data inválida");
+            } else {
+                ftxtfdatanascimento.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+                lblerrodatanascimento.setText("Data inválida");
+            }
         }
-    }
     }//GEN-LAST:event_ftxtfdatanascimentoFocusLost
 
     private void txtfnumerotelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfnumerotelefoneFocusLost
@@ -747,6 +750,10 @@ public class Cadastro_de_Funcionario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_ftxtfdataemissaocarteiraFocusLost
+
+    private void ftxtfdatanascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtfdatanascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxtfdatanascimentoActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

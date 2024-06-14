@@ -57,20 +57,16 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
     
-     public void DetalhesAcomodacao(){
+    public void DetalhesAcomodacao(){
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
-            declaracaoPreparada = conexao.prepareStatement(
-                    "SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
+            declaracaoPreparada = conexao.prepareStatement("SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
             declaracaoPreparada.setInt(1, idAcomodacao);
             resultado = declaracaoPreparada.executeQuery();
             
@@ -78,18 +74,15 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
                 try {
                     String tipo_acomodacao = resultado.getString("tipo_quarto");
                     if("Individual".equals(tipo_acomodacao)){
-                       btnrindividual.setSelected(true);
+                        btnrindividual.setSelected(true);
                     }else if("Duplo".equals(tipo_acomodacao)){
-                       btnrduplo.setSelected(true);
+                        btnrduplo.setSelected(true);
                     }else if("Triplo".equals(tipo_acomodacao)){
-                       btnrtriplo.setSelected(true);
+                        btnrtriplo.setSelected(true);
                     } else {
-                       btnrsuite.setSelected(true);
+                        btnrsuite.setSelected(true);
                     }
-                    
                     String status = resultado.getString("status_quarto");
-                   
-                   
                     boolean wifi = resultado.getBoolean("comodidade_wifi");
                     if(Boolean.TRUE.equals(wifi)){
                        cbxwifi.setSelected(true);
@@ -114,18 +107,15 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
                     txtfnomeacomodacao.setText(resultado.getString("nome_acomodacao"));
                     txtfnumeroacomodacao.setText(resultado.getString("id_acomodacao"));
                     txtfdescricao.setText(resultado.getString("descricao"));
-
                     boolean bloqueado = resultado.getBoolean("bloqueio_acomodacao");
                     btnrrestricao.setSelected(bloqueado);
                     if(Boolean.TRUE.equals(bloqueado)){
                         String dataBanco = resultado.getString("periodo_bloqueio_inicio");
                         String dataInicio = formatoDatavoltando(dataBanco);
                         ftxtfdatainicio.setText(dataInicio);
-                        
                         dataBanco = resultado.getString("periodo_bloqueio_fim");
                         dataInicio = formatoDatavoltando(dataBanco);
                         ftxtfdatafinal.setText(dataInicio);
-                        
                         txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));    
                     }
                 } catch (SQLException ex) {
@@ -136,7 +126,6 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             Logger.getLogger(Visualizando_Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -314,28 +303,24 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnrindividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrindividualActionPerformed
-        // TODO add your handling code here:
-        btnrduplo.setSelected(false);
+         btnrduplo.setSelected(false);
         btnrtriplo.setSelected(false);
         btnrsuite.setSelected(false);
     }//GEN-LAST:event_btnrindividualActionPerformed
 
     private void btnrduploActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrduploActionPerformed
-        // TODO add your handling code here:
         btnrindividual.setSelected(false);
         btnrtriplo.setSelected(false);
         btnrsuite.setSelected(false);
     }//GEN-LAST:event_btnrduploActionPerformed
 
     private void btnrtriploActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrtriploActionPerformed
-        // TODO add your handling code here:
         btnrduplo.setSelected(false);
         btnrindividual.setSelected(false);
         btnrsuite.setSelected(false);
     }//GEN-LAST:event_btnrtriploActionPerformed
 
     private void btnrsuiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrsuiteActionPerformed
-        // TODO add your handling code here:
         btnrduplo.setSelected(false);
         btnrtriplo.setSelected(false);
         btnrindividual.setSelected(false);
@@ -373,7 +358,6 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
 
     private void btnsalvaralteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesActionPerformed
         try {
-            // TODO add your handling code here:
             String opcaoSelecionada = null;
             if (btnrindividual.isSelected()) {
                 opcaoSelecionada = "Individual";
@@ -384,27 +368,19 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             }else if (btnrsuite.isSelected()) {
                 opcaoSelecionada ="Suite";
             }
-            
             boolean wifi = cbxwifi.isSelected();
             boolean arCondicionado = cbxarcondicionado.isSelected();
             boolean tv = cbxtv.isSelected();
             boolean frigobar = cbxfrigibar.isSelected();
             boolean acessibilidade = cbxacessibilidade.isSelected();
-            
-            
             boolean bloqueio = btnrrestricao.isSelected();
-            
-            
-            
-            
+
             Connection conexao = null;
             PreparedStatement statement = null;
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario ="root";
             String senha ="";
             conexao =DriverManager.getConnection(url,usuario,senha);
-            
-            
             String sql = "UPDATE acomodacoes SET tipo_quarto = ?,capacidade = ?,nome_acomodacao = ?,comodidade_wifi = ?,"
                     + "comodidade_arcondicionado = ?,comodidade_tv = ?,comodidade_frigobar = ?,comodidade_acessibilidade = ?,descricao = ?,"
                     + "bloqueio_acomodacao = ?,periodo_bloqueio_inicio = ?,periodo_bloqueio_fim = ?,motivo_bloqueio = ?,status_quarto = ?"
@@ -425,7 +401,6 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             if(btnrrestricao.isSelected()){
                 String data = ftxtfdatainicio.getText();
                 String datainicio = formatoData(data);
-                
                 data = ftxtfdatafinal.getText();
                 String datafinal = formatoData(data);
                   
@@ -464,10 +439,7 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
                 statement.setString(13," ");
                 statement.setString(14,"Disponivels");
             }
- 
             statement.setString(15,txtfnumeroacomodacao.getText());
-            
-
             statement.executeUpdate();
             statement.close();
             conexao.close();
