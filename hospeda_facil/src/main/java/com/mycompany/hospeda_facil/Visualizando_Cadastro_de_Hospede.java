@@ -183,6 +183,12 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnroutros, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 212, -1, -1));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 597, 150, 50));
 
         txtfnumerohospede.setEditable(false);
@@ -373,6 +379,12 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         Editando_Cadastro_de_Hospede objeto2 = new Editando_Cadastro_de_Hospede();
         objeto2.setVisible(true);
     }//GEN-LAST:event_btneditarMouseClicked
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Visualizando_Cadastro_de_Hospede.this.dispose();
+        Lista_de_Hóspede objeto2 = new Lista_de_Hóspede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

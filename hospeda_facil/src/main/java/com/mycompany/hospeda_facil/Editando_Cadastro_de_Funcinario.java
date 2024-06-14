@@ -256,6 +256,12 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtnnumerofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtnnumerofuncionario.setBorder(null);
         jPanel1.add(txtnnumerofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 172, 110, 30));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 610, 170, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -500,6 +506,12 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
             ftxtfcep.setBorder(null);
         }
     }//GEN-LAST:event_ftxtfcepFocusLost
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Editando_Cadastro_de_Funcinario.this.dispose();
+        Lista_de_Funcionários objeto2 = new Lista_de_Funcionários();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     private boolean  validarCPF(String cpf) {
         if (cpf == null || cpf.length() != 11) {
             return false;

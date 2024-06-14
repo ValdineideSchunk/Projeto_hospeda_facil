@@ -251,6 +251,12 @@ public boolean validardata(String data) {
         txtnnumerofuncionario.setBorder(null);
         txtnnumerofuncionario.setEnabled(false);
         jPanel1.add(txtnnumerofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 172, 110, 30));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 613, 170, 50));
 
         ftxtfdataadimisao.setBorder(null);
@@ -611,6 +617,9 @@ public boolean validardata(String data) {
                 statement.close();
                 conexao.close();
                 JOptionPane.showMessageDialog(null,"Funcionario cadastrado com sucesso.");
+                Cadastro_de_Funcionario.this.dispose();
+                Lista_de_Funcionários objeto2 = new Lista_de_Funcionários();
+                objeto2.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(Cadastro_de_Funcionario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -755,6 +764,12 @@ public boolean validardata(String data) {
     private void ftxtfdatanascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtfdatanascimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ftxtfdatanascimentoActionPerformed
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Cadastro_de_Funcionario.this.dispose();
+        Menu_Principal objeto2 = new Menu_Principal();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

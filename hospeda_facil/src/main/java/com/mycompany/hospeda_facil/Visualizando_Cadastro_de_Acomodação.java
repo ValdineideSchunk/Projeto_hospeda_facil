@@ -238,6 +238,12 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         }
         ftxtfdatafinal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(ftxtfdatafinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 438, 120, 30));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 586, 160, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -365,6 +371,12 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
     Editando_Cadastro_de_Acomodação objeto2 = new Editando_Cadastro_de_Acomodação();
     objeto2.setVisible(true);
     }//GEN-LAST:event_btneditarMouseClicked
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Visualizando_Cadastro_de_Acomodação.this.dispose();
+        Lista_de_Acomodações objeto2 = new Lista_de_Acomodações();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

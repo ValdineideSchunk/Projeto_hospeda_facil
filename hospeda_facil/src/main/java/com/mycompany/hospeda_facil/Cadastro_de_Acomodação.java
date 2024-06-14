@@ -155,6 +155,12 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
         }
         ftxtfdatafinal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(ftxtfdatafinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 438, 140, 30));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 583, 150, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -335,12 +341,18 @@ public class Cadastro_de_Acomodação extends javax.swing.JFrame {
             conexao.close();
             JOptionPane.showMessageDialog(null,"Acomodação cadastrada com sucesso.");
             Cadastro_de_Acomodação.this.dispose();
-            Menu_Principal objeto2 = new Menu_Principal();
+            Lista_de_Acomodações objeto2 = new Lista_de_Acomodações();
             objeto2.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }//GEN-LAST:event_btnfinalizarcadastroActionPerformed
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Cadastro_de_Acomodação.this.dispose();
+        Menu_Principal objeto2 = new Menu_Principal();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

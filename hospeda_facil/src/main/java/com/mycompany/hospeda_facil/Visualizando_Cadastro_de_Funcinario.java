@@ -288,6 +288,12 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfnumerofuncionario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfnumerofuncionario.setBorder(null);
         jPanel1.add(txtfnumerofuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 172, 110, 30));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 610, 160, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -410,6 +416,12 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
     Editando_Cadastro_de_Funcinario objeto2 = new Editando_Cadastro_de_Funcinario();
     objeto2.setVisible(true);
     }//GEN-LAST:event_btneditarMouseClicked
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Visualizando_Cadastro_de_Funcinario.this.dispose();
+        Lista_de_Funcionários objeto2 = new Lista_de_Funcionários();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -172,6 +172,12 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 531, 82, 90));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 570, 150, 50));
 
         btnsalvaralteracoes.addActionListener(new java.awt.event.ActionListener() {
@@ -330,6 +336,12 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
             Logger.getLogger(Editando_Reserva_Depois_Checkin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnsalvaralteracoesActionPerformed
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Editando_Reserva_Depois_Checkin.this.dispose();
+        Lista_de_Reserva objeto2 = new Lista_de_Reserva();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -140,7 +140,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="829" y="390" width="260" height="27"/>
+              <AbsoluteConstraints x="829" y="392" width="260" height="27"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -250,6 +250,9 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnvoltar">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnvoltarActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="460" y="597" width="160" height="50"/>

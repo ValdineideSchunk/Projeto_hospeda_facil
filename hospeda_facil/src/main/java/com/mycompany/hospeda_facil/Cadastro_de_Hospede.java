@@ -140,7 +140,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
 
         txtfcidade.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfcidade.setBorder(null);
-        jPanel1.add(txtfcidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(829, 390, 260, 27));
+        jPanel1.add(txtfcidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(829, 392, 260, 27));
 
         txtfbairro.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtfbairro.setBorder(null);
@@ -181,6 +181,12 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnroutros, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 212, -1, -1));
+
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 597, 160, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -446,7 +452,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
                 conexao.close();
                 JOptionPane.showMessageDialog(null,"Hospede Cadastrado Com Sucesso..");
                 Cadastro_de_Hospede.this.dispose();
-                Menu_Principal objeto2 = new Menu_Principal();
+                Lista_de_Hóspede objeto2 = new Lista_de_Hóspede();
                 objeto2.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
@@ -538,6 +544,12 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
             lblerrocep.setText(mensagem);
         }
     }//GEN-LAST:event_lblerrocepFocusLost
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Cadastro_de_Hospede.this.dispose();
+        Lista_de_Hóspede objeto2 = new Lista_de_Hóspede();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

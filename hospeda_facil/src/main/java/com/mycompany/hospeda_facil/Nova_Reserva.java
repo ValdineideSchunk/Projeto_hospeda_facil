@@ -313,6 +313,11 @@ public void prencherdadosacomodacao(){
         jPanel1.add(btnnovohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 200, 40));
 
         btnvoltar.setBorder(null);
+        btnvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 570, 140, 50));
 
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -607,6 +612,12 @@ public void prencherdadosacomodacao(){
         txtfnumerocriancas.setText("0");
         }
     }//GEN-LAST:event_txtfnumerocriancasFocusLost
+
+    private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
+        Nova_Reserva.this.dispose();
+        Menu_Principal objeto2 = new Menu_Principal();
+        objeto2.setVisible(true);
+    }//GEN-LAST:event_btnvoltarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
