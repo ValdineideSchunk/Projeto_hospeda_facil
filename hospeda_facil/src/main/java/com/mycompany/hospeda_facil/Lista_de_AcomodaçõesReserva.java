@@ -28,13 +28,13 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
     public Lista_de_AcomodaçõesReserva() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btnmenu, btnhospede,btnpesquisaracomodacao,
         btnreserva, btnmapa, btnajustes,btnnovaacomodação,
         btnpesquisarporcpf,btnpesquisarpornome};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfpesquisaacomodação};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
     }
@@ -175,7 +175,7 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    public void PopularTbllistaacomodacoes(String sql){
+    public void PopularTbllistaacomodacoes(String sql){    //Função responsavel por polular a lista de acomodações
         try {
             Connection conexao = null;
             PreparedStatement statement = null;
@@ -183,16 +183,11 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
             String usuario ="root";
             String senha ="";
             conexao =DriverManager.getConnection(url,usuario,senha);
-            
             PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
-            
             banco.execute();
             ResultSet resultado = banco.executeQuery(sql);
-            
             DefaultTableModel model = (DefaultTableModel) tbllistaacomodacoes.getModel();
-            
             model.setNumRows(0);
-            
             while(resultado.next())
             {
                 model.addRow(new Object[]
@@ -204,14 +199,12 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
                     resultado.getString("status_quarto"),
                 });
             }
-            
             conexao.close();
             banco.close();
         } catch (SQLException ex) {
             Logger.getLogger(Lista_de_AcomodaçõesReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
         Lista_de_AcomodaçõesReserva.this.dispose();
         Menu_Principal objeto2 = new Menu_Principal();
@@ -254,15 +247,12 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbllistaacomodacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistaacomodacoesMouseClicked
-        
         int linha = tbllistaacomodacoes.getSelectedRow();
-        ida = tbllistaacomodacoes.getValueAt(linha, 0).toString();
-        
+        ida = tbllistaacomodacoes.getValueAt(linha, 0).toString(); // evento responsavel por chamar a funcionalidade responsavel por criar novas reserva
         Lista_de_AcomodaçõesReserva.this.dispose();
         Nova_Reserva objeto2 = new Nova_Reserva();
         objeto2.setVisible(true);
         objeto2.prencherDadosHospede(); 
-        
     }//GEN-LAST:event_tbllistaacomodacoesMouseClicked
 
     private void btnpesquisarporcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarporcpfActionPerformed
@@ -276,11 +266,10 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_btnpesquisarpornomeActionPerformed
 
     private void btnpesquisaracomodacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisaracomodacaoActionPerformed
-        String textoDoCampo = txtfpesquisaacomodação.getText();
+        String textoDoCampo = txtfpesquisaacomodação.getText(); //evento responsavel por pesquisar acomodações de acordo com o filtro selecionado
         switch(pesquisa) {
             case 1:
             this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes WHERE nome_acomodacao LIKE '%" + textoDoCampo + "%'");
-
             break;
             case 2:
             this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes WHERE id_acomodacao = '" + textoDoCampo + "'");

@@ -28,17 +28,17 @@ public class Check_in extends javax.swing.JFrame {
     public Check_in() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = { // chamando função para transformar botões tranparente
         btnfinalizarreserva, btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
         JTextField[] textFields = {
-        ftxtfdataentrada, txtfacomodacao, txtfhospede};
+        ftxtfdataentrada, txtfacomodacao, txtfhospede};// chamando função para transformar TextField tranparente
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
 
         PopulandoRCheckin(); 
     }
-    public String formatoDatavoltando(String data) {
+    public String formatoDatavoltando(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -47,7 +47,7 @@ public class Check_in extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
     
-     public void PopulandoRCheckin(){    
+     public void PopulandoRCheckin(){    //Função responsavel por polular a tela
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
@@ -161,6 +161,8 @@ public class Check_in extends javax.swing.JFrame {
     }//GEN-LAST:event_btnvoltarActionPerformed
 
     private void btnfinalizarreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarreservaActionPerformed
+        
+             //evento responsavel por salvar as informações no banco de dados
         try {
             Connection conexao = null;
             PreparedStatement statement = null;

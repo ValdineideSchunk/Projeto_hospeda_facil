@@ -28,12 +28,12 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
     public Editando_Cadastro_de_Hospede() {
         initComponents();
         DetalhesHospede();
-        JButton[] buttons = {
+        JButton[] buttons = { // chamando função para transformar botões transparente
         btnsalvaralteracoes, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfnome, txtfrg, txtfcpf, txtfdatanascimento,
         txtfnumerotelefone, txtfemail, txtfcep,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento,
@@ -41,14 +41,9 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
         cbxestados.setOpaque(false);
-        cbxestados.setBackground(new Color(0, 0, 0, 0));
-        
-        
-        
-        
+        cbxestados.setBackground(new Color(0, 0, 0, 0));  
     }
-    public void DetalhesHospede(){
-        
+    public void DetalhesHospede(){    //Função responsavel por polular a tela
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
@@ -66,7 +61,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
             resultado = declaracaoPreparada.executeQuery();
 
             if (resultado.next()) {
-                
                 try {
                     String sexo = resultado.getString("sexo");
                     if("Masculino".equals(sexo)){
@@ -77,8 +71,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
                         btnroutros.setSelected(true);
                     }
                     String estado = resultado.getString("estado");
-                    
-                    
                     txtfnumerohospede.setText(resultado.getString("id_hospede"));
                     txtfnome.setText(resultado.getString("nome_hospede"));
                     txtfrg.setText(resultado.getString("rg"));
@@ -92,21 +84,9 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
                     txtfrua.setText(resultado.getString("rua"));
                     txtfcomplemento.setText(resultado.getString("complemento"));
                     txtfobservacoes.setText(resultado.getString("observacoes"));
-                    
-                    
-                    
                     String databanco = resultado.getString("data_nascimento");
                     String datanascimento = formatoDatavoltando(databanco);
-                    txtfdatanascimento.setText(datanascimento);
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                    txtfdatanascimento.setText(datanascimento);  
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -397,13 +377,9 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsalvaralteracoesActionPerformed
 
     private void btnsalvaralteracoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseClicked
-
         try {
-            
             String data = txtfdatanascimento.getText();
             String datanascimento = formatoData(data);
-            
-
             String opcaoSelecionada = null;
             if (btnrmasculino.isSelected()) {
                 opcaoSelecionada = "Masculino";
@@ -415,19 +391,14 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
             String estadoselecionado = (String) cbxestados.getSelectedItem();
             Connection conexao = null;
             PreparedStatement statement = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
             String sql = "UPDATE hospedes SET nome_hospede = ?, rg = ?, cpf = ?, data_nascimento = ?, sexo = ?, celular = ?, "
                     + "email = ?, cep = ?, Estado = ?, cidade = ?, bairro = ?, rua = ?, complemento = ?, observacoes = ? "
                     + "WHERE id_hospede = ?";
-            
             statement = conexao.prepareStatement(sql);
-            
             statement.setString(1,txtfnome.getText());
             statement.setString(2,txtfrg.getText());
             statement.setString(3,txtfcpf.getText());
@@ -443,7 +414,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
             statement.setString(13,txtfcomplemento.getText());
             statement.setString(14,txtfobservacoes.getText());
             statement.setString(15,txtfnumerohospede.getText());
-            
             statement.executeUpdate();
             statement.close();
             conexao.close();
@@ -451,7 +421,6 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Editando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_btnsalvaralteracoesMouseClicked
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed

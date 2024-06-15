@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author NEY SCHUNK
  */
-public class validarCPFExistenteBanco {
+public class validarCPFExistenteBanco {// classe para verificar no momento do cadastro do  hospede se o CPF ja se encontra no banco de dados
     public static boolean validarCPFExistentehospede(String cpf) throws SQLException {
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -47,8 +47,9 @@ public class validarCPFExistenteBanco {
 
         return false;
     }
+                                            
     public static boolean validarCPFExistentefuncionario(String cpf) throws SQLException {
-        Connection conexao = null;
+        Connection conexao = null;            // classe para verificar no momento do cadastro do  hospede se o CPF ja se encontra no banco de dados
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
@@ -79,10 +80,5 @@ public class validarCPFExistenteBanco {
 
         return false;
     }
-    
-    
-    
-    
-    
-    
+
 }

@@ -30,12 +30,12 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         initComponents();
         DetalhesFuncionario();
         
-        JButton[] buttons = {
+        JButton[] buttons = { // chamando função para transformar botões tranparente
         btnsalvaralteracoes, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};    
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField tranparente
         txtfnome, txtfrg, txtfcpf, ftxtfdatanascimento,
         txtfnumerotelefone, txtfemail, ftxtfcep,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes,
@@ -49,15 +49,15 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         cbxcargos.setBackground(new Color(0, 0, 0, 0));
             
     }
-    public String formatoDatavoltando(String data) {
-        String dateStr = data;//Data no formato DD/MM/YYYY
+    public String formatoDatavoltando(String data) {// formatar data
+        String dateStr = data;//Data no formato YYYY/MM/dd
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
-        return formattedDate;// retorno -> YYYY/MM/DD
+        return formattedDate;// retorno -> dd/MM/YYYY
     }
-    public String formatoData(String data) {
+    public String formatoData(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -65,7 +65,7 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
-    public void DetalhesFuncionario(){
+    public void DetalhesFuncionario(){    //Função responsavel por polular a tela
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
@@ -430,6 +430,8 @@ public class Editando_Cadastro_de_Funcinario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnsalvaralteracoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesMouseClicked
+            
+             //evento responsavel por salvar as informações no banco de dados
         try {
             String data = ftxtfdatanascimento.getText();
             String datanascimento = formatoData(data);

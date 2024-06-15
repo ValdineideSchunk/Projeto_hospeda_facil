@@ -33,7 +33,6 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
         btnsalvaralteracoes, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
-        
         JTextField[] textFields = {
             txtfcpf, txtfnomehospede, txtfnumeroadutos, txtfnumeroreserva,
             txtfnumerocriancas, txtfacomodacao,txtfvalordiaria,txtfobservacoes,
@@ -52,24 +51,19 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
-    
-     public void PopulandoReservas(){    
+    public void PopulandoReservas(){    
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
             declaracaoPreparada = conexao.prepareStatement(
                     "SELECT * FROM view_informacoes_reserva WHERE id_reserva = ?");
             declaracaoPreparada.setInt(1, idreserva);
             resultado = declaracaoPreparada.executeQuery();
-            
             if (resultado.next()) {
                 try {
                     String databanco = resultado.getString("data_checkin");
@@ -93,12 +87,10 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
                 }
-   
             }
         } catch (SQLException ex) {
             Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
      }
      public String formatoData(String data) {
         String dateStr = data;//Data no formato DD/MM/YYYY
@@ -300,24 +292,17 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
         try {
             Connection conexao = null;
             PreparedStatement statement = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
             String sql = "UPDATE reservas SET fk_acomodacao = ?, data_checkin = ?, data_checkout = ?, valor_diaria = ?,"
                     + " numero_adulto = ?, numero_crianca = ?, observacoes = ? WHERE id_reserva = ?";
-            
             statement = conexao.prepareStatement(sql);
-            
             String data = ftxtfdatainicioreserva.getText();
             String datainicio = formatoData(data);
-
             data = ftxtfdatafimreserva.getText();
             String datafim = formatoData(data);
-            
             statement.setString(1,idacomodacao);
             statement.setString(2,datainicio);
             statement.setString(3,datafim);
@@ -326,8 +311,6 @@ public class Editando_Reserva_Depois_Checkin extends javax.swing.JFrame {
             statement.setString(6,txtfnumerocriancas.getText());
             statement.setString(7,txtfobservacoes.getText());
             statement.setString(8,id);
-            
-            
             statement.executeUpdate();
             statement.close();
             conexao.close();

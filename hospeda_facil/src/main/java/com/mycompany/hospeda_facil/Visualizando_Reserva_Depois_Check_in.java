@@ -26,19 +26,19 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
     public Visualizando_Reserva_Depois_Check_in() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btneditarreserva, btnmenu, btnhospede,btnreserva,
         btnmapa, btnajustes,btncheckout,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfcpf,txtfnomehospede,txtfvalordiaria,txtfnumeroadultos,txtfnumerocriacas,observacoes,
         txtfacomodacao,txtfnumeroreserva,ftxtfdatafimreserva,ftxtfdatainicioreserva,txtfstatusreserva};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         PopulandoReservas();
          
     }
-     public String formatoDatavoltando(String data) {
+     public String formatoDatavoltando(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -47,23 +47,19 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
      
-    public void PopulandoReservas(){    
+    public void PopulandoReservas(){        //Função responsavel por polular a tela
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
             declaracaoPreparada = conexao.prepareStatement(
                     "SELECT * FROM view_informacoes_reserva WHERE id_reserva = ?");
             declaracaoPreparada.setInt(1, idreserva);
             resultado = declaracaoPreparada.executeQuery();
-            
             if (resultado.next()) {
                 try {
                     String databanco = resultado.getString("data_checkin");
@@ -86,18 +82,11 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
                 }
-   
             }
         } catch (SQLException ex) {
             Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
      }
-     
-     
-     
-     
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -376,7 +365,5 @@ public class Visualizando_Reserva_Depois_Check_in extends javax.swing.JFrame {
     private javax.swing.JTextField txtfvalordiaria;
     // End of variables declaration//GEN-END:variables
 
-    
-
-    
+  
 }

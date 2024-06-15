@@ -28,11 +28,11 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
     public Visualizando_Reservas_Canceladas_Finalizadas() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btnmenu, btnhospede,btnreserva, btnmapa, btnajustes,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfcpf,txtfnomehospede,txtfvalordiaria,txtfnumeroadultos,txtfnumerocriacas,
         observacoes,txtfacomodacao,txtfnumeroreserva,ftxtfdatafimreserva,ftxtfdatainicioreserva,
         txtfstatusreserva};
@@ -40,7 +40,7 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
         
         PopulandoReservas(); 
     }
-    public String formatoDatavoltando(String data) {
+    public String formatoDatavoltando(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -54,18 +54,14 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
             declaracaoPreparada = conexao.prepareStatement(
                     "SELECT * FROM view_informacoes_reserva WHERE id_reserva = ?");
             declaracaoPreparada.setInt(1, idreserva);
             resultado = declaracaoPreparada.executeQuery();
-            
             if (resultado.next()) {
                 try {
                     String databanco = resultado.getString("data_checkin");
@@ -95,8 +91,6 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
         }
     
      }
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -30,17 +30,17 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         initComponents();
         
         DetalhesAcomodacao();
-        JButton[] buttons = {
+        JButton[] buttons = { // chamando função para transformar botões tranparente
         btnsalvaralteracoes, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField tranparente
         txtfcapacidade,txtfnumeroacomodacao,txtfnomeacomodacao,txtfdescricao,
         txtfmotivobloqueio,ftxtfdatafinal,ftxtfdatainicio};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
     }
-    public String formatoData(String data) {
+    public String formatoData(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -48,16 +48,16 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;// retorno -> YYYY/MM/DD
     }
-    public String formatoDatavoltando(String data) {
-        String dateStr = data;//Data no formato DD/MM/YYYY
+    public String formatoDatavoltando(String data) {// formatar data
+        String dateStr = data;//Data no formato yyyy/MM/dd
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
-        return formattedDate;// retorno -> YYYY/MM/DD
+        return formattedDate;// retorno -> dd/MM/yyyy
     }
     
-    public void DetalhesAcomodacao(){
+    public void DetalhesAcomodacao(){    //Função responsavel por polular a tela
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
@@ -364,6 +364,8 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnsalvaralteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvaralteracoesActionPerformed
+        
+             //evento responsavel por salvar as informações no banco de dados
         try {
             String opcaoSelecionada = null;
             if (btnrindividual.isSelected()) {

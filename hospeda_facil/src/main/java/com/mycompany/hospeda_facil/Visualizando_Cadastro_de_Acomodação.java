@@ -27,17 +27,17 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         initComponents();
         DetalhesAcomodacao();
         JButton[] buttons = {
-        btneditar, btnmenu, btnhospede,
+        btneditar, btnmenu, btnhospede,//Função responsavel por preecher dados do hospede 
         btnreserva, btnmapa, btnajustes,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfcapacidade,txtfnumeroacomodacao,txtfnomeacomodacao,txtfdescricao,
         txtfmotivobloqueio,ftxtfdatafinal,ftxtfdatainicio};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
            
     }
-    public String formatoDatavoltando(String data) {
+    public String formatoDatavoltando(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -46,24 +46,19 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
         
-    public void DetalhesAcomodacao(){
+    public void DetalhesAcomodacao(){    //Função responsavel por polular a tela
         try {
-            
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
             declaracaoPreparada = conexao.prepareStatement(
                     "SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
             declaracaoPreparada.setInt(1, idAcomodacao);
             resultado = declaracaoPreparada.executeQuery();
-            
             if (resultado.next()) {
                 try {
                     String tipo_acomodacao = resultado.getString("tipo_quarto");
@@ -76,7 +71,6 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
                     } else {
                        btnrsuite.setSelected(true);
                     }
-                   
                     boolean wifi = resultado.getBoolean("comodidade_wifi");
                     if(Boolean.TRUE.equals(wifi)){
                        cbxwifi.setSelected(true);
@@ -101,18 +95,15 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
                     txtfnomeacomodacao.setText(resultado.getString("nome_acomodacao"));
                     txtfnumeroacomodacao.setText(resultado.getString("id_acomodacao"));
                     txtfdescricao.setText(resultado.getString("descricao"));
-
                     boolean bloqueado = resultado.getBoolean("bloqueio_acomodacao");
                     btnrrestricao.setSelected(bloqueado);
                     if(Boolean.TRUE.equals(bloqueado)){
                         String dataBanco = resultado.getString("periodo_bloqueio_inicio");
                         String dataInicio = formatoDatavoltando(dataBanco);
                         ftxtfdatainicio.setText(dataInicio);
-                        
                         dataBanco = resultado.getString("periodo_bloqueio_fim");
                         dataInicio = formatoDatavoltando(dataBanco);
                         ftxtfdatafinal.setText(dataInicio);
-                        
                         txtfmotivobloqueio.setText(resultado.getString("motivo_bloqueio"));    
                     }
 
@@ -124,8 +115,6 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
             Logger.getLogger(Visualizando_Cadastro_de_Acomodação.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -366,10 +355,9 @@ public class Visualizando_Cadastro_de_Acomodação extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btneditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseClicked
-        // TODO add your handling code here:
-    Visualizando_Cadastro_de_Acomodação.this.dispose();
-    Editando_Cadastro_de_Acomodação objeto2 = new Editando_Cadastro_de_Acomodação();
-    objeto2.setVisible(true);
+        Visualizando_Cadastro_de_Acomodação.this.dispose();
+        Editando_Cadastro_de_Acomodação objeto2 = new Editando_Cadastro_de_Acomodação();
+        objeto2.setVisible(true);
     }//GEN-LAST:event_btneditarMouseClicked
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed

@@ -26,14 +26,12 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
     int pesquisa = 0;
     public Lista_de_Acomodações() {
         initComponents();
-        
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btnmenu, btnhospede,btnpesquisaracomodacao,
         btnreserva, btnmapa, btnajustes,btnnovaacomodação,
         btnpesquisarporcpf,btnpesquisarpornome};
         Efeitos_Botoes.EfeitosBotoes(buttons);
-        
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfpesquisaacomodação};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
     }
@@ -174,7 +172,7 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    public void PopularTbllistaacomodacoes(String sql){
+    public void PopularTbllistaacomodacoes(String sql){    //Função responsavel por popilart lista de acomodações
         try {
             Connection conexao = null;
             PreparedStatement statement = null;
@@ -182,16 +180,11 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
             String usuario ="root";
             String senha ="";
             conexao =DriverManager.getConnection(url,usuario,senha);
-            
             PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
-            
             banco.execute();
             ResultSet resultado = banco.executeQuery(sql);
-            
             DefaultTableModel model = (DefaultTableModel) tbllistaacomodacoes.getModel();
-            
             model.setNumRows(0);
-            
             while(resultado.next())
             {
                 model.addRow(new Object[]
@@ -203,7 +196,6 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
                     resultado.getString("status_quarto"),
                 });
             }
-            
             conexao.close();
             banco.close();
         } catch (SQLException ex) {
@@ -253,9 +245,7 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
 
     private void tbllistaacomodacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistaacomodacoesMouseClicked
         int linha = tbllistaacomodacoes.getSelectedRow();
-
         id = tbllistaacomodacoes.getValueAt(linha, 0).toString();
-        
         Lista_de_Acomodações.this.dispose();
         Visualizando_Cadastro_de_Acomodação objeto2 = new Visualizando_Cadastro_de_Acomodação();
         objeto2.setVisible(true);
@@ -272,11 +262,10 @@ public class Lista_de_Acomodações extends javax.swing.JFrame {
     }//GEN-LAST:event_btnpesquisarpornomeActionPerformed
 
     private void btnpesquisaracomodacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisaracomodacaoActionPerformed
-        String textoDoCampo = txtfpesquisaacomodação.getText();
+        String textoDoCampo = txtfpesquisaacomodação.getText();  //evento responsavel por pesquisar avomodação de acordo com o filtro selecionado 
         switch(pesquisa) {
             case 1:
                 this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes WHERE nome_acomodacao LIKE '%" + textoDoCampo + "%'");
-            
             break;
             case 2:
                 this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes WHERE id_acomodacao = '" + textoDoCampo + "'");

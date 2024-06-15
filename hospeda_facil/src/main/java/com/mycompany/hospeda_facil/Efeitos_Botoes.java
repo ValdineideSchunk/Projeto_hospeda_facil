@@ -16,7 +16,7 @@ import javax.swing.JButton;
  */
 public class Efeitos_Botoes {
     
-    public static void EfeitosBotoes(JButton[] buttons) {
+    public static void EfeitosBotoes(JButton[] buttons) {// class responsavel por transformar a aparencia dos botões transparentes
         for (int i = 0; i < buttons.length; i++) {
             JButton button = buttons[i];
             button.setContentAreaFilled(false);
@@ -24,12 +24,12 @@ public class Efeitos_Botoes {
             button.setBorder(BorderFactory.createEmptyBorder());
             button.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void mouseEntered(MouseEvent e) { // criar borda quando mouse estiver sobre o botão
                     button.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
                 }
 
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void mouseExited(MouseEvent e) { // retirar a borda quando o mouse sair do botão
                     button.setBorder(BorderFactory.createEmptyBorder());
                 }
             });

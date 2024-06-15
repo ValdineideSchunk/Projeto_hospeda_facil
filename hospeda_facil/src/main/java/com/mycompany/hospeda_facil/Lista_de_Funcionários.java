@@ -26,20 +26,20 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
     public Lista_de_Funcionários() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btnmenu, btnhospede,btnpesquisarfuncionario,
         btnreserva, btnmapa, btnajustes,btnnovofuncionario,
         btnpesquisarpornome,btnpesquisarporcpf};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfpesquisafuncionario};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
         
         
     }
-    public void PopularTbllistafuncionarios(String sql) {
+    public void PopularTbllistafuncionarios(String sql) { // função responsavel por popular a lista de funcionarios
         try {
             Connection conexao = null;
             PreparedStatement statement = null;
@@ -47,16 +47,11 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
             String usuario ="root";
             String senha ="";
             conexao =DriverManager.getConnection(url,usuario,senha);
-            
             PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
-            
             banco.execute();
             ResultSet resultado = banco.executeQuery(sql);
-            
             DefaultTableModel model = (DefaultTableModel) tbllistafuncionarios.getModel();
-            
             model.setNumRows(0);
-            
             while(resultado.next())
             {
                 String status = resultado.getInt("status_funcionario") == 1 ? "Ativo" : "Inativo";
@@ -71,7 +66,6 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
                     status
                 });
             }
-            
             conexao.close();
             banco.close();
         } catch (SQLException ex) {
@@ -262,22 +256,15 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnnovofuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnovofuncionarioMouseClicked
-        // TODO add your handling code here:
-       
+    
     }//GEN-LAST:event_btnnovofuncionarioMouseClicked
 
     private void tbllistafuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistafuncionariosMouseClicked
-     
     int linha = tbllistafuncionarios.getSelectedRow();
-
-    id = tbllistafuncionarios.getValueAt(linha, 0).toString();
-        
+    id = tbllistafuncionarios.getValueAt(linha, 0).toString();   
     Lista_de_Funcionários.this.dispose();
     Visualizando_Cadastro_de_Funcinario objeto2 = new Visualizando_Cadastro_de_Funcinario();
-    objeto2.setVisible(true);
-        
-           
-        
+    objeto2.setVisible(true);  
     }//GEN-LAST:event_tbllistafuncionariosMouseClicked
 
     private void btnpesquisarporcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarporcpfActionPerformed
@@ -291,11 +278,10 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
     }//GEN-LAST:event_btnpesquisarpornomeActionPerformed
 
     private void btnpesquisarfuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarfuncionarioActionPerformed
-        String textoDoCampo = txtfpesquisafuncionario.getText();
+        String textoDoCampo = txtfpesquisafuncionario.getText(); // evento responsavel por pesquisar o funcionario de acordo com o filtro selecionado
         switch(pesquisa) {
             case 1:
             this.PopularTbllistafuncionarios("SELECT * FROM funcionarios WHERE cpf = '" + textoDoCampo + "'");
-
             break;
             case 2:
             this.PopularTbllistafuncionarios("SELECT * FROM funcionarios WHERE nome_funcionario LIKE '%" + textoDoCampo + "%'");

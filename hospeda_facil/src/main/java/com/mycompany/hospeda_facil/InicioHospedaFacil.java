@@ -15,18 +15,13 @@ public class InicioHospedaFacil extends javax.swing.JFrame {
     /**
      * Creates new form Inicio_Hospeda_Facil
      */
-    public InicioHospedaFacil() {
+    public InicioHospedaFacil() {// chamando função para transformar botões transparente
         initComponents();
-        
         JButton[] buttons = {
         btniniciosistema};
-        Efeitos_Botoes.EfeitosBotoes(buttons);
-        
-        
-        
+        Efeitos_Botoes.EfeitosBotoes(buttons);   
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -15,7 +15,7 @@ public class Ajustes extends javax.swing.JFrame {
     public Ajustes() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = { // chamando função para transformar botões tranparente
         btnlistadeacomodacoes,btncadastrodeacomodacoes,btnlistadefuncinarios,btncadastrodefuncionarios,btnlistadehospede,btncadastrodehospede,
         btnlistadereserva,btnnovareserva,btnsair};
         Efeitos_Botoes.EfeitosBotoes(buttons);

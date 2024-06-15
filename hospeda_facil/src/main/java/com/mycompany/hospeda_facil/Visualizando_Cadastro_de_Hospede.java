@@ -26,12 +26,12 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
     public Visualizando_Cadastro_de_Hospede() {
         initComponents();
         DetalhesHospede();
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btneditar, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfnome, txtfrg, txtfcpf, txtfdatanascimento,
         txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento,
@@ -40,7 +40,7 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         
         
     }
-    public String formatoDatavoltando(String data) {
+    public String formatoDatavoltando(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -256,26 +256,20 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    public void DetalhesHospede(){
-        
+    public void DetalhesHospede(){    //Função responsavel por polular a tela
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-
             conexao = DriverManager.getConnection(url, usuario, senha);
-
             declaracaoPreparada = conexao.prepareStatement(
                     "SELECT * FROM hospedes WHERE id_hospede = ?");
             declaracaoPreparada.setInt(1, idHospede);
             resultado = declaracaoPreparada.executeQuery();
-
             if (resultado.next()) {
-                
                 try {
                     String sexo = resultado.getString("sexo");
                     if("Masculino".equals(sexo)){
@@ -285,7 +279,6 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
                     }else if("Outros".equals(sexo)){
                         btnroutros.setSelected(true);
                     }
-                    
                     txtfnumerohospede.setText(resultado.getString("id_hospede"));
                     txtfnome.setText(resultado.getString("nome_hospede"));
                     txtfrg.setText(resultado.getString("rg"));
@@ -299,14 +292,9 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
                     txtfrua.setText(resultado.getString("rua"));
                     txtfcomplemento.setText(resultado.getString("complemento"));
                     txtfobservacoes.setText(resultado.getString("observacoes"));
-                    
                     String databanco = resultado.getString("data_nascimento");
                     String datanascimento = formatoDatavoltando(databanco);
                     txtfdatanascimento.setText(datanascimento);
-                    
-                    
-                    
-                    
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Cadastro_de_Hospede.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -317,21 +305,16 @@ public class Visualizando_Cadastro_de_Hospede extends javax.swing.JFrame {
     }
             
     private void btnrmasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrmasculinoMouseClicked
-        // TODO add your handling code here:
         btnrfeminino.setSelected(false);
         btnroutros.setSelected(false);
     }//GEN-LAST:event_btnrmasculinoMouseClicked
 
     private void btnrfemininoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrfemininoMouseClicked
-        // TODO add your handling code here:
-        btnrmasculino.setSelected(false);
-        btnroutros.setSelected(false);
+
     }//GEN-LAST:event_btnrfemininoMouseClicked
 
     private void btnroutrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnroutrosMouseClicked
-        // TODO add your handling code here:
-        btnrmasculino.setSelected(false);
-        btnrfeminino.setSelected(false);
+
     }//GEN-LAST:event_btnroutrosMouseClicked
 
     private void txtfcpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfcpfFocusLost

@@ -26,12 +26,12 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     public Cadastro_de_Hospede() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = { // chamando função para transformar botões tranparente
         btnfinalizarcadastro, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {             // chamando função para transformar TextField tranparente
         txtfnome, txtfrg, txtfcpf, ftxtfdatanascimento,
         txtfnumerotelefone, txtfemail, ftxtfcep,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes};
@@ -40,7 +40,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
         cbxestados.setOpaque(false);
         cbxestados.setBackground(new Color(0, 0, 0, 0));
     }
-    public String formatoData(String data) {
+    public String formatoData(String data) { // formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -322,7 +322,7 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnroutrosMouseClicked
 
     private void txtfcpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfcpfFocusLost
-        String cpf = txtfcpf.getText().trim();
+        String cpf = txtfcpf.getText().trim(); // verificando se CPF é valido
         if (cpf.isEmpty()) {
             txtfcpf.setBorder(null);
             lblerrocpf.setText("");  
@@ -365,6 +365,8 @@ public class Cadastro_de_Hospede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnajustesActionPerformed
 
     private void btnfinalizarcadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarcadastroActionPerformed
+        
+            // evento rsponsavel por fazer as validações dos dados inserido e posteriomete salvara essa informações no banco de dados
         try {
             if (txtfnome.getText().isEmpty() || txtfrg.getText().isEmpty() || txtfcpf.getText().isEmpty() ||
                 ftxtfdatanascimento.getText().isEmpty() || (!btnrmasculino.isSelected() && !btnrfeminino.isSelected() && !btnroutros.isSelected()) ||

@@ -26,12 +26,12 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
     public Visualizando_Cadastro_de_Funcinario() {
         initComponents();
         DetalhesFuncionario();
-    JButton[] buttons = {
+    JButton[] buttons = {// chamando função para transformar botões transparente
         btneditar, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-    JTextField[] textFields = {
+    JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfnome, txtfrg, txtfcpf, txtfdatanascimento,
         txtfnumerotelefone, txtfemail, txtfcep, txtfestado,
         txtfcidade, txtfbairro, txtfrua, txtfcomplemento, txtfobservacoes,
@@ -39,7 +39,7 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         txtfbanco,txtfagencia,txtfconta,txtfnumerofuncionario};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
     }
-    public String formatoData(String data) {
+    public String formatoData(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY           
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -47,7 +47,7 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
         return formattedDate;
     }
-    public void DetalhesFuncionario(){
+    public void DetalhesFuncionario(){    //Função responsavel por polular a tela
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
@@ -61,7 +61,6 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
             declaracaoPreparada.setInt(1, idFuncionario);
             resultado = declaracaoPreparada.executeQuery();
             if (resultado.next()) {
-                
                 try {
                     String sexo = resultado.getString("sexo");
                     if("Masculino".equals(sexo)){
@@ -107,8 +106,6 @@ public class Visualizando_Cadastro_de_Funcinario extends javax.swing.JFrame {
             Logger.getLogger(Visualizando_Cadastro_de_Funcinario.class.getName()).log(Level.SEVERE, null, ex);
         }
         } 
-
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

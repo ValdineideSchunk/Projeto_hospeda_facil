@@ -37,25 +37,18 @@ public class Nova_Reserva extends javax.swing.JFrame {
     public Nova_Reserva() {
         
         initComponents();
-
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btnfinalizarnovareserva, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnacomodação,
         btncpf,btnnovohospede,btnvoltar};
         Efeitos_Botoes.EfeitosBotoes(buttons);
-        
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfcpfhospede,txtfnomehospede,txtfvalordiaria,txtfnumeroadultos,txtfnumerocriancas,
         txtfobservacoes,txtfdetalhesacomodacao,ftxtfdatafimreserva,ftxtfdatainicioreserva};
-        TextFields_Transparentes.TextFieldsTransparentes(textFields);
-        
-        
-        
-        
-        
+        TextFields_Transparentes.TextFieldsTransparentes(textFields);   
     }
 
-    public String formatoData(String data) {
+    public String formatoData(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -64,19 +57,16 @@ public class Nova_Reserva extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
 
-    public void prencherDadosHospede() {
+    public void prencherDadosHospede() {    //Função responsavel por preecher dados do hospede 
         try {
             int hospede = Integer.parseInt(idh);
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-            
             conexao = DriverManager.getConnection("jdbc:mysql://localhost/hospedagem", "root", "");
             declaracaoPreparada = conexao.prepareStatement("SELECT * FROM hospedes WHERE id_hospede= ?");
-            
             declaracaoPreparada.setLong(1,hospede);
             resultado = declaracaoPreparada.executeQuery();
-            
             if (resultado.next()) {
                 try {
                     txtfnomehospede.setText(resultado.getString("nome_hospede"));
@@ -91,21 +81,17 @@ public class Nova_Reserva extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
         }
-   }       
-       
-public void prencherdadosacomodacao(){
+   }            
+public void prencherdadosacomodacao(){ //Função responsavel por preecher dados da acomodação
     int idacomodacao = Integer.parseInt(ida);
     try {
         Connection conexao = null;
         PreparedStatement declaracaoPreparada = null;
-        ResultSet resultado = null;
-            
+        ResultSet resultado = null; 
         String url = "jdbc:mysql://localhost/hospedagem";
         String usuario = "root";
-        String senha = "";
-            
-        conexao = DriverManager.getConnection(url, usuario, senha);
-            
+        String senha = "";    
+        conexao = DriverManager.getConnection(url, usuario, senha);   
         declaracaoPreparada = conexao.prepareStatement(
             "SELECT * FROM acomodacoes WHERE id_acomodacao = ?");
         declaracaoPreparada.setInt(1, idacomodacao);
@@ -126,7 +112,7 @@ public void prencherdadosacomodacao(){
             Logger.getLogger(Nova_Reserva.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-  public boolean validardata(String data) {
+  public boolean validardata(String data) { // função responsavel por validar a data
         if (data == null || data.trim().isEmpty()) {// Verifica se a string de data está no formato correto
             return false;
         }
@@ -167,9 +153,6 @@ public void prencherdadosacomodacao(){
     public static boolean anobissexto(int year) {// Função auxiliar para verificar se um ano é bissexto
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
-    
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -443,6 +426,9 @@ public void prencherdadosacomodacao(){
     }//GEN-LAST:event_lblimagemnovareservaAncestorAdded
 
     private void btnfinalizarnovareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarnovareservaActionPerformed
+        
+        // evento responsavel por verificar os dados inseridos pelo usuari e posteriormente salvar a nova reserva no banco de dados
+        
         if (txtfcpfhospede.getText().isEmpty() || txtfnomehospede.getText().isEmpty() || ftxtfdatainicioreserva.getText().isEmpty() ||
             ftxtfdatafimreserva.getText().isEmpty()  || txtfdetalhesacomodacao.getText().isEmpty() || txtfvalordiaria.getText().isEmpty() || 
             txtfnumeroadultos.getText().isEmpty() ||txtfnumerocriancas.getText().isEmpty())
@@ -468,7 +454,6 @@ public void prencherdadosacomodacao(){
             JOptionPane.showMessageDialog(null, "A data de início da reserva não pode ser superior à data de fim da reserva", "Erro", JOptionPane.ERROR_MESSAGE);
         return;
         }
-        
         if (!txtfvalordiaria.getText().trim().matches("\\d+(\\.\\d+)?")) {
             JOptionPane.showMessageDialog(null, "Valor inválido,\n"
                 + "Digite somente Numeros.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -512,10 +497,8 @@ public void prencherdadosacomodacao(){
 
             String data = ftxtfdatainicioreserva.getText();
             String datainicio = formatoData(data);
-
             data = ftxtfdatafimreserva.getText();
             String datafim = formatoData(data);
-
             statement.setString(1, idh);
             statement.setString(2, ida);
             statement.setString(3, datainicio);
@@ -528,7 +511,6 @@ public void prencherdadosacomodacao(){
             statement.setString(9, status);
             statement.executeUpdate();
             statement.close();
-
             sql = "UPDATE acomodacoes SET status_quarto = ?"
                     + "where id_acomodacao = ?";
             statement = conexao.prepareStatement(sql);
@@ -566,7 +548,7 @@ public void prencherdadosacomodacao(){
     }//GEN-LAST:event_ftxtfdatafimreservaMouseExited
 
     private void ftxtfdatainicioreservaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftxtfdatainicioreservaFocusLost
-        salvandodatainicio = ftxtfdatainicioreserva.getText();
+        salvandodatainicio = ftxtfdatainicioreserva.getText(); // evento responsavel por chamar a função validar data
         String data = ftxtfdatainicioreserva.getText().trim();
         if (data.equals("  /  /    ") || data.isEmpty()) {    // Verifica se o campo está vazio
             ftxtfdatainicioreserva.setBorder(null);

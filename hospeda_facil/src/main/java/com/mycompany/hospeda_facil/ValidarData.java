@@ -9,7 +9,7 @@ package com.mycompany.hospeda_facil;
  * @author NEY SCHUNK
  */
 public class ValidarData {
-    public boolean validardata(String data) {
+    public boolean validardata(String data) { // classe responsavel por validar a data
         if (data == null || data.trim().isEmpty()) {// Verifica se a string de data está no formato correto
             return false;
         }

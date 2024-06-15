@@ -27,13 +27,13 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
     public Lista_de_Hóspede() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btnmenu, btnhospede,btnpesquisarhospede,
         btnreserva, btnmapa, btnajustes,btnnovohospede,
         btnpesquisarporcpf, btnpesquisarpornome};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfpesquisahospede};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
@@ -175,7 +175,7 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    public void PopularTbllistahospede(String sql){        
+    public void PopularTbllistahospede(String sql){        // função responsavel por popular alista de funcionario
         try {
             Connection conexao = null;
             PreparedStatement statement = null;
@@ -183,16 +183,11 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
             String usuario ="root";
             String senha ="";
             conexao =DriverManager.getConnection(url,usuario,senha);
-            
             PreparedStatement banco = (PreparedStatement)conexao.prepareStatement(sql);
-            
             banco.execute();
             ResultSet resultado = banco.executeQuery(sql);
-            
             DefaultTableModel model = (DefaultTableModel) tbllistahospede.getModel();
-            
             model.setNumRows(0);
-            
             while(resultado.next())
             {
                 model.addRow(new Object[]
@@ -204,7 +199,6 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
                     resultado.getString("sexo"),
                 });
             }
-            
             conexao.close();
             banco.close();        
         } catch (SQLException ex) {
@@ -249,20 +243,15 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnnovohospedeActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-         this.PopularTbllistahospede("SELECT * from hospedes");
+        this.PopularTbllistahospede("SELECT * from hospedes");
     }//GEN-LAST:event_formWindowOpened
 
     private void tbllistahospedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistahospedeMouseClicked
-        // TODO add your handling code here:                                              
         int linha = tbllistahospede.getSelectedRow();
-
         id = tbllistahospede.getValueAt(linha, 0).toString();
-        
         Lista_de_Hóspede.this.dispose();
         Visualizando_Cadastro_de_Hospede objeto2 = new Visualizando_Cadastro_de_Hospede();
-        objeto2.setVisible(true);
-                                                    
+        objeto2.setVisible(true);                                           
     }//GEN-LAST:event_tbllistahospedeMouseClicked
 
     private void btnpesquisarporcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarporcpfActionPerformed
@@ -276,19 +265,18 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
     }//GEN-LAST:event_btnpesquisarpornomeActionPerformed
 
     private void btnpesquisarhospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarhospedeActionPerformed
-         String textoDoCampo = txtfpesquisahospede.getText();
+        String textoDoCampo = txtfpesquisahospede.getText(); // evento responsavel por pesquisar hospedes de acordo com o filtro selecionado
         switch(pesquisa) {
-    case 1:
+            case 1:
         this.PopularTbllistahospede("SELECT * FROM hospedes WHERE cpf = '" + textoDoCampo + "'");
-        
         break;
-    case 2:
+            case 2:
         this.PopularTbllistahospede("SELECT * FROM hospedes WHERE nome_hospede LIKE '%" + textoDoCampo + "%'");
         break;
-    default:
+            default:
         JOptionPane.showMessageDialog(null, "Selecione como Deseja Pesquisar");
-        break;
-}
+            break;
+        }
     }//GEN-LAST:event_btnpesquisarhospedeActionPerformed
 
     /**

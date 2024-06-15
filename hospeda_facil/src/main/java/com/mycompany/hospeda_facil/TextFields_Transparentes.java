@@ -11,7 +11,7 @@ import javax.swing.JTextField;
  *
  * @author NEY SCHUNK
  */
-public class TextFields_Transparentes {
+public class TextFields_Transparentes { // classe responsavel por mudar a aparencia dos TextFields para transparente
     public static void TextFieldsTransparentes(JTextField[] textFields) {
         for (int i = 0; i < textFields.length; i++) {
             JTextField txtf = textFields[i];

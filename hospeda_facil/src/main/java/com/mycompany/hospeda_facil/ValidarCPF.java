@@ -8,7 +8,7 @@ package com.mycompany.hospeda_facil;
  *
  * @author NEY SCHUNK
  */
-public class ValidarCPF {
+public class ValidarCPF { // classe responsavel por validar o CPF
     public static boolean validarCPF(String cpf) {
         if (cpf == null || cpf.length() != 11) {
             return false;

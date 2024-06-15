@@ -20,11 +20,11 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btnfazerlogin};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfusuario, ptxtfsenha};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
@@ -80,7 +80,7 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnfazerloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfazerloginActionPerformed
-        try {
+        try {                                                // evento responsavel por validar o login do usuario no sistema
             String campousuario = txtfusuario.getText();
             String camposenha = ptxtfsenha.getText();
             

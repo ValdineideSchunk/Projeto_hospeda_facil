@@ -30,45 +30,41 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
     public Lista_de_Reserva() {
         initComponents();
         
-        JButton[] buttons = {
+        JButton[] buttons = {// chamando função para transformar botões transparente
         btnnovareserva, btnmenu, btnhospede,
         btnreserva, btnmapa, btnajustes,btnpesquisareserva,
         btnreservado,btnhospedado,btnfinalizado,btncancelada,btntodos,btnpesquisarpornome,
         btnpesquisarnumeroreserva};
         Efeitos_Botoes.EfeitosBotoes(buttons);
         
-        JTextField[] textFields = {
+        JTextField[] textFields = {// chamando função para transformar TextField transparente
         txtfdadopesquisa};
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
     }
     public String formatoDatavoltando(String data) {
-        String dateStr = data;//Data no formato DD/MM/YYYY
+        String dateStr = data;//Data no formato yyyy/MM/dd
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterOutput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(dateStr, formatterInput); // Converte a string para LocalDate
         String formattedDate = date.format(formatterOutput); // Formata a data para o novo formato
-        return formattedDate;// retorno -> YYYY/MM/DD
+        return formattedDate;// retorno -> dd/mm/yyyy
     }
-    public void Populartbllistareserva(String sql){
+    public void Populartbllistareserva(String sql){    //Função responsavel por polular a lista de reservas
     try {
         String url = "jdbc:mysql://localhost/hospedagem";
         String usuario = "root";
         String senha = "";
-        
         Connection conexao = DriverManager.getConnection(url, usuario, senha);
         PreparedStatement banco = conexao.prepareStatement(sql);
         ResultSet resultado = banco.executeQuery();
-        
         DefaultTableModel model = (DefaultTableModel) tbllistareserva.getModel();
         model.setNumRows(0);
-        
         while (resultado.next()) {
             String databancoCheckin = resultado.getString("data_checkin");
             String datacheckin = formatoDatavoltando(databancoCheckin);
             String databancoCheckout = resultado.getString("data_checkout");
             String datacheckout = formatoDatavoltando(databancoCheckout);
             statusreserva = resultado.getString("status_reserva");
-            
             model.addRow(new Object[] {
                 resultado.getString("id_reserva"),
                 resultado.getString("fk_hospede"),
@@ -304,7 +300,7 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
     }//GEN-LAST:event_btnnovareservaActionPerformed
 
     private void tbllistareservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistareservaMouseClicked
-        int linha = tbllistareserva.getSelectedRow();
+        int linha = tbllistareserva.getSelectedRow();// evento responsavel por direconar o usuario para atela correta de acordo com o status da reserva
         id = tbllistareserva.getValueAt(linha, 0).toString();
         String status = tbllistareserva.getValueAt(linha, 6).toString();
         if("Reservado".equals(status)){

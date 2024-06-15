@@ -40,16 +40,16 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
         initComponents();
         
         JButton[] buttons = {
-        btnsalvaralteracoes, btnmenu, btnhospede,btnpesquisaracomodação,
-        btnreserva, btnmapa, btnajustes,btnvoltar};
-        Efeitos_Botoes.EfeitosBotoes(buttons);
+            btnsalvaralteracoes, btnmenu, btnhospede,btnpesquisaracomodação,
+            btnreserva, btnmapa, btnajustes,btnvoltar};
+            Efeitos_Botoes.EfeitosBotoes(buttons);
         
         JTextField[] textFields = {
             txtfcpfhospede, txtfnomehospede, txtfnumeroadutos, txtfnumeroreserva,
             txtfnumerocriancas, txtfdetalhesacomodacao,txtfvalordiaria,txtfobservacoes,
             ftxtfdatainicioreserva, ftxtfdatafimreserva, txtfstatus
         };
-        TextFields_Transparentes.TextFieldsTransparentes(textFields);
+            TextFields_Transparentes.TextFieldsTransparentes(textFields);
         
         PopulandoReservas(); 
     }
@@ -71,23 +71,19 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
     
-     public void PopulandoReservas(){    
+     public void PopulandoReservas(){        //Função responsavel por polular a tela
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
             ResultSet resultado = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
             declaracaoPreparada = conexao.prepareStatement(
                     "SELECT * FROM view_informacoes_reserva WHERE id_reserva = ?");
             declaracaoPreparada.setInt(1, idreserva);
             resultado = declaracaoPreparada.executeQuery();
-            
             if (resultado.next()) {
                 try {
                     String databanco = resultado.getString("data_checkin");
@@ -322,24 +318,17 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
         try {
             Connection conexao = null;
             PreparedStatement statement = null;
-            
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
-            
             conexao = DriverManager.getConnection(url, usuario, senha);
-            
             String sql = "UPDATE reservas SET fk_acomodacao = ?, data_checkin = ?, data_checkout = ?, valor_diaria = ?,"
                     + " numero_adulto = ?, numero_crianca = ?, observacoes = ? WHERE id_reserva = ?";
-            
             statement = conexao.prepareStatement(sql);
-            
             String data = ftxtfdatainicioreserva.getText();
             String datainicio = formatoData(data);
-
             data = ftxtfdatafimreserva.getText();
             String datafim = formatoData(data);
-            
             statement.setString(1,idacomodacao);
             statement.setString(2,datainicio);
             statement.setString(3,datafim);
@@ -348,34 +337,16 @@ public class Editando_Reserva_Antes_Checkin extends javax.swing.JFrame {
             statement.setString(6,txtfnumerocriancas.getText());
             statement.setString(7,txtfobservacoes.getText());
             statement.setString(8,id);
-            
-            
             statement.executeUpdate();
             statement.close();
             conexao.close();
             JOptionPane.showMessageDialog(null, "Dados atualizados com Sucesso!!!");
         } catch (SQLException ex) {
             Logger.getLogger(Editando_Reserva_Antes_Checkin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        }  
     }//GEN-LAST:event_btnsalvaralteracoesActionPerformed
 
     private void btnpesquisaracomodaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisaracomodaçãoActionPerformed
-        
-        
         this.setVisible(false);
         Lista_de_AcomodaçõesReserva objeto2 = new Lista_de_AcomodaçõesReserva();
         objeto2.setVisible(true);
