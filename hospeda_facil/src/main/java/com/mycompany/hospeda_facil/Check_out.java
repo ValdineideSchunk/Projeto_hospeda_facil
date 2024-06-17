@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  * @author vschunk ok
  */
 public class Check_out extends javax.swing.JFrame {
-
+    String idacomodacao;
     int idreserva = Integer.parseInt(id);
     
     public Check_out() {
@@ -74,7 +74,7 @@ public class Check_out extends javax.swing.JFrame {
                     txtfhospede.setText(resultado.getString("nome_hospede"));
                     txtfacomodacao.setText("N°: " + resultado.getString("fk_acomodacao") +
                                          "\nNome: " + resultado.getString("nome_acomodacao"));
-                    
+                    idacomodacao = resultado.getString("fk_acomodacao");
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -178,6 +178,16 @@ public class Check_out extends javax.swing.JFrame {
             String status ="Finalizada";
             statement.setString(1,status);
             statement.setString(2,id);
+            statement.executeUpdate();
+            statement.close();
+            
+            sql = "UPDATE acomodacoes SET status_quarto = ?"
+                    + "where id_acomodacao = ?";
+            statement = conexao.prepareStatement(sql);
+            String statusacomodação ="Pronto p/ Limpeza";
+            statement.setString(1, statusacomodação );
+            statement.setString(2,idacomodacao);
+            
             statement.executeUpdate();
             statement.close();
             conexao.close();

@@ -251,7 +251,6 @@ public class Lista_de_Funcionários extends javax.swing.JFrame {
     }//GEN-LAST:event_btnnovofuncionarioActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
         this.PopularTbllistafuncionarios("SELECT * from funcionarios");
     }//GEN-LAST:event_formWindowOpened
 

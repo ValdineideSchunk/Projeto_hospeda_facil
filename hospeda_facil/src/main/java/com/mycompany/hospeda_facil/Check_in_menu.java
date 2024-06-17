@@ -23,11 +23,11 @@ import javax.swing.JTextField;
  *
  * @author vschunk
  */
-public class Check_in extends javax.swing.JFrame {
-    String idacomodacao;
+public class Check_in_menu extends javax.swing.JFrame {
     
-    int idreserva = Integer.parseInt(id);
-    public Check_in() {
+    String idacomodacao = String.valueOf(id);
+    
+    public Check_in_menu() {
         initComponents();
         
         JButton[] buttons = { // chamando função para transformar botões tranparente
@@ -62,8 +62,8 @@ public class Check_in extends javax.swing.JFrame {
             conexao = DriverManager.getConnection(url, usuario, senha);
             
             declaracaoPreparada = conexao.prepareStatement(
-                    "SELECT * FROM view_informacoes_reserva WHERE id_reserva = ?");
-            declaracaoPreparada.setInt(1, idreserva);
+                    "SELECT * FROM view_informacoes_reserva WHERE fk_acomodacao = ?");
+            declaracaoPreparada.setString(1, idacomodacao);
             resultado = declaracaoPreparada.executeQuery();
             
             if (resultado.next()) {
@@ -74,7 +74,7 @@ public class Check_in extends javax.swing.JFrame {
                     txtfhospede.setText(resultado.getString("nome_hospede"));
                     txtfacomodacao.setText("N°: " + resultado.getString("fk_acomodacao") +
                                           "\nNome: " + resultado.getString("nome_acomodacao"));
-                    idacomodacao = resultado.getString("fk_acomodacao");
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -160,7 +160,7 @@ public class Check_in extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-        Check_in.this.dispose();
+        Check_in_menu.this.dispose();
     }//GEN-LAST:event_btnvoltarActionPerformed
 
     private void btnfinalizarreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarreservaActionPerformed
@@ -174,11 +174,11 @@ public class Check_in extends javax.swing.JFrame {
             String usuario = "root";
             String senha = "";
             conexao = DriverManager.getConnection(url, usuario, senha);
-            String sql = "UPDATE reservas SET status_reserva = ? WHERE id_reserva = ?";
+            String sql = "UPDATE reservas SET status_reserva = ? WHERE fk_acomodacao = ?";
             statement = conexao.prepareStatement(sql);
             String status ="Hospedado";
             statement.setString(1,status);
-            statement.setString(2,id);
+            statement.setString(2,idacomodacao);
             
             
             statement.executeUpdate();
@@ -194,22 +194,20 @@ public class Check_in extends javax.swing.JFrame {
             statement.executeUpdate();
             statement.close();
             conexao.close();
-            
-            
-            
-            
+
             JOptionPane.showMessageDialog(null, "Check-in Realizado com Sucesso!!!");
-            Check_in.this.dispose();
-            Visualizando_Reserva_Antes_Check_in.fechartela();
+            Check_in_menu.this.dispose();
+            
+            
         } catch (SQLException ex) {
-            Logger.getLogger(Check_in.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Check_in_menu.class.getName()).log(Level.SEVERE, null, ex);
         }
             
        
     }//GEN-LAST:event_btnfinalizarreservaActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        Visualizando_Reserva_Antes_Check_in.fechartela();
+        
     }//GEN-LAST:event_formWindowClosing
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -225,20 +223,21 @@ public class Check_in extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Check_in_menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Check_in_menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Check_in_menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Check_in_menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Check_in().setVisible(true);
+                new Check_in_menu().setVisible(true);
             }
         });
     }

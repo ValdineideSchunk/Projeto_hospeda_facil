@@ -115,8 +115,8 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         btnvoltar = new javax.swing.JButton();
         txtfnumeroreserva = new javax.swing.JTextField();
         btncancelarreserva = new javax.swing.JButton();
-        btncheckin = new javax.swing.JButton();
         btnmenu = new javax.swing.JButton();
+        btncheckin = new javax.swing.JButton();
         btnhospede = new javax.swing.JButton();
         btnreserva = new javax.swing.JButton();
         btnmapa = new javax.swing.JButton();
@@ -206,19 +206,19 @@ public class Visualizando_Reserva_Antes_Check_in extends javax.swing.JFrame {
         });
         jPanel1.add(btncancelarreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 590, 260, 50));
 
-        btncheckin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncheckinActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btncheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 587, 170, 50));
-
         btnmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnmenuActionPerformed(evt);
             }
         });
         jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 29, 81, 82));
+
+        btncheckin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncheckinActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btncheckin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 587, 170, 50));
 
         btnhospede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

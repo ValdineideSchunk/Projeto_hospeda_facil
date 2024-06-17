@@ -511,11 +511,15 @@ public void prencherdadosacomodacao(){ //Função responsavel por preecher dados
             statement.setString(9, status);
             statement.executeUpdate();
             statement.close();
+            
+            
             sql = "UPDATE acomodacoes SET status_quarto = ?"
                     + "where id_acomodacao = ?";
             statement = conexao.prepareStatement(sql);
+            
             statement.setString(1, status);
             statement.setString(2,ida);
+            
             statement.executeUpdate();
             statement.close();
             conexao.close();

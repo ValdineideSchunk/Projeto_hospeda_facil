@@ -4,7 +4,6 @@
  */
 package com.mycompany.hospeda_facil;
 
-import static com.mycompany.hospeda_facil.Lista_de_AcomodaçõesReserva.ida;
 import static com.mycompany.hospeda_facil.Lista_de_Funcionários.id;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,13 +20,12 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author vschunk
+ * @author vschunk ok
  */
-public class Check_in extends javax.swing.JFrame {
-    String idacomodacao;
+public class Check_out_menu extends javax.swing.JFrame {
+    String idacomodacao = String.valueOf(id);
     
-    int idreserva = Integer.parseInt(id);
-    public Check_in() {
+    public Check_out_menu() {
         initComponents();
         
         JButton[] buttons = { // chamando função para transformar botões tranparente
@@ -37,8 +35,8 @@ public class Check_in extends javax.swing.JFrame {
         JTextField[] textFields = {
         ftxtfdataentrada, txtfacomodacao, txtfhospede};// chamando função para transformar TextField tranparente
         TextFields_Transparentes.TextFieldsTransparentes(textFields);
-
-        PopulandoRCheckin(); 
+ 
+        PopulandoRCheckout(); 
     }
     public String formatoDatavoltando(String data) {// formatar data
         String dateStr = data;//Data no formato DD/MM/YYYY
@@ -49,7 +47,7 @@ public class Check_in extends javax.swing.JFrame {
         return formattedDate;// retorno -> YYYY/MM/DD
     }
     
-     public void PopulandoRCheckin(){    //Função responsavel por polular a tela
+     public void PopulandoRCheckout(){        //Função responsavel por polular a tela
         try {
             Connection conexao = null;
             PreparedStatement declaracaoPreparada = null;
@@ -62,19 +60,20 @@ public class Check_in extends javax.swing.JFrame {
             conexao = DriverManager.getConnection(url, usuario, senha);
             
             declaracaoPreparada = conexao.prepareStatement(
-                    "SELECT * FROM view_informacoes_reserva WHERE id_reserva = ?");
-            declaracaoPreparada.setInt(1, idreserva);
+                    "SELECT * FROM view_informacoes_reserva WHERE fk_acomodacao = ?");
+            declaracaoPreparada.setString(1, idacomodacao);
             resultado = declaracaoPreparada.executeQuery();
             
             if (resultado.next()) {
                 try {
-                    String databanco = resultado.getString("data_checkin");
+                    String databanco = resultado.getString("data_checkout");
                     String datacheckin = formatoDatavoltando(databanco);
                     ftxtfdataentrada.setText(datacheckin);
+
                     txtfhospede.setText(resultado.getString("nome_hospede"));
                     txtfacomodacao.setText("N°: " + resultado.getString("fk_acomodacao") +
-                                          "\nNome: " + resultado.getString("nome_acomodacao"));
-                    idacomodacao = resultado.getString("fk_acomodacao");
+                                         "\nNome: " + resultado.getString("nome_acomodacao"));
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(Visualizando_Reserva_Antes_Check_in.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -93,7 +92,7 @@ public class Check_in extends javax.swing.JFrame {
         ftxtfdataentrada = new javax.swing.JFormattedTextField();
         txtfacomodacao = new javax.swing.JTextField();
         txtfhospede = new javax.swing.JTextField();
-        lblImagem_Check_in = new javax.swing.JLabel();
+        lblImagem_Check_out = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -109,7 +108,7 @@ public class Check_in extends javax.swing.JFrame {
                 btnfinalizarreservaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnfinalizarreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 191, 224, 39));
+        jPanel1.add(btnfinalizarreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 191, 240, 39));
 
         btnvoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,16 +130,16 @@ public class Check_in extends javax.swing.JFrame {
         txtfacomodacao.setEditable(false);
         txtfacomodacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtfacomodacao.setBorder(null);
-        jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 111, 200, 23));
+        jPanel1.add(txtfacomodacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 200, 23));
 
         txtfhospede.setEditable(false);
         txtfhospede.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtfhospede.setBorder(null);
-        jPanel1.add(txtfhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 148, 230, 23));
+        jPanel1.add(txtfhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 250, 23));
 
-        lblImagem_Check_in.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblImagem_Check_in.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Check_in.png")); // NOI18N
-        jPanel1.add(lblImagem_Check_in, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        lblImagem_Check_out.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblImagem_Check_out.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Chech_out.png")); // NOI18N
+        jPanel1.add(lblImagem_Check_out, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,57 +159,53 @@ public class Check_in extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-        Check_in.this.dispose();
+        Check_out_menu.this.dispose();
     }//GEN-LAST:event_btnvoltarActionPerformed
 
     private void btnfinalizarreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfinalizarreservaActionPerformed
         
+             //evento responsavel por salvar as informações no banco de dados
         try {
-            //evento responsavel por salvar as informações no banco de dados
-            
             Connection conexao = null;
             PreparedStatement statement = null;
             String url = "jdbc:mysql://localhost/hospedagem";
             String usuario = "root";
             String senha = "";
             conexao = DriverManager.getConnection(url, usuario, senha);
-            String sql = "UPDATE reservas SET status_reserva = ? WHERE id_reserva = ?";
+            String sql = "UPDATE reservas SET status_reserva = ? WHERE fk_acomodacao = ?";
             statement = conexao.prepareStatement(sql);
-            String status ="Hospedado";
+            String status ="Finalizada";
             statement.setString(1,status);
-            statement.setString(2,id);
-            
-            
+            statement.setString(2,idacomodacao);
             statement.executeUpdate();
             statement.close();
             
             sql = "UPDATE acomodacoes SET status_quarto = ?"
                     + "where id_acomodacao = ?";
-            
             statement = conexao.prepareStatement(sql);
-            String statusacomodação ="Ocupado";
+            String statusacomodação ="Pronto p/ Limpeza";
             statement.setString(1, statusacomodação );
             statement.setString(2,idacomodacao);
+            
             statement.executeUpdate();
             statement.close();
             conexao.close();
+            JOptionPane.showMessageDialog(null, "Check-out Realizado com Sucesso!!!");
+            Check_out_menu.this.dispose();
+            Menu_Principal.fechartela();
             
-            
-            
-            
-            JOptionPane.showMessageDialog(null, "Check-in Realizado com Sucesso!!!");
-            Check_in.this.dispose();
-            Visualizando_Reserva_Antes_Check_in.fechartela();
         } catch (SQLException ex) {
-            Logger.getLogger(Check_in.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Check_out_menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-       
     }//GEN-LAST:event_btnfinalizarreservaActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        Visualizando_Reserva_Antes_Check_in.fechartela();
+
     }//GEN-LAST:event_formWindowClosing
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -225,20 +220,23 @@ public class Check_in extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Check_out_menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Check_out_menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Check_out_menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Check_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Check_out_menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Check_in().setVisible(true);
+                new Check_out_menu().setVisible(true);
             }
         });
     }
@@ -248,7 +246,7 @@ public class Check_in extends javax.swing.JFrame {
     private javax.swing.JButton btnvoltar;
     private javax.swing.JFormattedTextField ftxtfdataentrada;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblImagem_Check_in;
+    private javax.swing.JLabel lblImagem_Check_out;
     private javax.swing.JTextField txtfacomodacao;
     private javax.swing.JTextField txtfhospede;
     // End of variables declaration//GEN-END:variables
