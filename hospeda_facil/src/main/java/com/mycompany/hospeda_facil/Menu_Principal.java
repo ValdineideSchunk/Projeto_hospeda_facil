@@ -167,7 +167,7 @@ public class Menu_Principal extends javax.swing.JFrame {
 
         // Consulta para obter o nome do hóspede
         String query = "SELECT nome_hospede FROM view_informacoes_reserva " +
-                       "WHERE fk_acomodacao = ? AND (status_reserva = 'Reservado' OR status_reserva = 'Ocupado')";
+                       "WHERE fk_acomodacao = ? AND (status_reserva = 'Reservado' OR status_reserva = 'Hospedado')";
         declaracaoPreparada = conexao.prepareStatement(query);
         declaracaoPreparada.setInt(1, idAcomodacao);
         resultado = declaracaoPreparada.executeQuery();
@@ -198,6 +198,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         JPanel panel = getPanelById(idAcomodacao); // Método que retorna o JPanel correspondente ao ID
         JButton button = getButtonByld(idAcomodacao);
         JLabel label = getLabelById(idAcomodacao);
+        
         if(panel != null && button!= null) {
             String status = getStatusAcomodacao(idAcomodacao);
             if (checkAcomodacaoExists(idAcomodacao)) {
@@ -347,7 +348,7 @@ public JPanel getPanelById(int id) {
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblImagemMenu_principal = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -372,7 +373,7 @@ public JPanel getPanelById(int id) {
             }
         });
 
-        jPanelprincipal.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelprincipal.setBackground(new java.awt.Color(204, 204, 255));
         jPanelprincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Panelid1.setBackground(new java.awt.Color(204, 204, 204));
@@ -390,7 +391,7 @@ public JPanel getPanelById(int id) {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Acomodação 01");
 
-        labelHospede1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelHospede1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelHospede1.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout Panelid1Layout = new javax.swing.GroupLayout(Panelid1);
@@ -400,17 +401,17 @@ public JPanel getPanelById(int id) {
             .addGroup(Panelid1Layout.createSequentialGroup()
                 .addGroup(Panelid1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panelid1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(Panelid1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(Panelid1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(Panelid1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(labelHospede1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
+                    .addGroup(Panelid1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         Panelid1Layout.setVerticalGroup(
@@ -441,7 +442,7 @@ public JPanel getPanelById(int id) {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Acomodação 02");
 
-        labelHospede2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelHospede2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelHospede2.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout Panelid2Layout = new javax.swing.GroupLayout(Panelid2);
@@ -487,7 +488,7 @@ public JPanel getPanelById(int id) {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Acomodação 04");
 
-        labelHospede4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelHospede4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelHospede4.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout Panelid4Layout = new javax.swing.GroupLayout(Panelid4);
@@ -533,7 +534,7 @@ public JPanel getPanelById(int id) {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Acomodação 05");
 
-        labelHospede5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelHospede5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelHospede5.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout Panelid5Layout = new javax.swing.GroupLayout(Panelid5);
@@ -584,7 +585,7 @@ public JPanel getPanelById(int id) {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Acomodação 06");
 
-        labelHospede6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelHospede6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelHospede6.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout Panelid6Layout = new javax.swing.GroupLayout(Panelid6);
@@ -612,9 +613,9 @@ public JPanel getPanelById(int id) {
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelHospede6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addComponent(labelHospede6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -634,7 +635,7 @@ public JPanel getPanelById(int id) {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Acomodação 07");
 
-        labelHospede7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelHospede7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelHospede7.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout Panelid7Layout = new javax.swing.GroupLayout(Panelid7);
@@ -685,7 +686,7 @@ public JPanel getPanelById(int id) {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Acomodação 08");
 
-        labelHospede8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelHospede8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelHospede8.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout Panelid8Layout = new javax.swing.GroupLayout(Panelid8);
@@ -735,6 +736,9 @@ public JPanel getPanelById(int id) {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Acomodação 03");
+
+        labelHospede3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelHospede3.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout Panelid3Layout = new javax.swing.GroupLayout(Panelid3);
         Panelid3.setLayout(Panelid3Layout);
@@ -809,8 +813,8 @@ public JPanel getPanelById(int id) {
         });
         jPanelprincipal.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 600, 210, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\TesteCor.png")); // NOI18N
-        jPanelprincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, -1));
+        lblImagemMenu_principal.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Menu_Principal.png")); // NOI18N
+        jPanelprincipal.add(lblImagemMenu_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1856,7 +1860,6 @@ public JPanel getPanelById(int id) {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1875,6 +1878,7 @@ public JPanel getPanelById(int id) {
     private javax.swing.JLabel labelHospede6;
     private javax.swing.JLabel labelHospede7;
     private javax.swing.JLabel labelHospede8;
+    private javax.swing.JLabel lblImagemMenu_principal;
     // End of variables declaration//GEN-END:variables
 
     private JPanel findPanelById(int i) {

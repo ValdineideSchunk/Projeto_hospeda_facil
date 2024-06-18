@@ -421,7 +421,7 @@ public class Editando_Cadastro_de_Acomodação extends javax.swing.JFrame {
                 statement.setString(11,null);
                 statement.setString(12,null);
                 statement.setString(13," ");
-                statement.setString(14,"Disponivels");
+                statement.setString(14,"Disponivel");
             }else if("Reservado".equals(status)){
                 statement.setString(11,null);
                 statement.setString(12,null);

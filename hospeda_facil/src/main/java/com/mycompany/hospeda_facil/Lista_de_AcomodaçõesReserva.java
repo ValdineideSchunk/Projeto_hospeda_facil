@@ -243,7 +243,7 @@ public class Lista_de_AcomodaçõesReserva extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes");
+        this.PopularTbllistaacomodacoes("SELECT * FROM acomodacoes WHERE status_quarto = 'Disponivel';");
     }//GEN-LAST:event_formWindowOpened
 
     private void tbllistaacomodacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbllistaacomodacoesMouseClicked
