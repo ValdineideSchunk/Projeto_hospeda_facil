@@ -158,7 +158,7 @@ public class Lista_de_Hóspede extends javax.swing.JFrame {
         txtfpesquisahospede.setBorder(null);
         jPanel1.add(txtfpesquisahospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 310, 30));
 
-        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
+        Lista_de_Hóspede.setIcon(new javax.swing.ImageIcon("D:\\Users\\MDEOLINDO\\Desktop\\PROG_APP_GIT\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Hóspede.png")); // NOI18N
         jPanel1.add(Lista_de_Hóspede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

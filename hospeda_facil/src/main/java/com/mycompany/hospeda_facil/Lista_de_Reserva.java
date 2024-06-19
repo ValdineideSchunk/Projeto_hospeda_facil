@@ -234,7 +234,7 @@ public class Lista_de_Reserva extends javax.swing.JFrame {
         jPanel1.add(txtfdadopesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 142, 200, 30));
 
         lblimagemlistadereserva.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemlistadereserva.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Reservas.png")); // NOI18N
+        lblimagemlistadereserva.setIcon(new javax.swing.ImageIcon("D:\\Users\\MDEOLINDO\\Desktop\\PROG_APP_GIT\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Lista_de_Reservas.png")); // NOI18N
         lblimagemlistadereserva.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 lblimagemlistadereservaAncestorAdded(evt);

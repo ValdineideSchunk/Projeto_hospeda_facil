@@ -139,7 +139,7 @@ public class Check_in_menu extends javax.swing.JFrame {
         jPanel1.add(txtfhospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 148, 230, 23));
 
         lblImagem_Check_in.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblImagem_Check_in.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Check_in.png")); // NOI18N
+        lblImagem_Check_in.setIcon(new javax.swing.ImageIcon("D:\\Users\\MDEOLINDO\\Desktop\\PROG_APP_GIT\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Check_in.png")); // NOI18N
         jPanel1.add(lblImagem_Check_in, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

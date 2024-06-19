@@ -813,7 +813,7 @@ public JPanel getPanelById(int id) {
         });
         jPanelprincipal.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 600, 210, 50));
 
-        lblImagemMenu_principal.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Menu_Principal.png")); // NOI18N
+        lblImagemMenu_principal.setIcon(new javax.swing.ImageIcon("D:\\Users\\MDEOLINDO\\Desktop\\PROG_APP_GIT\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Menu_Principal.png")); // NOI18N
         jPanelprincipal.add(lblImagemMenu_principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

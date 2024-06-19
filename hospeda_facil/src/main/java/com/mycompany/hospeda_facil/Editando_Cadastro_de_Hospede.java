@@ -293,7 +293,7 @@ public class Editando_Cadastro_de_Hospede extends javax.swing.JFrame {
         jPanel1.add(cbxestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 260, 30));
 
         lblimagemEDITANDOcadastrohospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblimagemEDITANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_Hospede.png")); // NOI18N
+        lblimagemEDITANDOcadastrohospede.setIcon(new javax.swing.ImageIcon("D:\\Users\\MDEOLINDO\\Desktop\\PROG_APP_GIT\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Editando_cadastro_Hospede.png")); // NOI18N
         jPanel1.add(lblimagemEDITANDOcadastrohospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -231,7 +231,7 @@ public class Visualizando_Reservas_Canceladas_Finalizadas extends javax.swing.JF
         jPanel1.add(txtfstatusreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 173, 140, 30));
 
         lblVisualizando_Reservas_Canceladas_Finalizadas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblVisualizando_Reservas_Canceladas_Finalizadas.setIcon(new javax.swing.ImageIcon("C:\\Users\\NEY SCHUNK\\Desktop\\HOSPEDA_FACIL\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Reservas_Canceladas_Finalizadas.png")); // NOI18N
+        lblVisualizando_Reservas_Canceladas_Finalizadas.setIcon(new javax.swing.ImageIcon("D:\\Users\\MDEOLINDO\\Desktop\\PROG_APP_GIT\\Projeto_hospeda_facil\\hospeda_facil\\src\\main\\java\\com\\mycompany\\hospeda_facil\\imagens_telas\\Visualizando_Reservas_Canceladas_Finalizadas.png")); // NOI18N
         jPanel1.add(lblVisualizando_Reservas_Canceladas_Finalizadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

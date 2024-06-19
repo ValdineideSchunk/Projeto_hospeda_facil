@@ -186,7 +186,7 @@
         <Component class="javax.swing.JLabel" name="lblLista_de_Acomoda&#xe7;&#xf5;es">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\NEY SCHUNK\Desktop\HOSPEDA_FACIL\Projeto_hospeda_facil\hospeda_facil\src\main\java\com\mycompany\hospeda_facil\imagens_telas\Lista_de_Acomoda&#xe7;&#xf5;es.png"/>
+              <Image iconType="2" name="D:\Users\MDEOLINDO\Desktop\PROG_APP_GIT\Projeto_hospeda_facil\hospeda_facil\src\main\java\com\mycompany\hospeda_facil\imagens_telas\Lista_de_Acomoda&#xe7;&#xf5;es.png"/>
             </Property>
           </Properties>
           <Constraints>
